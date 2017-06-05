@@ -7,11 +7,11 @@ var gulp = require('gulp'),
 gulp.task('browser-sync', function () {
     /** Runs the web app currently under development and watches the filesystem for changes */
 
-        // Specify list of files to watch for changes, apparently reload method doesn't work on Windows */
+    // Specify list of files to watch for changes, apparently reload method doesn't work on Windows */
     var filesToWatch = [
-            './**/*.html',
-            './**/*.js'
-        ];
+        './**/*.html',
+        './**/*.js'
+    ];
 
     // Create a rewrite rule that redirects to index.html to let Angular handle the routing
     browserSync.init(filesToWatch, {
