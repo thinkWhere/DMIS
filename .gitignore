@@ -3,6 +3,8 @@
 
 # Dev artifacts
 shippable/
+client/node_modules/
+client/assets/styles/css
 
 # Ignore dist folders created when building for deployment
 server/web/static/dist
