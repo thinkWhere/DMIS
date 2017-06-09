@@ -13,6 +13,8 @@ class HelloWorldAPI(Resource):
         """
         Simple Hello World API call. Accepts name and replies Hello.
         ---
+        tags:
+          - hello
         parameters:
           - name: yourname
             in: path
