@@ -7,9 +7,9 @@ The DMIS application is split into a client and server structure.  The client ca
 
 ### Dependencies
 
-#### Python 3.5
+#### Python 3.5 / 3.6
 
-You need to have Python 3.5 installed in your development environment.  [Python 3 install instructions are here](https://thinkwhere.atlassian.net/wiki/display/DEV/HOWTO+-+Install+Python+3+on+Windows)
+You need to have Python 3.5 / 3.6 installed in your development environment.  [Python 3 install instructions are here](https://thinkwhere.atlassian.net/wiki/display/DEV/HOWTO+-+Install+Python+3+on+Windows)
 
 #### NodeJS
 
@@ -28,7 +28,7 @@ All server development is done with Python
 #### Set-up development environment
 To develop on the application:
 
-* Clone the repo and ```cd``` into the british-library-app directory
+* Clone the repo and ```cd``` into the dmis-app directory
 * Enter the following to create a [Virtual Environment](https://docs.python.org/3/library/venv.html#venv-def) to install the app dependencies into
     * ```pyvenv venv``` or
     * ```C:\Program Files (x86)\Python35-32\Tools\scripts\pyvenv.py venv``` (on Windows if command above does not work, or add to windows path)
@@ -36,15 +36,18 @@ To develop on the application:
     * ```.\venv\scripts\activate```
 * **WINDOWS ONLY** - To install on Windows you need to run the installer as follows:
     * ```.\bin\win\install.bat```
-* **LINUX ONLY** - To install on Linxu use pip to install all dependencies
+* **LINUX ONLY** - To install on Linux use pip to install all dependencies
     * ```pip install -r requirements.txt```
 * 
     
 #### Running locally
 
-* Before running you'll need to create a distribution of the client code, that we'll use Flask to serve.  This is done via gulp in from the client directory:
+* CD into the client directory that contains the file gulpfile.js
     * ```cd client```
-    * ```gulp build-staging```
+* If this is the first time you have run the client on this machine, install all dependencies using npm:
+    * ```npm install```
+* Now create a distribution of the client code, that we'll use Flask to serve.  This is done via gulp in from the client directory:
+    * ```gulp run```
 * Once the distribution has been built, you can run the app from the command line, ensure you have installed all dependencies, as described above, then:
     * ```python manage.py runserver -d```
 * To see the app running, point your browser to [http://localhost:5000/](http://localhost:5000/)
