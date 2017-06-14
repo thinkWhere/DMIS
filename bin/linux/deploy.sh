@@ -38,34 +38,3 @@ if [ $BRANCH == "develop" ]
         eb deploy -l $VERSION
 
 fi
-
-# Only deploy to Prod if we're on master and testing the Prod Environment
-if [ $BRANCH == "master" ]
-    then
-        pip install --upgrade pip
-        pip install -r requirements.txt
-
-        # TODO - establish way of securing credentials
-        # export AWS_CREDENTIAL_FILE=./.ebextensions/eb.credentials
-
-        # Set appropriate environment var
-        mv ./.ebextensions/environment.prod ./.ebextensions/environment.config
-        printf '1\nn\n' | eb init dmis --region eu-west-1
-
-        # Uncomment if debug needed
-        # tail ./.elasticbeanstalk/config.yml
-        # tail ./.ebextensions/environment.config
-
-        # Deploy master builds to Prod environment
-        echo Deploying $VERSION to dmis-prod
-        eb use dmis-prod
-        eb deploy -l $VERSION
-
-        # Tag Prod version
-        git tag -a $VERSION -m "$VERSION deployed to $DMIS_ENV "
-        git push origin $VERSION
-
-        # Sleep 50s after deploy to allow AWS to stabalise prior to running integration tests
-        #echo "Sleeping to let AWS Stabalise..."
-        #sleep 50s
-fi

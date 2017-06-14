@@ -16,11 +16,3 @@ if [ $BRANCH == "develop" ]
         nosetests ./tests/server/integration --with-xunit --xunit-file ./shippable/testresults/integrationresults.xml
         xvfb-run --server-args="-ac" behave tests/behave --junit --junit-directory ./shippable/testresults/shippable
 fi
-
-if [ $BRANCH == "master" ]
-    then
-        export DMIS_ENV="prod"
-        echo Running integration tests in Master branch against environment $DMIS_ENV
-        nosetests ./tests/server/integration --with-xunit --xunit-file ./shippable/testresults/integrationresults.xml
-        xvfb-run --server-args="-ac" behave tests/behave --junit --junit-directory ./shippable/testresults/shippable
-fi
