@@ -6,7 +6,7 @@ python:
     - "3.5"
 
 env:
-    - secure: xxx_TODO_xxx
+    - secure: as89PSP5mH6Ba4AaG5RzJdw0wVSTQAGjil567Icph0Rd8xHBgmSDalNpwHj9+5pQsgEyS8aPoY+77aKOTlNwZfZm8Bo1H+IigbZmJhPgkJ2WCjT6/rgdxpIJAkhXAmbABw1PlDWHve7fcrCP3LO4qMXZYO2eWJ1siPYWGDIyv4Sui0WSC47mEHEjM8DQbw/9QSFsRM73owsLMHOUYgpG42lrXnHNAekv8uWeb5MGrm4xqR1PRmPpGHjCOmQ3KyMesf9n8s3qklyJuu5hTXOMeQD0a5yT1HPUuC59JGljlKowJPR4B1CrLKmtQeUBhfmLCIDTioRFNj+4JPcRVnzTsg==
 
 build:
     # Use the python 3.6 docker container to build the application
@@ -30,8 +30,8 @@ build:
         - cd ..
 
         # Required to display test results in Shippable GUI
-        #- mkdir -p shippable/testresults
-        #- mkdir -p shippable/codecoverage
+        - mkdir -p shippable/testresults
+        - mkdir -p shippable/codecoverage
 
         # JS Unit Tests
         #- cd tests/client
@@ -39,8 +39,6 @@ build:
         #- cd ../..
 
         # Install Python dependencies
-        #- python --version
-        #- apt-get install -y libgeos-c1 libgeos-dev  # Required for shapely
         - pip install -r requirements.txt
 
         # Run Python tests
