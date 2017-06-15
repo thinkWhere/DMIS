@@ -8,6 +8,9 @@
 # dependencies
 /node_modules
 
+# dev artifacts
+/src/assets/styles/css
+
 # IDEs and editors
 /.idea
 .project
