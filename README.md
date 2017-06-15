@@ -21,6 +21,8 @@ With node installed use npm to install the following globally:
 npm install gulp -g
 ```
 
+Verify that you are running at least node 6.9.x and npm 3.x.x by running node -v and npm -v in a terminal/console window. Older versions produce errors, but newer versions are fine.
+
 ### Getting Started with Server Development
 
 All server development is done with Python
@@ -42,15 +44,7 @@ To develop on the application:
     
 #### Running locally
 
-* CD into the client directory that contains the file gulpfile.js
-    * ```cd client```
-* If this is the first time you have run the client on this machine, install all dependencies using npm:
-    * ```npm install```
-* Now create a distribution of the client code, that we'll use Flask to serve.  This is done via gulp in from the client directory:
-    * ```gulp run```
-* Once the distribution has been built, you can run the app from the command line, ensure you have installed all dependencies, as described above, then:
-    * ```python manage.py runserver -d```
-* To see the app running, point your browser to [http://localhost:5000/](http://localhost:5000/)
+TODO
 
 
 ### Getting Started with Client Development
@@ -66,49 +60,38 @@ npm install
 
 ### Running the app
 
-To run the app you need to first start the API, so you will need to follow the Server development instructions above.
+#### DMIS Angular Client
 
-In a terminal tab in Pycharm from the root of the application you can run:
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
 
-```
-python manage.py runserver -d --threaded
-```
+#### Development server
 
-You can then run the application, using gulp as follows.  cd to /client. 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-```
-gulp run
-```
+#### Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+
+#### Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+#### Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+#### Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
+
+#### Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ### Testing the app
 
-The app contains both Unit tests and E2E tests
-
-#### Karma unit tests
-
-To run the tests from the command line, navigate to the root client directory and run karma:
-
-```
-cd client
-karma start ..\tests\client\karma.conf.js
-```
-
-#### Behave E2E tests
-
-To run Behave
-
-Start virtual environment:
-```
-.venv\scripts\activate
-```
-Run Behave:
-```
-behave tests\behave
-```
-To run local host, change the URL in tests.behave.steps.steps_helper and run threaded:
-```
-python manage.py runserver -d --threaded
-```
+TODO
 
 ## Dev Ops
 
