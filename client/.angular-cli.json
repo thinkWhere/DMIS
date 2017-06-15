@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "assets/styles/sass/dmis.scss",
+        "assets/styles/dmis.scss",
         "../node_modules/openlayers/dist/ol-debug.css"
       ],
       "scripts": [
@@ -43,9 +43,6 @@
     },
     {
       "project": "src/tsconfig.spec.json"
-    },
-    {
-      "project": "e2e/tsconfig.e2e.json"
     }
   ],
   "test": {
