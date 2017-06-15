@@ -16,6 +16,8 @@ VERSION=v.0.0.$BUILD_NUMBER-$BRANCH
 # Only deploy to Staging if we're on develop
 if [ $BRANCH == "develop" ]
     then
+        pip install --upgrade pip
+        
         # Install AWS requirements
         pip install -r requirements.txt
         printf 'n\n' | eb init dmis --region eu-west-1
