@@ -19,7 +19,7 @@ if [ $BRANCH == "develop" ]
         pip install --upgrade pip
         
         # Install AWS requirements
-        pip install -r requirements.txt
+        pip install -r requirements.aws-deploy.txt
         printf 'n\n' | eb init dmis --region eu-west-1
         eb use dmis-staging
 
