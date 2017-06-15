@@ -5,7 +5,7 @@
 /client/node_modules
 
 # dev artifacts
-/client/src/assets/styles/css
+client/src/assets/styles/css
 shippable/
 
 # Ignore dist folders created when building for deployment
