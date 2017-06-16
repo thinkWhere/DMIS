@@ -1,5 +1,5 @@
 from flask import current_app
-from passlib.apps import custom_app_context as pwd_context
+from passlib.hash import pbkdf2_sha256 as sha256_hash
 from server.models.dtos.user_dto import UserDTO
 from server.models.postgis.user import User, UserRole
 from server.models.postgis.utils import NotFound
@@ -39,9 +39,10 @@ class UserService:
         new_user = User()
 
         # Test user doesn't already exist
-        existing_user = self.get_user_by_username(username)
-        if existing_user:
-            raise UserExistsError(f'User {username} already exists')
+        try:
+            existing_user = self.get_user_by_username(username)
+        except NotFound:
+            pass      # Not found is good
 
         new_user.username = username
         new_user.email_address = email
@@ -86,6 +87,6 @@ class UserService:
         :return: Hashed password
         """
         # Hash plaintext password using sha512 algorithm, DO NOT ALTER SCHEME
-        password_hash = pwd_context.encrypt(password, scheme='sha512_crypt')
+        password_hash = sha256_hash.hash(password)
 
         return password_hash

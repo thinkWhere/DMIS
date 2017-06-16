@@ -25,12 +25,17 @@ class TestUserService(unittest.TestCase):
         self.ctx = self.app.app_context()
         self.ctx.push()
 
-    def create_canned_user() -> User:
+    def test_create_user_new(self):
         """ Generate a canned user in the DB """
-        test_user = User()
-        test_user.id = TEST_USER_ID
-        test_user.username = 'Thinkwhere TEST'
-        test_user.mapping_level = 1
-        test_user.create()
+        if self.skip_tests:
+            return
 
-        return test_user
+        # Arrange
+        test_username = 'ThinkWhereTest'
+        test_email = 'testuser@thinkwhere.com'
+        test_password = 'aaAAAfffFFFvvvvVVV'
+        user_service = UserService()
+
+        # Act
+        user_service.create_user(test_username, test_email, test_password)
+        self.assertTrue(1 == 1)

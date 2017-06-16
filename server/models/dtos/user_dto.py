@@ -16,6 +16,6 @@ def is_known_role(value):
 class UserDTO(Model):
     """ DTO for User """
     username = StringType()
-    role = StringType()
+    role = StringType(validators=[is_known_role])
     email_address = EmailType(serialized_name='emailAddress', serialize_when_none=False)
 
