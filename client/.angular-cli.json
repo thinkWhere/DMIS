@@ -23,7 +23,9 @@
         "../node_modules/openlayers/dist/ol-debug.css"
       ],
       "scripts": [
-        "../node_modules/openlayers/dist/ol-debug.js"
+        "../node_modules/openlayers/dist/ol-debug.js",
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

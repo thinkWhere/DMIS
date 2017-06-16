@@ -2,6 +2,10 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import '../../../node_modules/font-awesome/scss/font-awesome';
 
-body {
+body, html {
   font-family: 'Droid Sans', sans-serif;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 100%;
 }
