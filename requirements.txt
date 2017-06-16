@@ -13,11 +13,13 @@ itsdangerous==0.24
 Jinja2==2.9.6
 Mako==1.0.6
 MarkupSafe==1.0
+passlib==1.7.1
 psycopg2==2.7.1
 python-dateutil==2.6.0
 python-editor==1.0.3
 pytz==2017.2
 PyYAML==3.12
+schematics==2.0.1
 six==1.10.0
 SQLAlchemy==1.1.10
 Werkzeug==0.12.2

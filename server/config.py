@@ -1,8 +1,12 @@
 import logging
+import os
 
 
 class EnvironmentConfig(object):
-    pass
+    SQLALCHEMY_DATABASE_URI = os.getenv('DMIS_DB', None)
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_POOL_SIZE = 5
+    SQLALCHEMY_MAX_OVERFLOW = 5
 
 
 class StagingConfig(EnvironmentConfig):
