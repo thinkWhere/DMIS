@@ -16,6 +16,7 @@ class User(db.Model):
     role = db.Column(db.Integer, default=0, nullable=False)
     email_address = db.Column(db.String)
     password = db.Column(db.String)
+    date_created = db.Column(db.DateTime, default=timestamp)
 
     def create(self):
         """ Creates and saves the current model to the DB """
@@ -36,16 +37,6 @@ class User(db.Model):
     def update(self, user_dto: UserDTO):
         """ Update the user details """
         self.email_address = user_dto.email_address.lower() if user_dto.email_address else None
-        db.session.commit()
-
-    def set_password(self, hashed_password: str):
-        """ Updates password with supplied hashed password"""
-        self.password = hashed_password
-        db.session.commit()
-
-    def set_user_role(self, role: UserRole):
-        """ Sets the supplied role on the user """
-        self.role = role.value
         db.session.commit()
 
     def delete(self):
