@@ -25,6 +25,16 @@ npm install gulp -g
 
 All server development is done with Python
 
+#### Environment vars:
+To avoid saving credentials in the repository, the following environment variables must be set up locally or on the 
+deployment envoronment:
+* **DMIS_DB** - This is for the PostGIS connection string.  This will be in the format: postgresql://username:pwd@host/dbname
+* **DMIS_ENV** - Deployment environment. [Prod | Staging | Dev]
+* Linux / Mac
+    * ```export DMIS_ENV=Dev```
+* Windows
+    * ```setx DMIS_ENV "Dev"```
+
 #### Set-up development environment
 To develop on the application:
 
