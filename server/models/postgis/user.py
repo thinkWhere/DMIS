@@ -1,9 +1,7 @@
 #import geojson
 from server import db
-#from server.models.dtos.user_dto import UserDTO, UserMappedProjectsDTO, MappedProject, UserFilterDTO, Pagination, \
-#    UserSearchQuery, UserSearchDTO, ListedUser
-#from server.models.postgis.licenses import License, users_licenses_table
-#from server.models.postgis.project_info import ProjectInfo
+#from server.models.dtos.user_dto import UserDTO, UserFilterDTO, Pagination, UserSearchQuery, UserSearchDTO, \
+#     ListedUser
 from server.models.dtos.user_dto import UserDTO
 from server.models.postgis.lookups import UserRole
 from server.models.postgis.utils import NotFound, timestamp
@@ -18,7 +16,6 @@ class User(db.Model):
     role = db.Column(db.Integer, default=0, nullable=False)
     email_address = db.Column(db.String)
     password = db.Column(db.String)
-    date_registered = db.Column(db.DateTime, default=timestamp)
 
     def create(self):
         """ Creates and saves the current model to the DB """
