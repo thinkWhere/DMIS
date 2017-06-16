@@ -6,6 +6,7 @@
 
 # dev artifacts
 client/src/assets/styles/css
+client/package-lock.json
 shippable/
 
 # Ignore dist folders created when building for deployment
