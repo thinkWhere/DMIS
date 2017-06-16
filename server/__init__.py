@@ -11,7 +11,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 # Import all models so that they are registered with SQLAlchemy
-from server.models.postgis import *  # noqa
+from server.models.postgis import user  # noqa
 
 
 def bootstrap_app(env=None):

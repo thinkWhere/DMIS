@@ -1,7 +1,6 @@
 from werkzeug.exceptions import Unauthorized
-from flask import abort
-from flask_restful import Resource, request, fields
-from server import app
+from flask import abort, current_app
+from flask_restful import Resource
 
 
 class HelloWorldAPI(Resource):
@@ -41,5 +40,5 @@ class HelloWorldAPI(Resource):
         except Unauthorized:
             return {'Error': 'Unauthorized'}, 401
         except Exception as e:
-            app.logger.critical('Unhandled exception encountered: {}'.format(e))
+            current_app.logger.critical('Unhandled exception encountered: {}'.format(e))
             return {'Error': 'Unhandled'}, 500
