@@ -19,8 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "assets/styles/dmis.scss",
-        "../node_modules/openlayers/dist/ol-debug.css"
+        "../node_modules/openlayers/dist/ol-debug.css",
+        "assets/styles/dmis.scss"
       ],
       "scripts": [
         "../node_modules/openlayers/dist/ol-debug.js",

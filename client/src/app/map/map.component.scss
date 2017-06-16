@@ -1,5 +1,33 @@
+$preparedness: #3498DB;
+$incidents: #E74C3C;
+$assessment: #2C3E50;
+
 #map {
     height: 100%;
     position: relative;
     overflow: hidden;
+}
+
+.map-container {
+    margin: 0;
+    height: 100%;
+}
+
+.category-nav {
+    font-size: 1.5em;
+    .preparedness {
+        background-color: $preparedness;
+        color: white;
+        padding: 15px;
+    }
+    .incidents {
+        background-color: $incidents;
+        color: white;
+        padding: 15px;
+    }
+    .assessment {
+        background-color: $assessment;
+        color: white;
+        padding: 15px;
+    }
 }

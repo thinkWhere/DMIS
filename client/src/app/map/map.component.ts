@@ -19,8 +19,8 @@ export class MapComponent implements OnInit {
         ],
         target: 'map',
         view: new ol.View({
-          center: [0, 0],
-          zoom: 2
+          center: ol.proj.transform([104.99, 12.56], 'EPSG:4326', 'EPSG:3857'),
+          zoom: 7
         })
       });
   }
