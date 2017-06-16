@@ -41,7 +41,7 @@ To develop on the application:
 * Clone the repo and ```cd``` into the dmis-app directory
 * Enter the following to create a [Virtual Environment](https://docs.python.org/3/library/venv.html#venv-def) to install the app dependencies into
     * ```pyvenv venv``` or
-    * ```C:\Program Files\Python36\python" -m venv .\venv``` (on Windows if command above does not work, or add to windows path)
+    * ```"C:\Program Files\Python36\python" -m venv .\venv``` (on Windows if command above does not work, or add to windows path)
 * Once the venv directory has been created, you need to activate the Virtual Environment, as follows:
     * ```.\venv\scripts\activate```
 * **WINDOWS ONLY** - To install on Windows you need to run the installer as follows:
