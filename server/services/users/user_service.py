@@ -1,7 +1,7 @@
 from flask import current_app
 from passlib.hash import pbkdf2_sha256 as sha256_hash
 from server.models.dtos.user_dto import UserDTO
-from server.models.postgis.user import User, UserRole
+from server.models.postgis.user import User, UserCreateError, UserRole
 from server.models.postgis.utils import NotFound
 
 
@@ -38,19 +38,16 @@ class UserService:
         """
         new_user = User()
 
-        # Test user doesn't already exist
-        try:
-            existing_user = self.get_user_by_username(username)
-        except NotFound:
-            pass      # Not found is good
-
         new_user.username = username
         new_user.email_address = email
         # Hash password so not storing in plaintext
         new_user.password = UserService._hash_password(password)
 
-        new_user.create()
-        return new_user
+        try:
+            new_user.create()
+            return new_user
+        except UserCreateError as err:
+            raise UserExistsError(str(err))
 
     @staticmethod
     def get_user_by_id(user_id: int) -> User:
