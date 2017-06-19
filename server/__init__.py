@@ -2,65 +2,50 @@ import logging
 import os
 from flask import Flask
 from flask_cors import CORS
+from flask_migrate import Migrate
 from flask_restful import Api
+from flask_sqlalchemy import SQLAlchemy
 from logging.handlers import RotatingFileHandler
 
-app = Flask(__name__)
+db = SQLAlchemy()
+migrate = Migrate()
+
+# Import all models so that they are registered with SQLAlchemy
+from server.models.postgis import user  # noqa
 
 
-def bootstrap_app():
+def bootstrap_app(env=None):
     """
     Bootstrap function to initialise the Flask app and config
     :return: Initialised Flask app
     """
-    set_config()
+    app = Flask(__name__)
 
-    initialise_logger()
-    app.logger.info('DMIS App Starting Up, Environment = {0}'.format(get_current_environment()))
+    if env is None:
+        env = os.getenv('DMIS_ENV', 'Dev')  # default to Dev if config environment var not set
+
+    app.config.from_object(f'server.config.{env}Config')
+
+    initialise_logger(app)
+    app.logger.info(f'DMIS App Starting Up, Environment = {env}')
+
+    db.init_app(app)
+    migrate.init_app(app, db)
 
     app.logger.debug('Initialising Blueprints')
     from .web import main as main_blueprint
     from .web import swagger as swagger_blueprint
-
     app.register_blueprint(main_blueprint)
     app.register_blueprint(swagger_blueprint)
 
     define_flask_restful_routes(app)
 
-    CORS(app)
+    CORS(app)  # Enables CORS on all API routes making API callable from anywhere
 
     return app
 
 
-def get_current_environment():
-    """
-    Gets the currently running environment from the OS Env Var
-    :return: Current environment, according to the OS Environment
-    """
-    # default to Dev if config environment var not set
-    env = os.getenv('DMIS_ENV', 'Dev')
-    return env.capitalize()
-
-
-def get_current_dynamo_environment():
-    """
-    If we're running on Dev we still to return Staging as our Dynamo environment, so we don't create unnecessary tables
-    :return String for Dynamo Env
-    """
-    # default to Dev if config environment var not set
-    dynamo_env = 'Staging' if get_current_environment() == 'Dev' else get_current_environment()
-    return dynamo_env.lower()
-
-
-def set_config():
-    """
-    Sets the config for the current environment
-    """
-    env = get_current_environment()
-    app.config.from_object('server.config.{0}Config'.format(env))
-
-
-def initialise_logger():
+def initialise_logger(app):
     """
     Read environment config then initialise a 2MB rotating log.  Prod Log Level can be reduced to help diagnose Prod
     only issues.

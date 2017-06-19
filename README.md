@@ -7,9 +7,9 @@ The DMIS application is split into a client and server structure.  The client ca
 
 ### Dependencies
 
-#### Python 3.5 / 3.6
+#### Python 3.6
 
-You need to have Python 3.5 / 3.6 installed in your development environment.  [Python 3 install instructions are here](https://thinkwhere.atlassian.net/wiki/display/DEV/HOWTO+-+Install+Python+3+on+Windows)
+You need to have Python 3.6 installed in your development environment.  [Python 3 install instructions are here](https://thinkwhere.atlassian.net/wiki/display/DEV/HOWTO+-+Install+Python+3+on+Windows)
 
 #### NodeJS
 
@@ -25,13 +25,23 @@ npm install gulp -g
 
 All server development is done with Python
 
+#### Environment vars:
+To avoid saving credentials in the repository, the following environment variables must be set up locally or on the 
+deployment envoronment:
+* **DMIS_DB** - This is for the PostGIS connection string.  This will be in the format: postgresql://username:pwd@host/dbname
+* **DMIS_ENV** - Deployment environment. [Prod | Staging | Dev]
+* Linux / Mac
+    * ```export DMIS_ENV=Dev```
+* Windows
+    * ```setx DMIS_ENV "Dev"```
+
 #### Set-up development environment
 To develop on the application:
 
 * Clone the repo and ```cd``` into the dmis-app directory
 * Enter the following to create a [Virtual Environment](https://docs.python.org/3/library/venv.html#venv-def) to install the app dependencies into
     * ```pyvenv venv``` or
-    * ```C:\Program Files (x86)\Python35-32\Tools\scripts\pyvenv.py venv``` (on Windows if command above does not work, or add to windows path)
+    * ```"C:\Program Files\Python36\python" -m venv .\venv``` (on Windows if command above does not work, or add to windows path)
 * Once the venv directory has been created, you need to activate the Virtual Environment, as follows:
     * ```.\venv\scripts\activate```
 * **WINDOWS ONLY** - To install on Windows you need to run the installer as follows:
