@@ -13,6 +13,45 @@ $assessment: #2C3E50;
   height: 100%;
 }
 
+.switch-category {
+  cursor: pointer;
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  margin: 0px -20px 0;
+  color: white;
+  div {
+    padding: 5px 10px;
+  }
+}
+
+.preparedness-bg {
+  background-color: $preparedness;
+}
+
+.incidents-bg {
+  background-color: $incidents;
+}
+
+.assessment-bg {
+  background-color: $assessment;
+}
+
+.preparedness-fg {
+  color: $preparedness;
+  border-bottom: 1px solid lightgray;
+}
+
+.incidents-fg {
+  color: $incidents;
+  border-bottom: 1px solid lightgray;
+}
+
+.assessment-fg {
+  color: $assessment;
+  border-bottom: 1px solid lightgray;
+}
+
 /** Sidebar **/
 /** Inspiration and code taken from https://github.com/Turbo87/sidebar-v2 **/
 
@@ -43,7 +82,7 @@ $width-md: 390px !default;
 $width-sm: 305px !default;
 $width-xs: 100% !default;
 
-$sidebar-z-index: 2000 !default;
+$sidebar-z-index: 2 !default;
 $sidebar-transition: 500ms !default;
 
 $tab-size: 40px !default;
@@ -124,7 +163,7 @@ $move-map-in-xs: true !default;
     right: 0;
   }
 
-  background-color: $tabs-bg;
+  opacity: 0.5;
 
   &, & > ul {
     position: absolute;
@@ -139,25 +178,12 @@ $move-map-in-xs: true !default;
       height: $tab-size;
 
       color: $tab-fg;
-      @if $tab-bg {
-        background: $tab-bg;
-      }
 
       font-size: $tab-font-size;
 
       overflow: hidden;
 
       transition: all $tab-transition;
-
-      &:hover {
-        color: $tab-hover-fg;
-        background-color: $tab-hover-bg;
-      }
-
-      &.active {
-        color: $tab-active-fg;
-        background-color: $tab-active-bg;
-      }
 
       &.disabled {
         color: fade-out($tab-fg, 0.6);
@@ -254,7 +280,6 @@ $move-map-in-xs: true !default;
   line-height: $tab-size;
   font-size: $tab-font-size * 1.2;
   color: $header-fg;
-  background-color: $header-bg;
 
   .sidebar-right & {
     padding-left: $tab-size;

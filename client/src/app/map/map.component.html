@@ -2,7 +2,9 @@
     <div id="map" class="map col-md-12">
         <div id="sidebar" class="sidebar sidebar-left">
             <!-- Nav tabs -->
-            <div class="sidebar-tabs" (click)="toggleContent()">
+            <div class="sidebar-tabs"
+                 [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
+                 (click)="toggleContent()">
                 <ul role="tablist">
                     <li class="active"><a role="tab"><i class="fa fa-bars"></i></a></li>
                 </ul>
@@ -10,18 +12,43 @@
             <!-- Tab panes -->
             <div *ngIf="showContent" class="sidebar-content">
                 <div class="sidebar-pane active" id="home">
-                    <h1 class="sidebar-header">
-                        Preparedness
-                        <span class="sidebar-toggle"><i class="fa fa-caret-down"></i></span>
+                    <h1 class="sidebar-header pointer"
+                        [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
+                        (click)="toggleCategoryPicker()">
+                        <span *ngIf="category === 'preparedness'">Preparedness</span>
+                        <span *ngIf="category === 'incidents'">Incidents and Warnings</span>
+                        <span *ngIf="category === 'assessment'">Assessment and Response</span>
+                        <span class="sidebar-toggle">
+                            <i class="fa fa-caret-down"></i>
+                        </span>
                     </h1>
-                    <h4>Demographics</h4>
-                    <p>TODO</p>
-                    <h4>Historical data</h4>
-                    <p>TODO</p>
-                    <h4>Emergency services</h4>
-                    <p>TODO</p>
-                    <h4>HRF Information</h4>
-                    <p>TODO</p>
+                    <div class="switch-category" *ngIf="showCategoryPicker">
+                        <div class="preparedness-fg" (click)="setCategory('preparedness')">
+                            <h4>Preparedness</h4>
+                        </div>
+                        <div class="incidents-fg" (click)="setCategory('incidents')">
+                            <h4>Incidents and Warnings</h4>
+                        </div>
+                        <div class="assessment-fg" (click)="setCategory('assessment')">
+                            <h4>Assessment and Response</h4>
+                        </div>
+                    </div>
+                    <div *ngIf="category === 'preparedness'">
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Demographics</h4>
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Historical data</h4>
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Emergency services</h4>
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> HRF Information</h4>
+                    </div>
+                    <div *ngIf="category === 'incidents'">
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> MOWRAM</h4>
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Pacific Disaster Centre</h4>
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Weatherbug</h4>
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> IoT Sensors</h4>
+                    </div>
+                    <div *ngIf="category === 'assessment'">
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Assessment</h4>
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Response</h4>
+                    </div>
                 </div>
             </div>
         </div>
