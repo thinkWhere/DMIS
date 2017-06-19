@@ -75,8 +75,10 @@ def define_flask_restful_routes(app):
     app.logger.debug('Initialising API Routes')
     api = Api(app, default_mediatype='application/json')
 
+    from server.api.user_api import LoginAPI
     from server.api.hello_world_api import HelloWorldAPI
     from server.api.swagger_docs import SwaggerDocs
 
+    api.add_resource(LoginAPI, '/api/users/<string:username>/login', endpoint='login')
     api.add_resource(HelloWorldAPI, '/api/hello/<string:yourname>')
     api.add_resource(SwaggerDocs, '/api/docs')

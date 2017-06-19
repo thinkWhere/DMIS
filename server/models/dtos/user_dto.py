@@ -18,4 +18,5 @@ class UserDTO(Model):
     username = StringType()
     role = StringType(validators=[is_known_role])
     email_address = EmailType(serialized_name='emailAddress', serialize_when_none=False)
+    session_token = StringType(required=False, serialize_when_none=False)
 

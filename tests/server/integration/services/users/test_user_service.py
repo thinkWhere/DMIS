@@ -98,5 +98,3 @@ class TestUserService(unittest.TestCase):
         # Act
         with self.assertRaises(UserNotFoundError):
             UserService.get_user_by_id(test_user_id)
-
-
