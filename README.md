@@ -15,12 +15,6 @@ You need to have Python 3.5 / 3.6 installed in your development environment.  [P
 
 You must have nodejs installed to develop and run the app, locally.  [Get install from here](https://nodejs.org/en/)
 
-With node installed use npm to install the following globally:
-
-```
-npm install gulp -g
-```
-
 Verify that you are running at least node 6.9.x and npm 3.x.x by running node -v and npm -v in a terminal/console window. Older versions produce errors, but newer versions are fine.
 
 ### Getting Started with Server Development
