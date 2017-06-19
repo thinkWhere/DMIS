@@ -1,10 +1,13 @@
 # Pycharm
 .idea/
 
-# Dev artifacts
+# dependencies
+/client/node_modules
+
+# dev artifacts
+client/src/assets/styles/css
+client/package-lock.json
 shippable/
-client/node_modules/
-client/assets/styles/css
 
 # Ignore dist folders created when building for deployment
 server/web/static/dist

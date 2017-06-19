@@ -1,0 +1,38 @@
+@import "variables";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import '../../../node_modules/font-awesome/scss/font-awesome';
+
+body, html {
+  font-family: 'Droid Sans', sans-serif;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* OpenLayers override */
+.ol-zoom button {
+  background-color: $brand-primary;
+}
+
+.ol-attribution button {
+  background-color: $brand-primary;
+}
+
+.ol-control button, .ol-control button:focus, .ol-control button:hover {
+  background-color: $brand-primary;
+}
+
+.ol-zoom {
+  top: auto;
+  left: auto;
+  bottom: 55px;
+  right: 8px;
+}
