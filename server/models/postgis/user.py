@@ -8,10 +8,6 @@ from server.models.postgis.lookups import UserRole
 from server.models.postgis.utils import NotFound, timestamp
 
 
-class UserCreateError(Exception):
-    pass
-
-
 class User(db.Model):
     """ Describes the user account table """
     __tablename__ = "dmis_users"
@@ -26,10 +22,7 @@ class User(db.Model):
     def create(self):
         """ Creates and saves the current model to the DB """
         db.session.add(self)
-        try:
-            db.session.commit()
-        except Exception:
-            raise UserCreateError("Cannot create new user")
+        db.session.commit()
 
     def save(self):
         db.session.commit()

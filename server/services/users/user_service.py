@@ -1,8 +1,7 @@
 from flask import current_app
 from passlib.hash import pbkdf2_sha256 as sha256_hash
 from server.models.dtos.user_dto import UserDTO
-from server.models.postgis.user import User, UserCreateError, UserRole
-from server.models.postgis.utils import NotFound
+from server.models.postgis.user import User, UserRole
 
 
 class UserExistsError(Exception):
@@ -15,6 +14,16 @@ class UserExistsError(Exception):
             current_app.logger.error('User already exists: ' + message)
 
 
+class UserNotFoundError(Exception):
+    """
+    Custom exception to notify caller that user does not exist
+    """
+
+    def __init__(self, message):
+        if current_app:
+            current_app.logger.error('UserNotFoundError: ' + message)
+
+
 class UserServiceError(Exception):
     """
     Custom exception to notify caller error has occurred within UserService
@@ -22,7 +31,7 @@ class UserServiceError(Exception):
 
     def __init__(self, message):
         if current_app:
-            current_app.logger.error('User account error: ' + message)
+            current_app.logger.error('UserServiceError: ' + message)
 
 
 class UserService:
@@ -43,18 +52,19 @@ class UserService:
         # Hash password so not storing in plaintext
         new_user.password = UserService._hash_password(password)
 
-        try:
-            new_user.create()
-            return new_user
-        except UserCreateError as err:
-            raise UserExistsError(str(err))
+        # Check if username already exists
+        if User().get_by_username(username) is not None:
+            raise UserExistsError(f'Cannot create account. Username {username} already exists.')
+
+        new_user.create()
+        return new_user
 
     @staticmethod
     def get_user_by_id(user_id: int) -> User:
         user = User().get_by_id(user_id)
 
         if user is None:
-            raise NotFound()
+            raise UserNotFoundError(f'User {user_id} not found')
 
         return user
 
@@ -63,7 +73,7 @@ class UserService:
         user = User().get_by_username(username)
 
         if user is None:
-            raise NotFound()
+            raise UserNotFoundError(f'User {username} not found')
 
         return user
 
