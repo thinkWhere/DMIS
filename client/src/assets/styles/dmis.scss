@@ -29,3 +29,10 @@ body, html {
 .ol-control button, .ol-control button:focus, .ol-control button:hover {
   background-color: $brand-primary;
 }
+
+.ol-zoom {
+  top: auto;
+  left: auto;
+  bottom: 55px;
+  right: 8px;
+}

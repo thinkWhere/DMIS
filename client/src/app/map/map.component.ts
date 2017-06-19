@@ -8,20 +8,26 @@ import * as ol from 'openlayers';
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+    showContent = true;
 
-   ngOnInit() {
-    var map = new ol.Map({
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        target: 'map',
-        view: new ol.View({
-          center: ol.proj.transform([104.99, 12.56], 'EPSG:4326', 'EPSG:3857'),
-          zoom: 7
-        })
-      });
-  }
+    toggleContent(): void {
+        this.showContent = !this.showContent;
+    }    
+    
+    constructor() {}
+    
+    ngOnInit() {
+       var map = new ol.Map({
+           layers: [
+               new ol.layer.Tile({
+                   source: new ol.source.OSM()
+               })
+            ],
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.transform([104.99, 12.56], 'EPSG:4326', 'EPSG:3857'),
+                zoom: 7
+            })
+        });
+    }
 }
