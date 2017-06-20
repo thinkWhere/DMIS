@@ -27,11 +27,13 @@ class User(db.Model):
     def save(self):
         db.session.commit()
 
-    def get_by_id(self, user_id: int):
+    @staticmethod
+    def get_by_id(user_id: int):
         """ Return the user for the specified id, or None if not found """
         return User.query.get(user_id)
 
-    def get_by_username(self, username: str):
+    @staticmethod
+    def get_by_username(username: str):
         """ Return the user for the specified username, or None if not found """
         return User.query.filter_by(username=username).one_or_none()
 
