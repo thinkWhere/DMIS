@@ -1,0 +1,29 @@
+<div class="map-container row row-no-padding">
+    <div id="map" class="map col-md-12">
+        <div id="sidebar" class="sidebar sidebar-left">
+            <!-- Nav tabs -->
+            <div class="sidebar-tabs" (click)="toggleContent()">
+                <ul role="tablist">
+                    <li class="active"><a role="tab"><i class="fa fa-bars"></i></a></li>
+                </ul>
+            </div>
+            <!-- Tab panes -->
+            <div *ngIf="showContent" class="sidebar-content">
+                <div class="sidebar-pane active" id="home">
+                    <h1 class="sidebar-header">
+                        Preparedness
+                        <span class="sidebar-toggle"><i class="fa fa-caret-down"></i></span>
+                    </h1>
+                    <h4>Demographics</h4>
+                    <p>TODO</p>
+                    <h4>Historical data</h4>
+                    <p>TODO</p>
+                    <h4>Emergency services</h4>
+                    <p>TODO</p>
+                    <h4>HRF Information</h4>
+                    <p>TODO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
