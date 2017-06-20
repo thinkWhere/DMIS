@@ -1,17 +1,18 @@
-import base64
+from base64 import b64decode, b64encode
+
 from flask_httpauth import HTTPTokenAuth, HTTPBasicAuth
-from passlib.hash import pbkdf2_sha256 as sha256_hash
 from flask import current_app
+from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
+from passlib.hash import pbkdf2_sha256 as sha256_hash
 
 from server.api.utils import DMISAPIDecorators
-from server.models.dtos.user_dto import UserDTO, SessionDTO
+from server.models.dtos.user_dto import SessionDTO
 from server.models.postgis.lookups import UserRole
 from server.services.users.user_service import UserService, NotFound
-from server.services.users.token_utils import is_valid_token, generate_timed_token
 
 
 basic_auth = HTTPBasicAuth()
-token_auth = HTTPTokenAuth(scheme='Token')
+token_auth = HTTPTokenAuth()
 dmis = DMISAPIDecorators
 
 
@@ -23,7 +24,21 @@ def verify_credentials(username: str, password: str) -> bool:
     :param password: Password from request header
     :return: True if valid
     """
-    return AuthenticationService().is_valid_credentials(username, password)
+    return AuthenticationService.is_valid_credentials(username, password)
+
+
+@token_auth.verify_token
+def verify_token(token: str) -> bool:
+    """ Verifies that the session token is valid """
+    try:
+        decoded_token = b64decode(token).decode('utf-8')
+    except UnicodeDecodeError:
+        current_app.logger.error(f'Unable to decode token')
+        return False  # Can't decode token, so fail login
+
+    # If token check is valid we don't need to do any subsequent testing.  Note that tokens are hardcoded to
+    # be good for 8 hours (28800 seconds)
+    return AuthenticationService.is_valid_token(decoded_token, 28800)
 
 
 class AuthenticationService:
@@ -46,33 +61,6 @@ class AuthenticationService:
 
         return login_success
 
-    # def is_valid_credentials(self, username_or_token, password):
-    #     """
-    #     Validates if the supplied credentials are valid
-    #     :param username_or_token: Will be the users username or a generated auth token
-    #     :param password: users password, will be empty if token being used
-    #     :return: True if valid
-    #     """
-    #     # If username_or_token is empty then no point attempting to validate, so return False
-    #     if not username_or_token:
-    #         return False
-    #
-    #     # If token check is valid we don't need to do any subsequent testing.  Note that tokens are hardcoded to
-    #     # be good for 8 hours (28800 seconds)
-    #     if is_valid_token(username_or_token, 28800):
-    #         return True
-    #
-    #     # Token check has failed so attempt to standard username/password check
-    #     try:
-    #         user = UserService.get_user_by_username(username_or_token)
-    #     except NotFound:
-    #         return False
-    #
-    #     # If customer is valid we just need to validate password
-    #     login_success = self._is_valid_password(password, user.password)
-    #
-    #     return login_success
-
     @staticmethod
     def login_user(user_id: int) -> SessionDTO:
         """
@@ -85,7 +73,7 @@ class AuthenticationService:
         session = SessionDTO()
         session.username = user.username
         session.role = UserRole(user.role).name
-        session.token = generate_timed_token(user_id)
+        session.token = AuthenticationService.generate_timed_token(user_id)
 
         return session
 
@@ -101,3 +89,41 @@ class AuthenticationService:
         password_match = sha256_hash.verify(password, password_hash)
 
         return password_match
+
+    @staticmethod
+    def generate_timed_token(user_id: int) -> str:
+        """
+        Generates a unique token with time embedded within it
+        :return: Base64 encoded token as a string
+        """
+        print(current_app.secret_key)
+        serializer = URLSafeTimedSerializer(current_app.secret_key)
+
+        # Generate token embedding user_id
+        token = serializer.dumps(user_id)
+
+        b64_token = b64encode(token.encode())
+        return b64_token.decode('ascii')
+
+    @staticmethod
+    def is_valid_token(token, token_expiry):
+        """
+        Validates if the supplied token is valid, and hasn't expired.
+        :param token: Token to check
+        :param token_expiry: When the token expires
+        :return: True if token is valid
+        """
+        print(current_app.secret_key)
+        serializer = URLSafeTimedSerializer(current_app.secret_key)
+
+        try:
+            tokenised_user_id = serializer.loads(token, max_age=token_expiry)
+            dmis.authenticated_user_id = tokenised_user_id
+        except SignatureExpired:
+            current_app.logger.debug('Token has expired')
+            return False
+        except BadSignature:
+            current_app.logger.debug('Bad Token Signature')
+            return False
+
+        return True

@@ -66,14 +66,6 @@ class UserService:
             raise NotFound()
 
         return user
-    #
-    # @staticmethod
-    # def get_user_dto_by_username(requested_username: str, logged_in_user_id: int) -> UserDTO:
-    #     """Gets user DTO for supplied username """
-    #     requested_user = UserService.get_user_by_username(requested_username)
-    #     logged_in_user = UserService.get_user_by_id(logged_in_user_id)
-    #
-    #     return requested_user.as_dto(logged_in_user.username)
 
     @staticmethod
     def _hash_password(password):

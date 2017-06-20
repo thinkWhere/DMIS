@@ -3,6 +3,7 @@ from flask_migrate import MigrateCommand
 from flask_script import Manager
 
 from server import bootstrap_app
+from server.services.users.authentication_service import AuthenticationService
 
 application = bootstrap_app()  # Initialise the flask app.
 manager = Manager(application)
@@ -15,21 +16,16 @@ manager.add_command('db', MigrateCommand)
 @manager.option('-u', '--username')
 def gen_basic(username: str, password: str):
     """ Helper method for generating valid base64 encoded session tokens """
-    print(username)
-    print(password)
-
     token_string = f'{username}:{password}'
-
     basic_token = b64encode(token_string.encode('ascii'))
     print(f"Basic {basic_token.decode('ascii')}")
 
-    # auth_header = {
-    #     'Authorization': 'Basic %s' % b64encode(b'success@simulator.amazonses.com:Secret123!').decode("ascii")
-    # }
-    # token = AuthenticationService.generate_session_token_for_user(user_id)
-    # print(f'Raw token is: {token}')
-    # b64_token = base64.b64encode(token.encode())
-    # print(f'Your base64 encoded session token: {b64_token}')
+
+@manager.option('-u', '--user_id', help='Test User ID')
+def gen_token(user_id):
+    """ Helper method for generating valid base64 encoded session tokens """
+    token = AuthenticationService.generate_timed_token(user_id)
+    print(f"Bearer {token}")
 
 
 if __name__ == '__main__':
