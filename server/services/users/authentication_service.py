@@ -1,9 +1,27 @@
 import base64
+from flask_httpauth import HTTPTokenAuth, HTTPBasicAuth
 from passlib.hash import pbkdf2_sha256 as sha256_hash
 from flask import current_app
+
+
 from server.models.dtos.user_dto import UserDTO
-from server.services.users.user_service import UserService, UserNotFoundError
+from server.services.users.user_service import UserService, NotFound
 from server.services.users.token_utils import is_valid_token, generate_timed_token
+
+
+basic_auth = HTTPBasicAuth()
+token_auth = HTTPTokenAuth(scheme='Token')
+
+
+@basic_auth.verify_password
+def verify_credentials(username, password):
+    """
+    Verifies that the supplied token on any login_required decorated endpoint are valid
+    :param username: Username from request header
+    :param password: Password from request header
+    :return: True if valid
+    """
+    return AuthenticationService().is_valid_credentials(username, password)
 
 
 class AuthenticationService:
@@ -27,7 +45,7 @@ class AuthenticationService:
         # Token check has failed so attempt to standard username/password check
         try:
             user = UserService.get_user_by_username(username_or_token)
-        except UserNotFoundError:
+        except NotFound:
             return False
 
         # If customer is valid we just need to validate password

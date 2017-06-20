@@ -79,5 +79,5 @@ def define_flask_restful_routes(app):
     from server.api.swagger_docs import SwaggerDocs
 
     api.add_resource(UserAPI,       '/api/user')
-    api.add_resource(LoginAPI,      '/api/user/<string:username>/login')
+    api.add_resource(LoginAPI,      '/api/user/login')
     api.add_resource(SwaggerDocs,   '/api/docs')

@@ -15,16 +15,6 @@ class UserExistsError(Exception):
             current_app.logger.error('User already exists: ' + message)
 
 
-class UserNotFoundError(Exception):
-    """
-    Custom exception to notify caller that user does not exist
-    """
-
-    def __init__(self, message):
-        if current_app:
-            current_app.logger.error('UserNotFoundError: ' + message)
-
-
 class UserServiceError(Exception):
     """
     Custom exception to notify caller error has occurred within UserService
@@ -43,7 +33,7 @@ class UserService:
         Creates a new admin user record
         :param user_dto: DTO containing all user details
         :return: User if created successfully
-        :raises UserExistsError if user does not exist
+        :raises UserExistsError if username already exists
         """
         # Check if username already exists
         if User.get_by_username(user_dto.username) is not None:
