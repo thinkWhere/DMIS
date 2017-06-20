@@ -3,7 +3,7 @@ from schematics.exceptions import DataError
 
 from server.models.dtos.user_dto import UserDTO
 from server.services.users.user_service import UserService, UserExistsError
-from server.services.users.authentication_service import AuthenticationService, basic_auth
+from server.services.users.authentication_service import AuthenticationService, basic_auth, dmis
 
 
 class UserAPI(Resource):
@@ -91,7 +91,7 @@ class LoginAPI(Resource):
 
         """
         try:
-            logged_in_user = AuthenticationService().login_user(username)
+            logged_in_user = AuthenticationService().login_user(dmis.authenticated_user_id)
             return logged_in_user.to_primitive(), 200
         except Exception as e:
             current_app.logger.critical('Unhandled exception when attempting to login, exception: {0}'.format(str(e)))
