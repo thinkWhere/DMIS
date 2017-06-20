@@ -13,9 +13,15 @@ def is_known_role(value):
                               f'{UserRole.USER.name}')
 
 
-class UserDTO(Model):
-    """ DTO for User """
+class SessionDTO(Model):
+    """ Describes the session object """
     username = StringType()
     role = StringType()
-    email_address = EmailType(serialized_name='emailAddress', serialize_when_none=False)
+    token = StringType()
 
+
+class UserDTO(Model):
+    """ DTO for User """
+    username = StringType(required=True)
+    password = StringType(required=True)
+    email_address = EmailType(serialized_name='emailAddress', required=True)

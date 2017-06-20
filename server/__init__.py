@@ -29,6 +29,8 @@ def bootstrap_app(env=None):
     initialise_logger(app)
     app.logger.info(f'DMIS App Starting Up, Environment = {env}')
 
+    app.secret_key = app.config['SECRET_KEY']  # Used by various utils for creating entropy
+
     db.init_app(app)
     migrate.init_app(app, db)
 
@@ -75,8 +77,11 @@ def define_flask_restful_routes(app):
     app.logger.debug('Initialising API Routes')
     api = Api(app, default_mediatype='application/json')
 
-    from server.api.hello_world_api import HelloWorldAPI
+    from server.api.layer_api import LayerAPI
+    from server.api.user_api import LoginAPI, UserAPI
     from server.api.swagger_docs import SwaggerDocs
 
-    api.add_resource(HelloWorldAPI, '/api/hello/<string:yourname>')
-    api.add_resource(SwaggerDocs, '/api/docs')
+    api.add_resource(LayerAPI,      '/api/layer')
+    api.add_resource(UserAPI,       '/api/user')
+    api.add_resource(LoginAPI,      '/api/user/login')
+    api.add_resource(SwaggerDocs,   '/api/docs')
