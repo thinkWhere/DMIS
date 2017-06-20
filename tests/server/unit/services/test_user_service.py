@@ -1,4 +1,3 @@
-import os
 from passlib.hash import pbkdf2_sha256 as sha256_hash
 import unittest
 

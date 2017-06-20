@@ -1,9 +1,8 @@
 import os
 import unittest
-from unittest.mock import patch
 
 from server import bootstrap_app
-from server.services.users.user_service import UserService, User, UserNotFoundError
+from server.services.users.user_service import UserService, User, NotFound
 
 TEST_USER_ID = 1
 
@@ -72,7 +71,7 @@ class TestUserService(unittest.TestCase):
         test_username = 'ThinkWherexxxxTest'
 
         # Act
-        with self.assertRaises(UserNotFoundError):
+        with self.assertRaises(NotFound):
             UserService.get_user_by_username(test_username)
 
     def test_get_user_by_id(self):
@@ -96,5 +95,5 @@ class TestUserService(unittest.TestCase):
         test_user_id = 9999999999999999999
 
         # Act
-        with self.assertRaises(UserNotFoundError):
+        with self.assertRaises(NotFound):
             UserService.get_user_by_id(test_user_id)
