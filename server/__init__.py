@@ -29,6 +29,8 @@ def bootstrap_app(env=None):
     initialise_logger(app)
     app.logger.info(f'DMIS App Starting Up, Environment = {env}')
 
+    app.secret_key = app.config['SECRET_KEY']  # Used by various utils for creating entropy
+
     db.init_app(app)
     migrate.init_app(app, db)
 

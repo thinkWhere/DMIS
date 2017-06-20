@@ -86,13 +86,10 @@ class LoginAPI(Resource):
             description: Unauthorized, credentials are invalid
           500:
             description: Internal Server Error
-        security:
-          type: basic
-
         """
         try:
-            logged_in_user = AuthenticationService().login_user(dmis.authenticated_user_id)
-            return logged_in_user.to_primitive(), 200
+            session = AuthenticationService.login_user(dmis.authenticated_user_id)
+            return session.to_primitive(), 200
         except Exception as e:
             current_app.logger.critical('Unhandled exception when attempting to login, exception: {0}'.format(str(e)))
             return {'Error': 'Unhandled'}, 500

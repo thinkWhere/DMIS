@@ -13,6 +13,13 @@ def is_known_role(value):
                               f'{UserRole.USER.name}')
 
 
+class SessionDTO(Model):
+    """ Describes the session object """
+    username = StringType()
+    role = StringType()
+    token = StringType()
+
+
 class UserDTO(Model):
     """ DTO for User """
     username = StringType(required=True)

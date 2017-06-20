@@ -1,11 +1,7 @@
-#import geojson
 from server import db
-from psycopg2 import IntegrityError
-#from server.models.dtos.user_dto import UserDTO, UserFilterDTO, Pagination, UserSearchQuery, UserSearchDTO, \
-#     ListedUser
 from server.models.dtos.user_dto import UserDTO
 from server.models.postgis.lookups import UserRole
-from server.models.postgis.utils import NotFound, timestamp
+from server.models.postgis.utils import timestamp
 
 
 class User(db.Model):
@@ -22,9 +18,6 @@ class User(db.Model):
     def create(self):
         """ Creates and saves the current model to the DB """
         db.session.add(self)
-        db.session.commit()
-
-    def save(self):
         db.session.commit()
 
     @staticmethod

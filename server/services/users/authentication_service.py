@@ -4,7 +4,8 @@ from passlib.hash import pbkdf2_sha256 as sha256_hash
 from flask import current_app
 
 from server.api.utils import DMISAPIDecorators
-from server.models.dtos.user_dto import UserDTO
+from server.models.dtos.user_dto import UserDTO, SessionDTO
+from server.models.postgis.lookups import UserRole
 from server.services.users.user_service import UserService, NotFound
 from server.services.users.token_utils import is_valid_token, generate_timed_token
 
@@ -73,20 +74,20 @@ class AuthenticationService:
     #     return login_success
 
     @staticmethod
-    def login_user(user_id: int) -> UserDTO:
+    def login_user(user_id: int) -> SessionDTO:
         """
         Method gets relevant user details for a successfully authenticated customer and generates a session
         token that can be used in place of username and password for the remainder of the user session
-        :param username: The account username
-        :raises: LoginServiceError
-        :return: LoggedInCustomer
+        :param user_id: The account username
         """
-        user = UserService().get_user_by_username(username)
+        user = UserService.get_user_by_id(user_id)
 
-        logged_in_user = user.as_dto(None)
-        logged_in_user.session_token = generate_timed_token(username)
+        session = SessionDTO()
+        session.username = user.username
+        session.role = UserRole(user.role).name
+        session.token = generate_timed_token(user_id)
 
-        return logged_in_user
+        return session
 
     @staticmethod
     def _is_valid_password(password, password_hash):
