@@ -35,16 +35,11 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(f.value)
         .subscribe(
             data => {
-              // TODO: success
-              console.log("success");
               this.router.navigate([this.returnUrl]);
             },
             error => {
-              // TODO: error
-              console.log("error");
               this.errorLogin = true;
             }
-            
         )
   }
 }

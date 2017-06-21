@@ -20,14 +20,13 @@ export class AuthenticationService {
    * @param loginCredentials
    */
   login(loginCredentials) {
-    console.log(loginCredentials);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json; charset=UTF-8');
-    headers.append('Authorization', 'Basic ' + btoa(loginCredentials.email.toLowerCase() + ':' + loginCredentials.password));
+    headers.append('Authorization', 'Basic ' + btoa(loginCredentials.username.toLowerCase() + ':' + loginCredentials.password));
 
     let options = new RequestOptions({ headers: headers});
 
-    return this.http.post(environment.apiEndpoint + '/user/login', options)
+    return this.http.post(environment.apiEndpoint + '/user/login', {}, options)
         .map(this.extractLoginData)
         .catch(this.handleError);
   }
@@ -46,7 +45,7 @@ export class AuthenticationService {
    */
   private extractLoginData(res: Response) {
     let user = res.json();
-    if (user && user.sessionToken) {
+    if (user && user.token) {
       // store user details in local storage to keep user logged in between page refreshes
       localStorage.setItem('currentUser', JSON.stringify(user));
     }
