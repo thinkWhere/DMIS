@@ -12,7 +12,7 @@ export class MapComponent implements OnInit {
 
     toggleContent(): void {
         this.showContent = !this.showContent;
-    }    
+    }
     
     constructor() {}
     

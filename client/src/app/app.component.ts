@@ -10,6 +10,7 @@ import { AuthenticationService } from './shared/authentication.service';
 })
 export class AppComponent {
 
+  // TODO: create user service
   user: any;
 
   constructor(
@@ -18,7 +19,6 @@ export class AppComponent {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(this.user);
   }
 
   logout(){
