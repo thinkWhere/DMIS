@@ -11,7 +11,9 @@
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" ngModel required #password="ngModel">
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        </div>
         <div *ngIf="errorLogin" class="alert alert-danger" role="alert">
             Error: Username or password is incorrect.
         </div>

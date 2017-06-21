@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 
+import { AuthenticationService } from './shared/authentication.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,7 @@ import { HomeComponent } from './home/home.component';
           }
       ])
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,8 +7,7 @@ import { AuthenticationService } from './../shared/authentication.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: [AuthenticationService]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   returnUrl: string;
@@ -36,6 +35,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
             data => {
               this.router.navigate([this.returnUrl]);
+              this.authenticationService.setUsername();
             },
             error => {
               this.errorLogin = true;
