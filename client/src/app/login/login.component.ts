@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from './../shared/authentication.service';
@@ -20,8 +20,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // get the return url rom the route parameters or default to the homepage
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.errorLogin = false;
   }
 
@@ -30,6 +28,8 @@ export class LoginComponent implements OnInit {
    * @param loginForm
    */
   login(f: NgForm): void {
+    // get the return url rom the route parameters or default to the homepage
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.errorLogin = false;
     this.authenticationService.login(f.value)
         .subscribe(

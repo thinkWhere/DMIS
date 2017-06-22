@@ -26,7 +26,7 @@ export class AuthenticationService {
   login(loginCredentials) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json; charset=UTF-8');
-    headers.append('Authorization', 'Basic ' + btoa(loginCredentials.username.toLowerCase() + ':' + loginCredentials.password));
+    headers.append('Authorization', 'Basic ' + btoa(loginCredentials.username.toLowerCase().trim() + ':' + loginCredentials.password));
 
     let options = new RequestOptions({ headers: headers});
 
