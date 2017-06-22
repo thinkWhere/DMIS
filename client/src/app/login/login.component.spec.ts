@@ -22,7 +22,7 @@ describe('LoginComponent', () => {
         {provide: ActivatedRoute, useValue: activatedRouteStub},
         {provide: Router, useValue: routerStub},
         {provide: AuthenticationService, useValue: authenticationStub}
-      ],
+      ]
     })
     .compileComponents();
   }));
