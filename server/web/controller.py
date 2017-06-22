@@ -30,6 +30,7 @@ def km_default(path):
     #if '.' in path:
     #    return cambodia.send_static_file(path)
 
+    current_app.logger.debug(f'KM Calling {path}')
     return km.send_static_file('index.html')
 
 
@@ -42,4 +43,5 @@ def default(path):
     # if '.' in path:
     #     return main.send_static_file(path)
 
+    current_app.logger.debug(f'MAIN Calling {path}')
     return main.send_static_file('index.html')

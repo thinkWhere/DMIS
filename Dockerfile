@@ -13,4 +13,4 @@ ADD . /src
 EXPOSE 8000
 
 # Gunicorn configured for single-core machine, if more cores available increase workers using formula ((cores x 2) + 1))
-CMD cd /src; uwsgi --ini dmis_uwsgi.ini
+#CMD cd /src; uwsgi --ini dmis_uwsgi.ini
