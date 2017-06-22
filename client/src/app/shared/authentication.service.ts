@@ -55,6 +55,18 @@ export class AuthenticationService {
   }
 
   /**
+   * Gets the authentication token
+   * @returns {any}
+     */
+  getToken(){
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user){
+      return user.token;
+    }
+    return '';
+  }
+
+  /**
    * Extract login data
    * @param res
    */

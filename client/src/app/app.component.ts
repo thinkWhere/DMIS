@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription }   from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from './shared/authentication.service';
 
@@ -15,7 +16,8 @@ export class AppComponent {
   subscription: Subscription;
 
   constructor(
-      private authenticationService: AuthenticationService
+      private authenticationService: AuthenticationService,
+      private router: Router
   ){}
 
   ngOnInit() {
@@ -32,5 +34,6 @@ export class AppComponent {
   logout(){
     this.authenticationService.logout();
     this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.router.navigateByUrl('/');
   }
 }
