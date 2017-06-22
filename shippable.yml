@@ -26,7 +26,7 @@ build:
         # Install NPM packages and build client from gulpfile
         - cd client
         - npm install
-        - .\node_modules\.bin\ng build --aot --prod -op ..\server\web\static\dist\en
+        - ./node_modules/.bin/ng build --aot --prod -op ../server/web/static/dist/en
         - cd ..
 
         # Required to display test results in Shippable GUI
