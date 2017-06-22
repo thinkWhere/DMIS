@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 
 import * as ol from 'openlayers';
 
@@ -17,30 +17,6 @@ export class MapComponent implements OnInit {
     constructor(
         private router: Router
     ){}
-
-    /**
-     * Toggles the visibility of the table of contents 
-     */
-    toggleContent(): void {
-        this.showContent = !this.showContent;
-    }
-
-    /**
-     * Toggles the visibility of the category picker
-     */
-    toggleCategoryPicker(): void {
-        this.showCategoryPicker = !this.showCategoryPicker;
-    }
-
-    /**
-     * S
-     * @param category
-     */
-    setCategory(category): void {
-        this.category = category;
-        this.showCategoryPicker = false;
-        this.router.navigate(['/map/' + this.category]);
-    }
     
     ngOnInit() {
        var map = new ol.Map({
@@ -66,5 +42,29 @@ export class MapComponent implements OnInit {
         if (this.router.url === '/map/assessment'){
             this.category = 'assessment';
         }
+    }
+
+    /**
+     * Toggles the visibility of the table of contents 
+     */
+    toggleContent(): void {
+        this.showContent = !this.showContent;
+    }
+
+    /**
+     * Toggles the visibility of the category picker
+     */
+    toggleCategoryPicker(): void {
+        this.showCategoryPicker = !this.showCategoryPicker;
+    }
+
+    /**
+     * Set category
+     * @param category
+     */
+    setCategory(category): void {
+        this.category = category;
+        this.showCategoryPicker = false;
+        this.router.navigate(['/map/' + this.category]);
     }
 }
