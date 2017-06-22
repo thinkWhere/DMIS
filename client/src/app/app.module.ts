@@ -32,7 +32,7 @@ import { AuthenticationService } from './shared/authentication.service';
               component: LoginComponent
           },
           {
-              path: 'map',
+              path: 'map/:category',
               component: MapComponent
           }
       ])

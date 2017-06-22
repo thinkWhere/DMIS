@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 import * as ol from 'openlayers';
 
 @Component({
@@ -9,12 +11,12 @@ import * as ol from 'openlayers';
 export class MapComponent implements OnInit {
 
     showContent = true;
+    showCategoryPicker = false;
+    category = 'preparedness';
 
-    toggleContent(): void {
-        this.showContent = !this.showContent;
-    }
-    
-    constructor() {}
+    constructor(
+        private router: Router
+    ){}
     
     ngOnInit() {
        var map = new ol.Map({
@@ -29,5 +31,40 @@ export class MapComponent implements OnInit {
                 zoom: 7
             })
         });
+
+        // Switch to the category
+        if (this.router.url === '/map/preparedness'){
+            this.category = 'preparedness';
+        }
+        if (this.router.url === '/map/incidents'){
+            this.category = 'incidents';
+        }
+        if (this.router.url === '/map/assessment'){
+            this.category = 'assessment';
+        }
+    }
+
+    /**
+     * Toggles the visibility of the table of contents 
+     */
+    toggleContent(): void {
+        this.showContent = !this.showContent;
+    }
+
+    /**
+     * Toggles the visibility of the category picker
+     */
+    toggleCategoryPicker(): void {
+        this.showCategoryPicker = !this.showCategoryPicker;
+    }
+
+    /**
+     * Set category
+     * @param category
+     */
+    setCategory(category): void {
+        this.category = category;
+        this.showCategoryPicker = false;
+        this.router.navigate(['/map/' + this.category]);
     }
 }

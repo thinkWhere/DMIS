@@ -3,6 +3,7 @@ import os
 
 
 class EnvironmentConfig(object):
+    SECRET_KEY = os.getenv('DMIS_SECRET', None)
     SQLALCHEMY_DATABASE_URI = os.getenv('DMIS_DB', None)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_POOL_SIZE = 5
