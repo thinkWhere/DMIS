@@ -24,10 +24,10 @@ build:
         - node --version
 
         # Install NPM packages and build client from gulpfile
-        #- cd client
-        #- npm install
-        #- ./node_modules/.bin/gulp build
-        #- cd ..
+        - cd client
+        - npm install
+        - .\node_modules\.bin\ng build --aot --prod -op ..\server\web\static\dist\en
+        - cd ..
 
         # Required to display test results in Shippable GUI
         - mkdir -p shippable/testresults
