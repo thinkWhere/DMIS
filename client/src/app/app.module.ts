@@ -26,7 +26,7 @@ import { HomeComponent } from './home/home.component';
               component: LoginComponent
           },
           {
-              path: 'map',
+              path: 'map/:category',
               component: MapComponent
           }
       ])
