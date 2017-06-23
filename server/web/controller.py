@@ -9,6 +9,7 @@ def assets(path):
     :param path: Path to the file the browser is requesting
     :return: The requested file
     """
+    current_app.logger.warning('Request for assets should only happen on local Dev, check uWSGI config')
     return send_from_directory(main.static_folder, 'assets/' + path)
 
 
@@ -38,8 +39,10 @@ def default(path):
     """
     Default route for all other requests not handled above, which basically hands off to Angular to handle the routing
     """
-    if '.' in path:
-        current_app.logger.warning('Request for file should only happen on local Dev, check uWSGI config')
-        return main.send_static_file(path)
+    if '.' not in path:
+        return main.send_static_file('index.html')
 
-    return main.send_static_file('index.html')
+    current_app.logger.warning('Request for file should only happen on local Dev, check uWSGI config')
+    return main.send_static_file(path)
+
+
