@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "dist-en": "ng build --aot --prod -op ../server/web/static/dist/en",
+    "dist-km": "ng build --aot --prod -op ../server/web/static/dist/khm --base-href /km --locale km --i18n-format xlf --i18n-file ./src/locale/messages.km.xlf"
   },
   "private": true,
   "dependencies": {
