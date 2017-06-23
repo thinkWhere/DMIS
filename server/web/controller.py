@@ -39,10 +39,9 @@ def default(path):
     """
     Default route for all other requests not handled above, which basically hands off to Angular to handle the routing
     """
-    if '.' not in path:
-        return main.send_static_file('index.html')
+    if '.' in path:
+        # This required to enable app to be run locally, not needed for prod, however perf penalty of check
+        # is tiny as once browser has index.html angular will handle routing.
+        return main.send_static_file(path)
 
-    current_app.logger.warning('Request for file should only happen on local Dev, check uWSGI config')
-    return main.send_static_file(path)
-
-
+    return main.send_static_file('index.html')
