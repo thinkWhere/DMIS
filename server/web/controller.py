@@ -1,5 +1,5 @@
 from flask import send_from_directory, render_template, current_app
-from . import main
+from . import main, km
 
 
 @main.route('/assets/<path:path>')
@@ -9,6 +9,7 @@ def assets(path):
     :param path: Path to the file the browser is requesting
     :return: The requested file
     """
+    current_app.logger.warning('Request for assets should only happen on local Dev, check uWSGI config')
     return send_from_directory(main.static_folder, 'assets/' + path)
 
 
@@ -21,6 +22,17 @@ def api():
     return render_template('welcome.html', doc_link=api_url)
 
 
+@km.route('/', defaults={'path': 'index.html'})
+@km.route('/<path:path>')
+def km_default(path):
+    """
+    Default route for all other requests not handled above, which basically hands off to Angular to handle the routing
+    """
+    # NOTE - You won't be able to test this locally, this route will only work on Production as the necessary
+    # static files are served by uWSGI
+    return km.send_static_file('index.html')
+
+
 @main.route('/', defaults={'path': 'index.html'})
 @main.route('/<path:path>')
 def default(path):
@@ -28,6 +40,8 @@ def default(path):
     Default route for all other requests not handled above, which basically hands off to Angular to handle the routing
     """
     if '.' in path:
+        # This required to enable app to be run locally, not needed for prod, however perf penalty of check
+        # is tiny as once browser has index.html angular will handle routing.
         return main.send_static_file(path)
 
     return main.send_static_file('index.html')
