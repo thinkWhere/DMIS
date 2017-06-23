@@ -1,5 +1,6 @@
+from flask import current_app
 from server import db
-from server.models.dtos.layer_dto import LayerSearchQuery, LayerSearchDTO, ListedLayer
+from server.models.dtos.layer_dto import LayerSearchQuery, LayerSearchDTO, ListedLayer, LayerTOCDTO, LayerDetailsDTO
 from server.models.postgis.lookups import MapCategory
 from server.models.postgis.utils import NotFound
 
@@ -12,9 +13,9 @@ class Layer(db.Model):
     layer_name = db.Column(db.String, unique=True, index=True)
     layer_title = db.Column(db.String, default="New Layer")
     layer_description = db.Column(db.String, default="", nullable=False)
-    layer_group = db.Column(db.String, default="OTHER LAYERS", nullable=False)  # TODO: Change to db lookup
+    layer_group = db.Column(db.String, default="OTHER LAYERS", nullable=False)
     map_category = db.Column(db.Integer, default=0, nullable=False)
-    layer_source = db.Column(db.String)  # TODO: decide what needs to go here
+    layer_source = db.Column(db.String)
 
     def create(self):
         """ Creates and saves the current model to the DB """
@@ -62,3 +63,45 @@ class Layer(db.Model):
             dto.layers.append(listed_layer)
 
         return dto
+
+    @staticmethod
+    def get_layers_for_toc() -> LayerTOCDTO:
+        """ Get all layers """
+
+        # TODO: filter by role
+        # Base query that applies to all searches
+        all_layers = db.session.query(Layer.layer_name,
+                                      Layer.layer_title,
+                                      Layer.map_category,
+                                      Layer.layer_group,
+                                      Layer.layer_description,
+                                      Layer.layer_source)\
+            .order_by(Layer.map_category, Layer.layer_group)
+
+        layer_toc_dto = LayerTOCDTO()
+
+        if all_layers is None:
+            raise NotFound('No layers found')
+
+        for layer in all_layers:
+            layer_toc = Layer.get_layer_details(layer)
+
+            if layer.map_category == MapCategory.PREPAREDNESS:
+                layer_toc_dto.preparedness_layers.append(layer_toc)
+            elif layer.map_category == MapCategory.INCIDENTS_WARNINGS:
+                layer_toc_dto.incident_layers.append(layer_toc)
+            elif layer.map_category == MapCategory.ASSESSMENT_RESPONSE:
+                layer_toc_dto.assessment_layers.append(layer_toc)
+            else:
+                current_app.logger.error(f'Unknown Map Category for layer {layer.layer_id}')
+
+    @staticmethod
+    def get_layer_details(layer) -> LayerDetailsDTO:
+        layer_details = LayerDetailsDTO()
+        layer_details.layer_name = layer.layer_name
+        layer_details.layer_title = layer.layer_title
+        layer_details.layer_group = layer.layer_group
+        layer_details.layer_source = layer.layer_source
+        layer_details.layer_description = layer.layer_description
+
+        return layer_details
