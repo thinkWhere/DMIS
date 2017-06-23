@@ -16,8 +16,20 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a routerLink="/">About</a></li>
                     <li><a routerLink="/map/preparedness">Map</a></li>
-                    <li><a href="/">English</a></li>
-                    <li><p class="navbar-btn"><a routerLink="/login" class="btn btn-primary" role="button">Login</a></p></li>
+                    <li><a>English</a></li>
+                    <li *ngIf="!user">
+                        <p class="navbar-btn">
+                            <a routerLink="/login" class="btn btn-primary" role="button" i18n="Login button">Login</a>
+                        </p>
+                    </li>
+                    <li *ngIf="user" class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                          Hi, {{ user.username }} <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a (click)="logout()">Logout</a></li>
+                      </ul>
+                    </li>
                 </ul>
             </div>
         </div>
