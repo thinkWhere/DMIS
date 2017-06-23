@@ -1,5 +1,7 @@
 from flask import send_from_directory, render_template, current_app
 from . import main, km
+import glob
+import os
 
 
 @main.route('/assets/<path:path>')
@@ -43,6 +45,9 @@ def default(path):
     # if '.' in path:
     #     return main.send_static_file(path)
 
+    location = os.path.join(os.path.dirname(__file__), 'static/dist/en/*')
+    current_app.logger.debug(glob.glob(location))
+
     current_app.logger.debug(f'MAIN Calling {path}')
-    return send_from_directory(main.static_folder, path)
+    return main.send_static_file('index.html')
     #return main.send_static_file('index.html')
