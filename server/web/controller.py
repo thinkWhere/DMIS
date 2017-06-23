@@ -44,4 +44,5 @@ def default(path):
     #     return main.send_static_file(path)
 
     current_app.logger.debug(f'MAIN Calling {path}')
-    return main.send_static_file('index.html')
+    return send_from_directory(main.static_folder, path)
+    #return main.send_static_file('index.html')
