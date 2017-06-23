@@ -1,7 +1,5 @@
 from flask import send_from_directory, render_template, current_app
 from . import main, km
-import glob
-import os
 
 
 @main.route('/assets/<path:path>')
@@ -11,7 +9,7 @@ def assets(path):
     :param path: Path to the file the browser is requesting
     :return: The requested file
     """
-    #return send_from_directory(main.static_folder, 'assets/' + path)
+    return send_from_directory(main.static_folder, 'assets/' + path)
 
 
 @main.route('/api-docs')
@@ -29,10 +27,8 @@ def km_default(path):
     """
     Default route for all other requests not handled above, which basically hands off to Angular to handle the routing
     """
-    #if '.' in path:
-    #    return cambodia.send_static_file(path)
-
-    current_app.logger.debug(f'KM Calling {path}')
+    # NOTE - You won't be able to test this locally, this route will only work on Production as the necessary
+    # static files are served by uWSGI
     return km.send_static_file('index.html')
 
 
@@ -42,12 +38,8 @@ def default(path):
     """
     Default route for all other requests not handled above, which basically hands off to Angular to handle the routing
     """
-    # if '.' in path:
-    #     return main.send_static_file(path)
+    if '.' in path:
+        current_app.logger.warning('Request for file should only happen on local Dev, check uWSGI config')
+        return main.send_static_file(path)
 
-    location = os.path.join(os.path.dirname(__file__), 'static/dist/en/*')
-    current_app.logger.debug(glob.glob(location))
-
-    current_app.logger.debug(f'MAIN Calling {path}')
     return main.send_static_file('index.html')
-    #return main.send_static_file('index.html')
