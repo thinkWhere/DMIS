@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as ol from 'openlayers';
+import { LayerService } from './layer.service';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss'],
+  providers: [LayerService]  
 })
 export class MapComponent implements OnInit {
 
@@ -15,8 +17,27 @@ export class MapComponent implements OnInit {
     category = 'preparedness';
 
     constructor(
-        private router: Router
+        private router: Router,
+        private layerService: LayerService
     ){}
+    
+    ngOnInit() {
+        
+       this.initMap();
+        
+       this.layerService.getLayers()
+        .subscribe(
+            data => {
+              // Success
+              // TODO: load layers  
+            },
+            error => {
+              // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
+              // a 401
+              this.router.navigate(['/login'], { queryParams: { returnUrl: 'map/preparedness' }});
+            }
+        )
+    }
 
     /**
      * Toggles the visibility of the table of contents 
@@ -33,7 +54,7 @@ export class MapComponent implements OnInit {
     }
 
     /**
-     * S
+     * Set category
      * @param category
      */
     setCategory(category): void {
@@ -42,8 +63,8 @@ export class MapComponent implements OnInit {
         this.router.navigate(['/map/' + this.category]);
     }
     
-    ngOnInit() {
-       var map = new ol.Map({
+    private initMap () {
+        var map = new ol.Map({
            layers: [
                new ol.layer.Tile({
                    source: new ol.source.OSM()

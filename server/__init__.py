@@ -37,8 +37,10 @@ def bootstrap_app(env=None):
     app.logger.debug('Initialising Blueprints')
     from .web import main as main_blueprint
     from .web import swagger as swagger_blueprint
+    from .web import km as km_blueprint
     app.register_blueprint(main_blueprint)
     app.register_blueprint(swagger_blueprint)
+    app.register_blueprint(km_blueprint)
 
     define_flask_restful_routes(app)
 
