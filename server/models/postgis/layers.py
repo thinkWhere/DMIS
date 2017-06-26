@@ -1,6 +1,6 @@
 from flask import current_app
 from server import db
-from server.models.dtos.layer_dto import LayerSearchQuery, LayerSearchDTO, ListedLayer, LayerTOCDTO, LayerDetailsDTO
+from server.models.dtos.layer_dto import LayerSearchQuery, LayerSearchDTO, LayerDTO, LayerTOCDTO, LayerDetailsDTO
 from server.models.postgis.lookups import MapCategory
 from server.models.postgis.utils import NotFound
 
@@ -39,21 +39,18 @@ class Layer(db.Model):
         db.session.commit()
 
     @staticmethod
-    def get_all_layers(query: LayerSearchQuery) -> LayerSearchDTO:
-        """ Search and filter all layers """
+    def get_all_layers() -> LayerSearchDTO:
+        """ Return all layers """
 
         # Base query that applies to all searches
-        base = db.session.query(Layer.map_category)
+        results = Layer.query.order_by(Layer.map_category, Layer.layer_group, Layer.layer_name).all()
 
-        # Add filter to query as required
-        if query.map_category:
-            base = base.filter(Layer.map_category == MapCategory[query.role.upper()].value)
-
-        results = base.order_by(Layer.map_category)
+        if len(results) == 0:
+            raise NotFound
 
         dto = LayerSearchDTO()
-        for result in results.items:
-            listed_layer = ListedLayer()
+        for result in results:
+            listed_layer = LayerDTO()
             listed_layer.layer_name = result.layer_name
             listed_layer.layer_title = result.layer_title
             listed_layer.map_category = MapCategory(result.map_category).name
@@ -70,12 +67,7 @@ class Layer(db.Model):
 
         # TODO: filter by role
         # Base query that applies to all searches
-        all_layers = db.session.query(Layer.layer_name,
-                                      Layer.layer_title,
-                                      Layer.map_category,
-                                      Layer.layer_group,
-                                      Layer.layer_description,
-                                      Layer.layer_source)\
+        all_layers = Layer.query\
             .order_by(Layer.map_category, Layer.layer_group)
 
         layer_toc_dto = LayerTOCDTO()
