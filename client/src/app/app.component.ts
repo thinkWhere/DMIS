@@ -3,6 +3,7 @@ import { Subscription }   from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './shared/authentication.service';
+import { User } from './user/user';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,8 @@ import { AuthenticationService } from './shared/authentication.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  // TODO: create user service
-  user: any;
+  
+  user: User;
   subscription: Subscription;
 
   constructor(

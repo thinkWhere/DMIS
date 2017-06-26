@@ -10,13 +10,15 @@ import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 
 import { AuthenticationService } from './shared/authentication.service';
+import { AdminComponent } from './admin/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MapComponent,
-    HomeComponent
+    HomeComponent,
+    AdminComponent
   ],
   imports: [
       BrowserModule,
@@ -34,6 +36,10 @@ import { AuthenticationService } from './shared/authentication.service';
           {
               path: 'map/:category',
               component: MapComponent
+          },
+          {
+              path: 'admin',
+              component: AdminComponent
           }
       ])
   ],
