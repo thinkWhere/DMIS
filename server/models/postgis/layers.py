@@ -40,7 +40,7 @@ class Layer(db.Model):
 
     @staticmethod
     def get_all_layers() -> LayerSearchDTO:
-        """ Return all layers """
+        """ Return all layers as simple list for admin page """
 
         # Base query that applies to all searches
         results = Layer.query.order_by(Layer.map_category, Layer.layer_group, Layer.layer_name).all()
@@ -62,13 +62,20 @@ class Layer(db.Model):
         return dto
 
     @staticmethod
-    def get_layers_for_toc() -> LayerTOCDTO:
-        """ Get all layers """
+    def get_layers_for_toc(map_category_name: str) -> LayerTOCDTO:
+        """
+        Get all layers grouped by map category, with optional filter by map category
+        UNKNOWN category returns all categories
+        """
 
         # TODO: filter by role
         # Base query that applies to all searches
-        all_layers = Layer.query\
-            .order_by(Layer.map_category, Layer.layer_group)
+        layer_query = db.session.query(Layer)
+
+        if map_category_name != MapCategory.UNKNOWN.name:
+            all_layers = layer_query.filter(Layer.map_category == MapCategory[map_category_name].value)
+        else:
+            all_layers = layer_query.order_by(Layer.map_category, Layer.layer_group).all()
 
         layer_toc_dto = LayerTOCDTO()
 
@@ -78,14 +85,16 @@ class Layer(db.Model):
         for layer in all_layers:
             layer_toc = Layer.get_layer_details(layer)
 
-            if layer.map_category == MapCategory.PREPAREDNESS:
+            if layer.map_category == MapCategory.PREPAREDNESS.value:
                 layer_toc_dto.preparedness_layers.append(layer_toc)
-            elif layer.map_category == MapCategory.INCIDENTS_WARNINGS:
+            elif layer.map_category == MapCategory.INCIDENTS_WARNINGS.value:
                 layer_toc_dto.incident_layers.append(layer_toc)
-            elif layer.map_category == MapCategory.ASSESSMENT_RESPONSE:
+            elif layer.map_category == MapCategory.ASSESSMENT_RESPONSE.value:
                 layer_toc_dto.assessment_layers.append(layer_toc)
             else:
                 current_app.logger.error(f'Unknown Map Category for layer {layer.layer_id}')
+
+        return layer_toc_dto
 
     @staticmethod
     def get_layer_details(layer) -> LayerDetailsDTO:

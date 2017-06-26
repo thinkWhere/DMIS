@@ -9,7 +9,7 @@ class UserRole(Enum):
 
 class MapCategory(Enum):
     """ Identifies which map category each layer should be a part of """
-    UNKNOWN = 0
-    PREPAREDNESS = 1
-    INCIDENTS_WARNINGS = 2
-    ASSESSMENT_RESPONSE = 3
+    UNKNOWN = 1
+    PREPAREDNESS = 2
+    INCIDENTS_WARNINGS = 3
+    ASSESSMENT_RESPONSE = 4

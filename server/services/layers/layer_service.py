@@ -26,9 +26,9 @@ class LayerService:
         return new_layer
 
     @staticmethod
-    def get_layers_for_role(user_role: int) -> LayerTOCDTO:
+    def get_layers_by_category(map_category: str) -> LayerTOCDTO:
         """ Returns layers that matches role """
-        layers = Layer.get_by_role(user_role)
+        layers = Layer.get_layers_for_toc(map_category)
 
         if layers is None:
             raise NotFound()
