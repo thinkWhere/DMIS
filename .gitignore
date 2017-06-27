@@ -5,6 +5,7 @@
 /client/node_modules
 
 # dev artifacts
+client/assets
 client/src/assets/styles/css
 client/package-lock.json
 shippable/
