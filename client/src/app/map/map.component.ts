@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import * as ol from 'openlayers';
 import { LayerService } from './layer.service';
@@ -15,6 +16,8 @@ export class MapComponent implements OnInit {
     showContent = true;
     showCategoryPicker = false;
     category = 'preparedness';
+    layers: any;
+    map: any;
 
     constructor(
         private router: Router,
@@ -30,7 +33,15 @@ export class MapComponent implements OnInit {
             data => {
               // Success
               // TODO: load layers
-              var layers = {
+            },
+            error => {
+              // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
+              // a 401
+              this.router.navigate(['/login'], { queryParams: { returnUrl: 'map/preparedness' }});
+            }
+        );
+        // MOCK
+            this.layers = {
                   preparednessLayers: [
                       {
                         layer_name: "evaucation_sites",
@@ -50,14 +61,6 @@ export class MapComponent implements OnInit {
                   "incidentLayers": [],
                   "assessmentLayers": []
               };
-              console.log(layers);
-            },
-            error => {
-              // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
-              // a 401
-              this.router.navigate(['/login'], { queryParams: { returnUrl: 'map/preparedness' }});
-            }
-        )
     }
 
     /**
@@ -85,10 +88,31 @@ export class MapComponent implements OnInit {
     }
 
     /**
+     * Toggle a layer
+     * TODO: add layers somewhere else and just toggle them here
+     */
+    toggleLayer(): void {
+        var newSource = new ol.source.TileWMS({
+            params: {
+                'LAYERS': 'dmis:cambodia_evacuation_sites',
+                'FORMAT': 'image/png',
+                'PROJECTION': ''
+            },
+            url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
+            projection: this.map.getView().getProjection()
+        });
+         var layer = new ol.layer.Tile({
+                source: newSource
+            });
+        this.map.addLayer(layer);
+    }
+
+
+    /**
      * Initialise the map
      */
     private initMap () {
-        var map = new ol.Map({
+        this.map = new ol.Map({
            layers: [
                new ol.layer.Tile({
                    source: new ol.source.OSM()
