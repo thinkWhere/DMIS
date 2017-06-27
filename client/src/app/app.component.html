@@ -1,39 +1,54 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" routerLink="/">
-                    DMIS Cambodia
-                </a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a routerLink="/">About</a></li>
-                    <li><a routerLink="/map/preparedness">Map</a></li>
-                    <li><a>English</a></li>
-                    <li *ngIf="!user">
-                        <p class="navbar-btn">
-                            <a routerLink="/login" class="btn btn-primary" role="button" i18n="Login button">Login</a>
-                        </p>
-                    </li>
-                    <li *ngIf="user" class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                          Hi, {{ user.username }} <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a (click)="logout()">Logout</a></li>
-                      </ul>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top navbar-dmis" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/">
+                DMIS Cambodia
+            </a>
         </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul *ngIf="(route == '/map/preparedness' || route == '/map/incidents' || route == '/map/assessment')" class="nav navbar-nav navbar-categories">
+                <li>
+                    <a routerLinkActive="active" routerLink="/map/preparedness" class="preparedness" title="Preparedness">
+                        Preparedness
+                    </a>
+                </li>
+                <li>
+                    <a routerLinkActive="active" routerLink="/map/incidents" class="incidents" title="Incidents and Warnings">
+                        Incidents and Warnings
+                    </a>
+                </li>
+                <li>
+                    <a routerLinkActive="active" routerLink="/map/assessment" class="assessment" title="Assessment and Response">
+                        Assessment and Response
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a routerLink="/" title="Go to the about page">About</a></li>
+                <li><a routerLink="/map/preparedness" title="Go to the map page">Map</a></li>
+                <li><a href="/">English</a></li>
+                <li *ngIf="!user">
+                    <a routerLink="/login" title="Login" i18n="Login button"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+                </li>
+                <li *ngIf="user" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Hi, {{ user.username }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a (click)="logout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="dmis-container">
     <router-outlet></router-outlet>
 </div>
