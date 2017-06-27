@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription}   from 'rxjs/Subscription';
 
-import {AuthenticationService} from './shared/authentication.service';
+import { AuthenticationService } from './shared/authentication.service';
+import { User } from './user/user';
 
 
 @Component({
@@ -12,9 +13,8 @@ import {AuthenticationService} from './shared/authentication.service';
 })
 export class AppComponent {
 
-    // TODO: create user service
-    user:any;
-    subscription:Subscription;
+    user: User;
+    subscription: Subscription;
     route:string;
 
     constructor(
@@ -46,4 +46,3 @@ export class AppComponent {
         this.router.navigateByUrl('/');
     }
 }
-
