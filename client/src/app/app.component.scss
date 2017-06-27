@@ -5,6 +5,55 @@
   height: 100%;
 }
 
+.navbar-dmis {
+  border-bottom: none;
+}
+
+.navbar-header {
+   div.preparedness {
+      color: $preparedness;
+    }
+    div.incidents {
+      color: $incidents;
+    }
+    div.assessment {
+      color: $assessment;
+  }
+}
+
+.navbar-categories {
+  padding: 10px 0 0;
+  li {
+    margin: 0px 3px;
+    a {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: $brand-secondary;
+      color: white !important;
+    }
+    .preparedness.active {
+        color: white !important;
+        background-color: $preparedness;
+    }
+    .incidents.active{
+         color: white !important;
+         background-color: $incidents;
+    }
+    .assessment.active {
+      color: white !important;
+      background-color: $assessment;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+    .navbar-categories {
+        display: none;
+    }
+}
+
 /** Custom Bootstrap navbar **/
 $bgDefault      : #ffffff;
 $bgHighlight    : #ffffff;

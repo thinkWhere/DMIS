@@ -77,14 +77,21 @@ export class MapComponent implements OnInit {
             })
         });
 
-        // Switch to the category
-        if (this.router.url === '/map/preparedness'){
+        this.checkCategory();
+
+        this.router.events.subscribe((event) => {
+            this.checkCategory();
+        });
+    }
+
+    private checkCategory() {
+        if (this.router.url === '/map/preparedness') {
             this.category = 'preparedness';
         }
-        if (this.router.url === '/map/incidents'){
+        if (this.router.url === '/map/incidents') {
             this.category = 'incidents';
         }
-        if (this.router.url === '/map/assessment'){
+        if (this.router.url === '/map/assessment') {
             this.category = 'assessment';
         }
     }

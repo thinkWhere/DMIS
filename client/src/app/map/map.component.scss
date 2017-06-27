@@ -1,6 +1,4 @@
-$preparedness: #3498DB;
-$incidents: #E74C3C;
-$assessment: #2C3E50;
+@import "../../assets/styles/_variables.scss";
 
 #map {
   height: 100%;
@@ -11,6 +9,17 @@ $assessment: #2C3E50;
 .map-container {
   margin: 0;
   height: 100%;
+  border-top: 3px solid;
+}
+
+.map-container.preparedness {
+    border-color: $preparedness;
+}
+.map-container.incidents {
+    border-color: $incidents;
+}
+.map-container.assessment {
+    border-color: $assessment;
 }
 
 .switch-category {
@@ -79,7 +88,7 @@ $threshold-sm: 768px !default;
 
 $width-lg: 460px !default;
 $width-md: 390px !default;
-$width-sm: 305px !default;
+$width-sm: 390px !default;
 $width-xs: 100% !default;
 
 $sidebar-z-index: 2 !default;
@@ -163,7 +172,7 @@ $move-map-in-xs: true !default;
     right: 0;
   }
 
-  opacity: 0.5;
+  opacity: 0.7;
 
   &, & > ul {
     position: absolute;
@@ -327,14 +336,6 @@ $move-map-in-xs: true !default;
     border: $sidebar-border;
     border-radius: $sidebar-border-radius;
   }
-}
-
-.sidebar-left {
-  border-right: $sidebar-border;
-}
-
-.sidebar-right {
-  border-left: $sidebar-border;
 }
 
 .sidebar-tabs {
