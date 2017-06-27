@@ -150,6 +150,7 @@ export class MapComponent implements OnInit {
      * Add layers to the map - maybe move to layer service
      * TODO: review and maybe add to layer service when this function grows?
      * TODO: extend to incidents and assessment layers
+     * TODO: replace URL with API url
      */
     private addLayers () {
         for (var i = 0; i < this.layers.preparednessLayers.length; i++){
