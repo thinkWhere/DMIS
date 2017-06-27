@@ -1,6 +1,6 @@
 from flask import current_app
 from server import db
-from server.models.dtos.layer_dto import LayerSearchQuery, LayerSearchDTO, LayerDTO, LayerTOCDTO, LayerDetailsDTO
+from server.models.dtos.layer_dto import LayerSearchDTO, LayerDTO, LayerTOCDTO, LayerDetailsDTO
 from server.models.postgis.lookups import MapCategory
 from server.models.postgis.utils import NotFound
 
@@ -20,9 +20,6 @@ class Layer(db.Model):
     def create(self):
         """ Creates and saves the current model to the DB """
         db.session.add(self)
-        db.session.commit()
-
-    def save(self):
         db.session.commit()
 
     def get_by_id(self, layer_id: int):

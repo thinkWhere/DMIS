@@ -1,7 +1,7 @@
 from schematics import Model
 from schematics.exceptions import ValidationError
-from schematics.types import StringType, IntType
-from schematics.types.compound import ListType, ModelType, BaseType
+from schematics.types import StringType
+from schematics.types.compound import ListType, ModelType
 from server.models.postgis.lookups import MapCategory
 
 
@@ -23,11 +23,6 @@ class LayerDTO(Model):
     map_category = StringType(required=True, validators=[is_known_category], serialized_name='mapCategory')
     layer_group = StringType(serialized_name='layerGroup')
     layer_source = StringType(required=True, serialized_name='layerSource')
-
-
-class LayerSearchQuery(Model):
-    """ Describes a layer search query, that a client may submit to filter the list of layers """
-    map_category = StringType(validators=[is_known_category])
 
 
 class LayerSearchDTO(Model):
@@ -58,6 +53,6 @@ class LayerTOCDTO(Model):
         self.incident_layers = []
         self.assessment_layers = []
 
-    preparedness_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='preparednessLayers')
-    incident_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='incidentLayers')
-    assessment_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='assessmentLayers')
+    preparedness_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='preparednessLayers', serialize_when_none=False)
+    incident_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='incidentLayers', serialize_when_none=False)
+    assessment_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='assessmentLayers', serialize_when_none=False)
