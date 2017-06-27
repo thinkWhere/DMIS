@@ -115,7 +115,10 @@ export class MapComponent implements OnInit {
         this.map = new ol.Map({
            layers: [
                new ol.layer.Tile({
-                   source: new ol.source.OSM()
+                   source: new ol.source.OSM({
+                       url: "http://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+                       attributions: "<a href='http://www.openstreetmap.org/copyright/' target='_blank'>© OpenStreetMap</a> contributors"
+                   })
                })
             ],
             target: 'map',
