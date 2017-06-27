@@ -29,7 +29,28 @@ export class MapComponent implements OnInit {
         .subscribe(
             data => {
               // Success
-              // TODO: load layers  
+              // TODO: load layers
+              var layers = {
+                  preparednessLayers: [
+                      {
+                        layer_name: "evaucation_sites",
+                        layer_title: "Evacuation Sites",
+                        layer_description: "Sites for Evacuation",
+                        layer_source: "https://blah.com/wms",
+                        layer_group: "Humanitarian"
+                      },
+                      {
+                        layer_name: "admin_areas",
+                        layer_title: "Administrative Areas",
+                        layer_description: "Country, district, province, communes",
+                        layer_source: "https://blah.com/wms",
+                        layer_group: "Administrative"
+                      }
+                  ],
+                  "incidentLayers": [],
+                  "assessmentLayers": []
+              };
+              console.log(layers);
             },
             error => {
               // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
@@ -62,7 +83,10 @@ export class MapComponent implements OnInit {
         this.showCategoryPicker = false;
         this.router.navigate(['/map/' + this.category]);
     }
-    
+
+    /**
+     * Initialise the map
+     */
     private initMap () {
         var map = new ol.Map({
            layers: [
@@ -84,6 +108,9 @@ export class MapComponent implements OnInit {
         });
     }
 
+    /**
+     * Check the category in the URL
+     */
     private checkCategory() {
         if (this.router.url === '/map/preparedness') {
             this.category = 'preparedness';
