@@ -13,9 +13,9 @@ import { LayerService } from './layer.service';
 })
 export class MapComponent implements OnInit {
 
-    showContent = true;
-    showCategoryPicker = false;
-    category = 'preparedness';
+    showContent: boolean;
+    showCategoryPicker: boolean;
+    category: string;
     layers: any;
     map: any;
 
@@ -25,11 +25,15 @@ export class MapComponent implements OnInit {
     ){}
     
     ngOnInit() {
+
+        this.showContent = true;
+        this.showCategoryPicker = false;
+        this.category = 'preparedness';
+
+        this.initMap();
         
-       this.initMap();
-        
-       this.layerService.getLayers()
-        .subscribe(
+        this.layerService.getLayers()
+            .subscribe(
             data => {
               // Success
               // TODO: load layers
@@ -107,15 +111,15 @@ export class MapComponent implements OnInit {
     /**
      * Initialise the map
      */
-    private initMap () {
+    private initMap() {
         this.map = new ol.Map({
-           layers: [
-               new ol.layer.Tile({
-                   source: new ol.source.OSM({
-                       url: "http://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
-                       attributions: "<a href='http://www.openstreetmap.org/copyright/' target='_blank'>© OpenStreetMap</a> contributors"
-                   })
-               })
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM({
+                        url: "http://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+                        attributions: "<a href='http://www.openstreetmap.org/copyright/' target='_blank'>© OpenStreetMap</a> contributors"
+                    })
+                })
             ],
             target: 'map',
             view: new ol.View({
