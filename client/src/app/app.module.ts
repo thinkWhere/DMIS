@@ -10,15 +10,13 @@ import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 
 import { AuthenticationService } from './shared/authentication.service';
-import { AdminComponent } from './admin/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MapComponent,
-    HomeComponent,
-    AdminComponent
+    HomeComponent
   ],
   imports: [
       BrowserModule,
@@ -39,7 +37,7 @@ import { AdminComponent } from './admin/admin/admin.component';
           },
           {
               path: 'admin',
-              component: AdminComponent
+              loadChildren: 'app/admin/admin.module#AdminModule'
           }
       ])
   ],
