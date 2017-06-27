@@ -34,6 +34,10 @@ import { AuthenticationService } from './shared/authentication.service';
           {
               path: 'map/:category',
               component: MapComponent
+          },
+          {
+              path: 'admin',
+              loadChildren: 'app/admin/admin.module#AdminModule'
           }
       ])
   ],
