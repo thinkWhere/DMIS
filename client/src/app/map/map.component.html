@@ -34,20 +34,15 @@
                         </div>
                     </div>
                     <div *ngIf="category === 'preparedness'">
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Demographics</h4>
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Historical data</h4>
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Emergency services</h4>
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> HRF Information</h4>
+                        <div class="checkbox" *ngFor="let layer of preparednessLayers; index as i; trackBy: trackByFn" (change)="toggleLayer(layer.layerName)">
+                            <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                        </div>
                     </div>
                     <div *ngIf="category === 'incidents'">
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> MOWRAM</h4>
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Pacific Disaster Centre</h4>
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Weatherbug</h4>
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> IoT Sensors</h4>
+                        TODO
                     </div>
                     <div *ngIf="category === 'assessment'">
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Assessment</h4>
-                        <h4><i class="fa fa-plus" aria-hidden="true"></i> Response</h4>
+                        TODO
                     </div>
                 </div>
             </div>
