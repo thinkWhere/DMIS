@@ -17,9 +17,18 @@ class Layer(db.Model):
     map_category = db.Column(db.Integer, default=0, nullable=False)
     layer_source = db.Column(db.String)
 
-    def create(self):
-        """ Creates and saves the current model to the DB """
-        db.session.add(self)
+    @classmethod
+    def create_from_dto(cls, layer_dto: LayerDTO):
+        """ Creates new layer from DTO """
+        new_layer = cls()
+        new_layer.layer_name = layer_dto.layer_name
+        new_layer.layer_title = layer_dto.layer_title
+        new_layer.layer_description = layer_dto.layer_description
+        new_layer.layer_source = layer_dto.layer_source
+        new_layer.map_category = layer_dto.map_category
+        new_layer.layer_group = layer_dto.layer_group
+
+        db.session.add(cls)
         db.session.commit()
 
     def get_by_id(self, layer_id: int):

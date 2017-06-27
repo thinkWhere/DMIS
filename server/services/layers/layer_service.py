@@ -7,7 +7,7 @@ from server.models.postgis.utils import NotFound
 class LayerService:
 
     @staticmethod
-    def create_layer(layer_dto: LayerDTO):
+    def create_layer(layer_dto: LayerDTO) -> Layer:
         """
         Creates a new layer record
         :param layer_dto: DTO containing all layer details

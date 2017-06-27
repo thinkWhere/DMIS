@@ -23,7 +23,6 @@ class TestUserService(unittest.TestCase):
     skip_tests = False
     test_user = None
 
-
     @classmethod
     def setUpClass(cls):
         env = os.getenv('SHIPPABLE', 'false')
