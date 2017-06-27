@@ -16,7 +16,7 @@ export class MapComponent implements OnInit {
     showContent: boolean;
     showCategoryPicker: boolean;
     category: string;
-    layers: any;
+    preparednessLayers: any;
     map: any;
 
     constructor(
@@ -35,8 +35,9 @@ export class MapComponent implements OnInit {
         this.layerService.getLayers()
             .subscribe(
             data => {
-              // Success
-              // TODO: load layers
+                // Success
+                // TODO: load layers
+                // this.preparednessLayers = data.preparednessLayers;
             },
             error => {
               // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
@@ -45,26 +46,50 @@ export class MapComponent implements OnInit {
             }
         );
         // Mock - this will be replaced with data coming from the getLayers API
-        this.layers = {
-            preparednessLayers: [
+        this.preparednessLayers = [
                 {
-                    layer_name: "cambodia_geographic_boundaries",
-                    layer_title: "Administrative Areas",
-                    layer_description: "Country, district, province, communes",
-                    layer_source: "https://blah.com/wms",
-                    layer_group: "Administrative"
+                    layerName: "cambodia_geographic_boundaries",
+                    layerTitle: "Administrative Areas",
+                    layerDescription: "Country, district, province, communes",
+                    layerSource: "https://blah.com/wms",
+                    layerGroup: "Administrative"
                 },
                 {
-                    layer_name: "cambodia_evacuation_sites",
-                    layer_title: "Evacuation Sites",
-                    layer_description: "Sites for Evacuation",
-                    layer_source: "https://blah.com/wms",
-                    layer_group: "Humanitarian"
+                    layerName: "cambodia_evacuation_sites",
+                    layerTitle: "Evacuation Sites",
+                    layerDescription: "Sites for Evacuation",
+                    layerSource: "https://blah.com/wms",
+                    layerGroup: "Humanitarian"
+                },
+                {
+                    layerName: "cambodia_healh_centre",
+                    layerTitle: "Health Centre",
+                    layerDescription: "",
+                    layerSource: "",
+                    layerGroup: ""
+                },
+                {
+                    layerName: "cambodia_health_post",
+                    layerTitle: "Health Post",
+                    layerDescription: "",
+                    layerSource: "",
+                    layerGroup: ""
+                },
+                {
+                    layerName: "cambodia_hltfacp_od_gov",
+                    layerTitle: "Health Od Gov",
+                    layerDescription: "",
+                    layerSource: "",
+                    layerGroup: ""
+                },
+                {
+                    layerName: "cambodia_hltfacp_referral_gov",
+                    layerTitle: "Health Referral Gov",
+                    layerDescription: "",
+                    layerSource: "",
+                    layerGroup: ""
                 }
-            ],
-            "incidentLayers": [],
-            "assessmentLayers": []
-        };
+            ];
         this.addLayers();
     }
 
@@ -130,7 +155,7 @@ export class MapComponent implements OnInit {
 
         this.checkCategory();
 
-        this.router.events.subscribe((event) => {
+        this.router.events.subscribe(() => {
             this.checkCategory();
         });
     }
@@ -157,12 +182,11 @@ export class MapComponent implements OnInit {
      * TODO: replace URL with API url
      */
     private addLayers () {
-        for (var i = 0; i < this.layers.preparednessLayers.length; i++){
+        for (var i = 0; i < this.preparednessLayers.length; i++){
             var newSource = new ol.source.TileWMS({
             params: {
-                'LAYERS': this.layers.preparednessLayers[i].layer_name,
-                'FORMAT': 'image/png',
-                'PROJECTION': ''
+                'LAYERS': this.preparednessLayers[i].layerName,
+                'FORMAT': 'image/png'
             },
             url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
             projection: this.map.getView().getProjection()
@@ -172,7 +196,7 @@ export class MapComponent implements OnInit {
                 });
             layer.setVisible(false);
             layer.setProperties({
-                "layerName": this.layers.preparednessLayers[i].layer_name
+                "layerName": this.preparednessLayers[i].layerName
             });
             this.map.addLayer(layer);
         }

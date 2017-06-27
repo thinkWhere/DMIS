@@ -25,8 +25,9 @@ export class LayerService {
 
     let options = new RequestOptions({ headers: headers});
 
-    return this.http.get(environment.apiEndpoint + '/layer', options)
-        .map(response => response.json().data)
+    // TODO: make category a parameter
+    return this.http.get(environment.apiEndpoint + '/layer/toc/preparedness', options)
+        .map(response => response.json())
         .catch(this.handleError);
   }
 
