@@ -40,27 +40,28 @@ export class MapComponent implements OnInit {
               this.router.navigate(['/login'], { queryParams: { returnUrl: 'map/preparedness' }});
             }
         );
-        // MOCK
-            this.layers = {
-                  preparednessLayers: [
-                      {
-                        layer_name: "evaucation_sites",
-                        layer_title: "Evacuation Sites",
-                        layer_description: "Sites for Evacuation",
-                        layer_source: "https://blah.com/wms",
-                        layer_group: "Humanitarian"
-                      },
-                      {
-                        layer_name: "admin_areas",
-                        layer_title: "Administrative Areas",
-                        layer_description: "Country, district, province, communes",
-                        layer_source: "https://blah.com/wms",
-                        layer_group: "Administrative"
-                      }
-                  ],
-                  "incidentLayers": [],
-                  "assessmentLayers": []
-              };
+        // Mock - this will be replaced with data coming from the getLayers API
+        this.layers = {
+            preparednessLayers: [
+                {
+                    layer_name: "cambodia_geographic_boundaries",
+                    layer_title: "Administrative Areas",
+                    layer_description: "Country, district, province, communes",
+                    layer_source: "https://blah.com/wms",
+                    layer_group: "Administrative"
+                },
+                {
+                    layer_name: "cambodia_evacuation_sites",
+                    layer_title: "Evacuation Sites",
+                    layer_description: "Sites for Evacuation",
+                    layer_source: "https://blah.com/wms",
+                    layer_group: "Humanitarian"
+                }
+            ],
+            "incidentLayers": [],
+            "assessmentLayers": []
+        };
+        this.addLayers();
     }
 
     /**
@@ -89,24 +90,19 @@ export class MapComponent implements OnInit {
 
     /**
      * Toggle a layer
-     * TODO: add layers somewhere else and just toggle them here
      */
-    toggleLayer(): void {
-        var newSource = new ol.source.TileWMS({
-            params: {
-                'LAYERS': 'dmis:cambodia_evacuation_sites',
-                'FORMAT': 'image/png',
-                'PROJECTION': ''
-            },
-            url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
-            projection: this.map.getView().getProjection()
-        });
-         var layer = new ol.layer.Tile({
-                source: newSource
-            });
-        this.map.addLayer(layer);
+    toggleLayer(layerName): void {
+        // get the layers
+        var layers = this.map.getLayers().getArray();
+        // find the layer
+        for (var i = 0; i < layers.length; i++) {
+            // toggle visibility
+            if (layerName === layers[i].getProperties().layerName) {
+                layers[i].setVisible(!layers[i].getVisible());
+                return;
+            }
+        }
     }
-
 
     /**
      * Initialise the map
@@ -147,6 +143,33 @@ export class MapComponent implements OnInit {
         }
         if (this.router.url === '/map/assessment') {
             this.category = 'assessment';
+        }
+    }
+
+     /**
+     * Add layers to the map - maybe move to layer service
+     * TODO: review and maybe add to layer service when this function grows?
+     * TODO: extend to incidents and assessment layers
+     */
+    private addLayers () {
+        for (var i = 0; i < this.layers.preparednessLayers.length; i++){
+            var newSource = new ol.source.TileWMS({
+            params: {
+                'LAYERS': this.layers.preparednessLayers[i].layer_name,
+                'FORMAT': 'image/png',
+                'PROJECTION': ''
+            },
+            url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
+            projection: this.map.getView().getProjection()
+            });
+             var layer = new ol.layer.Tile({
+                    source: newSource
+                });
+            layer.setVisible(false);
+            layer.setProperties({
+                "layerName": this.layers.preparednessLayers[i].layer_name
+            });
+            this.map.addLayer(layer);
         }
     }
 }

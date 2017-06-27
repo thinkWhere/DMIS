@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div *ngIf="category === 'preparedness'">
-                        <div class="checkbox" *ngFor="let layer of layers.preparednessLayers; index as i; trackBy: trackByFn" (click)="toggleLayer()">
+                        <div class="checkbox" *ngFor="let layer of layers.preparednessLayers; index as i; trackBy: trackByFn" (change)="toggleLayer(layer.layer_name)">
                             <label><input type="checkbox" value="">{{ layer.layer_title }}</label>
                         </div>
                     </div>
