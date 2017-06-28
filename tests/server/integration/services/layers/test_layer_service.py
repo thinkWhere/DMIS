@@ -53,7 +53,7 @@ class TestLayerService(unittest.TestCase):
     def test_layers_by_category_finds_layer(self):
         if self.skip_tests:
             return
-        
+
         # Act
         layer_by_category = LayerService.get_layers_by_category(MapCategory.PREPAREDNESS.name)
 
