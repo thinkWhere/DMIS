@@ -35,7 +35,7 @@
                 <li><a routerLink="/map/preparedness" title="Go to the map page">Map</a></li>
                 <li><a href="/">English</a></li>
                 <li *ngIf="!user">
-                    <a routerLink="/login" title="Login" i18n="Login button"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+                    <a routerLink="/login" title="Login"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;<span i18n="Login button@@loginButton">Login</span></a>
                 </li>
                 <li *ngIf="user" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

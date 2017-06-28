@@ -2,23 +2,23 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="loginButton" datatype="html">
+        <source>Login</source>
+        <target>ចូល</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <note priority="1" from="description">Login button</note>
+      </trans-unit>
       <trans-unit id="titleApplication" datatype="html">
         <source>DMIS</source>
-        <target>DMIS</target>
+        <target/>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <note priority="1" from="description">Title of the application</note>
-      </trans-unit>
-      <trans-unit id="6765b4c916060f6bc42d9bb69e80377dbcb5e4e9" datatype="html">
-        <source>Login</source>
-        <target>ចូល</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <note priority="1" from="description">Login button</note>
       </trans-unit>
     </body>
   </file>
