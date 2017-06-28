@@ -29,7 +29,7 @@ class TestLayerService(unittest.TestCase):
         self.ctx = self.app.app_context()
         self.ctx.push()
 
-        self.setup_test_layer()
+        self.setup_dmis_layer()
 
     def tearDown(self):
         if self.skip_tests:
@@ -38,7 +38,7 @@ class TestLayerService(unittest.TestCase):
         self.test_layer.delete()
         self.ctx.pop()
 
-    def setup_test_layer(self):
+    def setup_dmis_layer(self):
         layer_dto = LayerDetailsDTO()
         layer_dto.layer_name = 'test_layer'
         layer_dto.layer_title = 'Test Layer'
