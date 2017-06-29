@@ -197,25 +197,4 @@ export class MapComponent implements OnInit {
             this.identifyService.addIdentifyEventHandlers(this.map, newSource);
         }
     }
-    
-    private addIdentifyTestLayer(){
-         this.testSource = new ol.source.TileWMS({
-                params: {
-                    'LAYERS': this.preparednessLayers[0].layerName,
-                    'FORMAT': 'image/png'
-                },
-                url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
-                projection: this.map.getView().getProjection()
-            });
-          var layer = new ol.layer.Tile({
-                    source: this.testSource
-                });
-            layer.setVisible(false);
-            layer.setProperties({
-                "layerName": this.preparednessLayers[0].layerName
-            });
-            this.map.addLayer(layer);
-          // TODO: tidy up
-
-    }
 }
