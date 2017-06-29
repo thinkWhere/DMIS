@@ -19,7 +19,6 @@ export class MapComponent implements OnInit {
     category: string;
     preparednessLayers: any;
     map: any;
-    testSource: any;
 
     constructor(
         private router: Router,
@@ -27,10 +26,6 @@ export class MapComponent implements OnInit {
         private mapService: MapService,
         private identifyService: IdentifyService
     ){}
-
-    ngAfterViewInit(){
-
-    }
 
     ngOnInit() {
 
