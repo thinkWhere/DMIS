@@ -37,6 +37,7 @@
                         <div class="checkbox" *ngFor="let layer of preparednessLayers; index as i; trackBy: trackByFn" (change)="toggleLayer(layer.layerName)">
                             <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
                         </div>
+                        <div id="info">&nbsp;</div>
                     </div>
                     <div *ngIf="category === 'incidents'">
                         TODO
@@ -49,3 +50,10 @@
         </div>
     </div>
 </div>
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content">
+        Popup content
+    </div>
+</div>
+

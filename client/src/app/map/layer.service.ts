@@ -32,6 +32,24 @@ export class LayerService {
   }
 
   /**
+   * Get identifiable layers
+   * @param map
+   * @returns {Array}
+     */
+  getIdentifiableLayers(map) {
+    let identifiableLayers = [];
+    let layers = map.getLayers().getArray();
+    // find the layer
+    for (var i = 0; i < layers.length; i++) {
+      // Only identify layers visible on the map
+      if (layers[i].getVisible() && layers[i].getProperties().layerName){
+         identifiableLayers.push(layers[i].getProperties().layerName)
+      }
+    }
+    return identifiableLayers;
+  }
+  
+  /**
    * Handle the error
    * @param error
    * @returns {ErrorObservable}
