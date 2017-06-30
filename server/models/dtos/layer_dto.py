@@ -25,24 +25,6 @@ class LayerDetailsDTO(Model):
     layer_source = StringType(required=True, serialized_name='layerSource')
 
 
-# class LayerSearchDTO(Model):
-#     """ Simple list of layer details """
-#     def __init__(self):
-#         super().__init__()
-#         self.layers = []
-#
-#     layers = ListType(ModelType(LayerDTO))
-
-
-# class LayerDetailsDTO(Model):
-#     """ Basic details for an individual layer, excluding hierarchy """
-#     layer_name = StringType()
-#     layer_title = StringType()
-#     layer_description = StringType()
-#     layer_source = StringType()
-#     layer_group = StringType()     # TODO: Add hierarchy using LayerGroupDTO instead
-
-
 class DMISLayersDTO(Model):
     """ Model for layers grouped by map category and layer group """
 

@@ -47,29 +47,6 @@ class Layer(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    # @staticmethod
-    # def get_all_layers() -> LayerSearchDTO:
-    #     """ Return all layers as simple list for admin page """
-    #
-    #     # Base query that applies to all searches
-    #     results = Layer.query.order_by(Layer.map_category, Layer.layer_group, Layer.layer_name).all()
-    #
-    #     if len(results) == 0:
-    #         raise NotFound
-    #
-    #     dto = LayerSearchDTO()
-    #     for result in results:
-    #         listed_layer = LayerDTO()
-    #         listed_layer.layer_name = result.layer_name
-    #         listed_layer.layer_title = result.layer_title
-    #         listed_layer.map_category = MapCategory(result.map_category).name
-    #         listed_layer.layer_group = result.layer_group
-    #         listed_layer.layer_source = result.layer_source
-    #
-    #         dto.layers.append(listed_layer)
-    #
-    #     return dto
-
     @staticmethod
     def get_layers(map_category: MapCategory) -> Optional[DMISLayersDTO]:
         """

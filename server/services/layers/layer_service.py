@@ -42,12 +42,3 @@ class LayerService:
 
         return layers
 
-    # @staticmethod
-    # def get_layer_list() -> LayerSearchDTO:
-    #     """ Returns details for all layers, used for admin purposes """
-    #     layers = Layer.get_all_layers()
-    #
-    #     if layers is None:
-    #         raise NotFound()
-    #
-    #     return layers
