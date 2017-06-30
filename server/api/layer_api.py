@@ -42,14 +42,11 @@ class LayerTocAPI(Resource):
           401:
             description: Unauthorized, credentials are invalid
           404:
-            description: Not Found
+            description: Endpoint not found or no layers available
           500:
             description: Internal Server Error
         """
         try:
-            # TODO: in future add a role filter on the layers
-            # if map_category is None:
-            #     map_category = 'UNKNOWN'
             layer_dto = LayerService.get_layers_by_category(map_category)
             return layer_dto.to_primitive(), 200
         except LayerServiceError as e:
