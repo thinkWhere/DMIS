@@ -7,7 +7,7 @@ from server.services.users.user_service import UserService, User, NotFound
 TEST_USER_ID = 1
 
 
-def create_test_user() -> User:
+def create_dmis_user() -> User:
     # Setup test user
     test_user = User()
     test_user.user_id = TEST_USER_ID
@@ -22,7 +22,6 @@ def create_test_user() -> User:
 class TestUserService(unittest.TestCase):
     skip_tests = False
     test_user = None
-
 
     @classmethod
     def setUpClass(cls):
@@ -40,7 +39,7 @@ class TestUserService(unittest.TestCase):
         self.ctx = self.app.app_context()
         self.ctx.push()
 
-        self.test_user = create_test_user()
+        self.test_user = create_dmis_user()
 
     def tearDown(self):
         if self.skip_tests:

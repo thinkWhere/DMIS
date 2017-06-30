@@ -113,7 +113,6 @@ class AuthenticationService:
         :param token_expiry: When the token expires
         :return: True if token is valid
         """
-        print(current_app.secret_key)
         serializer = URLSafeTimedSerializer(current_app.secret_key)
 
         try:
