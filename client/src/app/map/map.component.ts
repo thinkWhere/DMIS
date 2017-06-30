@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 
 import * as ol from 'openlayers';
 import { LayerService } from './layer.service';
+import { MapService } from './map.service';
+import { IdentifyService } from './identify.service';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [LayerService]  
+  providers: [LayerService, MapService, IdentifyService]
 })
 export class MapComponent implements OnInit {
 
@@ -21,9 +22,11 @@ export class MapComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private layerService: LayerService
+        private layerService: LayerService,
+        private mapService: MapService,
+        private identifyService: IdentifyService
     ){}
-    
+
     ngOnInit() {
 
         this.showContent = true;
@@ -137,27 +140,14 @@ export class MapComponent implements OnInit {
      * Initialise the map
      */
     private initMap() {
-        this.map = new ol.Map({
-            layers: [
-                new ol.layer.Tile({
-                    source: new ol.source.OSM({
-                        url: "http://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
-                        attributions: "<a href='http://www.openstreetmap.org/copyright/' target='_blank'>© OpenStreetMap</a> contributors"
-                    })
-                })
-            ],
-            target: 'map',
-            view: new ol.View({
-                center: ol.proj.transform([104.99, 12.56], 'EPSG:4326', 'EPSG:3857'),
-                zoom: 7
-            })
-        });
-
+        this.mapService.initMap();
+        this.map = this.mapService.getMap();
+        this.map.setTarget('map');
         this.checkCategory();
-
         this.router.events.subscribe(() => {
             this.checkCategory();
         });
+        this.identifyService.addIdentifyPopup(this.map);
     }
 
     /**
@@ -184,12 +174,12 @@ export class MapComponent implements OnInit {
     private addLayers () {
         for (var i = 0; i < this.preparednessLayers.length; i++){
             var newSource = new ol.source.TileWMS({
-            params: {
-                'LAYERS': this.preparednessLayers[i].layerName,
-                'FORMAT': 'image/png'
-            },
-            url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
-            projection: this.map.getView().getProjection()
+                params: {
+                    'LAYERS': this.preparednessLayers[i].layerName,
+                    'FORMAT': 'image/png'
+                },
+                url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
+                projection: this.map.getView().getProjection()
             });
              var layer = new ol.layer.Tile({
                     source: newSource
@@ -199,6 +189,7 @@ export class MapComponent implements OnInit {
                 "layerName": this.preparednessLayers[i].layerName
             });
             this.map.addLayer(layer);
+            this.identifyService.addIdentifyEventHandlers(this.map, newSource);
         }
     }
 }
