@@ -1,17 +1,19 @@
+<div class="sitrep-print-button">
+    <button (click)="print(title, situation, comments)" class="btn btn-primary">Print</button>
+</div>
 <div class="sitrep-container panel panel-default">
     <div>
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title" #ctrl="ngModel">
         </div>
     </div>
-    <div style="width: 566px; height: 400px" class="pull-left">
+    <div class="left-box pull-left">
         <div id="map" class="map" style="height: inherit"></div>
     </div>
-    <div style="width: 350px; height: 400px" class="pull-right">
-        <textarea class="form-control" rows="18" id="comment" placeholder="Situation"></textarea>
+    <div class="right-box pull-right">
+        <textarea class="form-control" rows="18" id="comment" placeholder="Situation" [(ngModel)]="situation" #ctrl="ngModel"></textarea>
     </div>
     <div class="form-group">
-        <textarea class="form-control" rows="5" id="comment" placeholder="Comments"></textarea>
+        <textarea class="form-control" rows="9" id="comment" placeholder="Comments" [(ngModel)]="comments" #ctrl="ngModel"></textarea>
     </div>
 </div>
-<button (click)="print(title)" class="btn btn-primary">Print</button>

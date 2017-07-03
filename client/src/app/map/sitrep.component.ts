@@ -29,11 +29,10 @@ export class SitrepComponent implements OnInit {
     /**
      * Print a SitRep with jsPDF. jsPDF uses millimeters for units
      */
-    print(title):void {
+    print(title, situation, comments):void {
         var format = 'a4';
         var dim = [297, 210];
         var size = (this.map.getSize());
-        var extent = this.map.getView().calculateExtent(size);
 
         this.map.once('postcompose', function (event) {
             var interval;
@@ -43,10 +42,10 @@ export class SitrepComponent implements OnInit {
                 var data = canvas.toDataURL('image/jpeg');
                 var pdf = new jsPDF('landscape', undefined, format);
                 pdf.text(title, 10, 15);
+                pdf.text(situation, 165, 25);
+                pdf.text(comments, 10, 135);
                 pdf.addImage(data, 'JPEG', 10, 20, dim[0] / 2, dim[1] / 2);
                 pdf.save('map.pdf');
-                //this.map.getView().fitExtent(extent, size);
-                //this.map.renderSync();
             }, 100);
         });
         this.map.renderSync();

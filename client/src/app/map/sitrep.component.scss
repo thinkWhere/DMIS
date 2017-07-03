@@ -1,6 +1,19 @@
+.sitrep-print-button {
+  padding: 20px;
+  width: 990px;
+  margin: 0 auto;
+}
 .sitrep-container {
   padding: 20px;
   width: 990px;
   height:700px;
   margin: 0 auto;
+  .left-box {
+    width: 522px;
+    height: 370px
+  }
+  .right-box {
+    width: 400px;
+    height: 400px;
+  }
 }
