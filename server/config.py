@@ -3,6 +3,7 @@ import os
 
 
 class EnvironmentConfig(object):
+    GEOSERVER_URL = 'http://mapcloud-geoserver-staging-lb-823669482.eu-west-1.elb.amazonaws.com/geoserver'
     SECRET_KEY = os.getenv('DMIS_SECRET', None)
     SQLALCHEMY_DATABASE_URI = os.getenv('DMIS_DB', None)
     SQLALCHEMY_TRACK_MODIFICATIONS = False

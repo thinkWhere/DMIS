@@ -2,7 +2,7 @@ from flask import current_app
 from flask_restful import Resource
 
 from server.services.layers.layer_service import LayerService, LayerServiceError
-from server.services.users.authentication_service import token_auth, dmis
+from server.services.users.authentication_service import token_auth
 from server.models.postgis.utils import NotFound
 
 
