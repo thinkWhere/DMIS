@@ -13,4 +13,4 @@ ADD . /src
 EXPOSE 8000
 
 # uWSGI used to serve Flask app, configuration loaded from ini file
-CMD cd /src; uwsgi --ini dmis_uwsgi.ini
+#CMD cd /src; uwsgi --ini dmis_uwsgi.ini
