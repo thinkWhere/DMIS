@@ -136,6 +136,31 @@ export class MapComponent implements OnInit {
         }
     }
 
+    /*print(): void {
+        var format = 'a4';
+        var resolution = 72;
+        var dim = [297, 210];
+        var size = (this.map.getSize());
+        var extent = this.map.getView().calculateExtent(size);
+
+        this.map.once('postcompose', function(event) {
+
+        var interval;
+        interval = setInterval(function() {
+            clearInterval(interval);
+            var canvas = event.context.canvas;
+            var data = canvas.toDataURL('image/jpeg');
+            var pdf = new jsPDF('landscape', undefined, format);
+            pdf.addImage(data, 'JPEG', 0, 0, dim[0]/2, dim[1]/2);
+            pdf.text('Hello world!', dim[0]/2 + 10, 10);
+            pdf.save('map.pdf');
+            this.map.getView().fitExtent(extent, size);
+            this.map.renderSync();
+        }, 100);
+        });
+        this.map.renderSync();
+    }*/
+
     /**
      * Initialise the map
      */

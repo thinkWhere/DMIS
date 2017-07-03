@@ -1,0 +1,17 @@
+<div class="sitrep-container panel panel-default">
+    <div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title" #ctrl="ngModel">
+        </div>
+    </div>
+    <div style="width: 566px; height: 400px" class="pull-left">
+        <div id="map" class="map" style="height: inherit"></div>
+    </div>
+    <div style="width: 350px; height: 400px" class="pull-right">
+        <textarea class="form-control" rows="18" id="comment" placeholder="Situation"></textarea>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" rows="5" id="comment" placeholder="Comments"></textarea>
+    </div>
+</div>
+<button (click)="print(title)" class="btn btn-primary">Print</button>
