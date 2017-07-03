@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { SitrepComponent } from './sitrep.component';
 
@@ -8,6 +9,7 @@ describe('SitrepComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ FormsModule ],
       declarations: [ SitrepComponent ]
     })
     .compileComponents();

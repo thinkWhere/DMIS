@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as ol from 'openlayers';
 import * as jsPDF from 'jspdf';
 
 import { MapService } from './map.service';
@@ -14,13 +13,14 @@ export class SitrepComponent implements OnInit {
 
     map: any;
     title: string = '';
+    situation: string = '';
+    comments: string = '';
     
     constructor(  
         private mapService: MapService) 
     {}
 
     ngOnInit() {
-        console.log('map');
         this.mapService.initMap();
         this.map = this.mapService.getMap();
         this.map.setTarget('map');
