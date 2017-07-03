@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GroupByPipe } from 'angular-pipes/src/aggregate/group-by.pipe';
 
 import * as ol from 'openlayers';
 import { LayerService } from './layer.service';
@@ -32,6 +33,7 @@ export class MapComponent implements OnInit {
         this.showContent = true;
         this.showCategoryPicker = false;
         this.category = 'preparedness';
+        this.preparednessLayers = [];
 
         this.initMap();
         
@@ -39,8 +41,8 @@ export class MapComponent implements OnInit {
             .subscribe(
             data => {
                 // Success
-                // TODO: load layers
-                // this.preparednessLayers = data.preparednessLayers;
+                this.preparednessLayers = data.preparednessLayers;
+                this.addLayers();
             },
             error => {
               // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
@@ -48,52 +50,6 @@ export class MapComponent implements OnInit {
               this.router.navigate(['/login'], { queryParams: { returnUrl: 'map/preparedness' }});
             }
         );
-        // Mock - this will be replaced with data coming from the getLayers API
-        this.preparednessLayers = [
-                {
-                    layerName: "cambodia_geographic_boundaries",
-                    layerTitle: "Administrative Areas",
-                    layerDescription: "Country, district, province, communes",
-                    layerSource: "https://blah.com/wms",
-                    layerGroup: "Administrative"
-                },
-                {
-                    layerName: "cambodia_evacuation_sites",
-                    layerTitle: "Evacuation Sites",
-                    layerDescription: "Sites for Evacuation",
-                    layerSource: "https://blah.com/wms",
-                    layerGroup: "Humanitarian"
-                },
-                {
-                    layerName: "cambodia_healh_centre",
-                    layerTitle: "Health Centre",
-                    layerDescription: "",
-                    layerSource: "",
-                    layerGroup: ""
-                },
-                {
-                    layerName: "cambodia_health_post",
-                    layerTitle: "Health Post",
-                    layerDescription: "",
-                    layerSource: "",
-                    layerGroup: ""
-                },
-                {
-                    layerName: "cambodia_hltfacp_od_gov",
-                    layerTitle: "Health Od Gov",
-                    layerDescription: "",
-                    layerSource: "",
-                    layerGroup: ""
-                },
-                {
-                    layerName: "cambodia_hltfacp_referral_gov",
-                    layerTitle: "Health Referral Gov",
-                    layerDescription: "",
-                    layerSource: "",
-                    layerGroup: ""
-                }
-            ];
-        this.addLayers();
     }
 
     /**
