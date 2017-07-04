@@ -65,13 +65,4 @@ export class MapService {
         return this.http.get(url, options)
             .map(response => (<Response>response).blob())
     }
-
-    /**
-     * Handle the error
-     * @param error
-     * @returns {ErrorObservable}
-     */
-    private handleError(error:Response | any) {
-        return Observable.throw(error);
-    }
 }
