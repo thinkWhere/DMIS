@@ -34,8 +34,14 @@
                         </div>
                     </div>
                     <div *ngIf="category === 'preparedness'">
-                        <div class="checkbox" *ngFor="let layer of preparednessLayers; index as i; trackBy: trackByFn" (change)="toggleLayer(layer.layerName)">
-                            <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                        <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerGroup'">
+                            <h3>{{ layerGroup.key }}</h3>
+                            <div *ngFor="let layer of layerGroup.value; index as i; trackBy: trackByFn">
+                                <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                    <label><input type="checkbox" value=""><b>{{ layer.layerTitle }}</b></label>
+                                </div>
+                                <p>{{ layer.layerDescription }}</p>
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="category === 'incidents'">
