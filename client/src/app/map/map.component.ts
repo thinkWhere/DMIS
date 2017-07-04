@@ -148,10 +148,10 @@ export class MapComponent implements OnInit {
                             var imageUrl = urlCreator.createObjectURL(data);
                             imageTile.getImage().src = imageUrl;
                         },
-                            error => {
-                                // TODO: potentially handle error?
-                            }
-                        )
+                        error => {
+                            // TODO: potentially handle error?
+                        }
+                    )
                 }.bind(this)
             });
              var layer = new ol.layer.Tile({
