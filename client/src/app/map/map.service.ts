@@ -1,5 +1,10 @@
 import {Injectable} from '@angular/core';
+import { Http, Headers, Response, RequestOptions, ResponseContentType } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import * as ol from 'openlayers';
+
+import { AuthenticationService } from './../shared/authentication.service';
+
 
 @Injectable()
 export class MapService {
@@ -7,8 +12,10 @@ export class MapService {
     map:any;
     self = this;
 
-    constructor() {
-    }
+    constructor(
+        private authenticationService: AuthenticationService,
+        private http: Http
+    ) {}
 
     /**
      * Initialise an OpenLayers map
@@ -36,5 +43,35 @@ export class MapService {
      */
     getMap() {
         return this.map;
+    }
+
+    /**
+     * Get the tile by adding authentication headers
+     * @param url
+     * @returns {any|Promise<R>|Maybe<T>}
+     */
+    getTile(url){
+        let headers = new Headers();
+        let token = this.authenticationService.getToken();
+        headers.append('Content-Type', 'application/json; charset=UTF-8');
+        headers.append('Authorization', 'Bearer ' + token);
+        headers.append('Accept', 'image/png');
+
+        let options = new RequestOptions({
+            headers: headers,
+            responseType: ResponseContentType.Blob
+        });
+
+        return this.http.get(url, options)
+            .map(response => (<Response>response).blob())
+    }
+
+    /**
+     * Handle the error
+     * @param error
+     * @returns {ErrorObservable}
+     */
+    private handleError(error:Response | any) {
+        return Observable.throw(error);
     }
 }

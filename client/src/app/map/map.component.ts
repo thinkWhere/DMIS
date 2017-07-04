@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupByPipe } from 'angular-pipes/src/aggregate/group-by.pipe';
-
 import * as ol from 'openlayers';
+
 import { LayerService } from './layer.service';
 import { MapService } from './map.service';
 import { IdentifyService } from './identify.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-map',
@@ -131,11 +132,27 @@ export class MapComponent implements OnInit {
         for (var i = 0; i < this.preparednessLayers.length; i++){
             var newSource = new ol.source.TileWMS({
                 params: {
-                    'LAYERS': this.preparednessLayers[i].layerName,
+                    'LAYERS': 'dmis:' + this.preparednessLayers[i].layerName,
                     'FORMAT': 'image/png'
                 },
-                url: 'http://52.49.245.101:8085/geoserver/dmis/wms',
-                projection: this.map.getView().getProjection()
+                url: environment.apiEndpoint + '/v1/map/wms',
+                projection: this.map.getView().getProjection(),
+                tileLoadFunction: function(imageTile, src) {
+                    // use a tileLoadFunction to add authentication headers to the request
+                    this.mapService.getTile(src)
+                        .subscribe(
+                        data => {
+                            // Success - returns a Blob - create an URL from it and update the original
+                            // imageTile source
+                            var urlCreator = window.URL;
+                            var imageUrl = urlCreator.createObjectURL(data);
+                            imageTile.getImage().src = imageUrl;
+                        },
+                            error => {
+                                // TODO: potentially handle error?
+                            }
+                        )
+                }.bind(this)
             });
              var layer = new ol.layer.Tile({
                     source: newSource
