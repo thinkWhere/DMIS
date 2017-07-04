@@ -53,7 +53,6 @@ export class MapService {
     getTile(url){
         let headers = new Headers();
         let token = this.authenticationService.getToken();
-        headers.append('Content-Type', 'application/json; charset=UTF-8');
         headers.append('Authorization', 'Bearer ' + token);
         headers.append('Accept', 'image/png');
 
