@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import { Http, Headers, Response, RequestOptions, ResponseContentType } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import * as ol from 'openlayers';
 
 import { AuthenticationService } from './../shared/authentication.service';
