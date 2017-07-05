@@ -61,6 +61,8 @@ export class IdentifyService {
      */
     addIdentifyEventHandlers(map, source){
         map.on('singleclick', (evt) => {
+            this.content.innerHTML = '';
+            this.overlay.setPosition(null);
             var viewResolution = map.getView().getResolution();
             var url = source.getGetFeatureInfoUrl(
                 evt.coordinate, viewResolution, 'EPSG:3857',
@@ -71,7 +73,7 @@ export class IdentifyService {
             var identifiableLayers = this.layerService.getIdentifiableLayers(map);
             url = this.updateUrlParameter(url, 'QUERY_LAYERS', identifiableLayers.join());
             url = this.updateUrlParameter(url, 'LAYERS', identifiableLayers.join());
-            if (url) {
+            if (url && identifiableLayers.length > 0) {
                 var coordinate = evt.coordinate;
                 var parser = new ol.format.GeoJSON();
                 this.getFeatureInfo(url)
@@ -79,13 +81,13 @@ export class IdentifyService {
                         data => {
                             // Success
                             var result = parser.readFeatures(data);
-                            this.populatePopup(result)
+                            this.populatePopup(result);
+                            this.overlay.setPosition(coordinate);
                         },
                         error => {
                             // TODO: handle error?
                         }
                     );
-                this.overlay.setPosition(coordinate);
             }
         });
     }
