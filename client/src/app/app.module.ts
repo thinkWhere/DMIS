@@ -11,13 +11,15 @@ import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 
 import { AuthenticationService } from './shared/authentication.service';
+import { SitrepComponent } from './map/sitrep.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MapComponent,
-    HomeComponent
+    HomeComponent,
+    SitrepComponent
   ],
   imports: [
       NgAggregatePipesModule,
@@ -36,6 +38,10 @@ import { AuthenticationService } from './shared/authentication.service';
           {
               path: 'map/:category',
               component: MapComponent
+          },
+          {
+              path: 'sitrep',
+              component: SitrepComponent
           },
           {
               path: 'admin',
