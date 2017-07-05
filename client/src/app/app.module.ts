@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgAggregatePipesModule } from 'angular-pipes';
 
+import { AuthenticationService } from './shared/authentication.service';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
-
-import { AuthenticationService } from './shared/authentication.service';
 import { SitrepComponent } from './map/sitrep.component';
 
 @NgModule({
