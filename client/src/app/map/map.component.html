@@ -1,6 +1,6 @@
 <div class="map-container row row-no-padding" [ngClass]="{'preparedness': category === 'preparedness', 'incidents': category === 'incidents', 'assessment': category === 'assessment'}">
     <div id="map" class="map col-md-12">
-        <div id="sidebar" class="sidebar sidebar-left">
+        <div id="sidebar" class="sidebar sidebar-left" [ngClass]="{'collapsed': !showContent}">
             <!-- Nav tabs -->
             <div class="sidebar-tabs"
                  [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
