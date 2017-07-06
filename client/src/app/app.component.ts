@@ -30,7 +30,8 @@ export class AppComponent {
         });
 
         // Checks if the user is logged in
-        this.user = JSON.parse(localStorage.getItem('currentUser'));
+        //this.user = JSON.parse(localStorage.getItem('currentUser'));
+        this.user = this.authenticationService.checkLoginStatus();
         this.subscription = this.authenticationService.usernameChanged$.subscribe(
             value => {
                 this.user = JSON.parse(localStorage.getItem('currentUser'));
