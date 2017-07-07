@@ -21,6 +21,7 @@ export class MapComponent implements OnInit {
     category: string;
     preparednessLayers: any;
     map: any;
+    wmsSource: any; // WMS source for use in identify
 
     constructor(
         private router: Router,
@@ -44,6 +45,11 @@ export class MapComponent implements OnInit {
                 // Success
                 this.preparednessLayers = data.preparednessLayers;
                 this.addLayers();
+                // If a WMS source exists, add identify event handlers. The WMS source is used by the
+                // identify service to generate the GetFeatureInfo URL
+                if (this.wmsSource){
+                    this.identifyService.addIdentifyEventHandlers(this.map, this.wmsSource);
+                }
             },
             error => {
               // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
@@ -132,7 +138,7 @@ export class MapComponent implements OnInit {
         for (var i = 0; i < this.preparednessLayers.length; i++){
             var newSource = new ol.source.TileWMS({
                 params: {
-                    'LAYERS': 'dmis:' + this.preparednessLayers[i].layerName,
+                    'LAYERS': this.preparednessLayers[i].layerName,
                     'FORMAT': 'image/png'
                 },
                 url: environment.apiEndpoint + '/v1/map/wms',
@@ -154,6 +160,9 @@ export class MapComponent implements OnInit {
                     )
                 }.bind(this)
             });
+            if (!this.wmsSource){
+                this.wmsSource = newSource;
+            }
              var layer = new ol.layer.Tile({
                     source: newSource
                 });
@@ -162,7 +171,6 @@ export class MapComponent implements OnInit {
                 "layerName": this.preparednessLayers[i].layerName
             });
             this.map.addLayer(layer);
-            this.identifyService.addIdentifyEventHandlers(this.map, newSource);
         }
     }
 }

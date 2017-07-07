@@ -3,6 +3,7 @@ import { HttpModule } from '@angular/http';
 
 import { IdentifyService } from './identify.service';
 import { LayerService } from './layer.service';
+import { AuthenticationService } from './../shared/authentication.service';
 
 describe('IdentifyService', () => {
 
@@ -10,10 +11,15 @@ describe('IdentifyService', () => {
   let layerServiceStub = {};
 
   beforeEach(() => {
+    
+    // Mock
+    let authenticationServiceStub = {};
+    
     TestBed.configureTestingModule({
       imports: [HttpModule],
       providers: [IdentifyService,
-        {provide: LayerService, useValue: layerServiceStub}]
+        {provide: LayerService, useValue: layerServiceStub},
+        {provide: AuthenticationService, useValue: authenticationServiceStub}]
     });
   });
 

@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import { Http, Headers, Response, RequestOptions, ResponseContentType } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import * as ol from 'openlayers';
 
 import { LayerService } from './layer.service';
+import { AuthenticationService } from './../shared/authentication.service';
 
 @Injectable()
 export class IdentifyService {
@@ -12,10 +13,12 @@ export class IdentifyService {
     content: any;
     closer: any;
     overlay: any;
+    maxFeatureCount: number = 10;
 
     constructor(
         private http: Http,
-        private layerService: LayerService
+        private layerService: LayerService,
+        private authenticationService: AuthenticationService
     ) {}
 
     /**
@@ -57,56 +60,34 @@ export class IdentifyService {
      * @param source
      */
     addIdentifyEventHandlers(map, source){
-        /**
-         * Add a click handler to the map to render the popup.
-         * TODO: add identify for each layer
-         */
         map.on('singleclick', (evt) => {
+            this.content.innerHTML = '';
+            this.overlay.setPosition(null);
             var viewResolution = map.getView().getResolution();
             var url = source.getGetFeatureInfoUrl(
                 evt.coordinate, viewResolution, 'EPSG:3857',
-                {'INFO_FORMAT': 'application/json'});
+                {
+                    'INFO_FORMAT': 'application/json',
+                    'FEATURE_COUNT': this.maxFeatureCount
+                });
             var identifiableLayers = this.layerService.getIdentifiableLayers(map);
             url = this.updateUrlParameter(url, 'QUERY_LAYERS', identifiableLayers.join());
             url = this.updateUrlParameter(url, 'LAYERS', identifiableLayers.join());
-            if (url) {
+            if (url && identifiableLayers.length > 0) {
                 var coordinate = evt.coordinate;
                 var parser = new ol.format.GeoJSON();
-                // Mock - TODO: replace for call to API
-                var response = '{"type":"FeatureCollection","totalFeatures":"unknown","features":[{"type":"Feature","id":"Cambodia_KHM_admin0.1","geometry_name":"geom","properties":{"id":1,"id_0":40,"iso":"KHM","name_engli":"Cambodia"}}],"crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:EPSG::3857"}}}';
-                var result = parser.readFeatures(response);
-                if (result.length) {
-                    var info = [];
-                    // TODO: create template for popup?
-                    var tableContent = '<table class="table table-condensed">';
-                    tableContent += '<tbody>';
-                    tableContent += '<thead><tr><th>Property</th><th>Value</th></tr></thead>';
-                    for (var i = 0, ii = result.length; i < ii; ++i) {
-                        var properties = result[i].getKeys();
-                        // exclude geometry property
-                        for (var j = 0; j < properties.length; j++) {
-                            if (properties[j] !== 'geometry') {
-                                tableContent += '<tr>';
-                                // Property key
-                                tableContent += '<th scope="row">';
-                                tableContent += properties[j];
-                                tableContent += '</td>';
-                                // Property value
-                                tableContent += '<td>';
-                                tableContent += result[i].get(properties[j]);
-                                tableContent += '</td>';
-                                tableContent += '</tr>';
-                            }
+                this.getFeatureInfo(url)
+                        .subscribe(
+                        data => {
+                            // Success
+                            var result = parser.readFeatures(data);
+                            this.populatePopup(result);
+                            this.overlay.setPosition(coordinate);
+                        },
+                        error => {
+                            // TODO: handle error?
                         }
-                    }
-                    tableContent += '</tbody>';
-                    tableContent += '</table>';
-                    this.content.innerHTML = tableContent;
-                } else {
-                    this.content.innerHTML = '&nbsp;';
-                }
-                this.overlay.setPosition(coordinate);
-                // TODO: use getFeatureInfo function to get the response from the server instead of mock
+                    );
             }
         });
     }
@@ -117,9 +98,53 @@ export class IdentifyService {
      * @returns {any|Promise<R>|Maybe<T>}
      */
     private getFeatureInfo(url) {
-        return this.http.get(url)
+        let headers = new Headers();
+        let token = this.authenticationService.getToken();
+        headers.append('Authorization', 'Bearer ' + token);
+
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.get(url, options)
             .map(response => response.json())
             .catch(this.handleError);
+    }
+
+    /**
+     * Populates the popup with the identify results
+     * TODO: create template for popup?
+     * @param result
+     */
+    private populatePopup(result) {
+        if (result.length) {
+            var tableContent = '';
+            for (var i = 0, ii = result.length; i < ii; ++i) {
+                tableContent += '<h4>' + result[i].getId() + '</h4>';
+                tableContent += '<table class="table table-condensed">';
+                tableContent += '<tbody>';
+                tableContent += '<thead><tr><th>Property</th><th>Value</th></tr></thead>';
+                var properties = result[i].getKeys();
+                // exclude geometry property
+                for (var j = 0; j < properties.length; j++) {
+                    if (properties[j] !== 'geometry') {
+                        tableContent += '<tr>';
+                        // Property key
+                        tableContent += '<th scope="row">';
+                        tableContent += properties[j];
+                        tableContent += '</td>';
+                        // Property value
+                        tableContent += '<td>';
+                        tableContent += result[i].get(properties[j]);
+                        tableContent += '</td>';
+                        tableContent += '</tr>';
+                    }
+                }
+                tableContent += '</tbody>';
+                tableContent += '</table>';
+            }
+            this.content.innerHTML = tableContent;
+        } else {
+            this.content.innerHTML = 'No information available.';
+        }
     }
 
     /**
