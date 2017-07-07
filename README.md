@@ -23,8 +23,9 @@ All server development is done with Python
 
 #### Environment vars:
 To avoid saving credentials in the repository, the following environment variables must be set up locally or on the 
-deployment envoronment:
+deployment environment:
 * **DMIS_DB** - This is for the PostGIS connection string.  This will be in the format: postgresql://username:pwd@host/dbname
+* **DMIS_SECRET** - This is a secret key
 * **DMIS_ENV** - Deployment environment. [Prod | Staging | Dev]
 * Linux / Mac
     * ```export DMIS_ENV=Dev```
