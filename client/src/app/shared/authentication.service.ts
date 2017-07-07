@@ -11,13 +11,17 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthenticationService {
 
+  isLoggedIn: boolean;
+  
   // Observable string sources
   private usernameChangedSource = new Subject<string>();
 
   // Observable strings
   usernameChanged$ = this.usernameChangedSource.asObservable();
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+    this.isLoggedIn = false;
+  }
 
   /**
    * Login to the application
@@ -42,6 +46,7 @@ export class AuthenticationService {
     // remove user from local storage to log the user out
     localStorage.removeItem('currentUser');
     this.usernameChangedSource.next('');
+    this.isLoggedIn = false;
   }
 
   /**
@@ -64,6 +69,22 @@ export class AuthenticationService {
       return user.token;
     }
     return '';
+  }
+
+  /**
+   * Check the login status of the user
+   * Can be used on page load to check the local storage
+   * @returns {any}
+     */
+  checkLoginStatus(){
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user){
+      this.isLoggedIn = true;
+      return user;
+    }
+    else {
+      return null;
+    }
   }
 
   /**

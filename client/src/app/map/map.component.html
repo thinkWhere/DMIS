@@ -1,6 +1,6 @@
 <div class="map-container row row-no-padding" [ngClass]="{'preparedness': category === 'preparedness', 'incidents': category === 'incidents', 'assessment': category === 'assessment'}">
     <div id="map" class="map col-md-12">
-        <div id="sidebar" class="sidebar sidebar-left">
+        <div id="sidebar" class="sidebar sidebar-left" [ngClass]="{'collapsed': !showContent}">
             <!-- Nav tabs -->
             <div class="sidebar-tabs"
                  [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
@@ -10,19 +10,19 @@
                 </ul>
             </div>
             <!-- Tab panes -->
-            <div *ngIf="showContent" class="sidebar-content">
+            <div [hidden]="!showContent" class="sidebar-content">
                 <div class="sidebar-pane active" id="home">
                     <h1 class="sidebar-header pointer" title="Change category"
                         [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
                         (click)="toggleCategoryPicker()">
-                        <span *ngIf="category === 'preparedness'">Preparedness</span>
-                        <span *ngIf="category === 'incidents'">Incidents and Warnings</span>
-                        <span *ngIf="category === 'assessment'">Assessment and Response</span>
+                        <span [hidden]="category !== 'preparedness'">Preparedness</span>
+                        <span [hidden]="category !== 'incidents'">Incidents and Warnings</span>
+                        <span [hidden]="category !== 'assessment'">Assessment and Response</span>
                         <span class="sidebar-toggle">
                             <i class="fa fa-caret-down"></i>
                         </span>
                     </h1>
-                    <div class="switch-category" *ngIf="showCategoryPicker">
+                    <div class="switch-category" [hidden]="!showCategoryPicker">
                         <div class="preparedness-fg" (click)="setCategory('preparedness')">
                             <h4>Preparedness</h4>
                         </div>
@@ -33,7 +33,7 @@
                             <h4>Assessment and Response</h4>
                         </div>
                     </div>
-                    <div *ngIf="category === 'preparedness'">
+                    <div [hidden]="category !== 'preparedness'">
                         <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerGroup'">
                             <h3>{{ layerGroup.key }}</h3>
                             <div *ngFor="let layer of layerGroup.value; index as i; trackBy: trackByFn">
@@ -44,10 +44,10 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="category === 'incidents'">
+                    <div [hidden]="category !== 'incidents'">
                         TODO
                     </div>
-                    <div *ngIf="category === 'assessment'">
+                    <div [hidden]="category !== 'assessment'">
                         TODO
                     </div>
                 </div>

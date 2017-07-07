@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgAggregatePipesModule } from 'angular-pipes';
 
+import { AuthGuardService } from './shared/auth-guard.service';
 import { AuthenticationService } from './shared/authentication.service';
 
 import { AppComponent } from './app.component';
@@ -37,7 +38,8 @@ import { SitrepComponent } from './map/sitrep.component';
           },
           {
               path: 'map/:category',
-              component: MapComponent
+              component: MapComponent,
+              canActivate: [AuthGuardService]
           },
           {
               path: 'sitrep',
@@ -45,11 +47,12 @@ import { SitrepComponent } from './map/sitrep.component';
           },
           {
               path: 'admin',
+              canActivate: [AuthGuardService],
               loadChildren: 'app/admin/admin.module#AdminModule'
           }
       ])
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

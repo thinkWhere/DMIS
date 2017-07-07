@@ -138,7 +138,7 @@ export class MapComponent implements OnInit {
         for (var i = 0; i < this.preparednessLayers.length; i++){
             var newSource = new ol.source.TileWMS({
                 params: {
-                    'LAYERS': 'dmis:' + this.preparednessLayers[i].layerName,
+                    'LAYERS': this.preparednessLayers[i].layerName,
                     'FORMAT': 'image/png'
                 },
                 url: environment.apiEndpoint + '/v1/map/wms',

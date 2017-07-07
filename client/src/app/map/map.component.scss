@@ -334,7 +334,6 @@ $move-map-in-xs: true !default;
 .sidebar {
 
   @media(min-width: $threshold-sm) {
-    border: $sidebar-border;
     border-radius: $sidebar-border-radius;
   }
 }

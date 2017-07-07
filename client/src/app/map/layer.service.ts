@@ -43,7 +43,7 @@ export class LayerService {
     for (var i = 0; i < layers.length; i++) {
       // Only identify layers visible on the map
       if (layers[i].getVisible() && layers[i].getProperties().layerName){
-         identifiableLayers.push('dmis:' + layers[i].getProperties().layerName)
+         identifiableLayers.push(layers[i].getProperties().layerName)
       }
     }
     return identifiableLayers;
