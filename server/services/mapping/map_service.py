@@ -25,7 +25,7 @@ class MapService:
     def proxy_request_to_geoserver(map_protocol: str, query_string: str):
         """ Helper method to proxy map requests to Geoserver"""
         geoserver_url = current_app.config['GEOSERVER_URL']
-        geoserver_request_url = f'{geoserver_url}/{map_protocol}?{query_string}'
+        geoserver_request_url = f'{geoserver_url}/dmis/{map_protocol}?{query_string}'
 
         raw_response = requests.get(geoserver_request_url)
 
