@@ -40,8 +40,6 @@ To develop on the application:
     * ```"C:\Program Files\Python36\python" -m venv .\venv``` (on Windows if command above does not work, or add to windows path)
 * Once the venv directory has been created, you need to activate the Virtual Environment, as follows:
     * ```.\venv\scripts\activate```
-* **WINDOWS ONLY** - To install on Windows you need to run the installer as follows:
-    * ```.\bin\win\install.bat```
 * **LINUX ONLY** - To install on Linux use pip to install all dependencies
     * ```pip install -r requirements.txt```
 * 
