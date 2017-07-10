@@ -68,7 +68,8 @@ export class IdentifyService {
                 evt.coordinate, viewResolution, 'EPSG:3857',
                 {
                     'INFO_FORMAT': 'application/json',
-                    'FEATURE_COUNT': this.maxFeatureCount
+                    'FEATURE_COUNT': this.maxFeatureCount,
+                    'BUFFER': 10
                 });
             var identifiableLayers = this.layerService.getIdentifiableLayers(map);
             url = this.updateUrlParameter(url, 'QUERY_LAYERS', identifiableLayers.join());
