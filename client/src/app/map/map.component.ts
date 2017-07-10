@@ -132,7 +132,6 @@ export class MapComponent implements OnInit {
      * Add layers to the map - maybe move to layer service
      * TODO: review and maybe add to layer service when this function grows?
      * TODO: extend to incidents and assessment layers
-     * TODO: replace URL with API url
      */
     private addLayers () {
         for (var i = 0; i < this.preparednessLayers.length; i++){
@@ -141,6 +140,7 @@ export class MapComponent implements OnInit {
                     'LAYERS': this.preparednessLayers[i].layerName,
                     'FORMAT': 'image/png'
                 },
+                attributions: [new ol.Attribution({html: this.preparednessLayers[i].layerCopyright})],
                 url: environment.apiEndpoint + '/v1/map/wms',
                 projection: this.map.getView().getProjection(),
                 tileLoadFunction: function(imageTile, src) {

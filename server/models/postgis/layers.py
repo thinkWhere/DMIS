@@ -17,6 +17,7 @@ class Layer(db.Model):
     layer_group = db.Column(db.String, default="OTHER LAYERS", nullable=False)
     map_category = db.Column(db.Integer, default=0, nullable=False)
     layer_source = db.Column(db.String)
+    layer_copyright = db.Column(db.String)
 
     @classmethod
     def create_from_dto(cls, layer_dto: LayerDetailsDTO):
@@ -28,6 +29,7 @@ class Layer(db.Model):
         new_layer.layer_source = layer_dto.layer_source
         new_layer.map_category = MapCategory[layer_dto.map_category].value
         new_layer.layer_group = layer_dto.layer_group
+        new_layer.layer_copyright = layer_dto.layer_copyright
 
         db.session.add(new_layer)
         db.session.commit()
@@ -90,5 +92,6 @@ class Layer(db.Model):
         layer_details.layer_group = layer.layer_group
         layer_details.layer_source = layer.layer_source
         layer_details.layer_description = layer.layer_description
+        layer_details.layer_copyright = layer.layer_copyright
 
         return layer_details
