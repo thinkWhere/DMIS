@@ -31,6 +31,14 @@ body, html {
   background-color: $brand-primary;
 }
 
+.ol-attribution ul {
+  font-size: 1rem;
+}
+
+.ol-attribution li + li:before {
+    content: " | ";
+}
+
 .ol-control button, .ol-control button:focus, .ol-control button:hover {
   background-color: $brand-primary;
 }
