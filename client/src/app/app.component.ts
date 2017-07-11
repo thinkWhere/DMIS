@@ -65,8 +65,8 @@ export class AppComponent {
     switchLanguage(languageCode) {
         // Get host
         var host = window.location.host;
-        // Get the base href - language specific
-        var code = ''; // default to English
+        // Get the base href - default to English
+        var code = ''; 
         // Get remaining URL
         var location = this.location.path();
         // If the language code is not English - use the code in the URL
