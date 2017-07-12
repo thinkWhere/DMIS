@@ -1,6 +1,6 @@
 from schematics import Model
 from schematics.exceptions import ValidationError
-from schematics.types import StringType, IntType, EmailType
+from schematics.types import StringType, IntType
 from schematics.types.compound import ListType, ModelType
 from server.models.postgis.lookups import UserRole
 
