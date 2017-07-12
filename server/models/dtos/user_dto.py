@@ -1,6 +1,7 @@
 from schematics import Model
 from schematics.exceptions import ValidationError
-from schematics.types import StringType, IntType, EmailType
+from schematics.types import StringType, IntType
+from schematics.types.compound import ListType, ModelType
 from server.models.postgis.lookups import UserRole
 
 
@@ -23,5 +24,21 @@ class SessionDTO(Model):
 class UserDTO(Model):
     """ DTO for User """
     username = StringType(required=True)
-    password = StringType(required=True)
-    email_address = EmailType(serialized_name='emailAddress', required=True)
+    password = StringType(required=True, serialize_when_none=False)
+    role = StringType(required=True, validators=[is_known_role])
+
+
+class UserUpdateDTO(Model):
+    """ DTO for user update """
+    username = StringType(required=True)
+    role = StringType(required=True, validators=[is_known_role])
+
+
+class UserListDTO(Model):
+    """ DTO for a list of users """
+    def __init__(self):
+        """ DTO constructor to initialise all arrays to be empty """
+        super().__init__()
+        self.user_list = []
+
+    user_list = ListType(ModelType(UserDTO), serialized_name='userList')
