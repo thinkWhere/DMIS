@@ -3,6 +3,8 @@ import unittest
 
 from server import bootstrap_app
 from server.services.users.user_service import UserService, User, NotFound
+from server.models.dtos.user_dto import UserUpdateDTO
+from server.models.postgis.lookups import UserRole
 
 TEST_USER_ID = 1
 
@@ -12,8 +14,8 @@ def create_dmis_user() -> User:
     test_user = User()
     test_user.user_id = TEST_USER_ID
     test_user.username = 'ThinkWhereTest'
-    test_user.email_address = 'testuser@thinkwhere.com'
     test_user.password = 'aaAAAfffFFFvvvvVVV'
+    test_user.role = UserRole['USER'].value
     test_user.create()
 
     return test_user
@@ -96,3 +98,19 @@ class TestUserService(unittest.TestCase):
         # Act
         with self.assertRaises(NotFound):
             UserService.get_user_by_id(test_user_id)
+
+    def test_update_user_role(self):
+        """ Check that the role is updated """
+        if self.skip_tests:
+            return
+
+        # Arrange
+        test_user_update_dto = UserUpdateDTO()
+        test_user_update_dto.username = 'ThinkWhereTest'
+        test_user_update_dto.role = 'admin'
+
+        # Act
+        updated_user = UserService.update_user(test_user_update_dto)
+
+        # Assert
+        self.assertEqual(updated_user.role.upper(), test_user_update_dto.role.upper())
