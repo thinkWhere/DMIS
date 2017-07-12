@@ -1,16 +1,17 @@
 from flask_restful import Resource, request, current_app
 from schematics.exceptions import DataError
 
-from server.models.dtos.user_dto import UserDTO
+from server.models.dtos.user_dto import UserDTO, UserUpdateDTO
 from server.services.users.user_service import UserService, UserExistsError
 from server.services.users.authentication_service import AuthenticationService, basic_auth, dmis
+from server.models.postgis.utils import NotFound
 
 
 class UserAPI(Resource):
 
-    def put(self):
+    def put(self, username):
         """
-        Creates user and validates email address
+        Creates user
         ---
         tags:
           - users
@@ -20,18 +21,21 @@ class UserAPI(Resource):
           - in: body
             name: body
             required: true
-            description: JSON object for creating draft project
+            description: JSON object for creating a new user
             schema:
                   properties:
-                      username:
-                          type: string
-                          default: dmisuser
                       password:
                           type: string
                           default: password
-                      emailAddress:
+                      role:
                           type: string
-                          default: test@dmis.com
+                          default: user
+          - in: path
+            name: username
+            description: the unique user
+            required: true
+            type: string
+            default: dmisuser
         responses:
           201:
             description: User Created
@@ -44,9 +48,7 @@ class UserAPI(Resource):
         """
         try:
             user_dto = UserDTO(request.get_json())
-            if user_dto.email_address == '':
-                user_dto.email_address = None  # Replace empty string with None so validation doesn't break
-
+            user_dto.username = username
             user_dto.validate()
         except DataError as e:
             current_app.logger.error(f'error validating request: {str(e)}')
@@ -58,6 +60,91 @@ class UserAPI(Resource):
             return {"Error": str(e)}, 403
         except Exception as e:
             error_msg = f'User Create - Unhandled error: {str(e)}'
+            current_app.logger.critical(error_msg)
+            return {"Error": error_msg}, 500
+
+    def delete(self, username):
+        """
+        Deletes a user
+        ---
+        tags:
+          - users
+        produces:
+          - application/json
+        parameters:
+          - in: path
+            name: username
+            description: the unique user
+            required: true
+            type: string
+            default: test
+        responses:
+          201:
+            description: User deleted
+          400:
+            description: Invalid request
+          404:
+            description: Not found
+          500:
+            description: Internal Server Error
+        """
+        try:
+            UserService.delete_user(username)
+            return {"Success": "User deleted"}, 200
+        except NotFound:
+            return {"Error": "No user found"}, 404
+        except Exception as e:
+            error_msg = f'User DELETE - unhandled error: {str(e)}'
+            current_app.logger.critical(error_msg)
+            return {"error": error_msg}, 500
+
+    def post(self, username):
+        """
+        Updates a user
+        ---
+        tags:
+          - users
+        produces:
+          - application/json
+        parameters:
+          - in: body
+            name: body
+            required: true
+            description: JSON object for creating a new user
+            schema:
+                  properties:
+                      role:
+                          type: string
+                          default: user
+          - in: path
+            name: username
+            description: the unique user
+            required: true
+            type: string
+            default: dmisuser
+        responses:
+          200:
+            description: User details updated
+          400:
+            description: Invalid request
+          500:
+            description: Internal Server Error
+        """
+        try:
+            user_update_dto = UserUpdateDTO(request.get_json())
+            user_update_dto.username = username
+            user_update_dto.validate()
+        except DataError as e:
+            current_app.logger.error(f'error validating request: {str(e)}')
+            return str(e), 400
+
+        try:
+            updated_user = UserService.update_user(user_update_dto)
+            return updated_user.to_primitive(), 200
+        except NotFound:
+            return {"Error": "User not found"}, 404
+        except Exception as e:
+            error_msg = f'User update - Unhandled error: {str(e)}'
             current_app.logger.critical(error_msg)
             return {"Error": error_msg}, 500
 
@@ -93,3 +180,27 @@ class LoginAPI(Resource):
         except Exception as e:
             current_app.logger.critical('Unhandled exception when attempting to login, exception: {0}'.format(str(e)))
             return {'Error': 'Unhandled'}, 500
+
+
+class UserListAPI(Resource):
+    def get(self):
+        """
+        Gets a list of all users
+        ---
+        tags:
+          - users
+        produces:
+          - application/json
+        responses:
+          200:
+            description: Users found
+          500:
+            description: Internal Server Error
+        """
+        try:
+            user_dto = UserService.get_all_users()
+            return user_dto.to_primitive(), 200
+        except Exception as e:
+            error_msg = f'User list GET - unhandled error: {str(e)}'
+            current_app.logger.critical(error_msg)
+            return {"error": error_msg}, 500

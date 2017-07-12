@@ -1,7 +1,7 @@
 from server import db
-from server.models.dtos.user_dto import UserDTO
+from server.models.dtos.user_dto import UserDTO, UserListDTO, UserUpdateDTO
 from server.models.postgis.lookups import UserRole
-from server.models.postgis.utils import timestamp
+from server.models.postgis.utils import timestamp, NotFound
 
 
 class User(db.Model):
@@ -11,7 +11,6 @@ class User(db.Model):
     user_id = db.Column(db.BigInteger, primary_key=True, index=True)
     username = db.Column(db.String, unique=True, index=True)
     role = db.Column(db.Integer, default=0, nullable=False)
-    email_address = db.Column(db.String)
     password = db.Column(db.String)
     date_created = db.Column(db.DateTime, default=timestamp)
 
@@ -30,9 +29,23 @@ class User(db.Model):
         """ Return the user for the specified username, or None if not found """
         return User.query.filter_by(username=username).one_or_none()
 
-    def update(self, user_dto: UserDTO):
+    @staticmethod
+    def get_all_users():
+        """ Return a list of all users """
+        user_list = User.query.all()
+
+        if len(user_list) == 0:
+            raise NotFound()
+
+        user_list_dto = UserListDTO()
+        for user in user_list:
+            user_list_dto.user_list.append(user.as_dto())
+
+        return user_list_dto
+
+    def update(self, user_update_dto: UserUpdateDTO):
         """ Update the user details """
-        self.email_address = user_dto.email_address.lower() if user_dto.email_address else None
+        self.role = UserRole[user_update_dto.role.upper()].value
         db.session.commit()
 
     def delete(self):
@@ -40,14 +53,9 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def as_dto(self, logged_in_username: str) -> UserDTO:
-        """ Create DTO object from user in scope """
+    def as_dto(self) -> UserDTO:
         user_dto = UserDTO()
         user_dto.username = self.username
         user_dto.role = UserRole(self.role).name
-
-        if self.username == logged_in_username:
-            # Only return email address when logged in user is looking at their own profile
-            user_dto.email_address = self.email_address
 
         return user_dto
