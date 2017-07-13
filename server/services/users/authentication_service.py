@@ -37,8 +37,9 @@ def verify_token(token: str) -> bool:
         return False  # Can't decode token, so fail login
 
     # If token check is valid we don't need to do any subsequent testing.  Note that tokens are hardcoded to
-    # be good for 8 hours (28800 seconds)
-    return AuthenticationService.is_valid_token(decoded_token, 28800)
+    # be good for 30 days
+    # TODO need a better solution for token management for API
+    return AuthenticationService.is_valid_token(decoded_token, 2592000)
 
 
 class AuthenticationService:

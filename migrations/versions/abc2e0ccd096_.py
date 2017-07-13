@@ -1,4 +1,4 @@
-python"""empty message
+"""empty message
 
 Revision ID: abc2e0ccd096
 Revises: bc2d1f8b2cc8
