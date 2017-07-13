@@ -79,11 +79,13 @@ def define_flask_restful_routes(app):
     app.logger.debug('Initialising API Routes')
     api = Api(app, default_mediatype='application/json')
 
+    from server.api.data_api import DataAPI
     from server.api.layer_api import LayerTocAPI
     from server.api.maps_api import MapsAPI
     from server.api.user_api import LoginAPI, UserAPI, UserListAPI
     from server.api.swagger_docs import SwaggerDocs
 
+    api.add_resource(DataAPI,       '/api/v1/data/<string:data_source>')
     api.add_resource(LayerTocAPI,   '/api/layer/toc/<string:map_category>')
     api.add_resource(MapsAPI,       '/api/v1/map/<string:map_protocol>')
     api.add_resource(UserAPI,       '/api/user/<string:username>')

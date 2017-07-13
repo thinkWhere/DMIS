@@ -1,20 +1,20 @@
 from flask_restful import Resource, request, current_app
 
-from server.services.mapping.map_service import MapService, MapServiceError
+from server.services.data_ingest.data_ingest_service import DataIngestService, DataIngestError
 from server.services.users.authentication_service import token_auth
 
 
-class MapsAPI(Resource):
+class DataAPI(Resource):
 
     @token_auth.login_required
-    def get(self, map_protocol):
+    def put(self, data_source):
         """
-        Proxies map requests
+        Allows third parties to push data into DMIS
         ---
         tags:
-          - maps
+          - data
         produces:
-          - application/xml
+          - application/json
         parameters:
           - in: header
             name: Authorization
@@ -22,18 +22,25 @@ class MapsAPI(Resource):
             required: true
             type: string
           - in: path
-            name: map_protocol
-            description: Mapping protocol requested
+            name: data_source
+            description: Unique data source name
             type: string
             required: true
-            default: wms
-          - in: query
-            name: REQUEST
-            type: string
+            default: river-gauge
+          - in: body
+            name: body
             required: false
-            default: GetCapabilities
+            description: Request payload for data
+            schema:
+                  properties:
+                      property1:
+                          type: string
+                          default: sample
+                      property2:
+                          type: string
+                          default: sample
         responses:
-          200:
+          201:
             description: Request successful
           400:
             description: Bad request
@@ -43,11 +50,9 @@ class MapsAPI(Resource):
             description: Internal Server Error
         """
         try:
-            # Get query string from URL
-            query_str = request.query_string.decode('utf-8')
-            response = MapService.handle_map_request(map_protocol, query_str)
-            return response
-        except MapServiceError as e:
+            DataIngestService.process_data(data_source, request)
+            return {'Status': 'Success'}, 201
+        except DataIngestError as e:
             return {'Error': str(e)}, 400
         except Exception as e:
             current_app.logger.critical('Unhandled exception encountered: {}'.format(e))
