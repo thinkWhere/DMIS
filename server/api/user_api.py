@@ -2,6 +2,7 @@ from flask_restful import Resource, request, current_app
 from schematics.exceptions import DataError
 
 from server.models.dtos.user_dto import UserDTO, UserUpdateDTO
+from server.services.users.authentication_service import token_auth
 from server.services.users.user_service import UserService, UserExistsError
 from server.services.users.authentication_service import AuthenticationService, basic_auth, dmis
 from server.models.postgis.utils import NotFound
@@ -9,6 +10,7 @@ from server.models.postgis.utils import NotFound
 
 class UserAPI(Resource):
 
+    @token_auth.login_required
     def put(self, username):
         """
         Creates user
@@ -41,6 +43,8 @@ class UserAPI(Resource):
             description: User Created
           400:
             description: Invalid request
+          401:
+            description: Unauthorized, credentials are invalid
           403:
             description: Forbidden, username already exists
           500:
@@ -63,6 +67,7 @@ class UserAPI(Resource):
             current_app.logger.critical(error_msg)
             return {"Error": error_msg}, 500
 
+    @token_auth.login_required
     def delete(self, username):
         """
         Deletes a user
@@ -81,8 +86,8 @@ class UserAPI(Resource):
         responses:
           201:
             description: User deleted
-          400:
-            description: Invalid request
+          401:
+            description: Unauthorized, credentials are invalid
           404:
             description: Not found
           500:
@@ -98,6 +103,7 @@ class UserAPI(Resource):
             current_app.logger.critical(error_msg)
             return {"error": error_msg}, 500
 
+    @token_auth.login_required
     def post(self, username):
         """
         Updates a user
@@ -127,6 +133,10 @@ class UserAPI(Resource):
             description: User details updated
           400:
             description: Invalid request
+          401:
+            description: Unauthorized, credentials are invalid
+          404:
+            description: Not found
           500:
             description: Internal Server Error
         """
@@ -183,6 +193,8 @@ class LoginAPI(Resource):
 
 
 class UserListAPI(Resource):
+
+    @token_auth.login_required
     def get(self):
         """
         Gets a list of all users
@@ -194,6 +206,8 @@ class UserListAPI(Resource):
         responses:
           200:
             description: Users found
+          401:
+            description: Unauthorized, credentials are invalid
           500:
             description: Internal Server Error
         """
