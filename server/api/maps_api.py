@@ -37,6 +37,8 @@ class MapsAPI(Resource):
             description: Request successful
           400:
             description: Bad request
+          401:
+            description: Unauthorized, credentials are invalid
           500:
             description: Internal Server Error
         """

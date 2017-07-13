@@ -1,6 +1,6 @@
 from flask_restful import Resource, request, current_app
 
-from server.services.data_ingest.data_ingest_service import DataIngestService
+from server.services.data_ingest.data_ingest_service import DataIngestService, DataIngestError
 from server.services.users.authentication_service import token_auth
 
 
@@ -22,7 +22,7 @@ class DataAPI(Resource):
             required: true
             type: string
           - in: path
-            name: data-source
+            name: data_source
             description: Mapping protocol requested
             type: string
             required: true
@@ -44,12 +44,15 @@ class DataAPI(Resource):
             description: Request successful
           400:
             description: Bad request
+          401:
+            description: Unauthorized, credentials are invalid
           500:
             description: Internal Server Error
         """
         try:
-            pass
-        except MapServiceError as e:
+            DataIngestService.process_data(data_source, request)
+            return {'Status': 'Success'}, 201
+        except DataIngestError as e:
             return {'Error': str(e)}, 400
         except Exception as e:
             current_app.logger.critical('Unhandled exception encountered: {}'.format(e))
