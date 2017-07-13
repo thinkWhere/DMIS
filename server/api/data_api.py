@@ -23,7 +23,7 @@ class DataAPI(Resource):
             type: string
           - in: path
             name: data_source
-            description: Mapping protocol requested
+            description: Unique data source name
             type: string
             required: true
             default: river-gauge
