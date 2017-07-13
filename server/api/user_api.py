@@ -43,6 +43,8 @@ class UserAPI(Resource):
             description: User Created
           400:
             description: Invalid request
+          401:
+            description: Unauthorized, credentials are invalid
           403:
             description: Forbidden, username already exists
           500:
@@ -84,8 +86,8 @@ class UserAPI(Resource):
         responses:
           201:
             description: User deleted
-          400:
-            description: Invalid request
+          401:
+            description: Unauthorized, credentials are invalid
           404:
             description: Not found
           500:
@@ -131,6 +133,10 @@ class UserAPI(Resource):
             description: User details updated
           400:
             description: Invalid request
+          401:
+            description: Unauthorized, credentials are invalid
+          404:
+            description: Not found
           500:
             description: Internal Server Error
         """
@@ -200,6 +206,8 @@ class UserListAPI(Resource):
         responses:
           200:
             description: Users found
+          401:
+            description: Unauthorized, credentials are invalid
           500:
             description: Internal Server Error
         """
