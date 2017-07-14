@@ -6,18 +6,49 @@
         <tr>
             <th>Username</th>
             <th>Role</th>
-            <th>Remove</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let user of userList; index as i; trackBy: trackByFn" [class.selected]="user === selectedUser">
             <td>{{ user.username }}</td>
-            <td>{{ user.role }}</td>
-            <td class="pointer" (click)="deleteUser(user); $event.stopPropagation()"><i class="fa fa-trash" aria-hidden="true"></i></td>
+            <td *ngIf="!editMode || user.username != editUsername">{{ user.role }}</td>
+            <td *ngIf="editMode && user.username == editUsername">
+                <select id="role" class="form-control"
+                name="role"
+                [(ngModel)]="user.role" required
+                #role="ngModel" >
+                  <option value="USER">User</option>
+                  <option value="ADMIN">Admin</option>
+                </select>
+            </td>
+            <td *ngIf="!editMode" class="pointer" (click)="editUser(user.username); $event.stopPropagation()"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</td>
+            <td *ngIf="editMode" class="pointer" (click)="saveEdits(user.username, user.role); $event.stopPropagation()"><i class="fa fa-save" aria-hidden="true"></i> Save</td>
+            <td class="pointer" data-target="#myModal" data-toggle="modal" (click)="showDeleteConfirm(true, user);"><i class="fa fa-trash" aria-hidden="true"></i> Delete</td>
         </tr>
         </tbody>
     </table>
     <div *ngIf="errorDeletingUser" class="alert alert-danger">
         <strong>Error: </strong> could not delete the user.
+    </div>
+</div>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="myModal" role="dialog" [hidden]="!showDeleteConfirmModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Delete confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this user?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="deleteUser(userToDelete)" data-dismiss="modal">Confirm</button>
+        </div>
+      </div>
     </div>
 </div>

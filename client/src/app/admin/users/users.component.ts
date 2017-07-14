@@ -11,7 +11,13 @@ export class UsersComponent implements OnInit {
 
   userList: any;
   selectedUser: null;
+
   errorDeletingUser: boolean = false;
+  showDeleteConfirmModal: boolean = false;
+  userToDelete: string = '';
+
+  editMode: boolean = false;
+  editUsername: string = '';
 
   constructor(
       private userService: UserService
@@ -33,6 +39,20 @@ export class UsersComponent implements OnInit {
             });
   }
 
+  /**
+   * Set the delete confirm modal to visible/invisible
+   * @param boolean visible/invisible
+   * @param string username
+   */
+  showDeleteConfirm(boolean, user){
+      this.showDeleteConfirmModal = boolean;
+      this.userToDelete = user;
+  }
+
+  /**
+   * Delete a user
+   * @param user
+   */
   deleteUser(user){
     this.errorDeletingUser = false;
     this.userService.deleteUser(user.username)
@@ -41,11 +61,42 @@ export class UsersComponent implements OnInit {
               // Success
               this.userList = this.userList.filter(u => u !== user);
               if (this.selectedUser === user) { this.selectedUser = null; }
+              this.showDeleteConfirm(true, null);
             },
             error => {
-              // TODO: handle error
-              console.log("error");
               this.errorDeletingUser = true;
+            });
+  }
+
+  /**
+   * Edit user
+   * @param user
+   */
+  editUser(username){
+      this.editMode = true;
+      this.editUsername = username;
+  }
+
+   /**
+    * Save edits
+    * @param username
+    * @param role
+   */
+  saveEdits(username, role){
+      this.editMode = false;
+      this.editUsername = '';
+
+      var user = {
+          username: username,
+          role: role
+      };
+      this.userService.updateUserRole(user)
+        .subscribe(
+            data => {
+              // Success
+            },
+            error => {
+              // TODO: handle error?
             });
   }
 

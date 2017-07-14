@@ -10,7 +10,6 @@ import { UserService } from './user.service';
 })
 export class AddUserComponent implements OnInit {
 
-  roles = ['user', 'admin'];
   successAddingUser: boolean = false;
   errorAddingUser: boolean = false;
 
