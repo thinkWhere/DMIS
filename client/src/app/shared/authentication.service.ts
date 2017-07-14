@@ -72,6 +72,18 @@ export class AuthenticationService {
   }
 
   /**
+   * Returns an authenticated header
+   * @returns {Headers}
+   */
+  getAuthenticatedHeaders(){
+    let headers = new Headers();
+    let token = this.getToken();
+    headers.append('Content-Type', 'application/json; charset=UTF-8');
+    headers.append('Authorization', 'Bearer ' + token);
+    return headers;
+  }
+
+  /**
    * Check the login status of the user
    * Can be used on page load to check the local storage
    * @returns {any}

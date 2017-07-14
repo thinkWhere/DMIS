@@ -1,27 +1,23 @@
 <div id="users-component">
     <h2>Users</h2>
+    <a routerLink="/admin/user/add" role="button" class="btn btn-primary pull-right">Add user</a>
     <table class="table table-hover">
         <thead>
         <tr>
             <th>Username</th>
             <th>Role</th>
-            <th>Email</th>
             <th>Remove</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>John Doe</td>
-            <td>ADMIN</td>
-            <td>john@example.com</td>
-            <td><i class="fa fa-trash" aria-hidden="true"></i></td>
-        </tr>
-        <tr>
-            <td>Mary Doe</td>
-            <td>USER</td>
-            <td>mary@example.com</td>
-            <td><i class="fa fa-trash" aria-hidden="true"></i></td>
+        <tr *ngFor="let user of userList; index as i; trackBy: trackByFn" [class.selected]="user === selectedUser">
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+            <td class="pointer" (click)="deleteUser(user); $event.stopPropagation()"><i class="fa fa-trash" aria-hidden="true"></i></td>
         </tr>
         </tbody>
     </table>
+    <div *ngIf="errorDeletingUser" class="alert alert-danger">
+        <strong>Error: </strong> could not delete the user.
+    </div>
 </div>

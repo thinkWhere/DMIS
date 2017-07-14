@@ -27,7 +27,7 @@ export class MapComponent implements OnInit {
         private router: Router,
         private layerService: LayerService,
         private mapService: MapService,
-        private identifyService: IdentifyService
+        private identifyService: IdentifyService,
     ){}
 
     ngOnInit() {

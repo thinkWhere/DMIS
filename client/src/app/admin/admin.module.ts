@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { UserService } from './users/user.service';
 
 import { AdminComponent } from './admin.component';
 import { UsersComponent } from './users/users.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AddUserComponent } from './users/add-user.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild([
           {
             path: '',
@@ -17,8 +22,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
               {
                 path: '',
                 children: [
+                  { path: '', component: AdminDashboardComponent },
                   { path: 'users', component: UsersComponent },
-                  { path: '', component: AdminDashboardComponent }
+                  { path: 'user/add', component: AddUserComponent }
                 ]
               }
             ]
@@ -28,7 +34,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
   declarations: [
       AdminComponent,
       UsersComponent,
-      AdminDashboardComponent
-  ]
+      AdminDashboardComponent,
+      AddUserComponent
+  ],
+  providers: [UserService],
 })
 export class AdminModule { }

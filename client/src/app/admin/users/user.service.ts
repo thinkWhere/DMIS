@@ -1,0 +1,45 @@
+import { Injectable } from '@angular/core'
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+
+import { AuthenticationService } from './../../shared/authentication.service';
+import { environment } from '../../../environments/environment';
+
+@Injectable()
+export class UserService {
+
+  constructor(
+      private authenticationService: AuthenticationService,
+      private http: Http
+  ) { }
+
+  getAllUsers() {
+    let headers = this.authenticationService.getAuthenticatedHeaders();
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.get(environment.apiEndpoint + '/user/all', options)
+        .map(response => response.json())
+  }
+
+  addUser(user){
+    let headers = this.authenticationService.getAuthenticatedHeaders();
+    let options = new RequestOptions({headers: headers});
+    let newUser = {
+      password: user.password,
+      role: user.role
+    };
+    return this.http.put(environment.apiEndpoint + '/user/' + user.username, newUser, options)
+        .map(response => response.json())
+  }
+
+  deleteUser(username){
+    let headers = this.authenticationService.getAuthenticatedHeaders();
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.delete(environment.apiEndpoint + '/user/' + username, options)
+        .map(response => response.json())
+  }
+
+  updateUserRole(){
+    // TODO
+  }
+}
