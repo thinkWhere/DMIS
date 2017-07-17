@@ -1,11 +1,21 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
 
 import { UserService } from './user.service';
+import { AuthenticationService } from './../../shared/authentication.service';
 
 describe('UserService', () => {
+
+  // Mock
+  let authenticationServiceStub = {};
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserService]
+      imports: [HttpModule],
+      providers: [
+          UserService,
+        {provide: AuthenticationService, useValue: authenticationServiceStub}
+      ]
     });
   });
 
@@ -13,3 +23,4 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   }));
 });
+
