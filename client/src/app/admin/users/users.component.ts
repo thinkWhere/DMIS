@@ -24,10 +24,13 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getLayers();
+    this.getUsers();
   }
 
-  getLayers() {
+  /**
+   * Gets all the users
+   */
+  getUsers() {
      this.userService.getAllUsers()
             .subscribe(
             data => {
