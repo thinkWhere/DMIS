@@ -71,7 +71,7 @@ export class IdentifyService {
                     'FEATURE_COUNT': this.maxFeatureCount,
                     'BUFFER': 10
                 });
-            var identifiableLayers = this.layerService.getIdentifiableLayers(map);
+            var identifiableLayers = this.layerService.getIdentifiableLayers(map, 'wms');
             url = this.updateUrlParameter(url, 'QUERY_LAYERS', identifiableLayers.join());
             url = this.updateUrlParameter(url, 'LAYERS', identifiableLayers.join());
             if (url && identifiableLayers.length > 0) {
@@ -90,7 +90,48 @@ export class IdentifyService {
                         }
                     );
             }
+            // TODO: make more generic
+            var arcgisLayers = this.layerService.getIdentifiableLayers(map, 'arcgisrest');
+            console.log(evt);
+            console.log(map.getSize());
+            var geometry = evt.coordinate[0] + ',' + evt.coordinate[1];
+            var mapExtent = '-20026376.39,20026376.39,-20048966.10,20048966.10';
+            var imageDisplay = map.getSize()[0] + ',' + map.getSize()[1] + ',' + '72';
+            var point = ol.proj.transform([-120.17797, 37.5923],'EPSG:4326', 'EPSG:3857');
+            console.log(point);
+            url = 'http://arcgis.pdc.org/arcgis/rest/services/global_public/pdc_integrated_active_hazards/MapServer/identify?' +
+                'geometry=' + geometry +
+                '&geometryType=esriGeometryPoint' +
+                '&layers=all&tolerance=10' +
+                '&mapExtent=' + mapExtent +
+                '&imageDisplay=' + imageDisplay +
+                '&returnGeometry=false&f=json';
+            if (url){
+                 this.identifyArcGISRest(url)
+                        .subscribe(
+                        data => {
+                            // Success
+                           console.log(data);
+                        },
+                        error => {
+                            console.log(error);
+                            // TODO: handle error?
+                        }
+                    );
+            }
+
         });
+    }
+
+    /**
+     * Make a call to the ArcGIS REST service
+     * @param url
+     * @returns {Observable<R|T>}
+     */
+    private identifyArcGISRest(url){
+         return this.http.get(url)
+                .map(response => response.json())
+                .catch(this.handleError);
     }
 
     /**
