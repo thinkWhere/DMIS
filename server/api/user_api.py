@@ -20,6 +20,11 @@ class UserAPI(Resource):
         produces:
           - application/json
         parameters:
+          - in: header
+            name: Authorization
+            description: Base64 encoded session token
+            required: true
+            type: string
           - in: body
             name: body
             required: true
@@ -77,6 +82,11 @@ class UserAPI(Resource):
         produces:
           - application/json
         parameters:
+          - in: header
+            name: Authorization
+            description: Base64 encoded session token
+            required: true
+            type: string
           - in: path
             name: username
             description: the unique user
@@ -113,6 +123,11 @@ class UserAPI(Resource):
         produces:
           - application/json
         parameters:
+          - in: header
+            name: Authorization
+            description: Base64 encoded session token
+            required: true
+            type: string
           - in: body
             name: body
             required: true
@@ -203,6 +218,12 @@ class UserListAPI(Resource):
           - users
         produces:
           - application/json
+        parameters:
+          - in: header
+            name: Authorization
+            description: Base64 encoded session token
+            required: true
+            type: string
         responses:
           200:
             description: Users found
