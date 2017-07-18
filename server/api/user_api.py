@@ -212,7 +212,7 @@ class UserListAPI(Resource):
     @token_auth.login_required
     def get(self):
         """
-        Gets a list of all userssss
+        Gets a list of all users
         ---
         tags:
           - users
