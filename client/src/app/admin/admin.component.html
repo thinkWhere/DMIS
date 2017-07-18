@@ -1,16 +1,16 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 col-sm-4 col-xs-4">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
             <h2>Admin</h2>
             <ul class="nav nav-sidebar">
-                <li>Manage users - TODO</li>
+                <li>Manage users</li>
                 <li><a routerLink="/admin/users" title="View users">Users</a></li>
-                <li><a routerLink="/admin/add-users" title="Add user">Add user</a></li>
+                <li><a routerLink="/admin/user/add" title="Add user">Add user</a></li>
                 <li>Manage layers - TODO</li>
                 <li><a routerLink="/admin/layers" title="View layers">Layers</a></li>
             </ul>
         </div>
-        <div class="col-md-9 col-sm-8 col-xs-8">
+        <div class="col-lg-10 col-md-9 col-sm-8 col-xs-8">
             <router-outlet></router-outlet>
         </div>
     </div>

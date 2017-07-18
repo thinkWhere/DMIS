@@ -1,0 +1,64 @@
+<div class="add-user-container">
+    <h2>Add user</h2>
+    <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && addUser(userForm)" novalidate>
+      <div class="form-group">
+        <label for="username">Username</label>
+
+        <input type="text" id="username" class="form-control"
+               required minlength="4" maxlength="24"
+               name="username" #username="ngModel" ngModel>
+
+        <div *ngIf="username.errors && (username.dirty || username.touched)"
+             class="alert alert-danger">
+            <div [hidden]="!username.errors.required">
+              Username is required
+            </div>
+            <div [hidden]="!username.errors.minlength">
+              Username must be at least 4 characters long.
+            </div>
+            <div [hidden]="!username.errors.maxlength">
+              Username cannot be more than 24 characters long.
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control"
+               name="password"
+               #password="ngModel"
+               ngModel required>
+        <div *ngIf="password.errors && (password.dirty || password.touched)"
+             class="alert alert-danger">
+            <div [hidden]="!username.errors.required">
+              Password is required
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" class="form-control"
+                name="role"
+                ngModel required
+                #role="ngModel" >
+          <option value="USER">User</option>
+          <option value="ADMIN">Admin</option>
+        </select>
+
+        <div *ngIf="role.errors && role.touched" class="alert alert-danger">
+          <div [hidden]="!role.errors.required">Role is required</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary"
+             [disabled]="!userForm.form.valid">Add user</button>
+
+      <div [hidden]="!successAddingUser" class="alert alert-success">
+          <strong>Success: </strong> successfully added user {{ username.value }}
+      </div>
+      <div [hidden]="!errorAddingUser" class="alert alert-danger">
+          <strong>Error: </strong> failed to add user {{ username.value }}. Does this username already exist?
+      </div>
+    </form>
+</div>

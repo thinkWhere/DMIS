@@ -36,7 +36,7 @@
                     <div [hidden]="category !== 'preparedness'">
                         <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerGroup'">
                             <h3>{{ layerGroup.key }}</h3>
-                            <div *ngFor="let layer of layerGroup.value; index as i; trackBy: trackByFn">
+                            <div *ngFor="let layer of layerGroup.value; index as i;">
                                 <div class="checkbox" (change)="toggleLayer(layer.layerName)">
                                     <label><input type="checkbox" value=""><b>{{ layer.layerTitle }}</b></label>
                                 </div>
