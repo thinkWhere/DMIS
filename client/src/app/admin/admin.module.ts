@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NgArrayPipesModule } from 'angular-pipes';
 
 import { UserService } from './users/user.service';
 
@@ -12,6 +13,7 @@ import { AddUserComponent } from './users/add-user.component';
 
 @NgModule({
   imports: [
+    NgArrayPipesModule,
     CommonModule,
     FormsModule,
     RouterModule.forChild([
