@@ -56,13 +56,13 @@
              [disabled]="!userForm.form.valid">Add user</button>
 
       <div [hidden]="!successAddingUser" class="alert alert-success">
-          <strong>Success: </strong> successfully added user.
+          <strong>Success: </strong> successfully added a user.
       </div>
       <div [hidden]="!errorAddingUser" class="alert alert-danger">
-          <strong>Error: </strong> failed to add user. Does this username already exist?
+          <strong>Error: </strong> failed to add a user. Does this username already exist?
       </div>
       <div [hidden]="!invalidUsernameSupplied" class="alert alert-danger">
-          <strong>Error: </strong> your username is invalid. Please make sure you don't have any whitespaces in your username.
+          <strong>Error: </strong> the username is invalid. Please make sure you don't have any whitespaces in your username.
       </div>
     </form>
 </div>
