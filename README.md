@@ -32,6 +32,11 @@ deployment environment:
 * Windows
     * ```setx DMIS_ENV "Dev"```
 
+### DB migrations
+TODO: add more docs
+``` python manage.py db migrate```
+``` python manage.py db upgrade```
+
 #### Set-up development environment
 To develop on the application:
 
