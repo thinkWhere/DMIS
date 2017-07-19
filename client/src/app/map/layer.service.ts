@@ -56,7 +56,7 @@ export class LayerService {
         if (layers[i].getVisible() && layers[i].getProperties().layerName){
           // TODO: filter identifiable layers per type
           if (layers[i].getProperties().layerName === 'pdc_integrated_active_hazards'){
-            identifiableLayers.push(layers[i].getProperties().layerName)
+            identifiableLayers.push(layers[i])
           }
         }
       }

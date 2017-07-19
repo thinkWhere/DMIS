@@ -115,7 +115,8 @@ export class IdentifyService {
             var geometry = evt.coordinate[0] + ',' + evt.coordinate[1];
             var mapExtent = '-20037700,20037700,-30241100,30241100';
             var imageDisplay = map.getSize()[0] + ',' + map.getSize()[1] + ',' + '72';
-            var arcUrl = 'http://arcgis.pdc.org/arcgis/rest/services/global_public/pdc_integrated_active_hazards/MapServer/identify?' +
+            // TODO: add ability to have more than one ArcGIS REST layer
+            var arcUrl = arcgisLayers[0].getProperties().layerSource + '/identify?' +
                 'geometry=' + geometry +
                 '&geometryType=esriGeometryPoint' +
                 '&layers=all&tolerance=10' +

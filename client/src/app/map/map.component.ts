@@ -171,7 +171,7 @@ export class MapComponent implements OnInit {
                 });
             layer.setVisible(false);
             layer.setProperties({
-                "layerName": this.preparednessLayers[i].layerName
+                "layerName": this.preparednessLayers[i].layerName,
             });
             this.map.addLayer(layer);
         }
@@ -185,7 +185,8 @@ export class MapComponent implements OnInit {
                 });
             layer.setVisible(false);
             layer.setProperties({
-                "layerName": this.incidentLayers[i].layerName
+                "layerName": this.incidentLayers[i].layerName,
+                "layerSource": this.incidentLayers[i].layerSource
             });
             this.map.addLayer(layer);
         }
