@@ -13,3 +13,9 @@ class MapCategory(Enum):
     PREPAREDNESS = 2
     INCIDENTS_WARNINGS = 3
     ASSESSMENT_RESPONSE = 4
+
+
+class LayerType(Enum):
+    """ Describes which layer types are supported """
+    WMS = 'wms'
+    ARCGISREST = 'arcgisrest'
