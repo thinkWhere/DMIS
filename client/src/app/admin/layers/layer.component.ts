@@ -16,8 +16,8 @@ export class LayerComponent implements OnInit {
   editMode: boolean = false;
   categoryOptions: any = [
       {value: 'PREPAREDNESS', name: 'Preparedness'},
-      {value: 'INCIDENTS', name: 'Incidents and Warnings'},
-      {value: 'ASSESSMENT', name: 'Assessment and Response'}
+      {value: 'INCIDENTS_WARNINGS', name: 'Incidents and Warnings'},
+      {value: 'ASSESSMENT_RESPONSE', name: 'Assessment and Response'}
   ];
   selectedCategory: any = {
       value: '',
