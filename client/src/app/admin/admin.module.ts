@@ -9,6 +9,8 @@ import { AdminComponent } from './admin.component';
 import { UsersComponent } from './users/users.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AddUserComponent } from './users/add-user.component';
+import { LayerListComponent } from './layers/layer-list.component';
+import { LayerComponent } from './layers/layer.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import { AddUserComponent } from './users/add-user.component';
                 children: [
                   { path: '', component: AdminDashboardComponent },
                   { path: 'users', component: UsersComponent },
-                  { path: 'user/add', component: AddUserComponent }
+                  { path: 'user/add', component: AddUserComponent },
+                  { path: 'layers', component: LayerListComponent },
+                  { path: 'layer/:id', component: LayerComponent }
                 ]
               }
             ]
@@ -35,7 +39,9 @@ import { AddUserComponent } from './users/add-user.component';
       AdminComponent,
       UsersComponent,
       AdminDashboardComponent,
-      AddUserComponent
+      AddUserComponent,
+      LayerListComponent,
+      LayerComponent
   ],
   providers: [UserService],
 })

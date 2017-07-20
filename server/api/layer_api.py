@@ -47,12 +47,60 @@ class LayerTocAPI(Resource):
             description: Internal Server Error
         """
         try:
-            layer_dto = LayerService.get_layers_by_category(map_category)
-            return layer_dto.to_primitive(), 200
+            layer_details = LayerService.get_layers_by_category(map_category)
+            return layer_details.to_primitive(), 200
         except LayerServiceError as e:
             return {"Error": str(e)}, 400
         except NotFound:
             return {"Error": "No layers found"}, 404
+        except Exception as e:
+            error_msg = f'Layer GET - unhandled error {str(e)}'
+            current_app.logger.critical(error_msg)
+            return {'error': error_msg}, 500
+
+
+class LayerAPI(Resource):
+
+    @token_auth.login_required
+    def get(self, id):
+        """
+        Gets layers grouped by Category
+        ---
+        tags:
+          - layers
+        produces:
+          - application/json
+        parameters:
+            - in: header
+              name: Authorization
+              description: Base64 encoded session token
+              required: true
+              type: string
+            - in: path
+              name: id
+              description: ID of the layer
+              type: integer
+              required: true
+              default: 1
+        responses:
+          200:
+            description: Layer
+          400:
+            description: Bad request
+          401:
+            description: Unauthorized, credentials are invalid
+          404:
+            description: No layer found
+          500:
+            description: Internal Server Error
+        """
+        try:
+            layer_details_dto = LayerService.get_layer_by_id(id)
+            return layer_details_dto.to_primitive(), 200
+        except LayerServiceError as e:
+            return {"Error": str(e)}, 400
+        except NotFound:
+            return {"Error": "No layer found"}, 404
         except Exception as e:
             error_msg = f'Layer GET - unhandled error {str(e)}'
             current_app.logger.critical(error_msg)

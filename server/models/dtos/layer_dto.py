@@ -1,6 +1,6 @@
 from schematics import Model
 from schematics.exceptions import ValidationError
-from schematics.types import StringType
+from schematics.types import StringType, IntType
 from schematics.types.compound import ListType, ModelType
 from server.models.postgis.lookups import MapCategory
 
@@ -17,6 +17,7 @@ def is_known_category(value):
 
 class LayerDetailsDTO(Model):
     """ Describes a layer within the Layer List """
+    layer_id = IntType(required=True, serialized_name='layerId')
     layer_name = StringType(required=True, serialized_name='layerName')
     layer_title = StringType(required=True, serialized_name='layerTitle')
     layer_description = StringType(serialized_name='layerDescription')

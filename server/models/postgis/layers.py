@@ -36,9 +36,10 @@ class Layer(db.Model):
 
         return new_layer
 
-    def get_by_id(self, layer_id: int):
+    @staticmethod
+    def get_by_id(layer_id: int):
         """ Return the layer for the specified id, or None if not found """
-        return Layer.query.get(layer_id).one_or_none()
+        return Layer.query.get(layer_id)
 
     def get_by_layername(self, layername: str):
         """ Return the layer for the specified layername, or None if not found """
@@ -87,11 +88,21 @@ class Layer(db.Model):
     @staticmethod
     def get_layer_details(layer) -> LayerDetailsDTO:
         layer_details = LayerDetailsDTO()
+        layer_details.layer_id = layer.layer_id
         layer_details.layer_name = layer.layer_name
         layer_details.layer_title = layer.layer_title
         layer_details.layer_group = layer.layer_group
         layer_details.layer_source = layer.layer_source
         layer_details.layer_description = layer.layer_description
         layer_details.layer_copyright = layer.layer_copyright
+
+        if layer.map_category == MapCategory.PREPAREDNESS.value:
+            layer_details.map_category = MapCategory.PREPAREDNESS.name
+        elif layer.map_category == MapCategory.INCIDENTS_WARNINGS.value:
+            layer_details.map_category = MapCategory.INCIDENTS_WARNINGS.name
+        elif layer.map_category == MapCategory.ASSESSMENT_RESPONSE.value:
+            layer_details.map_category = MapCategory.ASSESSMENT_RESPONSE.name
+        else:
+            current_app.logger.error(f'Unknown Map Category for layer {layer.layer_id}')
 
         return layer_details

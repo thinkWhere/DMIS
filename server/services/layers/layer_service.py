@@ -42,3 +42,14 @@ class LayerService:
 
         return layers
 
+    @staticmethod
+    def get_layer_by_id(layer_id: int) -> LayerDetailsDTO:
+        """ Returns a layer by ID """
+        layer = Layer.get_by_id(layer_id)
+
+        if layer is None:
+            raise NotFound()
+
+        layer_details_dto = Layer.get_layer_details(layer)
+
+        return layer_details_dto
