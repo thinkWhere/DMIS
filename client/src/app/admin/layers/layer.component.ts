@@ -38,6 +38,7 @@ export class LayerComponent implements OnInit {
    * Get the layer's details
    */
   getLayer(){
+      this.errorGettingLayer = false;
        this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.layerService.getLayer(params.get('id')))
