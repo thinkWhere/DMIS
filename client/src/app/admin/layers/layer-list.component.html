@@ -1,0 +1,26 @@
+<div>
+    <h2>Layers</h2>
+    <table *ngIf="!errorGettingLayerList" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Name</th>
+            <th>Group</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let layer of layerList; index as i;">
+            <td>{{ layer.layerTitle }}</td>
+            <td>{{ layer.mapCategory }}</td>
+            <td>{{ layer.layerGroup }}</td>
+            <td class="pointer">
+                <a class="btn btn-xs btn-primary" (click)="onSelect(layer)"><i class="fa fa-info" aria-hidden="true"></i> Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div *ngIf="errorGettingLayerList" class="alert alert-danger">
+        <strong>Error: </strong> could not get the list of layers.
+    </div>
+</div>

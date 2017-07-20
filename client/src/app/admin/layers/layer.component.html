@@ -1,0 +1,57 @@
+<h2>
+    Layer: {{ layer.layerTitle }}
+</h2>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Layer details</h3>
+  </div>
+  <table class="table">
+        <tbody>
+        <tr>
+            <th scope="row">Title</th>
+            <td *ngIf="!editMode">{{ layer.layerTitle }}</td>
+            <td *ngIf="editMode">
+                <input [(ngModel)]="layer.layerTitle" class="form-control" type="text">
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Copyright</th>
+            <td *ngIf="!editMode">{{ layer.layerCopyright }}</td>
+            <td *ngIf="editMode">
+                <input [(ngModel)]="layer.layerCopyright" class="form-control" type="text">
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Description</th>
+            <td *ngIf="!editMode">{{ layer.layerDescription }}</td>
+            <td *ngIf="editMode">
+                <input [(ngModel)]="layer.layerDescription" class="form-control" type="text">
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Group</th>
+            <td *ngIf="!editMode">{{ layer.layerGroup }}</td>
+            <td *ngIf="editMode">
+                <input [(ngModel)]="layer.layerGroup" class="form-control" type="text">
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Category</th>
+            <td *ngIf="!editMode">{{ selectedCategory.name }}</td>
+            <td *ngIf="editMode">
+              <select class="form-control" [(ngModel)]="selectedCategory">
+                <option *ngFor="let item of categoryOptions">{{item.name}}</option>
+              </select>
+            </td>
+        </tr>
+        </tbody>
+  </table>
+<div class="panel-body">
+    <a class="btn btn-primary" (click)="edit(layer)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+    <a class="btn btn-primary" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
+    <a class="btn btn-primary" (click)="save(layer)"><i class="fa fa-times" aria-hidden="true"></i> Save</a>
+</div>
+</div>
+
+
+
