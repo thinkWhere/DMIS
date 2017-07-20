@@ -1,17 +1,17 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
-            <h2>Admin</h2>
-            <ul class="nav nav-sidebar">
-                <li>Manage users</li>
-                <li><a routerLink="/admin/users" title="View users">Users</a></li>
-                <li><a routerLink="/admin/user/add" title="Add user">Add user</a></li>
-                <li>Manage layers</li>
-                <li><a routerLink="/admin/layers" title="View layers">Layers</a></li>
-            </ul>
-        </div>
-        <div class="col-lg-10 col-md-9 col-sm-8 col-xs-8">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+<div class="admin-container">
+  <div class="sidebar">
+    <h2>Admin</h2>
+      <ul class="nav nav-sidebar">
+          <li>Dashboard</li>
+          <li><a routerLink="/admin" title="View users">Dashboard</a></li>
+          <li>Manage users</li>
+          <li><a routerLink="/admin/users" title="View users">Users</a></li>
+          <li><a routerLink="/admin/user/add" title="Add user">Add user</a></li>
+          <li>Manage layers</li>
+          <li><a routerLink="/admin/layers" title="View layers">Layers</a></li>
+      </ul>
+  </div>
+  <div class="main">
+     <router-outlet></router-outlet>
+  </div>
 </div>
