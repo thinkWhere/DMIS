@@ -20,6 +20,7 @@ export class MapComponent implements OnInit {
     showCategoryPicker: boolean;
     category: string;
     preparednessLayers: any;
+    incidentLayers: any;
     map: any;
     wmsSource: any; // WMS source for use in identify
 
@@ -36,6 +37,7 @@ export class MapComponent implements OnInit {
         this.showCategoryPicker = false;
         this.category = 'preparedness';
         this.preparednessLayers = [];
+        this.incidentLayers = [];
 
         this.initMap();
         
@@ -44,6 +46,7 @@ export class MapComponent implements OnInit {
             data => {
                 // Success
                 this.preparednessLayers = data.preparednessLayers;
+                this.incidentLayers = data.incidentLayers;
                 this.addLayers();
                 // If a WMS source exists, add identify event handlers. The WMS source is used by the
                 // identify service to generate the GetFeatureInfo URL
@@ -168,7 +171,22 @@ export class MapComponent implements OnInit {
                 });
             layer.setVisible(false);
             layer.setProperties({
-                "layerName": this.preparednessLayers[i].layerName
+                "layerName": this.preparednessLayers[i].layerName,
+            });
+            this.map.addLayer(layer);
+        }
+
+        // TODO: base this on type of layer instead of category
+        for (var i = 0; i < this.incidentLayers.length; i++) {
+            var layer = new ol.layer.Tile({
+                  source: new ol.source.TileArcGISRest({
+                    url: this.incidentLayers[i].layerSource
+                  })
+                });
+            layer.setVisible(false);
+            layer.setProperties({
+                "layerName": this.incidentLayers[i].layerName,
+                "layerSource": this.incidentLayers[i].layerSource
             });
             this.map.addLayer(layer);
         }

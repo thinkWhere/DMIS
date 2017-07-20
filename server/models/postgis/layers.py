@@ -3,7 +3,7 @@ from typing import Optional
 from flask import current_app
 from server import db
 from server.models.dtos.layer_dto import DMISLayersDTO, LayerDetailsDTO
-from server.models.postgis.lookups import MapCategory
+from server.models.postgis.lookups import MapCategory, LayerType
 
 
 class Layer(db.Model):
@@ -18,6 +18,7 @@ class Layer(db.Model):
     map_category = db.Column(db.Integer, default=0, nullable=False)
     layer_source = db.Column(db.String)
     layer_copyright = db.Column(db.String)
+    layer_type = db.Column(db.String, default='wms', nullable=False)
 
     @classmethod
     def create_from_dto(cls, layer_dto: LayerDetailsDTO):
@@ -30,6 +31,7 @@ class Layer(db.Model):
         new_layer.map_category = MapCategory[layer_dto.map_category].value
         new_layer.layer_group = layer_dto.layer_group
         new_layer.layer_copyright = layer_dto.layer_copyright
+        new_layer.layer_type = LayerType[layer_dto.layer_type].value
 
         db.session.add(new_layer)
         db.session.commit()
@@ -95,6 +97,7 @@ class Layer(db.Model):
         layer_details.layer_source = layer.layer_source
         layer_details.layer_description = layer.layer_description
         layer_details.layer_copyright = layer.layer_copyright
+        layer_details.layer_type = layer.layer_type
 
         if layer.map_category == MapCategory.PREPAREDNESS.value:
             layer_details.map_category = MapCategory.PREPAREDNESS.name

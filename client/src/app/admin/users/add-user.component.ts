@@ -12,6 +12,7 @@ export class AddUserComponent implements OnInit {
 
   successAddingUser: boolean = false;
   errorAddingUser: boolean = false;
+  invalidUsernameSupplied: boolean = false;
 
   constructor(
       private userService: UserService
@@ -27,7 +28,16 @@ export class AddUserComponent implements OnInit {
   addUser(user: NgForm){
     this.successAddingUser = false;
     this.errorAddingUser = false;
-    this.userService.addUser(user.value)
+    this.invalidUsernameSupplied = false;
+    // Remove whitespace on both sides of the string
+    user.value.username = user.value.username.trim();
+    user.value.password = user.value.password.trim();
+    // Only submit user when username contains no spaces
+    if (this.hasWhiteSpace(user.value.username)){
+       this.invalidUsernameSupplied = true;
+    }
+    else {
+      this.userService.addUser(user.value)
         .subscribe(
             data => {
               // Success
@@ -36,5 +46,15 @@ export class AddUserComponent implements OnInit {
             error => {
               this.errorAddingUser = true;
             });
+    }
+  }
+
+  /**
+   * Check string for whitespace
+   * @param string
+   * @returns {boolean}
+   */
+  hasWhiteSpace(string) {
+    return string.indexOf(' ') >= 0;
   }
 }

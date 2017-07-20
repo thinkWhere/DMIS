@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderByPipe } from 'angular-pipes/src/array/order-by.pipe';
 
 import { UserService } from './user.service';
 
