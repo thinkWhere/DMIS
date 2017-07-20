@@ -12,18 +12,18 @@ import { LayerService } from './layer.service';
 })
 export class LayerComponent implements OnInit {
 
-  private layer: any = [];
-  private editMode: boolean = false;
-  private categoryOptions: any = [
+  layer: any = [];
+  editMode: boolean = false;
+  categoryOptions: any = [
       {value: 'PREPAREDNESS', name: 'Preparedness'},
       {value: 'INCIDENTS', name: 'Incidents and Warnings'},
       {value: 'ASSESSMENT', name: 'Assessment and Response'}
   ];
-  private selectedCategory: any = {
+  selectedCategory: any = {
       value: '',
       name: ''
   };
-  private errorGettingLayer: boolean = false;
+  errorGettingLayer: boolean = false;
 
   constructor(
       private route: ActivatedRoute,

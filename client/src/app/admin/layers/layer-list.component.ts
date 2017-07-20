@@ -12,8 +12,8 @@ import { LayerService } from './layer.service';
 })
 export class LayerListComponent implements OnInit {
 
-  private layerList: any;
-  private errorGettingLayerList: any;
+  layerList: any;
+  errorGettingLayerList: any;
 
   constructor(
       private layerService: LayerService,
