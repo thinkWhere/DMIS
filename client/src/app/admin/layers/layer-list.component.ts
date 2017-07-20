@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { OrderByPipe } from 'angular-pipes/src/array/order-by.pipe';
 
 import { LayerService } from './layer.service';
 

@@ -10,7 +10,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let layer of layerList; index as i;">
+        <tr *ngFor="let layer of layerList | orderBy: 'layerTitle'; index as i;">
             <td>{{ layer.layerTitle }}</td>
             <td>{{ layer.mapCategory }}</td>
             <td>{{ layer.layerGroup }}</td>
