@@ -64,7 +64,7 @@ class LayerAPI(Resource):
     @token_auth.login_required
     def get(self, id):
         """
-        Gets layers grouped by Category
+        Gets a layer
         ---
         tags:
           - layers
