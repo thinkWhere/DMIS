@@ -29,12 +29,12 @@ export class LayerListComponent implements OnInit {
    */
   getLayers() {
      this.errorGettingLayerList = false;
+     this.layerList = [];
      this.layerService.getLayers()
             .subscribe(
             data => {
               // Success
               // TODO: let the API do this?
-              this.layerList = [];
               if (data.preparednessLayers) {
                 for (var i = 0; i < data.preparednessLayers.length; i++){
                   this.layerList.push(data.preparednessLayers[i]);
@@ -52,7 +52,6 @@ export class LayerListComponent implements OnInit {
               }
             },
             error => {
-              this.layerList = [];
               this.errorGettingLayerList = true;
             });
   }
