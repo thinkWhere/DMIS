@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../environments/environment';
@@ -18,12 +18,8 @@ export class LayerService {
    * @param loginCredentials
    */
   getLayers() {
-    let headers = new Headers();
-    let token = this.authenticationService.getToken();
-    headers.append('Content-Type', 'application/json; charset=UTF-8');
-    headers.append('Authorization', 'Bearer ' + token);
-
-    let options = new RequestOptions({ headers: headers});
+    let headers = this.authenticationService.getAuthenticatedHeaders();
+    let options = new RequestOptions({headers: headers});
 
     // TODO: make category a parameter
     return this.http.get(environment.apiEndpoint + '/layer/toc/UNKNOWN', options)

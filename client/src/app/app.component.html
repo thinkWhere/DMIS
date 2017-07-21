@@ -31,7 +31,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a routerLink="/" title="Go to the about page">About</a></li>
+                <li><a routerLink="/" title="Go to the about page">About</a></li>
                 <li><a routerLink="/map/preparedness" title="Go to the map page">Map</a></li>
                 <li *ngIf="languageCode === 'km'"><a class="pointer" (click)="switchLanguage('en')">English</a></li>
                 <li *ngIf="languageCode === 'en'"><a class="pointer" (click)="switchLanguage('km')">ភាសាខ្មែរ</a></li>
