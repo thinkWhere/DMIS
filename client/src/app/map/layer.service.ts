@@ -43,19 +43,10 @@ export class LayerService {
     // find the layer
     for (var i = 0; i < layers.length; i++) {
       // Only identify layers visible on the map
-      if (type === 'wms'){
-        if (layers[i].getVisible() && layers[i].getProperties().layerName){
-          if (layers[i].getProperties().layerType !== 'wms'){
-            identifiableLayers.push(layers[i].getProperties().layerName)
-          }
-        }
-      }
-      if (type === 'arcgisrest'){
-        if (layers[i].getVisible() && layers[i].getProperties().layerName){
-          if (layers[i].getProperties().layerType === 'arcgisrest'){
+      if (layers[i].getVisible()){
+          if (layers[i].getProperties().layerType === type){
             identifiableLayers.push(layers[i])
           }
-        }
       }
     }
     return identifiableLayers;
