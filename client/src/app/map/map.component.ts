@@ -191,6 +191,8 @@ export class MapComponent implements OnInit {
         layer.setVisible(false);
         layer.setProperties({
             "layerName": wmsLayer.layerName,
+            "layerSource": wmsLayer.layerSource,
+            "layerType": wmsLayer.layerType
         });
         this.map.addLayer(layer);
     }
@@ -208,7 +210,8 @@ export class MapComponent implements OnInit {
         layer.setVisible(false);
         layer.setProperties({
             "layerName": arcRESTLayer.layerName,
-            "layerSource": arcRESTLayer.layerSource
+            "layerSource": arcRESTLayer.layerSource,
+            "layerType": arcRESTLayer.layerType
         });
         this.map.addLayer(layer);
     }

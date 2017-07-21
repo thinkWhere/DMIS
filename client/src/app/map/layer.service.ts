@@ -33,7 +33,6 @@ export class LayerService {
 
   /**
    * Get identifiable layers
-   * TODO: refactor when types are implemented
    * @param map
    * @param type
    * @returns {Array}
@@ -46,16 +45,14 @@ export class LayerService {
       // Only identify layers visible on the map
       if (type === 'wms'){
         if (layers[i].getVisible() && layers[i].getProperties().layerName){
-          // TODO: filter identifiable layers per type
-          if (layers[i].getProperties().layerName !== 'pdc_integrated_active_hazards'){
+          if (layers[i].getProperties().layerType !== 'wms'){
             identifiableLayers.push(layers[i].getProperties().layerName)
           }
         }
       }
       if (type === 'arcgisrest'){
         if (layers[i].getVisible() && layers[i].getProperties().layerName){
-          // TODO: filter identifiable layers per type
-          if (layers[i].getProperties().layerName === 'pdc_integrated_active_hazards'){
+          if (layers[i].getProperties().layerType === 'arcgisrest'){
             identifiableLayers.push(layers[i])
           }
         }
