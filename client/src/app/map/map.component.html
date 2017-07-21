@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div [hidden]="category !== 'preparedness'">
-                        <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerGroup'">
+                        <div *ngFor="let layerGroup of layers.preparednessLayers | groupBy: 'layerGroup'">
                             <h3>{{ layerGroup.key }}</h3>
                             <div *ngFor="let layer of layerGroup.value; index as i;">
                                 <div class="checkbox" (change)="toggleLayer(layer.layerName)">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div [hidden]="category !== 'incidents'">
-                        <div *ngFor="let layerGroup of incidentLayers | groupBy: 'layerGroup'">
+                        <div *ngFor="let layerGroup of layers.incidentLayers | groupBy: 'layerGroup'">
                             <h3>{{ layerGroup.key }}</h3>
                             <div *ngFor="let layer of layerGroup.value; index as i;">
                                 <div class="checkbox" (change)="toggleLayer(layer.layerName)">
