@@ -19,8 +19,7 @@ export class MapComponent implements OnInit {
     showContent: boolean;
     showCategoryPicker: boolean;
     category: string;
-    preparednessLayers: any;
-    incidentLayers: any;
+    layers: any;
     map: any;
     wmsSource: any; // WMS source for use in identify
 
@@ -36,8 +35,7 @@ export class MapComponent implements OnInit {
         this.showContent = true;
         this.showCategoryPicker = false;
         this.category = 'preparedness';
-        this.preparednessLayers = [];
-        this.incidentLayers = [];
+        this.layers = [];
 
         this.initMap();
         
@@ -45,9 +43,16 @@ export class MapComponent implements OnInit {
             .subscribe(
             data => {
                 // Success
-                this.preparednessLayers = data.preparednessLayers;
-                this.incidentLayers = data.incidentLayers;
-                this.addLayers();
+                this.layers = data;
+                if (this.layers.preparednessLayers){
+                    this.addLayers(this.layers.preparednessLayers);
+                }
+                if (this.layers.incidentLayers){
+                    this.addLayers(this.layers.incidentLayers);
+                }
+                if (this.layers.responseLayers){
+                    this.addLayers(this.layers.responseLayers);
+                }
                 // If a WMS source exists, add identify event handlers. The WMS source is used by the
                 // identify service to generate the GetFeatureInfo URL
                 if (this.wmsSource){
@@ -134,22 +139,36 @@ export class MapComponent implements OnInit {
      /**
      * Add layers to the map - maybe move to layer service
      * TODO: review and maybe add to layer service when this function grows?
-     * TODO: extend to incidents and assessment layers
      */
-    private addLayers () {
-        for (var i = 0; i < this.preparednessLayers.length; i++){
-            var newSource = new ol.source.TileWMS({
-                params: {
-                    'LAYERS': this.preparednessLayers[i].layerName,
-                    'FORMAT': 'image/png'
-                },
-                attributions: [new ol.Attribution({html: this.preparednessLayers[i].layerCopyright})],
-                url: environment.apiEndpoint + '/v1/map/wms',
-                projection: this.map.getView().getProjection(),
-                tileLoadFunction: function(imageTile, src) {
-                    // use a tileLoadFunction to add authentication headers to the request
-                    this.mapService.getTile(src)
-                        .subscribe(
+    private addLayers (layers) {
+        for (var i = 0; i < layers.length; i++){
+            if (layers[i].layerType === 'wms'){
+                this.addWMSLayer(layers[i]);
+            }
+            if (layers[i].layerType === 'arcgisrest'){
+                this.addArcGISRESTLayer(layers[i]);
+            }
+        }
+    }
+
+    /**
+     * Add a WMS layer
+     * TODO: use source property on the layer to allow support for a WMS from another source
+     * @param wmsLayer
+     */
+    private addWMSLayer(wmsLayer) {
+        var newSource = new ol.source.TileWMS({
+            params: {
+                'LAYERS': wmsLayer.layerName,
+                'FORMAT': 'image/png'
+            },
+            attributions: [new ol.Attribution({html: wmsLayer.layerCopyright})],
+            url: environment.apiEndpoint + '/v1/map/wms',
+            projection: this.map.getView().getProjection(),
+            tileLoadFunction: function (imageTile, src) {
+                // use a tileLoadFunction to add authentication headers to the request
+                this.mapService.getTile(src)
+                    .subscribe(
                         data => {
                             // Success - returns a Blob - create an URL from it and update the original
                             // imageTile source
@@ -161,34 +180,39 @@ export class MapComponent implements OnInit {
                             // TODO: potentially handle error?
                         }
                     )
-                }.bind(this)
-            });
-            if (!this.wmsSource){
-                this.wmsSource = newSource;
-            }
-             var layer = new ol.layer.Tile({
-                    source: newSource
-                });
-            layer.setVisible(false);
-            layer.setProperties({
-                "layerName": this.preparednessLayers[i].layerName,
-            });
-            this.map.addLayer(layer);
+            }.bind(this)
+        });
+        if (!this.wmsSource) {
+            this.wmsSource = newSource;
         }
+        var layer = new ol.layer.Tile({
+            source: newSource
+        });
+        layer.setVisible(false);
+        layer.setProperties({
+            "layerName": wmsLayer.layerName,
+            "layerSource": wmsLayer.layerSource,
+            "layerType": wmsLayer.layerType
+        });
+        this.map.addLayer(layer);
+    }
 
-        // TODO: base this on type of layer instead of category
-        for (var i = 0; i < this.incidentLayers.length; i++) {
-            var layer = new ol.layer.Tile({
-                  source: new ol.source.TileArcGISRest({
-                    url: this.incidentLayers[i].layerSource
-                  })
-                });
-            layer.setVisible(false);
-            layer.setProperties({
-                "layerName": this.incidentLayers[i].layerName,
-                "layerSource": this.incidentLayers[i].layerSource
-            });
-            this.map.addLayer(layer);
-        }
+    /**
+     * Add a ArcGIS REST layer
+     * @param arcRESTLayer
+     */
+    private addArcGISRESTLayer(arcRESTLayer) {
+        var layer = new ol.layer.Tile({
+            source: new ol.source.TileArcGISRest({
+                url: arcRESTLayer.layerSource
+            })
+        });
+        layer.setVisible(false);
+        layer.setProperties({
+            "layerName": arcRESTLayer.layerName,
+            "layerSource": arcRESTLayer.layerSource,
+            "layerType": arcRESTLayer.layerType
+        });
+        this.map.addLayer(layer);
     }
 }

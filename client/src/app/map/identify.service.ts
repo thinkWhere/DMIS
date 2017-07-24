@@ -85,8 +85,12 @@ export class IdentifyService {
                     'BUFFER': 10
                 });
             var identifiableLayers = this.layerService.getIdentifiableLayers(map, 'wms');
-            getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'QUERY_LAYERS', identifiableLayers.join());
-            getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'LAYERS', identifiableLayers.join());
+            var identifiableLayerNames = [];
+            for (var i = 0; i < identifiableLayers.length; i++){
+                identifiableLayerNames.push(identifiableLayers[i].getProperties().layerName);
+            }
+            getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'QUERY_LAYERS', identifiableLayerNames.join());
+            getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'LAYERS', identifiableLayerNames.join());
             if (getFeatureInfoUrl && identifiableLayers.length > 0) {
                 var parser = new ol.format.GeoJSON();
                 this.getFeatureInfo(getFeatureInfoUrl)
@@ -116,13 +120,15 @@ export class IdentifyService {
             var mapExtent = '-20037700,20037700,-30241100,30241100';
             var imageDisplay = map.getSize()[0] + ',' + map.getSize()[1] + ',' + '72';
             // TODO: add ability to have more than one ArcGIS REST layer
-            var arcUrl = arcgisLayers[0].getProperties().layerSource + '/identify?' +
-                'geometry=' + geometry +
-                '&geometryType=esriGeometryPoint' +
-                '&layers=all&tolerance=10' +
-                '&mapExtent=' + mapExtent +
-                '&imageDisplay=' + imageDisplay +
-                '&returnGeometry=false&f=json';
+            if (arcgisLayers.length > 0) {
+                var arcUrl = arcgisLayers[0].getProperties().layerSource + '/identify?' +
+                    'geometry=' + geometry +
+                    '&geometryType=esriGeometryPoint' +
+                    '&layers=all&tolerance=10' +
+                    '&mapExtent=' + mapExtent +
+                    '&imageDisplay=' + imageDisplay +
+                    '&returnGeometry=false&f=json';
+            }
             if (arcUrl && arcgisLayers.length > 0){
                  this.identifyArcGISRest(arcUrl)
                         .subscribe(
