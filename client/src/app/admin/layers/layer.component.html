@@ -41,16 +41,16 @@
                 <td *ngIf="!editMode">{{ selectedCategory.name }}</td>
                 <td *ngIf="editMode">
                   <select class="form-control" [(ngModel)]="selectedCategory">
-                    <option *ngFor="let item of categoryOptions">{{item.name}}</option>
+                    <option *ngFor="let item of categoryOptions" [ngValue]="item">{{item.name}}</option>
                   </select>
                 </td>
             </tr>
             </tbody>
       </table>
       <div class="panel-body">
-        <a class="btn btn-primary" (click)="edit(layer)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-        <a class="btn btn-primary" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
-        <a class="btn btn-primary" (click)="save(layer)"><i class="fa fa-times" aria-hidden="true"></i> Save</a>
+        <a class="btn btn-primary" *ngIf="!editMode" (click)="edit(layer)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+        <a class="btn btn-primary" *ngIf="editMode" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
+        <a class="btn btn-primary" *ngIf="editMode" (click)="save(layer)"><i class="fa fa-save" aria-hidden="true"></i> Save</a>
       </div>
   </div>
   <div class="panel-body">

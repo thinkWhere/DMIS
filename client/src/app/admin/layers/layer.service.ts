@@ -38,4 +38,25 @@ export class LayerService {
         .map(response => response.json())
   }
 
+  /**
+   * Update layer details
+   * @param layer
+   * @returns {Observable<R>}
+   */
+  updateLayer(layer){
+    let headers = this.authenticationService.getAuthenticatedHeaders();
+    let options = new RequestOptions({headers: headers});
+
+    var data = {
+      layerCopyright: layer.layerCopyright,
+      layerDescription: layer.layerDescription,
+      layerGroup: layer.layerGroup,
+      layerTitle: layer.layerTitle,
+      mapCategory: layer.mapCategory
+    };
+
+    return this.http.post(environment.apiEndpoint + '/layer/' + layer.layerId, data, options)
+        .map(response => response.json())
+  }
+
 }

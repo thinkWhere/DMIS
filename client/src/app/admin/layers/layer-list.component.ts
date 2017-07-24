@@ -12,7 +12,7 @@ import { LayerService } from './layer.service';
 })
 export class LayerListComponent implements OnInit {
 
-  layerList: any;
+  layerList: any = [];
   errorGettingLayerList: any;
 
   constructor(
@@ -29,11 +29,11 @@ export class LayerListComponent implements OnInit {
    */
   getLayers() {
      this.errorGettingLayerList = false;
-     this.layerList = [];
      this.layerService.getLayers()
             .subscribe(
             data => {
               // Success
+              this.layerList = [];
               // TODO: let the API do this?
               if (data.preparednessLayers) {
                 for (var i = 0; i < data.preparednessLayers.length; i++){
@@ -50,11 +50,13 @@ export class LayerListComponent implements OnInit {
                   this.layerList.push(data.responseLayers[i]);
                 }
               }
+              console.log(this.layerList);
             },
             error => {
               this.errorGettingLayerList = true;
+              this.layerList = [];
             });
-  }
+  };
 
   onSelect(layer){
       this.router.navigate(['/admin/layer', layer.layerId])
