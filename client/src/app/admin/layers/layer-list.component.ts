@@ -50,7 +50,6 @@ export class LayerListComponent implements OnInit {
                   this.layerList.push(data.responseLayers[i]);
                 }
               }
-              console.log(this.layerList);
             },
             error => {
               this.errorGettingLayerList = true;

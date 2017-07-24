@@ -72,10 +72,8 @@ export class LayerComponent implements OnInit {
 
   /**
    * Save layer details
-   * TODO
    */
   save(layer){
-      console.log(layer);
       layer.mapCategory = this.selectedCategory.value;
       this.editMode = false;
       this.errorUpdatingLayer = false;
