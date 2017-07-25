@@ -1,5 +1,5 @@
 from flask import current_app
-from server.models.dtos.layer_dto import DMISLayersDTO, LayerDetailsDTO
+from server.models.dtos.layer_dto import DMISLayersDTO, LayerDetailsDTO, LayerUpdateDTO
 from server.models.postgis.layers import Layer
 from server.models.postgis.lookups import MapCategory
 from server.models.postgis.utils import NotFound
@@ -43,7 +43,7 @@ class LayerService:
         return layers
 
     @staticmethod
-    def get_layer_by_id(layer_id: int) -> LayerDetailsDTO:
+    def get_layer_dto_by_id(layer_id: int) -> LayerDetailsDTO:
         """ Returns a layer by ID """
         layer = Layer.get_by_id(layer_id)
 
@@ -53,3 +53,20 @@ class LayerService:
         layer_details_dto = Layer.get_layer_details(layer)
 
         return layer_details_dto
+
+    @staticmethod
+    def get_layer_by_id(layer_id: int) -> Layer:
+        """ Returns a layer by ID """
+        layer = Layer.get_by_id(layer_id)
+
+        if layer is None:
+            raise NotFound()
+
+        return layer
+
+    @staticmethod
+    def update_layer(layer_update_dto: LayerUpdateDTO) -> LayerDetailsDTO:
+        """ Updates the user details in DB """
+        layer_details = LayerService.get_layer_by_id(layer_update_dto.layer_id)
+        layer_details.update(layer_update_dto)
+        return layer_details.get_layer_details(layer_details)

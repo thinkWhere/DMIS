@@ -2,7 +2,7 @@ from typing import Optional
 
 from flask import current_app
 from server import db
-from server.models.dtos.layer_dto import DMISLayersDTO, LayerDetailsDTO
+from server.models.dtos.layer_dto import DMISLayersDTO, LayerDetailsDTO, LayerUpdateDTO
 from server.models.postgis.lookups import MapCategory, LayerType
 
 
@@ -109,3 +109,12 @@ class Layer(db.Model):
             current_app.logger.error(f'Unknown Map Category for layer {layer.layer_id}')
 
         return layer_details
+
+    def update(self, layer_update_dto: LayerUpdateDTO):
+        """ Update the user details """
+        self.layer_title = layer_update_dto.layer_title
+        self.layer_description = layer_update_dto.layer_description
+        self.layer_copyright = layer_update_dto.layer_copyright
+        self.map_category = MapCategory[layer_update_dto.map_category].value
+        self.layer_group = layer_update_dto.layer_group
+        db.session.commit()

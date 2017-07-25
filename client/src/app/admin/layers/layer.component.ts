@@ -24,6 +24,7 @@ export class LayerComponent implements OnInit {
       name: ''
   };
   errorGettingLayer: boolean = false;
+  errorUpdatingLayer: boolean = false;
 
   constructor(
       private route: ActivatedRoute,
@@ -39,7 +40,7 @@ export class LayerComponent implements OnInit {
    */
   getLayer(){
       this.errorGettingLayer = false;
-       this.route.paramMap
+      this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.layerService.getLayer(params.get('id')))
       .subscribe(
@@ -71,11 +72,22 @@ export class LayerComponent implements OnInit {
 
   /**
    * Save layer details
-   * TODO
    */
-  save(){
+  save(layer){
+      layer.mapCategory = this.selectedCategory.value;
       this.editMode = false;
-      this.getLayer();
+      this.errorUpdatingLayer = false;
+      this.layerService.updateLayer(layer)
+      .subscribe(
+          data => {
+              console.log(data);
+            this.layer = data;
+            this.selectedCategory = this.getSelectedCategory(this.layer.mapCategory);
+          },
+          error => {
+             this.layer = {};
+             this.errorUpdatingLayer = true;
+          });
   }
 
   /**
