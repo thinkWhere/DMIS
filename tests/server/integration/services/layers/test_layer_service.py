@@ -42,7 +42,6 @@ class TestLayerService(unittest.TestCase):
         layer_dto = LayerDetailsDTO()
         layer_dto.layer_name = 'test_layer'
         layer_dto.layer_title = 'Test Layer'
-        layer_dto.layer_description = 'Thinkwhere Test Layer'
         layer_dto.layer_group = 'Humanitarian'
         layer_dto.map_category = MapCategory.PREPAREDNESS.name
         layer_dto.layer_source = 'https://blah.com/wms'
@@ -70,7 +69,6 @@ class TestLayerService(unittest.TestCase):
         test_layer_update_dto = LayerService.get_layer_dto_by_id(self.test_layer.layer_id)
         test_layer_update_dto.layer_title = 'spiderman'
         test_layer_update_dto.layer_copyright = 'spiderman copyright'
-        test_layer_update_dto.layer_description = 'spiderman description'
         test_layer_update_dto.layer_group = 'superheroes'
         test_layer_update_dto.map_category = MapCategory.INCIDENTS_WARNINGS.name
 
@@ -80,6 +78,5 @@ class TestLayerService(unittest.TestCase):
         # Assert
         self.assertEqual(updated_layer.layer_title, test_layer_update_dto.layer_title)
         self.assertEqual(updated_layer.layer_copyright, test_layer_update_dto.layer_copyright)
-        self.assertEqual(updated_layer.layer_description, test_layer_update_dto.layer_description)
         self.assertEqual(updated_layer.layer_group, test_layer_update_dto.layer_group)
         self.assertEqual(updated_layer.map_category, test_layer_update_dto.map_category)

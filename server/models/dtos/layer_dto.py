@@ -29,7 +29,6 @@ class LayerDetailsDTO(Model):
     layer_id = IntType(required=True, serialized_name='layerId')
     layer_name = StringType(required=True, serialized_name='layerName')
     layer_title = StringType(required=True, serialized_name='layerTitle')
-    layer_description = StringType(serialized_name='layerDescription')
     map_category = StringType(required=True, validators=[is_known_category], serialized_name='mapCategory')
     layer_group = StringType(serialized_name='layerGroup')
     layer_source = StringType(required=True, serialized_name='layerSource')
@@ -41,7 +40,6 @@ class LayerUpdateDTO(Model):
     """ DTO for layer update """
     layer_id = IntType(required=True, serialized_name='layerId')
     layer_title = StringType(required=True, serialized_name='layerTitle')
-    layer_description = StringType(serialized_name='layerDescription')
     layer_group = StringType(serialized_name='layerGroup')
     layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     map_category = StringType(required=True, validators=[is_known_category], serialized_name='mapCategory')

@@ -23,13 +23,6 @@
                 </td>
             </tr>
             <tr>
-                <th scope="row">Description</th>
-                <td *ngIf="!editMode">{{ layer.layerDescription }}</td>
-                <td *ngIf="editMode">
-                    <input [(ngModel)]="layer.layerDescription" class="form-control" type="text">
-                </td>
-            </tr>
-            <tr>
                 <th scope="row">Group</th>
                 <td *ngIf="!editMode">{{ layer.layerGroup }}</td>
                 <td *ngIf="editMode">

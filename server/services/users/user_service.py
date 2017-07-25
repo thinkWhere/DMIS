@@ -3,6 +3,7 @@ from passlib.hash import pbkdf2_sha256 as sha256_hash
 from server.models.dtos.user_dto import UserDTO, UserUpdateDTO
 from server.models.postgis.user import User
 from server.models.postgis.utils import NotFound
+from server.models.postgis.lookups import UserRole
 
 
 class UserExistsError(Exception):
@@ -42,6 +43,7 @@ class UserService:
         new_user = User()
         new_user.username = user_dto.username
         new_user.password = UserService._hash_password(user_dto.password)  # Hash password so not storing in plaintext
+        new_user.role = UserRole[user_dto.role].value
 
         new_user.create()
         return new_user

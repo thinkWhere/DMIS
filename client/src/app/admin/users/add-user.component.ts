@@ -26,6 +26,7 @@ export class AddUserComponent implements OnInit {
    * @param user
    */
   addUser(user: NgForm){
+    console.log(user.value);
     this.successAddingUser = false;
     this.errorAddingUser = false;
     this.invalidUsernameSupplied = false;

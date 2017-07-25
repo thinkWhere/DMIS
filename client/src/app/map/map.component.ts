@@ -204,7 +204,8 @@ export class MapComponent implements OnInit {
     private addArcGISRESTLayer(arcRESTLayer) {
         var layer = new ol.layer.Tile({
             source: new ol.source.TileArcGISRest({
-                url: arcRESTLayer.layerSource
+                url: arcRESTLayer.layerSource,
+                attributions: [new ol.Attribution({html: arcRESTLayer.layerCopyright})],
             })
         });
         layer.setVisible(false);
