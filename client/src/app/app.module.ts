@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 import { SitrepComponent } from './map/sitrep.component';
+import { WeatherComponent } from './weather/weather.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SitrepComponent } from './map/sitrep.component';
     LoginComponent,
     MapComponent,
     HomeComponent,
-    SitrepComponent
+    SitrepComponent,
+    WeatherComponent
   ],
   imports: [
       NgAggregatePipesModule,
@@ -40,6 +42,10 @@ import { SitrepComponent } from './map/sitrep.component';
               path: 'map/:category',
               component: MapComponent,
               canActivate: [AuthGuardService]
+          },
+          {
+              path: 'weather',
+              component: WeatherComponent
           },
           {
               path: 'sitrep',
