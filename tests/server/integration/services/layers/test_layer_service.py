@@ -5,8 +5,6 @@ from server import bootstrap_app
 from server.models.postgis.lookups import MapCategory, LayerType
 from server.services.layers.layer_service import LayerService, LayerDetailsDTO, LayerUpdateDTO
 
-TEST_LAYER_ID = 1
-
 
 class TestLayerService(unittest.TestCase):
     skip_tests = False
@@ -42,7 +40,6 @@ class TestLayerService(unittest.TestCase):
 
     def setup_dmis_layer(self):
         layer_dto = LayerDetailsDTO()
-        layer_dto.layer_id = TEST_LAYER_ID
         layer_dto.layer_name = 'test_layer'
         layer_dto.layer_title = 'Test Layer'
         layer_dto.layer_description = 'Thinkwhere Test Layer'
@@ -70,15 +67,19 @@ class TestLayerService(unittest.TestCase):
             return
 
         # Arrange
-        test_layer_update_dto = LayerService.get_layer_dto_by_id(TEST_LAYER_ID)
+        test_layer_update_dto = LayerService.get_layer_dto_by_id(self.test_layer.layer_id)
         test_layer_update_dto.layer_title = 'spiderman'
         test_layer_update_dto.layer_copyright = 'spiderman copyright'
         test_layer_update_dto.layer_description = 'spiderman description'
         test_layer_update_dto.layer_group = 'superheroes'
-        test_layer_update_dto.map_category = MapCategory.PREPAREDNESS.name
+        test_layer_update_dto.map_category = MapCategory.INCIDENTS_WARNINGS.name
 
         # Act
         updated_layer = LayerService.update_layer(test_layer_update_dto)
 
         # Assert
         self.assertEqual(updated_layer.layer_title, test_layer_update_dto.layer_title)
+        self.assertEqual(updated_layer.layer_copyright, test_layer_update_dto.layer_copyright)
+        self.assertEqual(updated_layer.layer_description, test_layer_update_dto.layer_description)
+        self.assertEqual(updated_layer.layer_group, test_layer_update_dto.layer_group)
+        self.assertEqual(updated_layer.map_category, test_layer_update_dto.map_category)
