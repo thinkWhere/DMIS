@@ -154,8 +154,8 @@ export class MapComponent implements OnInit {
         }
     }
 
-      /**
-    * Set layer legend for a WMS layer
+    /**
+    * Set layer legend for a WMS layer using a GetLegendGraphic request
     * @param layer
     */
     private setWMSLayerLegend(layer){
