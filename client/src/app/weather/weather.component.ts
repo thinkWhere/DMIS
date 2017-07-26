@@ -17,11 +17,11 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit() {
      // Checks the language to show the weather map in the correct language
-        var baseHref = this.locationStrategy.getBaseHref();
-        // If base href is not / or English, then set the language code
-        if (baseHref !== '/'){
-            // Remove leading '/'
-            this.languageCode = baseHref.substring(1);
-        }
+     var baseHref = this.locationStrategy.getBaseHref();
+     // If base href is not / or English, then set the language code
+     if (baseHref !== '/'){
+        // Remove leading '/'
+        this.languageCode = baseHref.substring(1);
+     }
   }
 }
