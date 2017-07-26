@@ -135,9 +135,6 @@ class LayerAPI(Resource):
                       layerCopyright:
                           type: string
                           default: People in Need
-                      layerDescription:
-                          type: string
-                          default: rivers in Cambodia
                       layerGroup:
                           type: string
                           default: environment

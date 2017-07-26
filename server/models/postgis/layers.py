@@ -13,7 +13,6 @@ class Layer(db.Model):
     layer_id = db.Column(db.BigInteger, primary_key=True, index=True)
     layer_name = db.Column(db.String, unique=True, index=True)
     layer_title = db.Column(db.String, default="New Layer")
-    layer_description = db.Column(db.String, default="", nullable=False)
     layer_group = db.Column(db.String, default="OTHER LAYERS", nullable=False)
     map_category = db.Column(db.Integer, default=0, nullable=False)
     layer_source = db.Column(db.String)
@@ -26,7 +25,6 @@ class Layer(db.Model):
         new_layer = cls()
         new_layer.layer_name = layer_dto.layer_name
         new_layer.layer_title = layer_dto.layer_title
-        new_layer.layer_description = layer_dto.layer_description
         new_layer.layer_source = layer_dto.layer_source
         new_layer.map_category = MapCategory[layer_dto.map_category].value
         new_layer.layer_group = layer_dto.layer_group
@@ -95,7 +93,6 @@ class Layer(db.Model):
         layer_details.layer_title = layer.layer_title
         layer_details.layer_group = layer.layer_group
         layer_details.layer_source = layer.layer_source
-        layer_details.layer_description = layer.layer_description
         layer_details.layer_copyright = layer.layer_copyright
         layer_details.layer_type = layer.layer_type
 
@@ -113,7 +110,6 @@ class Layer(db.Model):
     def update(self, layer_update_dto: LayerUpdateDTO):
         """ Update the user details """
         self.layer_title = layer_update_dto.layer_title
-        self.layer_description = layer_update_dto.layer_description
         self.layer_copyright = layer_update_dto.layer_copyright
         self.map_category = MapCategory[layer_update_dto.map_category].value
         self.layer_group = layer_update_dto.layer_group
