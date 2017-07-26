@@ -62,6 +62,13 @@
   border-bottom: 1px solid lightgray;
 }
 
+.layer-legend {
+  margin-left: 20px;
+  img {
+    max-width: 300px;
+  }
+}
+
 /**************************** Sidebar **************************************/
 /** Inspiration and code taken from https://github.com/Turbo87/sidebar-v2 **/
 
