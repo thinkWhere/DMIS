@@ -1,0 +1,7 @@
+<div class="container">
+    <div class="row">
+        <h1>Weather</h1>
+        <iframe *ngIf='languageCode === "en"' class="iframe-weather-map" src="http://cambodiameteo.com/map?menu=3&lang=en"></iframe>
+        <iframe *ngIf='languageCode === "km"' class="iframe-weather-map" src="http://cambodiameteo.com/map?menu=3&lang=km"></iframe>
+    </div>
+</div>

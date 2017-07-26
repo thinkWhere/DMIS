@@ -49,7 +49,6 @@ export class LayerService {
 
     var data = {
       layerCopyright: layer.layerCopyright,
-      layerDescription: layer.layerDescription,
       layerGroup: layer.layerGroup,
       layerTitle: layer.layerTitle,
       mapCategory: layer.mapCategory

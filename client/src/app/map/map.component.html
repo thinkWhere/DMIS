@@ -38,9 +38,8 @@
                             <h3>{{ layerGroup.key }}</h3>
                             <div *ngFor="let layer of layerGroup.value; index as i;">
                                 <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                    <label><input type="checkbox" value=""><b>{{ layer.layerTitle }}</b></label>
+                                    <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
                                 </div>
-                                <p>{{ layer.layerDescription }}</p>
                             </div>
                         </div>
                     </div>
@@ -49,9 +48,8 @@
                             <h3>{{ layerGroup.key }}</h3>
                             <div *ngFor="let layer of layerGroup.value; index as i;">
                                 <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                    <label><input type="checkbox" value=""><b>{{ layer.layerTitle }}</b></label>
+                                    <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
                                 </div>
-                                <p>{{ layer.layerDescription }}</p>
                             </div>
                         </div>
                     </div>
