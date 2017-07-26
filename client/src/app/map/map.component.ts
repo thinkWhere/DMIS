@@ -145,9 +145,7 @@ export class MapComponent implements OnInit {
     private addLayers (layers) {
         for (var i = 0; i < layers.length; i++){
             if (layers[i].layerType === 'wms'){
-                //layers[i].layerLegend = 'http://52.49.245.101:8085/geoserver/wms' + '?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=' + layers[i].layerName + '&legend_options=fontName:Times%20New%20Roman;fontAntiAliasing:true;fontColor:0x000033;fontSize:14;bgColor:0xFFFFEE;dpi:180';
-                //layers[i].layerLegend = environment.apiEndpoint + '/v1/map/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=' + layers[i].layerName + '&legend_options=fontName:Times%20New%20Roman;fontAntiAliasing:true;fontColor:0x000033;fontSize:14;bgColor:0xFFFFEE;dpi:180';
-                this.setLayerLegend(layers[i]);
+                this.setWMSLayerLegend(layers[i]);
                 this.addWMSLayer(layers[i]);
             }
             if (layers[i].layerType === 'arcgisrest'){
@@ -156,11 +154,11 @@ export class MapComponent implements OnInit {
         }
     }
 
-    /**
-     * Set layer legend
-     * @param layer
-     */
-    setLayerLegend(layer){
+      /**
+    * Set layer legend for a WMS layer
+    * @param layer
+    */
+    private setWMSLayerLegend(layer){
          layer.layerLegend = '';
          var url = environment.apiEndpoint + '/v1/map/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&height=10&LAYER=' + layer.layerName + '&legend_options=fontName:Times%20New%20Roman;fontAntiAliasing:true;fontColor:0x000033;dpi:180&transparent=true';
          this.mapService.getImage(url)
