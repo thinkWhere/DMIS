@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgAggregatePipesModule } from 'angular-pipes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AuthGuardService } from './shared/auth-guard.service';
 import { AuthenticationService } from './shared/authentication.service';
@@ -29,6 +30,7 @@ import { WeatherComponent } from './weather/weather.component';
       BrowserModule,
       FormsModule,
       HttpModule,
+      BrowserAnimationsModule,
       RouterModule.forRoot([
           {
               path: '',
