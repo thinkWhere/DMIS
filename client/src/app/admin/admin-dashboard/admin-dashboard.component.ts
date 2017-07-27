@@ -58,7 +58,7 @@ export class AdminDashboardComponent implements OnInit {
               this.users.push(users);
             },
             error => {
-              // TODO: handle error
+              // TODO: handle error?
             });
 
     // Get layers and prepare data in a format for NGX-Charts
@@ -93,24 +93,7 @@ export class AdminDashboardComponent implements OnInit {
               this.layers.push(responseLayers);
             },
             error => {
-              //this.errorGettingLayerList = true;
-              //this.layerList = [];
+              // TODO: handle error?
             });
-
-   /* // TODO: get layers
-    this.layers =  [
-      {
-        "name": "Preparedness",
-        "value": 8
-      },
-      {
-        "name": "Incidents and Warnings ",
-        "value": 5
-      },
-      {
-        "name": "Assessment and response",
-        "value": 7
-      }
-    ];*/
   }
 }
