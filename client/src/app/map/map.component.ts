@@ -160,7 +160,7 @@ export class MapComponent implements OnInit {
     */
     private setWMSLayerLegend(layer){
          layer.layerLegend = '';
-         var url = environment.apiEndpoint + '/v1/map/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&height=10&LAYER=' + layer.layerName + '&legend_options=fontName:Times%20New%20Roman;fontAntiAliasing:true;fontColor:0x000033;dpi:180&transparent=true';
+         var url = environment.apiEndpoint + '/v1/map/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&height=10&LAYER=' + layer.layerName + '&legend_options=fontName:Times%20New%20Roman;fontSize:6;fontAntiAliasing:true;fontColor:0x000033;dpi:180&transparent=true';
          this.mapService.getImage(url)
              .subscribe(
                  data => {
