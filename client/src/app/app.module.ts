@@ -14,7 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 import { SitrepComponent } from './map/sitrep.component';
-import { WeatherComponent } from './weather/weather.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { WeatherComponent } from './weather/weather.component';
     MapComponent,
     HomeComponent,
     SitrepComponent,
-    WeatherComponent
+    FaqComponent
   ],
   imports: [
       NgAggregatePipesModule,
@@ -46,8 +46,8 @@ import { WeatherComponent } from './weather/weather.component';
               canActivate: [AuthGuardService]
           },
           {
-              path: 'weather',
-              component: WeatherComponent
+              path: 'faq',
+              component: FaqComponent
           },
           {
               path: 'sitrep',

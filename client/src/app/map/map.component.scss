@@ -9,17 +9,6 @@
 .map-container {
   margin: 0;
   height: 100%;
-  border-top: 3px solid;
-}
-
-.map-container.preparedness {
-    border-color: $preparedness;
-}
-.map-container.incidents {
-    border-color: $incidents;
-}
-.map-container.assessment {
-    border-color: $assessment;
 }
 
 .switch-category {
@@ -66,6 +55,16 @@
   margin-left: 20px;
   img {
     max-width: 300px;
+  }
+}
+
+.layer-group {
+  .heading {
+    padding-bottom: 10px;
+    padding-top: 10px
+  }
+  .item {
+    padding-left: 20px
   }
 }
 
