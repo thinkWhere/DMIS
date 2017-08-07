@@ -1,24 +1,22 @@
 @import "../assets/styles/_variables.scss";
 
 .dmis-container {
-  padding-top: 50px;
+  padding-top: 52px;
   height: 100%;
 }
 
 .navbar-dmis {
-  border-bottom: none;
+  border-bottom: 2px solid;
+  border-color: $brand-secondary !important;
 }
-
-.navbar-header {
-   div.preparedness {
-      color: $preparedness;
-    }
-    div.incidents {
-      color: $incidents;
-    }
-    div.assessment {
-      color: $assessment;
-  }
+.navbar-dmis.preparedness {
+    border-color: $preparedness !important;
+}
+.navbar-dmis.incidents {
+    border-color: $incidents !important;
+}
+.navbar-dmis.assessment {
+    border-color: $assessment !important;
 }
 
 .navbar-categories {

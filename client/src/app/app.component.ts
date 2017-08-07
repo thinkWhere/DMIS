@@ -19,6 +19,7 @@ export class AppComponent {
     subscription: Subscription;
     route: string;
     languageCode: string = 'en';
+    category = '';
 
     constructor(
         private authenticationService:AuthenticationService,
@@ -37,8 +38,10 @@ export class AppComponent {
         }
         // Checks the route for displaying the categories in the header
         this.route = this.router.url;
+        this.checkCategory();
         this.router.events.subscribe((event) => {
             this.route = this.router.url;
+            this.checkCategory();
         });
 
         // Checks if the user is logged in
@@ -74,5 +77,21 @@ export class AppComponent {
             code = '/' + languageCode;
         }
         window.open('http://' + host + code + location, '_self');
+    }
+
+      /**
+     * Check the category in the URL
+     */
+    private checkCategory() {
+        this.category = '';
+        if (this.router.url === '/map/preparedness') {
+            this.category = 'preparedness';
+        }
+        if (this.router.url === '/map/incidents') {
+            this.category = 'incidents';
+        }
+        if (this.router.url === '/map/assessment') {
+            this.category = 'assessment';
+        }
     }
 }
