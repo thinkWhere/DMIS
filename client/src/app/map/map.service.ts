@@ -45,11 +45,11 @@ export class MapService {
     }
 
     /**
-     * Get the tile by adding authentication headers
+     * Get the image by adding authentication headers
      * @param url
      * @returns {any|Promise<R>|Maybe<T>}
      */
-    getTile(url){
+    getImage(url){
         let headers = new Headers();
         let token = this.authenticationService.getToken();
         headers.append('Authorization', 'Bearer ' + token);
@@ -63,4 +63,5 @@ export class MapService {
         return this.http.get(url, options)
             .map(response => (<Response>response).blob())
     }
+
 }

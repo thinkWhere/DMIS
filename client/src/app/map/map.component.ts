@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupByPipe } from 'angular-pipes/src/aggregate/group-by.pipe';
+import {DomSanitizer} from '@angular/platform-browser';
 import * as ol from 'openlayers';
 
 import { LayerService } from './layer.service';
@@ -27,7 +28,8 @@ export class MapComponent implements OnInit {
         private router: Router,
         private layerService: LayerService,
         private mapService: MapService,
-        private identifyService: IdentifyService
+        private identifyService: IdentifyService,
+        private sanitizer:DomSanitizer
     ){}
 
     ngOnInit() {
@@ -143,12 +145,34 @@ export class MapComponent implements OnInit {
     private addLayers (layers) {
         for (var i = 0; i < layers.length; i++){
             if (layers[i].layerType === 'wms'){
+                this.setWMSLayerLegend(layers[i]);
                 this.addWMSLayer(layers[i]);
             }
             if (layers[i].layerType === 'arcgisrest'){
                 this.addArcGISRESTLayer(layers[i]);
             }
         }
+    }
+
+    /**
+    * Set layer legend for a WMS layer using a GetLegendGraphic request
+    * @param layer
+    */
+    private setWMSLayerLegend(layer){
+         layer.layerLegend = '';
+         var url = environment.apiEndpoint + '/v1/map/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&height=10&LAYER=' + layer.layerName + '&legend_options=fontName:Times%20New%20Roman;fontSize:6;fontAntiAliasing:true;fontColor:0x000033;dpi:180&transparent=true';
+         this.mapService.getImage(url)
+             .subscribe(
+                 data => {
+                     // Success - returns a Blob - create an URL from it and update the layer legend
+                     var urlCreator = window.URL;
+                     var imageUrl = urlCreator.createObjectURL(data);
+                     layer.layerLegend = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+                 },
+                 error => {
+                     // TODO: potentially handle error?
+                 }
+             )
     }
 
     /**
@@ -167,7 +191,7 @@ export class MapComponent implements OnInit {
             projection: this.map.getView().getProjection(),
             tileLoadFunction: function (imageTile, src) {
                 // use a tileLoadFunction to add authentication headers to the request
-                this.mapService.getTile(src)
+                this.mapService.getImage(src)
                     .subscribe(
                         data => {
                             // Success - returns a Blob - create an URL from it and update the original

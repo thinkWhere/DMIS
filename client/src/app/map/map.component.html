@@ -40,6 +40,9 @@
                                 <div class="checkbox" (change)="toggleLayer(layer.layerName)">
                                     <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
                                 </div>
+                                <div class="layer-legend">
+                                    <img [src]="layer.layerLegend" alt="Legend ">
+                                </div>
                             </div>
                         </div>
                     </div>
