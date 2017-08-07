@@ -32,8 +32,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a routerLink="/" title="Go to the about page">About</a></li>
-                <li><a routerLink="/weather" title="Go to the weather map">Weather</a></li>
                 <li><a routerLink="/map/preparedness" title="Go to the map page">Map</a></li>
+                <li><a routerLink="/faq" title="Go to the FAQ page">FAQ</a></li>
+                <li><a href="http://ews1294.info/home" target="_blank" title="Go to the EWS website">EWS</a></li>
                 <li *ngIf="languageCode === 'km'"><a class="pointer" (click)="switchLanguage('en')">English</a></li>
                 <li *ngIf="languageCode === 'en'"><a class="pointer" (click)="switchLanguage('km')">ភាសាខ្មែរ</a></li>
                 <li *ngIf="!user">

@@ -1,0 +1,15 @@
+@import "../../assets/styles/_variables.scss";
+
+.faq-container {
+  border-top: 2px solid $brand-secondary;
+}
+
+.faq-header {
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+
+.faq-question {
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
