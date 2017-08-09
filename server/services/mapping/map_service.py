@@ -1,9 +1,9 @@
-import requests
 from urllib.parse import parse_qs
 
-
+import requests
 from flask import current_app, Response
 
+from server.services.mapping.earthnetworks_service import EarthNetworksService
 
 class MapServiceError(Exception):
     """ Custom Exception to notify callers an error occurred when handling projects """
@@ -30,7 +30,7 @@ class MapService:
         requested_layer = MapService.parse_geojson_request(query_string)
 
         if requested_layer.lower() == 'earthnetworks_lightning':
-            pass
+            EarthNetworksService.get_latest_lightning_data()
         else:
             raise MapServiceError(f'Unknown geojson layer requested: {requested_layer}')
 
