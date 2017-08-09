@@ -1,11 +1,11 @@
 <div>
-    <h1>Layers</h1>
+    <h1 i18n="layers header for admin page@@adminLayersHeader">Layers</h1>
     <table *ngIf="!errorGettingLayerList" class="table table-hover">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Group</th>
+            <th i18n="Layer title@@adminLayerTitle">Title</th>
+            <th i18n="Layer category@@adminLayerCategory">Category</th>
+            <th i18n="Layer group@@adminLayerGroup">Group</th>
             <th></th>
         </tr>
         </thead>
@@ -15,12 +15,13 @@
             <td>{{ layer.mapCategory }}</td>
             <td>{{ layer.layerGroup }}</td>
             <td class="pointer">
-                <a class="btn btn-xs btn-primary" (click)="onSelect(layer)"><i class="fa fa-info" aria-hidden="true"></i> Details</a>
+                <a class="btn btn-xs btn-primary" (click)="onSelect(layer)"><i class="fa fa-info" aria-hidden="true"></i> <span i18n="Show details layer button@@adminLayerDetailsButton">Details</span></a>
             </td>
         </tr>
         </tbody>
     </table>
     <div *ngIf="errorGettingLayerList" class="alert alert-danger">
-        <strong>Error: </strong> could not get the list of layers.
+        <strong i18n="Error message@@adminErrorMessage">Error</strong>:
+        <span i18n="Error message getting layer list@@adminErrorLayerList">could not get the list of layers.</span>
     </div>
 </div>
