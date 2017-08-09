@@ -2,23 +2,249 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="loginButton" datatype="html">
-        <source>Login</source>
-        <target/>
+      <trans-unit id="headerNameOfApplication" datatype="html">
+        <source>DMIS Cambodia</source>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Name of the application</note>
+      </trans-unit>
+      <trans-unit id="mapCategoryPreparedness" datatype="html">
+        <source>Preparedness</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <note priority="1" from="description">Map category</note>
+      </trans-unit>
+      <trans-unit id="mapCategoryIncidents" datatype="html">
+        <source>Incidents and Warnings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description">Map category</note>
+      </trans-unit>
+      <trans-unit id="mapCategoryAssessment" datatype="html">
+        <source>Assessment and Response</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <note priority="1" from="description">Map category</note>
+      </trans-unit>
+      <trans-unit id="headerAboutLink" datatype="html">
+        <source>About</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description">About link</note>
+      </trans-unit>
+      <trans-unit id="headerAboutLinkTitle" datatype="html">
+        <source>Go to the about page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description">About link title</note>
+      </trans-unit>
+      <trans-unit id="headerMapLink" datatype="html">
+        <source>Map</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <note priority="1" from="description">Map link</note>
+      </trans-unit>
+      <trans-unit id="headerMapLinkTitle" datatype="html">
+        <source>Go to the map page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <note priority="1" from="description">Map link title</note>
+      </trans-unit>
+      <trans-unit id="headerFaqLink" datatype="html">
+        <source>FAQ</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="headerFAQLinkTitle" datatype="html">
+        <source>Go to the FAQ page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link title</note>
+      </trans-unit>
+      <trans-unit id="headerEWSLink" datatype="html">
+        <source>EWS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <note priority="1" from="description">EWS link</note>
+      </trans-unit>
+      <trans-unit id="headerEWSLinkTitle" datatype="html">
+        <source>Go to the EWS website</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <note priority="1" from="description">EWS link title</note>
+      </trans-unit>
+      <trans-unit id="headerLoginButton" datatype="html">
+        <source>Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <note priority="1" from="description">Login button</note>
       </trans-unit>
+      <trans-unit id="headerWelcomeMessage" datatype="html">
+        <source>Hi</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <note priority="1" from="description">Welcome greeting for user</note>
+      </trans-unit>
+      <trans-unit id="headerAdminLink" datatype="html">
+        <source>Admin</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <note priority="1" from="description">Admin link</note>
+      </trans-unit>
+      <trans-unit id="headerLogoutLink" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <note priority="1" from="description">Logout link</note>
+      </trans-unit>
+      <trans-unit id="mapToggleCategory" datatype="html">
+        <source>Change category</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">Category toggle title</note>
+      </trans-unit>
+      <trans-unit id="mapToggleLayerGroup" datatype="html">
+        <source>Toggle layer group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <note priority="1" from="description">Toggle layer group button</note>
+      </trans-unit>
       <trans-unit id="titleApplication" datatype="html">
         <source>DMIS</source>
-        <target/>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <note priority="1" from="description">Title of the application</note>
+      </trans-unit>
+      <trans-unit id="homeDescription" datatype="html">
+        <source>This Disaster Management Information System provides a centralised repository for the systematic collection, documentation, analysis and display of relevant data related to the preparedness, detection and response to natural and man made disasters. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">Description of the application in header</note>
+      </trans-unit>
+      <trans-unit id="homeViewMap" datatype="html">
+        <source>View map</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">View map button</note>
+      </trans-unit>
+      <trans-unit id="homeDescriptionParagraph" datatype="html">
+        <source>The DMIS is a tool that helps to provide alerting and analysis functionality to members of the disaster response community in Cambodia, in order to better prepare communities and reduce the impact of disasters.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">Description of the application in paragraph</note>
+      </trans-unit>
+      <trans-unit id="homeDescriptionParagraphPartTwo" datatype="html">
+        <source>The Disaster Management Information System was developed by thinkWhere in partnership with People in Need on behalf of the World Food Programme for use by the National Committee for Disaster Management in Cambodia and other Civil Society Organisations.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Description of the application in paragraph</note>
+      </trans-unit>
+      <trans-unit id="faqHeader" datatype="html">
+        <source>Frequently Asked Questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">Header for the FAQ</note>
+      </trans-unit>
+      <trans-unit id="faqSubheader" datatype="html">
+        <source>Simple answers to your most common questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="description">Subheader for the FAQ</note>
       </trans-unit>
     </body>
   </file>
