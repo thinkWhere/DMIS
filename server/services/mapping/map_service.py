@@ -1,4 +1,6 @@
 import requests
+from urllib.parse import parse_qs
+
 
 from flask import current_app, Response
 
@@ -18,8 +20,28 @@ class MapService:
         # TODO currently only supports WMS will extend with new protocols over time
         if map_protocol.lower() == 'wms':
             return MapService.proxy_request_to_geoserver(map_protocol, query_string)
+        elif map_protocol.lower() == 'geojson':
+            return MapService.handle_geojson_request(query_string)
         else:
             raise MapServiceError(f'Unknown map protocol: {map_protocol}')
+
+    @staticmethod
+    def handle_geojson_request(query_string: str):
+        requested_layer = MapService.parse_geojson_request(query_string)
+
+        if requested_layer.lower() == 'earthnetworks_lightning':
+            pass
+        else:
+            raise MapServiceError(f'Unknown geojson layer requested: {requested_layer}')
+
+    @staticmethod
+    def parse_geojson_request(query_string: str) -> str:
+        parsed_query = parse_qs(query_string)
+
+        if 'layerName' in parsed_query:
+            return parsed_query['layerName'][0]
+        else:
+            raise MapServiceError('GeoJson request must supply layerName in query string')
 
     @staticmethod
     def proxy_request_to_geoserver(map_protocol: str, query_string: str):

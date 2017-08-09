@@ -32,6 +32,11 @@ class MapsAPI(Resource):
             type: string
             required: false
             default: GetCapabilities
+          - in: query
+            name: layerName
+            type: string
+            required: false
+            default: earthnetworks_lightning
         responses:
           200:
             description: Request successful
