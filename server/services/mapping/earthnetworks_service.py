@@ -1,6 +1,14 @@
 import boto3
+from datetime import datetime, timedelta
 from operator import itemgetter
 from flask import current_app
+
+
+class EarthNetworksError(Exception):
+    """ Custom Exception to notify callers an error occurred when handling projects """
+    def __init__(self, message):
+        if current_app:
+            current_app.logger.error(message)
 
 
 class EarthNetworksService:
@@ -15,19 +23,36 @@ class EarthNetworksService:
 
     @staticmethod
     def get_latest_lightning_data():
-        # TODO cache for 5 minutes. will require passing time rounded down to last 5 mins?
-        s3_client = EarthNetworksService.get_s3_client()
+        # TODO once realtime data flowing use current datetime not canned
+        #lightning_filename = EarthNetworksService.get_latest_daily_lighting_filename(datetime.now())
 
+        temp_date = datetime.strptime('20170808', '%Y%m%d')
+        lightning_filename = EarthNetworksService.get_latest_daily_lighting_filename(temp_date)
+        iain = lightning_filename
+
+    @staticmethod
+    def get_latest_daily_lighting_filename(file_date: datetime) -> str:
+        """ Gets the name of the supplied dates lightning data """
+        # TODO cache for 5 minutes
+        file_date_str = file_date.strftime('%Y%m%d')
+
+        s3_client = EarthNetworksService.get_s3_client()
         bucket_response = s3_client.list_objects(
             Bucket='tw-dmis',
-            Prefix='earthnetworks/pplnneed_lx_20170808'
+            Prefix=f'earthnetworks/pplnneed_lx_{file_date_str}'
         )
 
-        # Get today's data and sort it by newest first
+        if 'Contents' not in bucket_response:
+            # No contents for today try yesterday, if not tried already
+            if file_date.date() == datetime.today().date():
+                yesterday = file_date - timedelta(days=1)
+                return EarthNetworksService.get_latest_daily_lighting_file(yesterday)
+            else:
+                raise EarthNetworksError('No lightning data found')
+
+        # Get the latest record
         daily_data = bucket_response['Contents']
         daily_data.sort(key=itemgetter('LastModified'), reverse=True)
         latest_record = daily_data[0]['Key']
 
-        iain = latest_record
-        #iain = sorted(daily_data[], key=itemgetter('LastModified'), reverse=True)
-
+        return latest_record

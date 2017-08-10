@@ -5,6 +5,7 @@ from flask import current_app, Response
 
 from server.services.mapping.earthnetworks_service import EarthNetworksService
 
+
 class MapServiceError(Exception):
     """ Custom Exception to notify callers an error occurred when handling projects """
     def __init__(self, message):
