@@ -36,7 +36,7 @@ class MapsAPI(Resource):
             name: layerName
             type: string
             required: false
-            default: earthnetworks_lightning
+            default: earthnetworks_lightning_points
         responses:
           200:
             description: Request successful

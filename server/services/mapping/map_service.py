@@ -29,7 +29,7 @@ class MapService:
     def handle_geojson_request(query_string: str):
         requested_layer = MapService.parse_geojson_request(query_string)
 
-        if requested_layer.lower() == 'earthnetworks_lightning':
+        if requested_layer.lower() in ['earthnetworks_lightning_points', 'earthnetworks_lightning_heatmap']:
             EarthNetworksService.get_latest_lightning_data()
         else:
             raise MapServiceError(f'Unknown geojson layer requested: {requested_layer}')
