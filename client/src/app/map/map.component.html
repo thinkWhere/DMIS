@@ -12,30 +12,30 @@
             <!-- Tab panes -->
             <div [hidden]="!showContent" class="sidebar-content">
                 <div class="sidebar-pane active" id="home">
-                    <h1 class="sidebar-header pointer" title="Change category"
+                    <h1 class="sidebar-header pointer" title="Change category" i18n-title="Category toggle title@@mapToggleCategory"
                         [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
                         (click)="toggleCategoryPicker()">
-                        <span [hidden]="category !== 'preparedness'">Preparedness</span>
-                        <span [hidden]="category !== 'incidents'">Incidents and Warnings</span>
-                        <span [hidden]="category !== 'assessment'">Assessment and Response</span>
+                        <span [hidden]="category !== 'preparedness'" i18n="Map category@@mapCategoryPreparedness">Preparedness</span>
+                        <span [hidden]="category !== 'incidents'" i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</span>
+                        <span [hidden]="category !== 'assessment'" i18n="Map category@@mapCategoryAssessment">Assessment and Response</span>
                         <span class="sidebar-toggle">
                             <i class="fa fa-caret-down"></i>
                         </span>
                     </h1>
                     <div class="switch-category" [hidden]="!showCategoryPicker">
                         <div class="preparedness-fg" (click)="setCategory('preparedness')">
-                            <h4>Preparedness</h4>
+                            <h4 i18n="Map category@@mapCategoryPreparedness">Preparedness</h4>
                         </div>
                         <div class="incidents-fg" (click)="setCategory('incidents')">
-                            <h4>Incidents and Warnings</h4>
+                            <h4 i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</h4>
                         </div>
                         <div class="assessment-fg" (click)="setCategory('assessment')">
-                            <h4>Assessment and Response</h4>
+                            <h4 i18n="Map category@@mapCategoryAssessment">Assessment and Response</h4>
                         </div>
                     </div>
                     <div class="layer-group" [hidden]="category !== 'preparedness'">
                         <div *ngFor="let layerGroup of layers.preparednessLayers | groupBy: 'layerGroup'">
-                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group">
+                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                 <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                 <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
                                 <b>{{ layerGroup.key }}</b>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="layer-group" [hidden]="category !== 'incidents'">
                         <div *ngFor="let layerGroup of layers.incidentLayers | groupBy: 'layerGroup'">
-                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group">
+                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                 <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                 <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
                                 <b>{{ layerGroup.key }}</b>
