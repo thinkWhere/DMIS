@@ -7,13 +7,14 @@ import * as ol from 'openlayers';
 import { LayerService } from './layer.service';
 import { MapService } from './map.service';
 import { IdentifyService } from './identify.service';
+import { StyleService } from './style.service';
 import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [LayerService, MapService, IdentifyService]
+  providers: [LayerService, MapService, IdentifyService, StyleService]
 })
 export class MapComponent implements OnInit {
 
@@ -29,6 +30,7 @@ export class MapComponent implements OnInit {
         private layerService: LayerService,
         private mapService: MapService,
         private identifyService: IdentifyService,
+        private styleService: StyleService,
         private sanitizer:DomSanitizer
     ){}
 
@@ -151,6 +153,9 @@ export class MapComponent implements OnInit {
             if (layers[i].layerType === 'arcgisrest'){
                 this.addArcGISRESTLayer(layers[i]);
             }
+            if (layers[i].layerType === 'geojson'){
+                this.addGeoJSONLayer(layers[i]);
+            }
         }
     }
 
@@ -237,6 +242,83 @@ export class MapComponent implements OnInit {
             "layerName": arcRESTLayer.layerName,
             "layerSource": arcRESTLayer.layerSource,
             "layerType": arcRESTLayer.layerType
+        });
+        this.map.addLayer(layer);
+    }
+
+    /**
+     * Add a GeoJSON layer to the map
+     * Supports a normal GeoJSON layer and a Heatmap based on a GeoJSON layer
+     * @param geoJSONLayer
+     */
+    private addGeoJSONLayer(geoJSONLayer){
+        // TODO: get from API
+        var geoJSONObject = {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [104.164035, 10.5942426]
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [104.892167, 11.544873]
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [104.941406, 11.452350]
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [104.622803, 11.923035]
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [105.161133, 11.818209]
+                }
+            }
+            ]
+        };
+
+        // Treat the layer as a heatmap when it includes the word heatmap
+        var isHeatmap = geoJSONLayer.layerName.includes("heatmap");
+        var layer = null;
+        if (isHeatmap) {
+            layer = new ol.layer.Heatmap({
+                source: new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(geoJSONObject, {
+                        dataProjection: 'EPSG:4326',
+                        featureProjection: 'EPSG:3857'
+                    })
+                }),
+                weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
+            });
+        }
+        else {
+            layer = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(geoJSONObject, {
+                        dataProjection: 'EPSG:4326',
+                        featureProjection: 'EPSG:3857'
+                    })
+                }),
+                style: this.styleService.getStyle(geoJSONLayer.layerName)
+            });
+        }
+        layer.setVisible(false);
+        layer.setProperties({
+            "layerName": geoJSONLayer.layerName,
+            "layerSource": geoJSONLayer.layerSource,
+            "layerType": geoJSONLayer.layerType
         });
         this.map.addLayer(layer);
     }
