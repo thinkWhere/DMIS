@@ -1,10 +1,12 @@
+import csv
 import os
 from datetime import datetime, timedelta
 from operator import itemgetter
 
 import boto3
 from flask import current_app
-from geojson import Feature, FeatureCollection
+from geojson import Feature, FeatureCollection, Point, is_valid
+
 
 class EarthNetworksError(Exception):
     """ Custom Exception to notify callers an error occurred when handling projects """
@@ -30,19 +32,49 @@ class EarthNetworksService:
 
         temp_date = datetime.strptime('20170808', '%Y%m%d')
         file_location = EarthNetworksService.get_latest_daily_lighting_file(temp_date)
-        EarthNetworksService.convert_lightning_data_to_geojson(file_location)
+        feature_collection, last_updated = EarthNetworksService.convert_lightning_data_to_geojson(file_location)
+
+        validated_response = is_valid(feature_collection)
+
+        if validated_response['valid'] != 'yes':
+            current_app.logger.critical(f'Generated invalid geojson for file: {file_location}')
+            raise EarthNetworksError('Generated geojson is invalid')
+
+        return feature_collection, last_updated
 
     @staticmethod
     def convert_lightning_data_to_geojson(file_location: str):
         with open(file_location, 'r') as f:
             first_line = f.readline()
 
-        iain = first_line
+        if first_line.lower().startswith('no updates since'):
+            # There is no lightning data available so return empty feature collection
+            empty_point = Point()
+            feature = Feature(geometry=empty_point)
+            feature_collection = FeatureCollection([feature])
+
+            return feature_collection, first_line
+
+        lightning_data = []
+        with open(file_location, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                lightning_data.append(row)
+
+        lightning_features = []
+        for bolt in lightning_data:
+            bolt_point = Point((float(bolt['Latitude']), float(bolt['Longitude'])))
+            bolt_feature = Feature(geometry=bolt_point, properties={"Lightning Time": bolt['LightningTime']})
+            lightning_features.append(bolt_feature)
+
+        lightning_feature_collection = FeatureCollection(lightning_features)
+        return lightning_feature_collection, "Metadata TODO"
 
     @staticmethod
     def get_latest_daily_lighting_file(file_date: datetime) -> str:
         """ Gets the name of the supplied dates lightning data """
         # TODO cache for 5 minutes
+        # TODO clean up temp file and use temp dir
         file_date_str = file_date.strftime('%Y%m%d')
         bucket_name = current_app.config["EARTHNETWORKS_S3_SETTINGS"]["bucket_name"]
 
