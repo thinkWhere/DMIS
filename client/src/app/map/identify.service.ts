@@ -68,10 +68,14 @@ export class IdentifyService {
         map.on('singleclick', (evt) => {
             // The identify calls go to different sources depending on the type of layer
             // So we need to wait for all the calls to finish before displaying a popup
+            // Supported layer types are:
+            // - Pacific Disaster Centre ArcGIS REST layer (external)
+            // - DMIS WMS GetFeatureInfo
+            // - DMIS geoJSON (this is not async but include to allow them to appear in one popup)
             this.identifyAsyncCalls = {
                 pdcArcGISRest: false,
                 dmisGetFeatureInfo: false,
-                geoJSON: false //this is not async but include to allow them to appear in one popup
+                dmisGeoJSON: false
             };
             this.content.innerHTML = '';
             this.overlay.setPosition(null);
@@ -188,12 +192,13 @@ export class IdentifyService {
         var coordinate = evt.coordinate;
         var features = [];
         map.forEachFeatureAtPixel(pixel, function(feature, layer){
+            // Add the layer title so it can be displayed as a header in the identify popup
             var layerTitle = layer.getProperties().layerTitle;
             feature.setProperties({"dmisLayerTitle": layerTitle});
             features.push(feature);
 
         }, {hitTolerance: 10});
-        this.identifyAsyncCalls.geoJSON = true;
+        this.identifyAsyncCalls.dmisGeoJSON = true;
         var content = this.generatePopupContent(features);
         this.content.innerHTML += content;
         this.checkOtherCallsAndShowPopup(coordinate);
@@ -253,6 +258,12 @@ export class IdentifyService {
         if (result.length) {
             var tableContent = '';
             for (var i = 0, ii = result.length; i < ii; ++i) {
+                // If the layerTitle is set on the properties, use this. This title is the same as
+                // the title displayed in the table of contents. If it is not available, then try to
+                // use the ID returned in the results (e.g. for WMS, where GeoServer knows which layer
+                // belongs to which property
+                // TODO: match the ID returned in results with the layerTitle property on the layer to display a more
+                // user friendly layer title for WMS results
                 var layerTitle = '';
                 if (result[i].getProperties().dmisLayerTitle){
                     layerTitle = result[i].getProperties().dmisLayerTitle;
