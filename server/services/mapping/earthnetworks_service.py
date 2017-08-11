@@ -43,34 +43,6 @@ class EarthNetworksService:
         return dumps(feature_collection), last_updated
 
     @staticmethod
-    def convert_lightning_data_to_geojson(file_location: str):
-        with open(file_location, 'r') as f:
-            first_line = f.readline()
-
-        if first_line.lower().startswith('no updates since'):
-            # There is no lightning data available so return empty feature collection
-            empty_point = Point()
-            feature = Feature(geometry=empty_point)
-            feature_collection = FeatureCollection([feature])
-
-            return feature_collection, first_line
-
-        lightning_data = []
-        with open(file_location, 'r') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                lightning_data.append(row)
-
-        lightning_features = []
-        for bolt in lightning_data:
-            bolt_point = Point((float(bolt['Longitude']), float(bolt['Latitude'])))
-            bolt_feature = Feature(geometry=bolt_point, properties={"lightningTime": bolt['LightningTime']})
-            lightning_features.append(bolt_feature)
-
-        lightning_feature_collection = FeatureCollection(lightning_features)
-        return lightning_feature_collection, "Metadata TODO"
-
-    @staticmethod
     def get_latest_daily_lighting_file(file_date: datetime) -> str:
         """ Gets the name of the supplied dates lightning data """
         # TODO cache for 5 minutes
@@ -99,8 +71,39 @@ class EarthNetworksService:
 
         current_app.logger.debug(f'Latest lightning file is: {latest_record}')
 
-        temp_file = os.path.join(os.getcwd(), 'temp', 'iain-test.csv')
-
+        temp_file = EarthNetworksService.get_ligthning_tempfile_location()
         s3_client.download_file(bucket_name, latest_record, temp_file)
 
         return temp_file
+
+    @staticmethod
+    def get_weather_tempfile_location(lightning_filename: str) - > str:
+        temp_file = os.path.join(os.getcwd(), 'weather', latest_record)
+
+
+    @staticmethod
+    def convert_lightning_data_to_geojson(file_location: str):
+        with open(file_location, 'r') as f:
+            first_line = f.readline()
+
+        if first_line.lower().startswith('no updates since'):
+            # There is no lightning data available so return empty feature collection
+            empty_point = Point()
+            feature = Feature(geometry=empty_point)
+            feature_collection = FeatureCollection([feature])
+            return feature_collection, first_line
+
+        lightning_data = []
+        with open(file_location, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                lightning_data.append(row)
+
+        lightning_features = []
+        for bolt in lightning_data:
+            bolt_point = Point((float(bolt['Longitude']), float(bolt['Latitude'])))
+            bolt_feature = Feature(geometry=bolt_point, properties={"lightningTime": bolt['LightningTime']})
+            lightning_features.append(bolt_feature)
+
+        lightning_feature_collection = FeatureCollection(lightning_features)
+        return lightning_feature_collection, "Metadata TODO"
