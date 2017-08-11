@@ -26,6 +26,10 @@
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">27</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
         <note priority="1" from="description">Map category</note>
       </trans-unit>
       <trans-unit id="mapCategoryIncidents" datatype="html" approved="yes">
@@ -45,6 +49,10 @@
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
         <note priority="1" from="description">Map category</note>
       </trans-unit>
       <trans-unit id="mapCategoryAssessment" datatype="html" approved="yes">
@@ -63,6 +71,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <note priority="1" from="description">Map category</note>
       </trans-unit>
@@ -122,7 +134,7 @@
         </context-group>
         <note priority="1" from="description">EWS link title</note>
       </trans-unit>
-      <trans-unit id="headerLoginButton" datatype="html" approved="yes">
+      <trans-unit id="login" datatype="html" approved="yes">
         <source>Login</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">48</context>
@@ -131,7 +143,15 @@
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">Login button</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">Login</note>
       </trans-unit>
       <trans-unit id="headerWelcomeMessage" datatype="html" approved="yes">
         <source>Hi</source> <target state="translated">TODO</target><context-group purpose="location">
@@ -153,6 +173,76 @@
           <context context-type="linenumber">56</context>
         </context-group>
         <note priority="1" from="description">Logout link</note>
+      </trans-unit>
+      <trans-unit id="username" datatype="html" approved="yes">
+        <source>Username</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">Username</note>
+      </trans-unit>
+      <trans-unit id="loginUsernameRequired" datatype="html" approved="yes">
+        <source>Your username is required</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Username is required message</note>
+      </trans-unit>
+      <trans-unit id="password" datatype="html" approved="yes">
+        <source>Password</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">Password</note>
+      </trans-unit>
+      <trans-unit id="loginPasswordRequired" datatype="html" approved="yes">
+        <source>Password is required</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Password is required message</note>
+      </trans-unit>
+      <trans-unit id="error" datatype="html" approved="yes">
+        <source>Error</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <note priority="1" from="description">Error</note>
+      </trans-unit>
+      <trans-unit id="35161b0e4414f30d97c44608f42ef0703e043217" datatype="html" approved="yes">
+        <source>Username or password is incorrect.</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">Username or password incorrect message@loginUsernamePasswordIncorrect</note>
       </trans-unit>
       <trans-unit id="mapToggleCategory" datatype="html" approved="yes">
         <source>Change category</source> <target state="translated">TODO</target><context-group purpose="location">
@@ -311,14 +401,7 @@
         </context-group>
         <note priority="1" from="description">layers header for admin page</note>
       </trans-unit>
-      <trans-unit id="adminUsernameHeader" datatype="html" approved="yes">
-        <source>Username</source> <target state="translated">TODO</target><context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">Username header</note>
-      </trans-unit>
-      <trans-unit id="adminRoleHeader" datatype="html" approved="yes">
+      <trans-unit id="role" datatype="html" approved="yes">
         <source>Role</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">8</context>
@@ -327,7 +410,7 @@
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <note priority="1" from="description">Role header</note>
+        <note priority="1" from="description">Role</note>
       </trans-unit>
       <trans-unit id="adminOptionRoleAdmin" datatype="html" approved="yes">
         <source>Admin</source> <target state="translated">TODO</target><context-group purpose="location">
@@ -388,31 +471,8 @@
         </context-group>
         <note priority="1" from="description">Delete button</note>
       </trans-unit>
-      <trans-unit id="adminErrorMessage" datatype="html" approved="yes">
-        <source>Error</source> <target state="translated">TODO</target><context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-        <note priority="1" from="description">Error message</note>
-      </trans-unit>
       <trans-unit id="adminErrorDeleteUser" datatype="html" approved="yes">
-        <source>could not delete the user.</source> <target state="translated">TODO</target><context-group purpose="location">
+        <source>Could not delete the user.</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">43</context>
         </context-group>
@@ -449,13 +509,6 @@
           <context context-type="linenumber">60</context>
         </context-group>
         <note priority="1" from="description">Confirm button</note>
-      </trans-unit>
-      <trans-unit id="adminUsername" datatype="html" approved="yes">
-        <source>Username</source> <target state="translated">TODO</target><context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-        <note priority="1" from="description">Username</note>
       </trans-unit>
       <trans-unit id="adminUsernameRequired" datatype="html" approved="yes">
         <source>Username is required</source> <target state="translated">TODO</target><context-group purpose="location">
@@ -499,29 +552,29 @@
         </context-group>
         <note priority="1" from="description">Role required</note>
       </trans-unit>
-      <trans-unit id="adminSuccessMessage" datatype="html" approved="yes">
+      <trans-unit id="success" datatype="html" approved="yes">
         <source>Success</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
-        <note priority="1" from="description">Success message</note>
+        <note priority="1" from="description">Success</note>
       </trans-unit>
       <trans-unit id="adminSuccessAddUser" datatype="html" approved="yes">
-        <source>successfully added a user.</source> <target state="translated">TODO</target><context-group purpose="location">
+        <source>Successfully added a user.</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
         <note priority="1" from="description">Success add user</note>
       </trans-unit>
       <trans-unit id="adminFailedAddUser" datatype="html" approved="yes">
-        <source>failed to add a user. Does this username already exist?</source> <target state="translated">TODO</target><context-group purpose="location">
+        <source>Failed to add a user. Does this username already exist?</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">54</context>
         </context-group>
         <note priority="1" from="description">Failed to add user</note>
       </trans-unit>
       <trans-unit id="adminInvalidUsername" datatype="html" approved="yes">
-        <source>the username is invalid. Please make sure you don't have any whitespaces in your username.</source> <target state="translated">TODO</target><context-group purpose="location">
+        <source>The username is invalid. Please make sure you don't have any whitespaces in your username.</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">57</context>
         </context-group>
@@ -563,14 +616,14 @@
       <trans-unit id="adminLayerDetailsButton" datatype="html" approved="yes">
         <source>Details</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <note priority="1" from="description">Show details layer button</note>
       </trans-unit>
       <trans-unit id="adminErrorLayerList" datatype="html" approved="yes">
-        <source>could not get the list of layers.</source> <target state="translated">TODO</target><context-group purpose="location">
+        <source>Could not get the list of layers.</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <note priority="1" from="description">Error message getting layer list</note>
       </trans-unit>
@@ -596,7 +649,7 @@
         <note priority="1" from="description">Layer copyright</note>
       </trans-unit>
       <trans-unit id="adminErrorEditLayer" datatype="html" approved="yes">
-        <source>could not get the layer details.</source> <target state="translated">TODO</target><context-group purpose="location">
+        <source>Could not get the layer details.</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
