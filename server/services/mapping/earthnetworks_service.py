@@ -5,7 +5,7 @@ from operator import itemgetter
 
 import boto3
 from flask import current_app
-from geojson import Feature, FeatureCollection, Point, is_valid
+from geojson import Feature, FeatureCollection, Point, is_valid, dumps
 
 
 class EarthNetworksError(Exception):
@@ -40,7 +40,7 @@ class EarthNetworksService:
             current_app.logger.critical(f'Generated invalid geojson for file: {file_location}')
             raise EarthNetworksError('Generated geojson is invalid')
 
-        return feature_collection, last_updated
+        return dumps(feature_collection), last_updated
 
     @staticmethod
     def convert_lightning_data_to_geojson(file_location: str):
@@ -63,8 +63,8 @@ class EarthNetworksService:
 
         lightning_features = []
         for bolt in lightning_data:
-            bolt_point = Point((float(bolt['Latitude']), float(bolt['Longitude'])))
-            bolt_feature = Feature(geometry=bolt_point, properties={"Lightning Time": bolt['LightningTime']})
+            bolt_point = Point((float(bolt['Longitude']), float(bolt['Latitude'])))
+            bolt_feature = Feature(geometry=bolt_point, properties={"lightningTime": bolt['LightningTime']})
             lightning_features.append(bolt_feature)
 
         lightning_feature_collection = FeatureCollection(lightning_features)
@@ -99,8 +99,8 @@ class EarthNetworksService:
 
         current_app.logger.debug(f'Latest lightning file is: {latest_record}')
 
-        temp_file = os.path.join(os.getcwd(), 'iain-test.csv')
+        temp_file = os.path.join(os.getcwd(), 'temp', 'iain-test.csv')
 
-        latest_data = s3_client.download_file(bucket_name, latest_record, temp_file)
+        s3_client.download_file(bucket_name, latest_record, temp_file)
 
         return temp_file

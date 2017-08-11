@@ -2,11 +2,19 @@ from urllib.parse import parse_qs
 
 import requests
 from flask import current_app, Response
+from werkzeug.datastructures import Headers
 
-from server.services.mapping.earthnetworks_service import EarthNetworksService
+from server.services.mapping.earthnetworks_service import EarthNetworksService, EarthNetworksError
 
 
-class MapServiceError(Exception):
+class MapServiceClientError(Exception):
+    """ Custom Exception to notify callers an error occurred when handling projects """
+    def __init__(self, message):
+        if current_app:
+            current_app.logger.error(message)
+
+
+class MapServiceServerError(Exception):
     """ Custom Exception to notify callers an error occurred when handling projects """
     def __init__(self, message):
         if current_app:
@@ -24,28 +32,41 @@ class MapService:
         elif map_protocol.lower() == 'geojson':
             return MapService.handle_geojson_request(query_string)
         else:
-            raise MapServiceError(f'Unknown map protocol: {map_protocol}')
+            raise MapServiceClientError(f'Unknown map protocol: {map_protocol}')
 
     @staticmethod
-    def handle_geojson_request(query_string: str):
+    def handle_geojson_request(query_string: str) -> Response:
+        """ Validate that request if for a known layer, then generate a valid Flask Response """
         requested_layer = MapService.parse_geojson_request(query_string)
 
         if requested_layer.lower() in ['earthnetworks_lightning_points', 'earthnetworks_lightning_heatmap']:
-            EarthNetworksService.get_latest_lightning_data()
+
+            try:
+                feature_collection_json, last_updated = EarthNetworksService.get_latest_lightning_data()
+            except EarthNetworksError:
+                raise MapServiceServerError('Error occurred attempting to get EarthNetworks Lightning Data')
+
+            response_headers = Headers()
+            response_headers.add('Last-Modified', last_updated)
+
+            flask_response = Response(feature_collection_json, status=200, mimetype='application/json',
+                                      headers=response_headers)
+            return flask_response
         else:
-            raise MapServiceError(f'Unknown geojson layer requested: {requested_layer}')
+            raise MapServiceClientError(f'Unknown geojson layer requested: {requested_layer}')
 
     @staticmethod
     def parse_geojson_request(query_string: str) -> str:
+        """ Helper method to ensure geoJson mapping request is valid """
         parsed_query = parse_qs(query_string)
 
         if 'layerName' in parsed_query:
             return parsed_query['layerName'][0]
         else:
-            raise MapServiceError('GeoJson request must supply layerName in query string')
+            raise MapServiceClientError('GeoJson request must supply layerName in query string')
 
     @staticmethod
-    def proxy_request_to_geoserver(map_protocol: str, query_string: str):
+    def proxy_request_to_geoserver(map_protocol: str, query_string: str) -> Response:
         """ Helper method to proxy map requests to Geoserver"""
         geoserver_url = current_app.config['GEOSERVER_URL']
         geoserver_request_url = f'{geoserver_url}/dmis/{map_protocol}?{query_string}'
