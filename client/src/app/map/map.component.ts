@@ -4588,6 +4588,7 @@ export class MapComponent implements OnInit {
                         featureProjection: 'EPSG:3857'
                     })
                 }),
+                blur: 30,
                 weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
             });
         }
