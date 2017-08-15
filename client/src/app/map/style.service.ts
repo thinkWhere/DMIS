@@ -9,7 +9,6 @@ export class StyleService {
 
     /**
      * Style function: returns a style based on the layer name
-     * TODO: move to style service when this gets bigger?
      * @param layerName
      * @returns {ol.style.Style}
      */
@@ -18,7 +17,7 @@ export class StyleService {
         // Default style
          var style = new ol.style.Style({
              image: new ol.style.Circle({
-                 radius: 6,
+                 radius: 4,
                  stroke: new ol.style.Stroke({
                      color: 'red',
                      width: 2
@@ -26,6 +25,13 @@ export class StyleService {
                  fill: new ol.style.Fill({
                      color: 'white'
                  })
+             }),
+             stroke: new ol.style.Stroke({
+                 color: 'red',
+                 width: 1
+             }),
+             fill: new ol.style.Fill({
+                 color: 'rgba(255, 255, 255, 0.4)'
              })
         });
         if (layerName === 'earthnetworks_lightning_points'){

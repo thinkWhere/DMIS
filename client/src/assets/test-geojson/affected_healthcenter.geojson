@@ -1,0 +1,87 @@
+{
+	"type": "FeatureCollection",
+	"crs": {
+		"type": "name",
+		"properties": {
+			"name": "EPSG:3148"
+		}
+	},
+	"features": [{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [525235,
+			1442448]
+		},
+		"properties": {
+			"FID": 0,
+			"PCODE": 6,
+			"PNAME": "Kampong Thom",
+			"DCODE": 606,
+			"DNAME": "Sandan",
+			"CCODE": 60601,
+			"CNAME": "Chheu Teal",
+			"VCODE": 6060103,
+			"VNAME": "Kampong Ta Baen",
+			"ODCODE": "0602",
+			"ODNAME": "Kampong Thom",
+			"FACILITCOD": "060218",
+			"FACILITNAM": "Chheu Teal",
+			"COVERNAME": "Chheu Teal, Ngan communce",
+			"Coor_X": 525235,
+			"Coor_Y": 1442448
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [521365,
+			1434730]
+		},
+		"properties": {
+			"FID": 1,
+			"PCODE": 6,
+			"PNAME": "Kampong Thom",
+			"DCODE": 606,
+			"DNAME": "Sandan",
+			"CCODE": 60605,
+			"CNAME": "Mean Chey",
+			"VCODE": 6060503,
+			"VNAME": "Roneam",
+			"ODCODE": "0602",
+			"ODNAME": "Kampong Thom",
+			"FACILITCOD": "060219",
+			"FACILITNAM": "Mean Chey",
+			"COVERNAME": "Mean Chey, Kleang, Koul, Tumring communce",
+			"Coor_X": 521365,
+			"Coor_Y": 1434730
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [526862,
+			1448321]
+		},
+		"properties": {
+			"FID": 2,
+			"PCODE": 6,
+			"PNAME": "Kampong Thom",
+			"DCODE": 606,
+			"DNAME": "Sandan",
+			"CCODE": 60607,
+			"CNAME": "Sandan",
+			"VCODE": 6060710,
+			"VNAME": "Sandan",
+			"ODCODE": "0602",
+			"ODNAME": "Kampong Thom",
+			"FACILITCOD": "060217",
+			"FACILITNAM": "Sandan",
+			"COVERNAME": "Sandan, Mean Rith, Socheat, Dong Kambit, communce",
+			"Coor_X": 526862,
+			"Coor_Y": 1448321
+		}
+	}]
+}

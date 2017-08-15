@@ -65,7 +65,18 @@
                         </div>
                     </div>
                     <div [hidden]="category !== 'assessment'">
-                        TODO
+                         <div *ngFor="let layerGroup of layers.assessmentLayers | groupBy: 'layerGroup'">
+                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
+                                <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
+                                <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
+                                <b>{{ layerGroup.key }}</b>
+                            </h4>
+                            <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
+                                <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                    <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
