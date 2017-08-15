@@ -15,7 +15,7 @@ class TestDataIngestService(unittest.TestCase):
         actual_converted_geojson = DataIngestService._process_arcgis_json(arcgis_data)
 
         # Assert
-        self.assertDictEqual(sample_converted_geojson, actual_converted_geojson)
+        self.assertDictEqual(sample_converted_geojson, actual_converted_geojson, "GeoJSON data different from expected")
 
     @staticmethod
     def _get_json_file(json_filename):

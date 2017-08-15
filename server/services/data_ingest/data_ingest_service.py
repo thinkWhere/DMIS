@@ -1,6 +1,6 @@
 from flask import current_app
 from server.models.postgis.dmis_data import DMISData
-from geojson import Feature, FeatureCollection, Point, dumps
+from geojson import Feature, FeatureCollection
 from server.services.data_ingest.arcgis2geojson import arcgis2geojson
 
 
@@ -59,9 +59,9 @@ class DataIngestService:
     @staticmethod
     def _get_geojson_crs(epsg_code):
         """
-        Gets the GeoJSON crs identifier for an EPSG code
-        :param epsg_code:
-        :return:
+        Gets the GeoJSON CRS identifier for an EPSG code
+        :param epsg_code: string EPSG code
+        :return: dictionary for CRS member
         """
         return {
             "type": "name",
