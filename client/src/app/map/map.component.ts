@@ -268,7 +268,6 @@ export class MapComponent implements OnInit {
                 this.createGeoJSONLayer(geoJSONLayer, data);
             },
             error => {
-                console.log(error);
                 // TODO
             }
         );
