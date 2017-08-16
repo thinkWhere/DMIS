@@ -288,7 +288,8 @@ export class MapComponent implements OnInit {
                     features: (new ol.format.GeoJSON()).readFeatures(geoJSON, {
                         dataProjection: 'EPSG:4326',
                         featureProjection: 'EPSG:3857'
-                    })
+                    }),
+                    attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 }),
                 blur: 30,
                 weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
@@ -306,7 +307,8 @@ export class MapComponent implements OnInit {
                     features: (new ol.format.GeoJSON()).readFeatures(geoJSON, {
                         dataProjection: epsg,
                         featureProjection: 'EPSG:3857'
-                    })
+                    }),
+                    attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 }),
                 style: this.styleService.getStyle(layerData.layerName)
             });
