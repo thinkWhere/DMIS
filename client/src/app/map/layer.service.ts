@@ -47,6 +47,50 @@ export class LayerService {
     }
     return identifiableLayers;
   }
+
+  /**
+   * Get a GeoJSON layer
+   * TODO: call the API instead of local sample files
+   * @param layerName
+   * @returns {Observable<R|T>}
+   */
+  getGeoJSON(layerName){
+    var sourceGeoJSON = '';
+    switch(layerName){
+      case 'earthnetworks_lightning_points':
+        sourceGeoJSON = 'earthnetworks_lightning';
+        break;
+      case 'earthnetworks_lightning_heatmap':
+        sourceGeoJSON = 'earthnetworks_lightning';
+        break;
+      case 'ktm_pcdm_affected_healthcenter':
+        sourceGeoJSON = 'affected_healthcenter';
+        break;
+      case 'ktm_pcdm_affected_road':
+        sourceGeoJSON = 'affected_road';
+        break;
+      case 'ktm_pcdm_affected_school':
+        sourceGeoJSON = 'affected_school';
+        break;
+      case 'ktm_pcdm_affected_wells':
+        sourceGeoJSON = 'affected_wells';
+        break;
+      case 'ktm_pcdm_at_risk_commune':
+        sourceGeoJSON = 'at_risk_commune';
+        break;
+      case 'ktm_pcdm_at_risk_village':
+        sourceGeoJSON = 'at_risk_village';
+        break;
+      case 'ktm_pcdm_data_daily_actual':
+        sourceGeoJSON = 'data_daily_actual';
+        break;
+      default:
+        sourceGeoJSON = ''
+    }
+    return this.http.get('assets/test-geojson/' + sourceGeoJSON + '.geojson')
+        .map(response => response.json())
+        .catch(this.handleError);
+  }
   
   /**
    * Handle the error
