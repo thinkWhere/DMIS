@@ -61,7 +61,8 @@
 .layer-group {
   .heading {
     padding-bottom: 10px;
-    padding-top: 10px
+    padding-top: 10px;
+    font-size: 16px;
   }
   .item {
     padding-left: 20px
@@ -278,6 +279,7 @@ $move-map-in-xs: true !default;
   .sidebar.collapsed > & {
     overflow-y: hidden;
   }
+
 }
 
 .sidebar-pane {
@@ -456,6 +458,7 @@ $move-map-in-xs: true !default;
 }
 
 .legend-category {
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
