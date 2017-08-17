@@ -3,77 +3,106 @@
         <div id="sidebar" class="sidebar sidebar-left" [ngClass]="{'collapsed': !showContent}">
             <!-- Nav tabs -->
             <div class="sidebar-tabs"
-                 [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
-                 (click)="toggleContent()">
+                 [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
                 <ul role="tablist">
-                    <li class="active"><a role="tab"><i class="fa fa-bars"></i></a></li>
+                    <li (click)="toggleContent()">
+                        <a role="tab"><i class="fa fa-bars"></i></a>
+                    </li>
+                    <li (click)="setContent('map')">
+                        <a role="tab" [ngClass]="{'active': contentTab === 'map'}"
+                         [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                            <i class="fa fa-map-o"></i>
+                        </a>
+                    </li>
+                    <li (click)="setContent('measure')">
+                        <a role="tab"  [ngClass]="{'active': contentTab === 'measure'}"
+                           [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- Tab panes -->
             <div [hidden]="!showContent" class="sidebar-content">
-                <div class="sidebar-pane active" id="home">
-                    <h1 class="sidebar-header pointer" title="Change category" i18n-title="Category toggle title@@mapToggleCategory"
-                        [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}"
-                        (click)="toggleCategoryPicker()">
-                        <span [hidden]="category !== 'preparedness'" i18n="Map category@@mapCategoryPreparedness">Preparedness</span>
-                        <span [hidden]="category !== 'incidents'" i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</span>
-                        <span [hidden]="category !== 'assessment'" i18n="Map category@@mapCategoryAssessment">Assessment and Response</span>
-                        <span class="sidebar-toggle">
-                            <i class="fa fa-caret-down"></i>
-                        </span>
-                    </h1>
-                    <div class="switch-category" [hidden]="!showCategoryPicker">
-                        <div class="preparedness-fg" (click)="setCategory('preparedness')">
-                            <h4 i18n="Map category@@mapCategoryPreparedness">Preparedness</h4>
-                        </div>
-                        <div class="incidents-fg" (click)="setCategory('incidents')">
-                            <h4 i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</h4>
-                        </div>
-                        <div class="assessment-fg" (click)="setCategory('assessment')">
-                            <h4 i18n="Map category@@mapCategoryAssessment">Assessment and Response</h4>
+                <div [hidden]="contentTab !== 'measure'">
+                    <div class="sidebar-pane active" id="measure">
+                        <h1 class="sidebar-header pointer"
+                             [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                             Measure
+                        </h1>
+                        <div>
+                            TODO
                         </div>
                     </div>
-                    <div class="layer-group" [hidden]="category !== 'preparedness'">
-                        <div *ngFor="let layerGroup of layers.preparednessLayers | groupBy: 'layerGroup'">
-                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
-                                <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
-                                <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
-                                <b>{{ layerGroup.key }}</b>
-                            </h4>
-                            <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
-                                <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                    <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
-                                </div>
-                                <div class="layer-legend">
-                                    <img [src]="layer.layerLegend" alt="Legend ">
+                </div>
+                <div [hidden]="contentTab !== 'map'">
+                    <div class="sidebar-pane active" id="home">
+                        <h1 class="sidebar-header pointer"
+                            [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                            Legend
+                        </h1>
+                        <h3 class="pointer legend-category" title="Change category" i18n-title="Category toggle title@@mapToggleCategory"
+                            (click)="toggleCategoryPicker()">
+                            <span [hidden]="category !== 'preparedness'" i18n="Map category@@mapCategoryPreparedness">Preparedness</span>
+                            <span [hidden]="category !== 'incidents'" i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</span>
+                            <span [hidden]="category !== 'assessment'" i18n="Map category@@mapCategoryAssessment">Assessment and Response</span>
+                            <span class="pull-right">
+                                <i class="fa fa-caret-down"></i>
+                            </span>
+                        </h3>
+                        <div class="switch-category" [hidden]="!showCategoryPicker">
+                            <div class="preparedness-fg" (click)="setCategory('preparedness')">
+                                <h4 i18n="Map category@@mapCategoryPreparedness">Preparedness</h4>
+                            </div>
+                            <div class="incidents-fg" (click)="setCategory('incidents')">
+                                <h4 i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</h4>
+                            </div>
+                            <div class="assessment-fg" (click)="setCategory('assessment')">
+                                <h4 i18n="Map category@@mapCategoryAssessment">Assessment and Response</h4>
+                            </div>
+                        </div>
+                        <div class="layer-group" [hidden]="category !== 'preparedness'">
+                            <div *ngFor="let layerGroup of layers.preparednessLayers | groupBy: 'layerGroup'">
+                                <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
+                                    <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
+                                    <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
+                                    <b>{{ layerGroup.key }}</b>
+                                </h4>
+                                <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
+                                    <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                        <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                    </div>
+                                    <div class="layer-legend">
+                                        <img [src]="layer.layerLegend" alt="Legend ">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="layer-group" [hidden]="category !== 'incidents'">
-                        <div *ngFor="let layerGroup of layers.incidentLayers | groupBy: 'layerGroup'">
-                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
-                                <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
-                                <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
-                                <b>{{ layerGroup.key }}</b>
-                            </h4>
-                            <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
-                                <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                    <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                        <div class="layer-group" [hidden]="category !== 'incidents'">
+                            <div *ngFor="let layerGroup of layers.incidentLayers | groupBy: 'layerGroup'">
+                                <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
+                                    <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
+                                    <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
+                                    <b>{{ layerGroup.key }}</b>
+                                </h4>
+                                <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
+                                    <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                        <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div [hidden]="category !== 'assessment'">
-                         <div *ngFor="let layerGroup of layers.assessmentLayers | groupBy: 'layerGroup'">
-                            <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
-                                <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
-                                <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
-                                <b>{{ layerGroup.key }}</b>
-                            </h4>
-                            <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
-                                <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                    <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                        <div [hidden]="category !== 'assessment'">
+                             <div *ngFor="let layerGroup of layers.assessmentLayers | groupBy: 'layerGroup'">
+                                <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
+                                    <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
+                                    <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
+                                    <b>{{ layerGroup.key }}</b>
+                                </h4>
+                                <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
+                                    <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                        <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

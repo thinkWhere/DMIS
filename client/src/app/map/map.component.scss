@@ -171,6 +171,25 @@ $move-map-in-xs: true !default;
   bottom: 0;
   height: 100%;
 
+  &.preparedness-bg {
+    background-color: rgba($preparedness, 0.7);
+    .active {
+      background-color: rgba($preparedness, 1);
+    }
+  }
+  &.incidents-bg {
+    background-color: rgba($incidents, 0.7);
+    .active {
+      background-color: rgba($incidents, 1);
+    }
+  }
+  &.assessment-bg {
+    background-color: rgba($assessment, 0.7);
+    .active {
+      background-color: rgba($assessment, 1);
+    }
+  }
+
   .sidebar-left & {
     left: 0;
   }
@@ -178,8 +197,6 @@ $move-map-in-xs: true !default;
   .sidebar-right & {
     right: 0;
   }
-
-  opacity: 0.7;
 
   &, & > ul {
     position: absolute;
@@ -436,6 +453,10 @@ $move-map-in-xs: true !default;
       }
     }
   }
+}
+
+.legend-category {
+  margin-bottom: 20px;
 }
 
 /**************************** Popup **************************************/
