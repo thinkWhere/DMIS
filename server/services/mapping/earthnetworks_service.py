@@ -1,5 +1,7 @@
 import csv
 import os
+import time
+from enum import Enum
 from datetime import datetime, timedelta
 from operator import itemgetter
 
@@ -13,6 +15,12 @@ class EarthNetworksError(Exception):
     def __init__(self, message):
         if current_app:
             current_app.logger.error(message)
+
+
+class WeatherTypes(Enum):
+    """ Describes the role a user can be assigned, app doesn't support multiple roles """
+    LIGHTNING = 0
+    OBSERVATION = 1
 
 
 class EarthNetworksService:
@@ -71,15 +79,28 @@ class EarthNetworksService:
 
         current_app.logger.debug(f'Latest lightning file is: {latest_record}')
 
-        temp_file = EarthNetworksService.get_ligthning_tempfile_location()
-        s3_client.download_file(bucket_name, latest_record, temp_file)
+        local_lightning_file = EarthNetworksService.get_local_file_location(latest_record)
+        s3_client.download_file(bucket_name, latest_record, local_lightning_file)
 
-        return temp_file
+        return local_lightning_file
 
     @staticmethod
-    def get_weather_tempfile_location(lightning_filename: str) - > str:
-        temp_file = os.path.join(os.getcwd(), 'weather', latest_record)
+    def get_local_file_location(filename: str) -> str:
+        """ Return location on server where weather file can be safely downloaded"""
+        weather_dir = os.path.abspath(os.path.join(__file__, '../../../../weather'))
+        EarthNetworksService.clean_up_weather_dir(weather_dir, 7)
+        file_path = os.path.join(weather_dir, filename)
+        return file_path
 
+    @staticmethod
+    def clean_up_weather_dir(weather_dir: str, days_old: int):
+        """ Clean up any files older than 7 days to prevent local weather temp directory filling up """
+        clean_date = time.time() - (days_old * 86400)
+        for file in os.listdir(weather_dir):
+            if file.startswith('test') or file.startswith('README'):
+                continue  # Ignore test and doc files
+            if os.stat(os.path.join(weather_dir, file)).st_mtime < clean_date:
+                os.remove(os.path.join(weather_dir, file))
 
     @staticmethod
     def convert_lightning_data_to_geojson(file_location: str):
