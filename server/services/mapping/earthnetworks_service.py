@@ -52,8 +52,9 @@ class EarthNetworksService:
         # TODO clean up temp file and use temp dir
         file_date_str = file_date.strftime('%Y%m%d')
         bucket_name = current_app.config["EARTHNETWORKS_S3_SETTINGS"]["bucket_name"]
-
         s3_client = EarthNetworksService.get_s3_client()
+
+        # Get all files that match the prefix, eg all files for the specified
         bucket_response = s3_client.list_objects(
             Bucket=bucket_name,
             Prefix=f'earthnetworks/pplnneed_lx_{file_date_str}'
@@ -76,7 +77,6 @@ class EarthNetworksService:
         current_app.logger.debug(f'Latest lightning file is: {s3_latest_record}')
 
         local_lightning_file = EarthNetworksService.get_local_file_location(local_file_name)
-
         s3_client.download_file(bucket_name, s3_latest_record, local_lightning_file)
 
         return local_lightning_file
@@ -86,6 +86,8 @@ class EarthNetworksService:
         """ Return location on server where weather file can be safely downloaded"""
         base_dir = Path(__file__).parents[3]
         weather_dir = os.path.join(base_dir, 'weather')
+        current_app.logger.debug(f'Weather dir is {weather_dir}')
+
         EarthNetworksService.clean_up_weather_dir(weather_dir, 7)
         file_path = os.path.join(weather_dir, filename)
         return file_path

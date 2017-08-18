@@ -1,7 +1,8 @@
+import os
 import unittest
 
+from pathlib import Path
 from datetime import datetime
-import os
 
 from server.services.mapping.earthnetworks_service import EarthNetworksService
 from server import bootstrap_app
@@ -32,7 +33,8 @@ class TestEarthNetworksService(unittest.TestCase):
 
     def test_clean_up_removes_files(self):
         # Arrange
-        weather_dir = os.path.abspath(os.path.join(__file__, "../../../../../../weather"))
+        base_dir = Path(__file__).parents[5]
+        weather_dir = os.path.join(base_dir, 'weather')
         test_file_name = 'a_test.csv'
         test_file_location = os.path.join(weather_dir, test_file_name)
 
@@ -82,4 +84,7 @@ class TestEarthNetworksService(unittest.TestCase):
         # Clean up
         weather_dir = os.path.abspath(os.path.join(__file__, "../../../../../../weather"))
         EarthNetworksService.clean_up_weather_dir(weather_dir, 0)
+
+    def test_lightning_file_can_be_converted_to_geojson(self):
+        pass
 
