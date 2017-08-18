@@ -1,7 +1,7 @@
 import csv
 import os
 import time
-from enum import Enum
+from pathlib import Path
 from datetime import datetime, timedelta
 from operator import itemgetter
 
@@ -17,16 +17,11 @@ class EarthNetworksError(Exception):
             current_app.logger.error(message)
 
 
-class WeatherTypes(Enum):
-    """ Describes the role a user can be assigned, app doesn't support multiple roles """
-    LIGHTNING = 0
-    OBSERVATION = 1
-
-
 class EarthNetworksService:
 
     @staticmethod
     def get_s3_client():
+        """ Helper method creates authenticated S3 client to connect with Earthnetworks S3 bucket"""
         s3_client = boto3.client('s3',
                                  aws_access_key_id=current_app.config["EARTHNETWORKS_S3_SETTINGS"]["aws_access_key_id"],
                                  aws_secret_access_key=current_app.config["EARTHNETWORKS_S3_SETTINGS"]["aws_secret_access_key"])
@@ -75,19 +70,22 @@ class EarthNetworksService:
         # Get the latest record
         daily_data = bucket_response['Contents']
         daily_data.sort(key=itemgetter('LastModified'), reverse=True)
-        latest_record = daily_data[0]['Key']
+        s3_latest_record = daily_data[0]['Key']
+        local_file_name = s3_latest_record.lstrip('earthnetworks/')
 
-        current_app.logger.debug(f'Latest lightning file is: {latest_record}')
+        current_app.logger.debug(f'Latest lightning file is: {s3_latest_record}')
 
-        local_lightning_file = EarthNetworksService.get_local_file_location(latest_record)
-        s3_client.download_file(bucket_name, latest_record, local_lightning_file)
+        local_lightning_file = EarthNetworksService.get_local_file_location(local_file_name)
+
+        s3_client.download_file(bucket_name, s3_latest_record, local_lightning_file)
 
         return local_lightning_file
 
     @staticmethod
     def get_local_file_location(filename: str) -> str:
         """ Return location on server where weather file can be safely downloaded"""
-        weather_dir = os.path.abspath(os.path.join(__file__, '../../../../weather'))
+        base_dir = Path(__file__).parents[3]
+        weather_dir = os.path.join(base_dir, 'weather')
         EarthNetworksService.clean_up_weather_dir(weather_dir, 7)
         file_path = os.path.join(weather_dir, filename)
         return file_path
