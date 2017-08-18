@@ -29,6 +29,7 @@ export class MapComponent implements OnInit {
     layers: any;
     map: any;
     wmsSource: any; // WMS source for use in identify
+    contentTab: string = 'map';
 
     constructor(
         private router: Router,
@@ -82,6 +83,19 @@ export class MapComponent implements OnInit {
      */
     toggleContent(): void {
         this.showContent = !this.showContent;
+    }
+
+    /**
+     * Set the content of the tab
+     * @param tab
+     */
+    setContent(tab): void {
+        // Toggle content instead of switching when it is already on that tab
+        if (this.contentTab === tab){
+            this.toggleContent();
+        }
+        this.contentTab = tab;
+
     }
 
     /**
