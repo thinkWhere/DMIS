@@ -39,6 +39,24 @@ body, html {
     content: " | ";
 }
 
+.ol-scale-line {
+  left: auto;
+  bottom: auto;
+  top: 8px;
+  right: 8px;
+  background: $brand-primary;
+}
+
+.ol-mouse-position {
+  top: 35px;
+  right: 8px;
+  background: $brand-primary;
+  color: white;
+  padding: 4px;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
 .ol-control button, .ol-control button:focus, .ol-control button:hover {
   background-color: $brand-primary;
 }
