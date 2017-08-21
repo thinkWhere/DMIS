@@ -2,8 +2,9 @@ import csv
 import os
 import time
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from operator import itemgetter
+from typing import Tuple
 
 import boto3
 from flask import current_app
@@ -29,20 +30,19 @@ class EarthNetworksService:
         return s3_client
 
     @staticmethod
-    def get_latest_lightning_data():
+    def get_latest_lightning_data() -> Tuple[str, str]:
         # TODO once realtime data flowing use current datetime not canned
-        #lightning_filename = EarthNetworksService.get_latest_daily_lighting_filename(datetime.now())
-
-        temp_date = datetime.strptime('20170808', '%Y%m%d')
-        file_location = EarthNetworksService.get_latest_daily_lighting_file(temp_date)
-        feature_collection, last_updated = EarthNetworksService.convert_lightning_data_to_geojson(file_location)
-        return dumps(feature_collection), last_updated
+        current_date = datetime.now().date()
+        file_location = EarthNetworksService.get_latest_daily_lighting_file(current_date)
+        feature_collection, metadata = EarthNetworksService.convert_lightning_data_to_geojson(file_location)
+        return dumps(feature_collection), metadata
 
     @staticmethod
-    def get_latest_daily_lighting_file(file_date: datetime) -> str:
+    def get_latest_daily_lighting_file(file_date: date) -> str:
         """ Gets the name of the supplied dates lightning data """
         # TODO cache for 5 minutes
-        # TODO clean up temp file and use temp dir
+        current_app.logger.debug(f'Retrieving lightning data for {file_date}')
+
         file_date_str = file_date.strftime('%Y%m%d')
         bucket_name = current_app.config["EARTHNETWORKS_S3_SETTINGS"]["bucket_name"]
         s3_client = EarthNetworksService.get_s3_client()
@@ -50,12 +50,12 @@ class EarthNetworksService:
         # Get all files that match the prefix, eg all files for the specified
         bucket_response = s3_client.list_objects(
             Bucket=bucket_name,
-            Prefix=f'earthnetworks/pplnneed_lx_{file_date_str}'
+            Prefix=f'earthnetworks/pplnneedlx_{file_date_str}'
         )
 
         if 'Contents' not in bucket_response:
             # No contents for today try yesterday, if not tried already
-            if file_date.date() == datetime.today().date():
+            if file_date == datetime.now().date():
                 yesterday = file_date - timedelta(days=1)
                 return EarthNetworksService.get_latest_daily_lighting_file(yesterday)
             else:
@@ -77,7 +77,7 @@ class EarthNetworksService:
     @staticmethod
     def get_local_file_location(filename: str) -> str:
         """ Return location on server where weather file can be safely downloaded"""
-        base_dir = Path(__file__).parents[4]
+        base_dir = Path(__file__).parents[3]
         weather_dir = os.path.join(base_dir, 'weather')
         current_app.logger.debug(f'Weather dir is {weather_dir}')
 
@@ -96,7 +96,9 @@ class EarthNetworksService:
                 os.remove(os.path.join(weather_dir, file))
 
     @staticmethod
-    def convert_lightning_data_to_geojson(file_location: str):
+    def convert_lightning_data_to_geojson(file_location: str) -> Tuple[FeatureCollection, str]:
+        """ Converts lightning CSV file to GeoJson object, and returns last updated metadata """
+
         with open(file_location, 'r') as f:
             first_line = f.readline()
 
@@ -127,4 +129,17 @@ class EarthNetworksService:
             current_app.logger.critical(f'Generated invalid geojson for file: {file_location}')
             raise EarthNetworksError('Generated geojson is invalid')
 
-        return lightning_feature_collection, "Metadata TODO"
+        metadata = EarthNetworksService.get_lightning_file_meta_data(os.path.basename(file_location))
+
+        return lightning_feature_collection, metadata
+
+    @staticmethod
+    def get_lightning_file_meta_data(file_name: str) -> str:
+        """ Helper function that extracts the datetime the lightning data was captured from the filename"""
+        if 'test' in file_name:
+            return 'TEST FILE'  # Ensure we can unit test using test files without blowing up
+
+        clean_file_name = file_name.lstrip('pplnneedlx_').rstrip('.csv')
+        file_date = datetime.strptime(clean_file_name, '%Y%m%d_%H%M%S')
+        date_string = file_date.strftime('%d-%b-%Y %H:%M:%S')
+        return date_string

@@ -77,7 +77,7 @@ class TestEarthNetworksService(unittest.TestCase):
             return
 
         # Arrange
-        test_date = datetime.strptime('20170808', '%Y%m%d')
+        test_date = datetime.strptime('20170821', '%Y%m%d')
 
         # Act
         lightning_file = EarthNetworksService.get_latest_daily_lighting_file(test_date)
@@ -99,5 +99,36 @@ class TestEarthNetworksService(unittest.TestCase):
         self.assertEqual(metadata, 'No updates since 8/8/2017 3:23:56 PM')
         self.assertTrue(type(empty_feature_collection) is FeatureCollection, 'Must be a feature collection object')
 
+    def test_valid_lightning_file_returns_feature_collection(self):
+        # Arrange
+        lightning_file = os.path.join(self.weather_dir, 'test_lightning.csv')
 
+        # Act
+        valid_feature_collection, metadata = EarthNetworksService.convert_lightning_data_to_geojson(lightning_file)
+
+        self.assertEqual(332, len(valid_feature_collection['features']), 'Valid file should have 332 features')
+
+    def test_can_retrieve_metadata_from_filename(self):
+        # Arrange
+        filename = 'pplnneedlx_20170808_072225.csv'
+
+        # Act
+        metadata = EarthNetworksService.get_lightning_file_meta_data(filename)
+
+        # Assert
+        self.assertEqual(metadata, '08-Aug-2017 07:22:25')
+
+    def test_get_latest_lighning_data_returns_json_feature_collection(self):
+        if self.skip_tests:
+            return
+
+        # Act
+        json_feature_collection, metadata = EarthNetworksService.get_latest_lightning_data()
+
+        # Assert
+        self.assertTrue(json_feature_collection, 'Json str should be available')
+        self.assertTrue(metadata, 'Metadata should be available')
+
+        # Clean up
+        EarthNetworksService.clean_up_weather_dir(self.weather_dir, 0)
 
