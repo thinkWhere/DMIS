@@ -29,7 +29,7 @@ export class MapComponent implements OnInit {
     layers: any;
     map: any;
     wmsSource: any; // WMS source for use in identify
-    contentTab: string = 'map';
+    contentTab: string = 'legend';
 
     activeMeasureType: string = '';
 
@@ -71,6 +71,7 @@ export class MapComponent implements OnInit {
                     this.addLayers(this.layers.assessmentLayers);
                 }
                 this.identifyService.addIdentifyEventHandlers(this.map, this.wmsSource);
+                this.identifyService.setActive(true);
             },
             error => {
               // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
@@ -101,6 +102,12 @@ export class MapComponent implements OnInit {
             // Reset measure
             this.measureService.setActive(false);
             this.activeMeasureType = '';
+        }
+        if (this.contentTab === 'legend'){
+            this.identifyService.setActive(true);
+        }
+        else {
+            this.identifyService.setActive(false);
         }
     }
 

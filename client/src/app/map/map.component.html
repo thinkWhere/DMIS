@@ -8,8 +8,8 @@
                     <li (click)="toggleContent()" class="pointer">
                         <a role="tab"><i class="fa fa-bars"></i></a>
                     </li>
-                    <li (click)="setContent('map')" class="pointer">
-                        <a role="tab" [ngClass]="{'active': contentTab === 'map'}"
+                    <li (click)="setContent('legend')" class="pointer">
+                        <a role="tab" [ngClass]="{'active': contentTab === 'legend'}"
                          [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
                             <i class="fa fa-map-o"></i>
                         </a>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div [hidden]="contentTab !== 'map'">
+                <div [hidden]="contentTab !== 'legend'">
                     <div class="sidebar-pane active" id="home">
                         <h1 class="sidebar-header pointer"
                             [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
