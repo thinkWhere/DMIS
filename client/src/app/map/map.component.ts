@@ -31,6 +31,8 @@ export class MapComponent implements OnInit {
     wmsSource: any; // WMS source for use in identify
     contentTab: string = 'map';
 
+    activeMeasureType: string = '';
+
     constructor(
         private router: Router,
         private layerService: LayerService,
@@ -94,8 +96,12 @@ export class MapComponent implements OnInit {
         if (this.contentTab === tab){
             this.toggleContent();
         }
-        this.contentTab = tab;
-
+        else {
+            this.contentTab = tab;
+            // Reset measure
+            this.measureService.setActive(false);
+            this.activeMeasureType = '';
+        }
     }
 
     /**
@@ -129,6 +135,24 @@ export class MapComponent implements OnInit {
                 return;
             }
         }
+    }
+
+    /**
+     * Activate measure (line or area)
+     * @param type
+     */
+    activateMeasure(type){
+        this.activeMeasureType = type;
+        this.measureService.setType(type);
+        this.measureService.setActive(true);
+    }
+
+    /**
+     * Reset the measure tool
+     */
+    resetMeasure(){
+        this.measureService.setActive(false);
+        this.activeMeasureType = '';
     }
 
     /**

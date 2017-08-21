@@ -1,11 +1,19 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { MeasureService } from './measure.service';
+import { MapService } from './map.service';
 
 describe('MeasureService', () => {
+
+  // Mock
+  let mapServiceStub = {};
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MeasureService]
+      providers: [
+        MeasureService,
+        {provide: MapService, useValue: mapServiceStub}
+      ]
     });
   });
 

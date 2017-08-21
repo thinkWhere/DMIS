@@ -533,8 +533,8 @@ $move-map-in-xs: true !default;
 }
 
 :host /deep/ .ol-tooltip-static {
-  background-color: #ffcc33;
-  color: black;
+  background-color: #2abb81;
+  color: white;
   border: 1px solid white;
 }
 
@@ -551,5 +551,9 @@ $move-map-in-xs: true !default;
 }
 
 :host /deep/ .ol-tooltip-static:before {
-  border-top-color: #ffcc33;
+  border-top-color: #2abb81;
+}
+
+.sidebar-measure {
+  padding-top: 20px;
 }

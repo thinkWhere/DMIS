@@ -5,16 +5,16 @@
             <div class="sidebar-tabs"
                  [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
                 <ul role="tablist">
-                    <li (click)="toggleContent()">
+                    <li (click)="toggleContent()" class="pointer">
                         <a role="tab"><i class="fa fa-bars"></i></a>
                     </li>
-                    <li (click)="setContent('map')">
+                    <li (click)="setContent('map')" class="pointer">
                         <a role="tab" [ngClass]="{'active': contentTab === 'map'}"
                          [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
                             <i class="fa fa-map-o"></i>
                         </a>
                     </li>
-                    <li (click)="setContent('measure')">
+                    <li (click)="setContent('measure')" class="pointer">
                         <a role="tab"  [ngClass]="{'active': contentTab === 'measure'}"
                            [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
                             <i class="fa fa-pencil-square-o"></i>
@@ -30,8 +30,21 @@
                              [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
                              Measure
                         </h1>
-                        <div>
-                            TODO
+                        <div class="sidebar-measure">
+                            <div class="btn-group btn-group-justified">
+                              <a class="btn btn-default" (click)="activateMeasure('line')"
+                                 [ngClass]="{'active': activeMeasureType === 'line'}">
+                                  Measure line
+                              </a>
+                              <a class="btn btn-default" (click)="activateMeasure('area')"
+                                 [ngClass]="{'active': activeMeasureType === 'area'}">
+                                  Measure area
+                              </a>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="button" (click)="resetMeasure()">Reset</button>
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,7 @@ export class MeasureService {
     continueLineMsg: any;
     draw: any;
     source: any;
+    measureType: string = 'line';
 
     constructor(
         private mapService: MapService
@@ -39,13 +40,13 @@ export class MeasureService {
                     color: 'rgba(255, 255, 255, 0.2)'
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#ffcc33',
+                    color: '#2abb81',
                     width: 2
                 }),
                 image: new ol.style.Circle({
                     radius: 7,
                     fill: new ol.style.Fill({
-                        color: '#ffcc33'
+                        color: '#2abb81'
                     })
                 })
             })
@@ -77,6 +78,7 @@ export class MeasureService {
         });
 
         this.addInteraction();
+        this.draw.setActive(false);
     }
 
     /**
@@ -85,7 +87,32 @@ export class MeasureService {
      */
     setActive(boolean){
         this.draw.setActive(boolean);
+        this.map.removeInteraction(this.draw);
+        if (boolean){
+            this.addInteraction();
+        }
+        else {
+            this.clearMeasurements();
+        }
     };
+
+    /**
+     * Clear the measurements from the vector layer
+     */
+    clearMeasurements(){
+        if (this.measureTooltipElement) {
+            this.map.removeOverlay(this.measureTooltip);
+        }
+        this.source.clear();
+    }
+
+    /**
+     * Set measure type. Supported measure types are line and area
+     * @param typeOfMeasure
+     */
+    setType(typeOfMeasure){
+        this.measureType = typeOfMeasure;
+    }
 
     /**
      * Format length output.
@@ -137,39 +164,67 @@ export class MeasureService {
      * Add a draw interaction and event handlers to the map
      */
     private addInteraction = function () {
-        // TODO: add line measurements
-        this.draw = new ol.interaction.Draw({
-            source: this.source,
-            type: 'Polygon',
-            style: new ol.style.Style({
-                fill: new ol.style.Fill({
-                    color: 'rgba(255, 255, 255, 0.2)'
-                }),
-                stroke: new ol.style.Stroke({
-                    color: 'rgba(0, 0, 0, 0.5)',
-                    lineDash: [10, 10],
-                    width: 2
-                }),
-                image: new ol.style.Circle({
-                    radius: 5,
-                    stroke: new ol.style.Stroke({
-                        color: 'rgba(0, 0, 0, 0.7)'
-                    }),
+        // The only difference between initialising the draw polygon and draw line tool is the type
+        // It can't be made a variable though, because the compiler expects 'Point', 'LineString' etc and not a
+        // variable
+        if (this.measureType === 'area'){
+            this.draw = new ol.interaction.Draw({
+                source: this.source,
+                type: 'Polygon',
+                style: new ol.style.Style({
                     fill: new ol.style.Fill({
                         color: 'rgba(255, 255, 255, 0.2)'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'rgba(0, 0, 0, 0.5)',
+                        lineDash: [10, 10],
+                        width: 2
+                    }),
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(0, 0, 0, 0.7)'
+                        }),
+                        fill: new ol.style.Fill({
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        })
                     })
                 })
-            })
-        });
-        this.draw.setActive(false);
-        console.log(this.draw.getActive());
+            });
+        }
+        else {
+            this.draw = new ol.interaction.Draw({
+                source: this.source,
+                type: 'LineString',
+                style: new ol.style.Style({
+                    fill: new ol.style.Fill({
+                        color: 'rgba(255, 255, 255, 0.2)'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'rgba(0, 0, 0, 0.5)',
+                        lineDash: [10, 10],
+                        width: 2
+                    }),
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(0, 0, 0, 0.7)'
+                        }),
+                        fill: new ol.style.Fill({
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        })
+                    })
+                })
+            });
+        }
         this.map.addInteraction(this.draw);
 
-        this.createMeasureTooltip();
         this.createHelpTooltip();
 
         var listener;
         this.draw.on('drawstart', (evt) => {
+                this.clearMeasurements();
+                this.createMeasureTooltip();
                 // set sketch
                 this.sketch = evt.feature;
                 var tooltipCoord = evt.coordinate;
@@ -195,9 +250,6 @@ export class MeasureService {
                 this.measureTooltip.setOffset([0, -7]);
                 // unset sketch
                 this.sketch = null;
-                // unset tooltip so that a new one can be created
-                this.measureTooltipElement = null;
-                this.createMeasureTooltip();
                 ol.Observable.unByKey(listener);
             }, this);
     };
@@ -226,9 +278,6 @@ export class MeasureService {
      */
 
     private createMeasureTooltip = function () {
-        if (this.measureTooltipElement) {
-            this.measureTooltipElement.parentNode.removeChild(this.measureTooltipElement);
-        }
         this.measureTooltipElement = document.createElement('div');
         this.measureTooltipElement.className = 'ol-tooltip tooltip-measure';
         this.measureTooltip = new ol.Overlay({
