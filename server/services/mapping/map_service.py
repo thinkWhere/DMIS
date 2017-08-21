@@ -23,7 +23,7 @@ class MapServiceServerError(Exception):
 
 class MapService:
     @staticmethod
-    def handle_map_request(map_protocol: str, query_string: str):
+    def handle_map_request(map_protocol: str, query_string: str) -> Response:
         """ Handler looks at request protocol and then determines how to process the request"""
 
         # TODO currently only supports WMS will extend with new protocols over time
