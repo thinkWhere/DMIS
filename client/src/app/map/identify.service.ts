@@ -5,7 +5,6 @@ import * as ol from 'openlayers';
 
 import { LayerService } from './layer.service';
 import { AuthenticationService } from './../shared/authentication.service';
-import {isBoolean} from "util";
 
 @Injectable()
 export class IdentifyService {
