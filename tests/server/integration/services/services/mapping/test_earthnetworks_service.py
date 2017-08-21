@@ -4,6 +4,8 @@ import unittest
 from pathlib import Path
 from datetime import datetime
 
+from geojson import FeatureCollection, is_valid, dumps
+
 from server.services.mapping.earthnetworks_service import EarthNetworksService
 from server import bootstrap_app
 
@@ -11,6 +13,7 @@ from server import bootstrap_app
 class TestEarthNetworksService(unittest.TestCase):
 
     skip_tests = False
+    weather_dir = None
 
     @classmethod
     def setUpClass(cls):
@@ -19,6 +22,9 @@ class TestEarthNetworksService(unittest.TestCase):
         # Firewall rules mean we can't hit Postgres from Shippable so we have to skip them in the CI build
         if env == 'true':
             cls.skip_tests = True
+
+        base_dir = Path(__file__).parents[6]
+        cls.weather_dir = os.path.join(base_dir, 'weather')
 
     def setUp(self):
         """
@@ -33,10 +39,8 @@ class TestEarthNetworksService(unittest.TestCase):
 
     def test_clean_up_removes_files(self):
         # Arrange
-        base_dir = Path(__file__).parents[5]
-        weather_dir = os.path.join(base_dir, 'weather')
         test_file_name = 'a_test.csv'
-        test_file_location = os.path.join(weather_dir, test_file_name)
+        test_file_location = os.path.join(self.weather_dir, test_file_name)
 
         # Generate a test file for deletion
         f = open(test_file_location, 'w')
@@ -44,7 +48,7 @@ class TestEarthNetworksService(unittest.TestCase):
         f.close()
 
         # Act
-        EarthNetworksService.clean_up_weather_dir(weather_dir, 0)
+        EarthNetworksService.clean_up_weather_dir(self.weather_dir, 0)
 
         # Assert
         self.assertFalse(os.path.exists(test_file_location), 'Test file should have been deleted')
@@ -82,9 +86,18 @@ class TestEarthNetworksService(unittest.TestCase):
         self.assertTrue(lightning_file, 'Should have downloaded a lightning file')
 
         # Clean up
-        weather_dir = os.path.abspath(os.path.join(__file__, "../../../../../../weather"))
-        EarthNetworksService.clean_up_weather_dir(weather_dir, 0)
+        EarthNetworksService.clean_up_weather_dir(self.weather_dir, 0)
 
-    def test_lightning_file_can_be_converted_to_geojson(self):
-        pass
+    def test_no_lightning_data_returns_empty_geojson(self):
+        # Arrange
+        no_lightning_file = os.path.join(self.weather_dir, 'test_lightning_no_data.csv')
+
+        # Act
+        empty_feature_collection, metadata = EarthNetworksService.convert_lightning_data_to_geojson(no_lightning_file)
+
+        # Assert
+        self.assertEqual(metadata, 'No updates since 8/8/2017 3:23:56 PM')
+        self.assertTrue(type(empty_feature_collection) is FeatureCollection, 'Must be a feature collection object')
+
+
 

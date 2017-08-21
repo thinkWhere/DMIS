@@ -37,3 +37,4 @@ ENV/
 
 # Application
 weather/*.csv
+!weather/test*.csv

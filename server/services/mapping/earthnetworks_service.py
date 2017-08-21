@@ -36,13 +36,6 @@ class EarthNetworksService:
         temp_date = datetime.strptime('20170808', '%Y%m%d')
         file_location = EarthNetworksService.get_latest_daily_lighting_file(temp_date)
         feature_collection, last_updated = EarthNetworksService.convert_lightning_data_to_geojson(file_location)
-
-        validated_response = is_valid(feature_collection)
-
-        if validated_response['valid'] != 'yes':
-            current_app.logger.critical(f'Generated invalid geojson for file: {file_location}')
-            raise EarthNetworksError('Generated geojson is invalid')
-
         return dumps(feature_collection), last_updated
 
     @staticmethod
@@ -84,7 +77,7 @@ class EarthNetworksService:
     @staticmethod
     def get_local_file_location(filename: str) -> str:
         """ Return location on server where weather file can be safely downloaded"""
-        base_dir = Path(__file__).parents[3]
+        base_dir = Path(__file__).parents[4]
         weather_dir = os.path.join(base_dir, 'weather')
         current_app.logger.debug(f'Weather dir is {weather_dir}')
 
@@ -127,4 +120,11 @@ class EarthNetworksService:
             lightning_features.append(bolt_feature)
 
         lightning_feature_collection = FeatureCollection(lightning_features)
+
+        validated_collection = is_valid(lightning_feature_collection)
+
+        if validated_collection['valid'] != 'yes':
+            current_app.logger.critical(f'Generated invalid geojson for file: {file_location}')
+            raise EarthNetworksError('Generated geojson is invalid')
+
         return lightning_feature_collection, "Metadata TODO"
