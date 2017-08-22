@@ -15,6 +15,7 @@ import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 import { SitrepComponent } from './map/sitrep.component';
 import { FaqComponent } from './faq/faq.component';
+import { WeatherComponent } from './weather/weather.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FaqComponent } from './faq/faq.component';
     MapComponent,
     HomeComponent,
     SitrepComponent,
-    FaqComponent
+    FaqComponent,
+    WeatherComponent
   ],
   imports: [
       NgAggregatePipesModule,
@@ -48,6 +50,10 @@ import { FaqComponent } from './faq/faq.component';
           {
               path: 'faq',
               component: FaqComponent
+          },
+          {
+              path: 'weather',
+              component: WeatherComponent
           },
           {
               path: 'sitrep',
