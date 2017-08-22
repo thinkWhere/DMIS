@@ -59,6 +59,7 @@ export class MapService {
      * @returns map {any}
      */
     getMap() {
+        this.map.updateSize();
         return this.map;
     }
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Http, Headers, Response, RequestOptions, ResponseContentType } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import * as ol from 'openlayers';
 
@@ -18,6 +18,8 @@ export class IdentifyService {
     /** Identify **/
     maxFeatureCount: number = 10;
     identifyAsyncCalls: any;
+
+    isActive: any = false;
 
     constructor(
         private http: Http,
@@ -66,6 +68,9 @@ export class IdentifyService {
      */
     addIdentifyEventHandlers(map, source){
         map.on('singleclick', (evt) => {
+            if (!this.isActive) {
+                return;
+            }
             // The identify calls go to different sources depending on the type of layer
             // So we need to wait for all the calls to finish before displaying a popup
             // Supported layer types are:
@@ -92,50 +97,60 @@ export class IdentifyService {
     }
 
     /**
+     * Set the identify tool to active/inactive
+     * @param boolean
+     */
+    setActive(boolean){
+        this.isActive = boolean;
+    };
+
+    /**
      * Setup and identify WMS
      * @param map
      * @param source
      * @param evt
      */
     private setupAndIdentifyWMS(map, source, evt){
-         var coordinate = evt.coordinate;
-         var viewResolution = map.getView().getResolution();
-            var getFeatureInfoUrl = source.getGetFeatureInfoUrl(
-                evt.coordinate, viewResolution, 'EPSG:3857',
-                {
-                    'INFO_FORMAT': 'application/json',
-                    'FEATURE_COUNT': this.maxFeatureCount,
-                    'BUFFER': 10
-                });
-            var identifiableLayers = this.layerService.getIdentifiableLayers(map, 'wms');
-            var identifiableLayerNames = [];
-            for (var i = 0; i < identifiableLayers.length; i++){
-                identifiableLayerNames.push(identifiableLayers[i].getProperties().layerName);
-            }
-            getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'QUERY_LAYERS', identifiableLayerNames.join());
-            getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'LAYERS', identifiableLayerNames.join());
-            if (getFeatureInfoUrl && identifiableLayers.length > 0) {
-                var parser = new ol.format.GeoJSON();
-                this.getFeatureInfo(getFeatureInfoUrl)
-                        .subscribe(
-                        data => {
-                            // Success
-                            this.identifyAsyncCalls.dmisGetFeatureInfo = true;
-                            var result = parser.readFeatures(data);
-                            var content = this.generatePopupContent(result);
-                            this.content.innerHTML += content;
-                            this.checkOtherCallsAndShowPopup(coordinate);
-                        },
-                        error => {
-                            // TODO: handle error?
-                            this.identifyAsyncCalls.dmisGetFeatureInfo = true;
-                        }
-                    );
-            }
-            else {
-                // No call is made so set it to finished
-                this.identifyAsyncCalls.dmisGetFeatureInfo = true;
-            }
+         if (source) {
+             var coordinate = evt.coordinate;
+             var viewResolution = map.getView().getResolution();
+             var getFeatureInfoUrl = source.getGetFeatureInfoUrl(
+                 evt.coordinate, viewResolution, 'EPSG:3857',
+                 {
+                     'INFO_FORMAT': 'application/json',
+                     'FEATURE_COUNT': this.maxFeatureCount,
+                     'BUFFER': 10
+                 });
+             var identifiableLayers = this.layerService.getIdentifiableLayers(map, 'wms');
+             var identifiableLayerNames = [];
+             for (var i = 0; i < identifiableLayers.length; i++) {
+                 identifiableLayerNames.push(identifiableLayers[i].getProperties().layerName);
+             }
+             getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'QUERY_LAYERS', identifiableLayerNames.join());
+             getFeatureInfoUrl = this.updateUrlParameter(getFeatureInfoUrl, 'LAYERS', identifiableLayerNames.join());
+             if (getFeatureInfoUrl && identifiableLayers.length > 0) {
+                 var parser = new ol.format.GeoJSON();
+                 this.getFeatureInfo(getFeatureInfoUrl)
+                     .subscribe(
+                         data => {
+                             // Success
+                             this.identifyAsyncCalls.dmisGetFeatureInfo = true;
+                             var result = parser.readFeatures(data);
+                             var content = this.generatePopupContent(result);
+                             this.content.innerHTML += content;
+                             this.checkOtherCallsAndShowPopup(coordinate);
+                         },
+                         error => {
+                             // TODO: handle error?
+                             this.identifyAsyncCalls.dmisGetFeatureInfo = true;
+                         }
+                     );
+             }
+             else {
+                 // No call is made so set it to finished
+                 this.identifyAsyncCalls.dmisGetFeatureInfo = true;
+             }
+         }
     }
 
     /**
