@@ -8,7 +8,7 @@ from typing import Tuple
 
 import boto3
 from flask import current_app
-from geojson import Feature, FeatureCollection, Point, is_valid, dumps
+from geojson import Feature, FeatureCollection, Point, dumps
 
 
 class EarthNetworksError(Exception):
@@ -121,9 +121,7 @@ class EarthNetworksService:
 
         lightning_feature_collection = FeatureCollection(lightning_features)
 
-        validated_collection = is_valid(lightning_feature_collection)
-
-        if validated_collection['valid'] != 'yes':
+        if not lightning_feature_collection.is_valid:
             current_app.logger.critical(f'Generated invalid geojson for file: {file_location}')
             raise EarthNetworksError('Generated geojson is invalid')
 
