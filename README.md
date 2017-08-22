@@ -27,6 +27,9 @@ deployment environment:
 * **DMIS_DB** - This is for the PostGIS connection string.  This will be in the format: postgresql://username:pwd@host/dbname
 * **DMIS_SECRET** - This is a secret key
 * **DMIS_ENV** - Deployment environment. [Prod | Staging | Dev]
+* **EN_ACCESS_KEY** - AWS Access Key used to access EarthNetworks data stored in S3
+* **EN_SECRET_KEY** - AWS Access Secret used to access EarthNetworks data stored in S3
+
 * Linux / Mac
     * ```export DMIS_ENV=Dev```
 * Windows

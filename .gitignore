@@ -34,3 +34,7 @@ ENV/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/
+
+# Application
+weather/*.csv
+!weather/test*.csv

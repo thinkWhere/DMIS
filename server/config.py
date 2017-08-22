@@ -3,6 +3,11 @@ import os
 
 
 class EnvironmentConfig(object):
+    EARTHNETWORKS_S3_SETTINGS = {
+        'aws_access_key_id': os.getenv('EN_ACCESS_KEY', None),
+        'aws_secret_access_key': os.getenv('EN_SECRET_KEY', None),
+        'bucket_name': 'tw-dmis'
+    }
     GEOSERVER_URL = 'http://mapcloud-geoserver-staging-lb-823669482.eu-west-1.elb.amazonaws.com/geoserver'
     SECRET_KEY = os.getenv('DMIS_SECRET', None)
     SQLALCHEMY_DATABASE_URI = os.getenv('DMIS_DB', None)
