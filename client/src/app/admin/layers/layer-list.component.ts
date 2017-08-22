@@ -45,9 +45,9 @@ export class LayerListComponent implements OnInit {
                    this.layerList.push(data.incidentLayers[i]);
                 }
               }
-              if (data.responseLayers){
-                for (var i = 0; i < data.responseLayers.length; i++){
-                  this.layerList.push(data.responseLayers[i]);
+              if (data.assessmentLayers){
+                for (var i = 0; i < data.assessmentLayers.length; i++){
+                  this.layerList.push(data.assessmentLayers[i]);
                 }
               }
             },

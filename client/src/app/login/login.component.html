@@ -1,21 +1,22 @@
 <div class="container">
     <form #f="ngForm" class="form-signin" (ngSubmit)="f.form.valid && login(f)" novalidate>
-        <h2 class="form-signin-heading">Login</h2>
+        <h2 class="form-signin-heading" i18n="Login@@login">Login</h2>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="inputUsername">Username</label>
-            <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" autofocus ngModel required #username="ngModel">
-            <div *ngIf="f.submitted && !username.valid" class="help-block">Your username is required</div>
+            <label for="inputUsername" i18n="Username@@username">Username</label>
+            <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" i18n-placeholder="Username@@username" autofocus ngModel required #username="ngModel">
+            <div *ngIf="f.submitted && !username.valid" class="help-block" i18n="Username is required message@@loginUsernameRequired"> Your username is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-            <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" ngModel required #password="ngModel">
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+            <label for="inputPassword" i18n="Password@@password">Password</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" i18n-placeholder="Password@@password" ngModel required #password="ngModel">
+            <div *ngIf="f.submitted && !password.valid" class="help-block" i18n="Password is required message@@loginPasswordRequired">Password is required</div>
         </div>
         <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" i18n="Login@@login">Login</button>
         </div>
         <div *ngIf="errorLogin" class="alert alert-danger" role="alert">
-            Error: Username or password is incorrect.
+            <strong i18n="Error@@error">Error</strong>:
+            <span i18n="Username or password incorrect message@loginUsernamePasswordIncorrect">Username or password is incorrect.</span>
         </div>
     </form>
 </div>

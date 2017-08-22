@@ -1,8 +1,8 @@
 <div class="add-user-container">
-    <h1>Add user</h1>
+    <h1 i18n="Add user header for admin page@@adminAddUserHeader">Add user</h1>
     <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && addUser(userForm)" novalidate>
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username" i18n="Username@@username">Username</label>
 
         <input type="text" id="username" class="form-control"
                required minlength="4" maxlength="24"
@@ -10,20 +10,14 @@
 
         <div *ngIf="username.errors && (username.dirty || username.touched)"
              class="alert alert-danger">
-            <div [hidden]="!username.errors.required">
-              Username is required
-            </div>
-            <div [hidden]="!username.errors.minlength">
-              Username must be at least 4 characters long.
-            </div>
-            <div [hidden]="!username.errors.maxlength">
-              Username cannot be more than 24 characters long.
-            </div>
+            <div [hidden]="!username.errors.required" i18n="Username is required@@adminUsernameRequired">Username is required</div>
+            <div [hidden]="!username.errors.minlength" i18n="Username min characters@@adminUsernameMinCharacters">Username must be at least 4 characters long.</div>
+            <div [hidden]="!username.errors.maxlength" i18n="Username max characters@@adminUsernameMaxCharacters">Username cannot be more than 24 characters long.</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" i18n="Label for password@@adminPasswordLabel">Password</label>
         <input type="password" id="password" class="form-control"
                name="password"
                #password="ngModel"
@@ -31,38 +25,36 @@
                ngModel required>
         <div *ngIf="password.errors && (password.dirty || password.touched)"
              class="alert alert-danger">
-            <div [hidden]="!password.errors.required">
-              Password is required
-            </div>
+            <div [hidden]="!password.errors.required" i18n="Password required@@adminPasswordRequired">Password is required</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="role">Role</label>
+        <label for="role" i18n="Role@@role">Role</label>
         <select id="role" class="form-control"
                 name="role"
                 ngModel required
                 #role="ngModel" >
-          <option value="USER">User</option>
-          <option value="ADMIN">Admin</option>
+          <option value="USER" i18n="Option for role@@adminOptionRoleUser">User</option>
+          <option value="ADMIN" i18n="Option for role@@adminOptionRoleAdmin">Admin</option>
         </select>
 
         <div *ngIf="role.errors && role.touched" class="alert alert-danger">
-          <div [hidden]="!role.errors.required">Role is required</div>
+          <div [hidden]="!role.errors.required" i18n="Role required@@adminRoleRequired">Role is required</div>
         </div>
       </div>
 
       <button type="submit" class="btn btn-primary"
-             [disabled]="!userForm.form.valid">Add user</button>
+             [disabled]="!userForm.form.valid" i18n="Add user header for admin page@@adminAddUserHeader">Add user</button>
 
       <div [hidden]="!successAddingUser" class="alert alert-success">
-          <strong>Success: </strong> successfully added a user.
+          <strong i18n="Success@@success">Success</strong>: <span i18n="Success add user@@adminSuccessAddUser">Successfully added a user.</span>
       </div>
       <div [hidden]="!errorAddingUser" class="alert alert-danger">
-          <strong>Error: </strong> failed to add a user. Does this username already exist?
+          <strong i18n="Error@@error">Error</strong>: <span i18n="Failed to add user@@adminFailedAddUser">Failed to add a user. Does this username already exist?</span>
       </div>
       <div [hidden]="!invalidUsernameSupplied" class="alert alert-danger">
-          <strong>Error: </strong> the username is invalid. Please make sure you don't have any whitespaces in your username.
+          <strong i18n="Error@@error">Error</strong>: <span i18n="Invalid username@@adminInvalidUsername">The username is invalid. Please make sure you don't have any whitespaces in your username.</span>
       </div>
     </form>
 </div>

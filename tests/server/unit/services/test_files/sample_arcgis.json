@@ -1,0 +1,1319 @@
+{
+	"displayFieldName": "",
+	"fieldAliases": {
+		"FID": "FID",
+		"PROVINCE": "PROVINCE",
+		"SCHOOL_COD": "SCHOOL_COD",
+		"COMMUNE": "COMMUNE",
+		"DISTRICT": "DISTRICT",
+		"SCHOOL_NAM": "SCHOOL_NAM",
+		"VILLAGE": "VILLAGE",
+		"SCHOOL_TYP": "SCHOOL_TYP",
+		"TYPE_CODE": "TYPE_CODE",
+		"CLASSES": "CLASSES",
+		"ROOMS": "ROOMS",
+		"Location": "Location",
+		"Teach_staf": "Teach_staf",
+		"Non_teach": "Non_teach",
+		"Enrol": "Enrol",
+		"Coor_X": "Coor_X",
+		"Coor_Y": "Coor_Y"
+	},
+	"geometryType": "esriGeometryPoint",
+	"spatialReference": {
+		"wkid": 3148,
+		"latestWkid": 3148
+	},
+	"fields": [{
+		"name": "FID",
+		"type": "esriFieldTypeOID",
+		"alias": "FID"
+	},
+	{
+		"name": "PROVINCE",
+		"type": "esriFieldTypeString",
+		"alias": "PROVINCE",
+		"length": 254
+	},
+	{
+		"name": "SCHOOL_COD",
+		"type": "esriFieldTypeDouble",
+		"alias": "SCHOOL_COD"
+	},
+	{
+		"name": "COMMUNE",
+		"type": "esriFieldTypeString",
+		"alias": "COMMUNE",
+		"length": 254
+	},
+	{
+		"name": "DISTRICT",
+		"type": "esriFieldTypeString",
+		"alias": "DISTRICT",
+		"length": 254
+	},
+	{
+		"name": "SCHOOL_NAM",
+		"type": "esriFieldTypeString",
+		"alias": "SCHOOL_NAM",
+		"length": 254
+	},
+	{
+		"name": "VILLAGE",
+		"type": "esriFieldTypeString",
+		"alias": "VILLAGE",
+		"length": 254
+	},
+	{
+		"name": "SCHOOL_TYP",
+		"type": "esriFieldTypeString",
+		"alias": "SCHOOL_TYP",
+		"length": 254
+	},
+	{
+		"name": "TYPE_CODE",
+		"type": "esriFieldTypeDouble",
+		"alias": "TYPE_CODE"
+	},
+	{
+		"name": "CLASSES",
+		"type": "esriFieldTypeDouble",
+		"alias": "CLASSES"
+	},
+	{
+		"name": "ROOMS",
+		"type": "esriFieldTypeDouble",
+		"alias": "ROOMS"
+	},
+	{
+		"name": "Location",
+		"type": "esriFieldTypeString",
+		"alias": "Location",
+		"length": 10
+	},
+	{
+		"name": "Teach_staf",
+		"type": "esriFieldTypeInteger",
+		"alias": "Teach_staf"
+	},
+	{
+		"name": "Non_teach",
+		"type": "esriFieldTypeInteger",
+		"alias": "Non_teach"
+	},
+	{
+		"name": "Enrol",
+		"type": "esriFieldTypeInteger",
+		"alias": "Enrol"
+	},
+	{
+		"name": "Coor_X",
+		"type": "esriFieldTypeInteger",
+		"alias": "Coor_X"
+	},
+	{
+		"name": "Coor_Y",
+		"type": "esriFieldTypeInteger",
+		"alias": "Coor_Y"
+	}],
+	"features": [{
+		"attributes": {
+			"FID": 0,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060101001,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Chheu Teal",
+			"VILLAGE": "Chheu Teal",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 4,
+			"Location": "Rural",
+			"Teach_staf": 5,
+			"Non_teach": 1,
+			"Enrol": 248,
+			"Coor_X": 526658,
+			"Coor_Y": 1444260
+		},
+		"geometry": {
+			"x": 526657.5884785566,
+			"y": 1444259.9779527928
+		}
+	},
+	{
+		"attributes": {
+			"FID": 1,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060101502,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Chheu Teal",
+			"VILLAGE": "Chheu Teal",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 2,
+			"ROOMS": 2,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 60,
+			"Coor_X": 526658,
+			"Coor_Y": 1444260
+		},
+		"geometry": {
+			"x": 526657.5884785566,
+			"y": 1444259.9779527928
+		}
+	},
+	{
+		"attributes": {
+			"FID": 2,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060103003,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Kampong Ta Ben",
+			"VILLAGE": "Kampong Ta Ben",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 8,
+			"ROOMS": 8,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 3,
+			"Enrol": 303,
+			"Coor_X": 525759,
+			"Coor_Y": 1442813
+		},
+		"geometry": {
+			"x": 525758.58055513375,
+			"y": 1442812.9679954096
+		}
+	},
+	{
+		"attributes": {
+			"FID": 3,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060103503,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Kampong Ta Ben",
+			"VILLAGE": "Kampong Ta Ben",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 3,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 2,
+			"Non_teach": 0,
+			"Enrol": 85,
+			"Coor_X": 525759,
+			"Coor_Y": 1442813
+		},
+		"geometry": {
+			"x": 525758.58055513375,
+			"y": 1442812.9679954096
+		}
+	},
+	{
+		"attributes": {
+			"FID": 4,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060103703,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Kampong Ta Ben",
+			"VILLAGE": "Kampong Ta Ben",
+			"SCHOOL_TYP": "College",
+			"TYPE_CODE": 3,
+			"CLASSES": 8,
+			"ROOMS": 11,
+			"Location": "Rural",
+			"Teach_staf": 8,
+			"Non_teach": 2,
+			"Enrol": 342,
+			"Coor_X": 525759,
+			"Coor_Y": 1442813
+		},
+		"geometry": {
+			"x": 525758.58055513375,
+			"y": 1442812.9679954096
+		}
+	},
+	{
+		"attributes": {
+			"FID": 5,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060104004,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Samrith",
+			"VILLAGE": "Samrith",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 4,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 0,
+			"Enrol": 201,
+			"Coor_X": 524234,
+			"Coor_Y": 1441929
+		},
+		"geometry": {
+			"x": 524233.56850933441,
+			"y": 1441928.9627700699
+		}
+	},
+	{
+		"attributes": {
+			"FID": 6,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060105005,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Veal Pring",
+			"VILLAGE": "Veal Pring",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 0,
+			"Enrol": 168,
+			"Coor_X": 523583,
+			"Coor_Y": 1440566
+		},
+		"geometry": {
+			"x": 523582.56249171658,
+			"y": 1440565.953211606
+		}
+	},
+	{
+		"attributes": {
+			"FID": 7,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060108002,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Tuol Rovieng",
+			"VILLAGE": "Kerang",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 4,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 0,
+			"Enrol": 246,
+			"Coor_X": 528396,
+			"Coor_Y": 1441413
+		},
+		"geometry": {
+			"x": 528395.598783936,
+			"y": 1441412.9552600128
+		}
+	},
+	{
+		"attributes": {
+			"FID": 8,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060109051,
+			"COMMUNE": "Chheu Teal",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Dam Phkar",
+			"VILLAGE": "Dam Phkar",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 3,
+			"Non_teach": 1,
+			"Enrol": 106,
+			"Coor_X": 537111,
+			"Coor_Y": 1440363
+		},
+		"geometry": {
+			"x": 537110.66217351949,
+			"y": 1440362.939783453
+		}
+	},
+	{
+		"attributes": {
+			"FID": 9,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060301012,
+			"COMMUNE": "Khleng",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Porng Krapeu",
+			"VILLAGE": "Peam Khleng",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 3,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 2,
+			"Non_teach": 0,
+			"Enrol": 45,
+			"Coor_X": 525585,
+			"Coor_Y": 1436100
+		},
+		"geometry": {
+			"x": 525584.57332467148,
+			"y": 1436099.918246628
+		}
+	},
+	{
+		"attributes": {
+			"FID": 10,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060302014,
+			"COMMUNE": "Khleng",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Roka Chour",
+			"VILLAGE": "Roka Chour",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 7,
+			"Non_teach": 0,
+			"Enrol": 214,
+			"Coor_X": 524385,
+			"Coor_Y": 1435769
+		},
+		"geometry": {
+			"x": 524384.56416830409,
+			"y": 1435768.9168418611
+		}
+	},
+	{
+		"attributes": {
+			"FID": 11,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060302705,
+			"COMMUNE": "Khleng",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Roka Chour",
+			"VILLAGE": "Roka Chour",
+			"SCHOOL_TYP": "College",
+			"TYPE_CODE": 3,
+			"CLASSES": 3,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 0,
+			"Enrol": 106,
+			"Coor_X": 524385,
+			"Coor_Y": 1435769
+		},
+		"geometry": {
+			"x": 524384.56416830409,
+			"y": 1435768.9168418611
+		}
+	},
+	{
+		"attributes": {
+			"FID": 12,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060304013,
+			"COMMUNE": "Khleng",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Prey Chour",
+			"VILLAGE": "Prey Chour",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 2,
+			"ROOMS": 2,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 50,
+			"Coor_X": 525073,
+			"Coor_Y": 1434135
+		},
+		"geometry": {
+			"x": 525072.56780757045,
+			"y": 1434134.904092114
+		}
+	},
+	{
+		"attributes": {
+			"FID": 13,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060306011,
+			"COMMUNE": "Khleng",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Kamport Chhouk",
+			"VILLAGE": "Kamport Chhouk",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 5,
+			"Non_teach": 1,
+			"Enrol": 178,
+			"Coor_X": 525418,
+			"Coor_Y": 1437377
+		},
+		"geometry": {
+			"x": 525417.57322064019,
+			"y": 1437376.9278896593
+		}
+	},
+	{
+		"attributes": {
+			"FID": 14,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060401508,
+			"COMMUNE": "Mean Rith",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Kanty",
+			"VILLAGE": "Kanty",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 25,
+			"Coor_X": 529576,
+			"Coor_Y": 1443667
+		},
+		"geometry": {
+			"x": 529575.7119599717,
+			"y": 1443666.5525569732
+		}
+	},
+	{
+		"attributes": {
+			"FID": 15,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060502026,
+			"COMMUNE": "Meanchey",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Veal Snay",
+			"VILLAGE": "Veal Snay",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 4,
+			"Non_teach": 1,
+			"Enrol": 235,
+			"Coor_X": 521163,
+			"Coor_Y": 1432453
+		},
+		"geometry": {
+			"x": 521162.53743681137,
+			"y": 1432452.8950208861
+		}
+	},
+	{
+		"attributes": {
+			"FID": 16,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060503023,
+			"COMMUNE": "Meanchey",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Meanchey",
+			"VILLAGE": "Roneam",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 7,
+			"Non_teach": 5,
+			"Enrol": 294,
+			"Coor_X": 523093,
+			"Coor_Y": 1434748
+		},
+		"geometry": {
+			"x": 523092.55372216157,
+			"y": 1434747.9103887177
+		}
+	},
+	{
+		"attributes": {
+			"FID": 17,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060503702,
+			"COMMUNE": "Meanchey",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Bun Rany Hun Sen Meanchey",
+			"VILLAGE": "Roneam",
+			"SCHOOL_TYP": "College",
+			"TYPE_CODE": 3,
+			"CLASSES": 7,
+			"ROOMS": 7,
+			"Location": "Rural",
+			"Teach_staf": 11,
+			"Non_teach": 2,
+			"Enrol": 308,
+			"Coor_X": 523093,
+			"Coor_Y": 1434748
+		},
+		"geometry": {
+			"x": 523092.55372216157,
+			"y": 1434747.9103887177
+		}
+	},
+	{
+		"attributes": {
+			"FID": 18,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060506021,
+			"COMMUNE": "Meanchey",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Chunleng Phoum Thmei",
+			"VILLAGE": "Chunleng",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 8,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 8,
+			"Non_teach": 2,
+			"Enrol": 334,
+			"Coor_X": 520271,
+			"Coor_Y": 1434621
+		},
+		"geometry": {
+			"x": 520270.53276030731,
+			"y": 1434620.9119216423
+		}
+	},
+	{
+		"attributes": {
+			"FID": 19,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060506508,
+			"COMMUNE": "Meanchey",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Chunleng Phoum Thmei",
+			"VILLAGE": "Chunleng",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 60,
+			"Coor_X": 520278,
+			"Coor_Y": 1435437
+		},
+		"geometry": {
+			"x": 520277.63601097546,
+			"y": 1435436.5017450578
+		}
+	},
+	{
+		"attributes": {
+			"FID": 20,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060510022,
+			"COMMUNE": "Meanchey",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Phtorl Rumpos",
+			"VILLAGE": "Phtorl Rumpos",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 0,
+			"Enrol": 230,
+			"Coor_X": 521893,
+			"Coor_Y": 1437582
+		},
+		"geometry": {
+			"x": 521892.54736440675,
+			"y": 1437581.9325139364
+		}
+	},
+	{
+		"attributes": {
+			"FID": 21,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060602027,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Phoum Khmer",
+			"VILLAGE": "Khmer",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 5,
+			"Location": "Rural",
+			"Teach_staf": 4,
+			"Non_teach": 0,
+			"Enrol": 189,
+			"Coor_X": 524445,
+			"Coor_Y": 1448156
+		},
+		"geometry": {
+			"x": 524444.57560594392,
+			"y": 1448156.0088645646
+		}
+	},
+	{
+		"attributes": {
+			"FID": 22,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060602509,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Phoum Khmer",
+			"VILLAGE": "Khmer",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 25,
+			"Coor_X": 525107,
+			"Coor_Y": 1448455
+		},
+		"geometry": {
+			"x": 525106.68424697465,
+			"y": 1448454.5923200524
+		}
+	},
+	{
+		"attributes": {
+			"FID": 23,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060603028,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Kraing Deum",
+			"VILLAGE": "Kraing Deum",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 10,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 0,
+			"Enrol": 383,
+			"Coor_X": 523030,
+			"Coor_Y": 1447549
+		},
+		"geometry": {
+			"x": 523029.56461641664,
+			"y": 1447549.0056067447
+		}
+	},
+	{
+		"attributes": {
+			"FID": 24,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060606029,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Ngorn",
+			"VILLAGE": "Ngorn",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 4,
+			"Location": "Rural",
+			"Teach_staf": 5,
+			"Non_teach": 1,
+			"Enrol": 194,
+			"Coor_X": 521232,
+			"Coor_Y": 1444169
+		},
+		"geometry": {
+			"x": 521231.54832774249,
+			"y": 1444168.9820766461
+		}
+	},
+	{
+		"attributes": {
+			"FID": 25,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060609032,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Veal Pring Leu",
+			"VILLAGE": "Veal Pring Leu",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 3,
+			"Non_teach": 0,
+			"Enrol": 137,
+			"Coor_X": 522277,
+			"Coor_Y": 1440963
+		},
+		"geometry": {
+			"x": 522276.55319797387,
+			"y": 1440962.9573167847
+		}
+	},
+	{
+		"attributes": {
+			"FID": 26,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060610031,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Taing Krasao",
+			"VILLAGE": "Taing Krasao",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 4,
+			"Non_teach": 0,
+			"Enrol": 221,
+			"Coor_X": 525237,
+			"Coor_Y": 1446043
+		},
+		"geometry": {
+			"x": 525236.57957190287,
+			"y": 1446042.9924533677
+		}
+	},
+	{
+		"attributes": {
+			"FID": 27,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060610051,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Thlok Pring",
+			"VILLAGE": "Thlok Pring",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 3,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 2,
+			"Non_teach": 0,
+			"Enrol": 61,
+			"Coor_X": 516117,
+			"Coor_Y": 1446254
+		},
+		"geometry": {
+			"x": 516116.51239607797,
+			"y": 1446254.0021139481
+		}
+	},
+	{
+		"attributes": {
+			"FID": 28,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060612030,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "O Tnot",
+			"VILLAGE": "O Tnot",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 7,
+			"ROOMS": 5,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 1,
+			"Enrol": 281,
+			"Coor_X": 522662,
+			"Coor_Y": 1443333
+		},
+		"geometry": {
+			"x": 522661.55814596848,
+			"y": 1443332.9745941872
+		}
+	},
+	{
+		"attributes": {
+			"FID": 29,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060612506,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "O Tnot",
+			"VILLAGE": "O Tnot",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 2,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 60,
+			"Coor_X": 523537,
+			"Coor_Y": 1443395
+		},
+		"geometry": {
+			"x": 523536.66765282099,
+			"y": 1443394.5567275325
+		}
+	},
+	{
+		"attributes": {
+			"FID": 30,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060612704,
+			"COMMUNE": "Ngorn",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "O Tnot",
+			"VILLAGE": "O Tnot",
+			"SCHOOL_TYP": "College",
+			"TYPE_CODE": 3,
+			"CLASSES": 4,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 6,
+			"Non_teach": 2,
+			"Enrol": 186,
+			"Coor_X": 522662,
+			"Coor_Y": 1443333
+		},
+		"geometry": {
+			"x": 522661.55814596848,
+			"y": 1443332.9745941872
+		}
+	},
+	{
+		"attributes": {
+			"FID": 31,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060701033,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Danghet",
+			"VILLAGE": "Danghet",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 4,
+			"Location": "Rural",
+			"Teach_staf": 4,
+			"Non_teach": 0,
+			"Enrol": 179,
+			"Coor_X": 526411,
+			"Coor_Y": 1456058
+		},
+		"geometry": {
+			"x": 526410.59717904439,
+			"y": 1456058.0658291841
+		}
+	},
+	{
+		"attributes": {
+			"FID": 32,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060702047,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Chhouk",
+			"VILLAGE": "Chhouk",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 4,
+			"ROOMS": 4,
+			"Location": "Rural",
+			"Teach_staf": 2,
+			"Non_teach": 0,
+			"Enrol": 124,
+			"Coor_X": 528518,
+			"Coor_Y": 1455024
+		},
+		"geometry": {
+			"x": 528517.61180322256,
+			"y": 1455024.0562695605
+		}
+	},
+	{
+		"attributes": {
+			"FID": 33,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060702517,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Chhouk",
+			"VILLAGE": "Chhouk",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 25,
+			"Coor_X": 528342,
+			"Coor_Y": 1455201
+		},
+		"geometry": {
+			"x": 528341.71490232227,
+			"y": 1455200.6387570149
+		}
+	},
+	{
+		"attributes": {
+			"FID": 34,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060703034,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Krasaing",
+			"VILLAGE": "Krasaing",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 3,
+			"Location": "Rural",
+			"Teach_staf": 5,
+			"Non_teach": 0,
+			"Enrol": 121,
+			"Coor_X": 527059,
+			"Coor_Y": 1454254
+		},
+		"geometry": {
+			"x": 527058.60034689785,
+			"y": 1454254.0518472418
+		}
+	},
+	{
+		"attributes": {
+			"FID": 35,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060704038,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Sre Chang",
+			"VILLAGE": "Sre Chang",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 5,
+			"Non_teach": 1,
+			"Enrol": 158,
+			"Coor_X": 527545,
+			"Coor_Y": 1451985
+		},
+		"geometry": {
+			"x": 527544.60190649051,
+			"y": 1451985.0345572133
+		}
+	},
+	{
+		"attributes": {
+			"FID": 36,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060704516,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Sre Chang",
+			"VILLAGE": "Sre Chang",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 25,
+			"Coor_X": 527245,
+			"Coor_Y": 1451653
+		},
+		"geometry": {
+			"x": 527244.70318092743,
+			"y": 1451652.6136942788
+		}
+	},
+	{
+		"attributes": {
+			"FID": 37,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060705035,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Prasat Andet",
+			"VILLAGE": "Prasat Andet",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 4,
+			"Location": "Rural",
+			"Teach_staf": 4,
+			"Non_teach": 0,
+			"Enrol": 161,
+			"Coor_X": 525519,
+			"Coor_Y": 1450648
+		},
+		"geometry": {
+			"x": 525518.5857582445,
+			"y": 1450648.026425882
+		}
+	},
+	{
+		"attributes": {
+			"FID": 38,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060705514,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Prasat Andet",
+			"VILLAGE": "Prasat Andet",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 25,
+			"Coor_X": 525522,
+			"Coor_Y": 1450818
+		},
+		"geometry": {
+			"x": 525521.68969627609,
+			"y": 1450817.60930271
+		}
+	},
+	{
+		"attributes": {
+			"FID": 39,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060707039,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Svay",
+			"VILLAGE": "Svay",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 5,
+			"Non_teach": 1,
+			"Enrol": 109,
+			"Coor_X": 527302,
+			"Coor_Y": 1449797
+		},
+		"geometry": {
+			"x": 527301.59816054313,
+			"y": 1449797.0185200465
+		}
+	},
+	{
+		"attributes": {
+			"FID": 40,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060707513,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Svay",
+			"VILLAGE": "Svay",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 25,
+			"Coor_X": 527094,
+			"Coor_Y": 1449746
+		},
+		"geometry": {
+			"x": 527093.70011054119,
+			"y": 1449745.5997949545
+		}
+	},
+	{
+		"attributes": {
+			"FID": 41,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060710037,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Hun Sen Sandann",
+			"VILLAGE": "Sandann",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 18,
+			"ROOMS": 13,
+			"Location": "Rural",
+			"Teach_staf": 18,
+			"Non_teach": 4,
+			"Enrol": 661,
+			"Coor_X": 526983,
+			"Coor_Y": 1448298
+		},
+		"geometry": {
+			"x": 526982.59446979989,
+			"y": 1448298.0076722773
+		}
+	},
+	{
+		"attributes": {
+			"FID": 42,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060710501,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Sandann",
+			"VILLAGE": "Sandann",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 5,
+			"ROOMS": 5,
+			"Location": "Rural",
+			"Teach_staf": 5,
+			"Non_teach": 0,
+			"Enrol": 130,
+			"Coor_X": 526983,
+			"Coor_Y": 1448298
+		},
+		"geometry": {
+			"x": 526982.59446979989,
+			"y": 1448298.0076722773
+		}
+	},
+	{
+		"attributes": {
+			"FID": 43,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060710901,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Sandann",
+			"VILLAGE": "Sandann",
+			"SCHOOL_TYP": "Lycee G7-12",
+			"TYPE_CODE": 5,
+			"CLASSES": 18,
+			"ROOMS": 18,
+			"Location": "Rural",
+			"Teach_staf": 35,
+			"Non_teach": 0,
+			"Enrol": 980,
+			"Coor_X": 526983,
+			"Coor_Y": 1448298
+		},
+		"geometry": {
+			"x": 526982.59446979989,
+			"y": 1448298.0076722773
+		}
+	},
+	{
+		"attributes": {
+			"FID": 44,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060713036,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Prey Koki",
+			"VILLAGE": "Prey Koki",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 6,
+			"ROOMS": 6,
+			"Location": "Rural",
+			"Teach_staf": 3,
+			"Non_teach": 0,
+			"Enrol": 64,
+			"Coor_X": 525479,
+			"Coor_Y": 1449999
+		},
+		"geometry": {
+			"x": 525478.58488326462,
+			"y": 1449999.0216441599
+		}
+	},
+	{
+		"attributes": {
+			"FID": 45,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060713515,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Prey Kaki",
+			"VILLAGE": "Prey Kaki",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 25,
+			"Coor_X": 525974,
+			"Coor_Y": 1449284
+		},
+		"geometry": {
+			"x": 525973.69143770146,
+			"y": 1449283.5975396114
+		}
+	},
+	{
+		"attributes": {
+			"FID": 46,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060714053,
+			"COMMUNE": "Sandann",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Chaom Pra-ob",
+			"VILLAGE": "Chaom Pra-ob",
+			"SCHOOL_TYP": "Primary",
+			"TYPE_CODE": 2,
+			"CLASSES": 3,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 2,
+			"Non_teach": 0,
+			"Enrol": 93,
+			"Coor_X": 537847,
+			"Coor_Y": 1455375
+		},
+		"geometry": {
+			"x": 537846.68093571381,
+			"y": 1455375.0505848287
+		}
+	},
+	{
+		"attributes": {
+			"FID": 47,
+			"PROVINCE": "Kampong Thom",
+			"SCHOOL_COD": 6060908505,
+			"COMMUNE": "Tumring",
+			"DISTRICT": "Sandann",
+			"SCHOOL_NAM": "Meanchey",
+			"VILLAGE": "Roneam",
+			"SCHOOL_TYP": "Pre school",
+			"TYPE_CODE": 1,
+			"CLASSES": 1,
+			"ROOMS": 1,
+			"Location": "Rural",
+			"Teach_staf": 1,
+			"Non_teach": 0,
+			"Enrol": 30,
+			"Coor_X": 521438,
+			"Coor_Y": 1434661
+		},
+		"geometry": {
+			"x": 521437.64365541853,
+			"y": 1434661.4949448009
+		}
+	}]
+}

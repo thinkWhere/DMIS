@@ -1,36 +1,34 @@
-<h1>
-    Layer: {{ layer.layerTitle }}
-</h1>
+<h1><span i18n="Header layer@@adminHeaderLayer">Layer</span>: {{ layer.layerTitle }}</h1>
 <div class="panel panel-primary panel-layer">
   <div class="panel-heading">
-    <h3 class="panel-title">Layer details</h3>
+    <h3 class="panel-title" i18n="Layer details header for admin page@@adminLayerDetailsHeader">Layer details</h3>
   </div>
   <div *ngIf="!errorGettingLayer">
     <table class="table">
             <tbody>
             <tr>
-                <th scope="row">Title</th>
+                <th scope="row" i18n="Layer title@@adminLayerTitle">Title</th>
                 <td *ngIf="!editMode">{{ layer.layerTitle }}</td>
                 <td *ngIf="editMode">
                     <input [(ngModel)]="layer.layerTitle" class="form-control" type="text">
                 </td>
             </tr>
             <tr>
-                <th scope="row">Copyright</th>
+                <th scope="row" i18n="Layer copyright@@adminLayerCopyright">Copyright</th>
                 <td *ngIf="!editMode">{{ layer.layerCopyright }}</td>
                 <td *ngIf="editMode">
                     <input [(ngModel)]="layer.layerCopyright" class="form-control" type="text">
                 </td>
             </tr>
             <tr>
-                <th scope="row">Group</th>
+                <th scope="row" i18n="Layer group@@adminLayerGroup">Group</th>
                 <td *ngIf="!editMode">{{ layer.layerGroup }}</td>
                 <td *ngIf="editMode">
                     <input [(ngModel)]="layer.layerGroup" class="form-control" type="text">
                 </td>
             </tr>
             <tr>
-                <th scope="row">Category</th>
+                <th scope="row" i18n="Layer category@@adminLayerCategory">Category</th>
                 <td *ngIf="!editMode">{{ selectedCategory.name }}</td>
                 <td *ngIf="editMode">
                   <select class="form-control" [(ngModel)]="selectedCategory">
@@ -41,15 +39,19 @@
             </tbody>
       </table>
       <div class="panel-body">
-        <a class="btn btn-primary" *ngIf="!editMode" (click)="edit(layer)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-        <a class="btn btn-primary" *ngIf="editMode" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
-        <a class="btn btn-primary" *ngIf="editMode" (click)="save(layer)"><i class="fa fa-save" aria-hidden="true"></i> Save</a>
+        <a class="btn btn-primary" *ngIf="!editMode" (click)="edit(layer)">
+            <i class="fa fa-pencil" aria-hidden="true"></i> <span i18n="Edit button@@adminEditButton">Edit</span></a>
+        <a class="btn btn-primary" *ngIf="editMode" (click)="cancel()">
+            <i class="fa fa-times" aria-hidden="true"></i> <span i18n="Cancel button@@adminCancelButton">Cancel</span></a>
+        <a class="btn btn-primary" *ngIf="editMode" (click)="save(layer)">
+            <i class="fa fa-save" aria-hidden="true"></i> <span i18n="Save button@@adminSaveButton">Save</span></a>
       </div>
   </div>
   <div class="panel-body">
-    <div *ngIf="errorGettingLayer" class="alert alert-danger">
-      <strong>Error: </strong> could not get the layer details.
-    </div>
+      <div *ngIf="errorGettingLayer" class="alert alert-danger">
+          <strong i18n="Error@@error">Error</strong>:
+          <span i18n="Error message edit layer@@adminErrorEditLayer">Could not get the layer details.</span>
+      </div>
   </div>
 </div>
 

@@ -3,17 +3,22 @@ import { Router } from '@angular/router';
 import { GroupByPipe } from 'angular-pipes/src/aggregate/group-by.pipe';
 import {DomSanitizer} from '@angular/platform-browser';
 import * as ol from 'openlayers';
+import * as proj4x from 'proj4';
+
+// Define proj4 as workaround. See https://github.com/DefinitelyTyped/DefinitelyTyped/issues/15663
+let proj4 = (proj4x as any).default;
 
 import { LayerService } from './layer.service';
 import { MapService } from './map.service';
 import { IdentifyService } from './identify.service';
+import { StyleService } from './style.service';
 import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [LayerService, MapService, IdentifyService]
+  providers: [LayerService, MapService, IdentifyService, StyleService]
 })
 export class MapComponent implements OnInit {
 
@@ -23,16 +28,22 @@ export class MapComponent implements OnInit {
     layers: any;
     map: any;
     wmsSource: any; // WMS source for use in identify
+    contentTab: string = 'map';
 
     constructor(
         private router: Router,
         private layerService: LayerService,
         private mapService: MapService,
         private identifyService: IdentifyService,
+        private styleService: StyleService,
         private sanitizer:DomSanitizer
     ){}
 
     ngOnInit() {
+
+        // Define Indian 1960 / UTM zone 48N (used in Cambodia) Proj4js projection (copied from https://epsg.io/3148)
+        ol.proj.setProj4(proj4);
+        proj4.defs("EPSG:3148","+proj=utm +zone=48 +a=6377276.345 +b=6356075.41314024 +towgs84=198,881,317,0,0,0,0 +units=m +no_defs");
 
         this.showContent = true;
         this.showCategoryPicker = false;
@@ -52,8 +63,8 @@ export class MapComponent implements OnInit {
                 if (this.layers.incidentLayers){
                     this.addLayers(this.layers.incidentLayers);
                 }
-                if (this.layers.responseLayers){
-                    this.addLayers(this.layers.responseLayers);
+                if (this.layers.assessmentLayers){
+                    this.addLayers(this.layers.assessmentLayers);
                 }
                 // If a WMS source exists, add identify event handlers. The WMS source is used by the
                 // identify service to generate the GetFeatureInfo URL
@@ -74,6 +85,19 @@ export class MapComponent implements OnInit {
      */
     toggleContent(): void {
         this.showContent = !this.showContent;
+    }
+
+    /**
+     * Set the content of the tab
+     * @param tab
+     */
+    setContent(tab): void {
+        // Toggle content instead of switching when it is already on that tab
+        if (this.contentTab === tab){
+            this.toggleContent();
+        }
+        this.contentTab = tab;
+
     }
 
     /**
@@ -150,6 +174,9 @@ export class MapComponent implements OnInit {
             }
             if (layers[i].layerType === 'arcgisrest'){
                 this.addArcGISRESTLayer(layers[i]);
+            }
+            if (layers[i].layerType === 'geojson'){
+                this.addGeoJSONLayer(layers[i]);
             }
         }
     }
@@ -236,7 +263,76 @@ export class MapComponent implements OnInit {
         layer.setProperties({
             "layerName": arcRESTLayer.layerName,
             "layerSource": arcRESTLayer.layerSource,
-            "layerType": arcRESTLayer.layerType
+            "layerType": arcRESTLayer.layerType,
+            "layerTitle": arcRESTLayer.layerTitle
+        });
+        this.map.addLayer(layer);
+    }
+
+    /**
+     * Add a GeoJSON layer to the map
+     * Supports a normal GeoJSON layer and a Heatmap based on a GeoJSON layer
+     * @param geoJSONLayer
+     */
+    private addGeoJSONLayer(geoJSONLayer){
+        this.layerService.getGeoJSON(geoJSONLayer.layerName)
+            .subscribe(
+            data => {
+                // Success
+                this.createGeoJSONLayer(geoJSONLayer, data);
+            },
+            error => {
+                // TODO
+            }
+        );
+    }
+
+    /**
+     * Create a OL GeoJSON layer from GeoJSON and layer data and add to the map
+     * @param layerData
+     * @param geoJSON
+     */
+    private createGeoJSONLayer(layerData, geoJSON){
+        // Treat the layer as a heatmap when it includes the word heatmap
+        var isHeatmap = layerData.layerName.includes("heatmap");
+        var layer = null;
+        if (isHeatmap) {
+            layer = new ol.layer.Heatmap({
+                source: new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(geoJSON, {
+                        dataProjection: 'EPSG:4326',
+                        featureProjection: 'EPSG:3857'
+                    }),
+                    attributions: [new ol.Attribution({html: layerData.layerCopyright})],
+                }),
+                blur: 30,
+                weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
+            });
+        }
+        else {
+            var epsg = 'EPSG:4326';
+            if (geoJSON.crs){
+                if (geoJSON.crs.properties.name){
+                    epsg = geoJSON.crs.properties.name;
+                }
+            }
+            layer = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(geoJSON, {
+                        dataProjection: epsg,
+                        featureProjection: 'EPSG:3857'
+                    }),
+                    attributions: [new ol.Attribution({html: layerData.layerCopyright})],
+                }),
+                style: this.styleService.getStyle(layerData.layerName)
+            });
+        }
+        layer.setVisible(false);
+        layer.setProperties({
+            "layerName": layerData.layerName,
+            "layerSource": layerData.layerSource,
+            "layerType": layerData.layerType,
+            "layerTitle": layerData.layerTitle
         });
         this.map.addLayer(layer);
     }

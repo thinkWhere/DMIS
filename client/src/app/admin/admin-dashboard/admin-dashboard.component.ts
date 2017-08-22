@@ -68,7 +68,7 @@ export class AdminDashboardComponent implements OnInit {
               // Success
               this.layers = [];
               var preparednessLayers = {
-                'name': 'PREPAREDNESS',
+                'name': 'Preparedness',
                 'value': 0
               };
               if (data.preparednessLayers) {
@@ -83,14 +83,14 @@ export class AdminDashboardComponent implements OnInit {
                 incidentLayers.value = data.incidentLayers.length;
               }
               this.layers.push(incidentLayers);
-              var responseLayers = {
+              var assessmentLayers = {
                 'name': 'Assessment and response',
                 'value': 0
               };
-              if (data.responseLayers){
-                responseLayers.value = data.responseLayers.length;
+              if (data.assessmentLayers){
+                assessmentLayers.value = data.assessmentLayers.length;
               }
-              this.layers.push(responseLayers);
+              this.layers.push(assessmentLayers);
             },
             error => {
               // TODO: handle error?

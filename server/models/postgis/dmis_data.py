@@ -1,5 +1,6 @@
 from sqlalchemy.dialects.postgresql import JSON
 from server import db
+import datetime
 
 
 class DMISData(db.Model):
@@ -11,6 +12,7 @@ class DMISData(db.Model):
     # TODO postgres recommend using JSONB type as it's more efficient, however, for now we want to easily see the data
     json_data = db.Column(JSON)
     # TODO we could add further columns for xml, strings etc as needed dependent on type of data???
+    data_received = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def save_json_data(self, data_source, json):
         self.data_source = data_source

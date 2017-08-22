@@ -34,6 +34,24 @@ export class MapService {
                 zoom: 7
             })
         });
+
+        // Add scale line control
+        var scaleLineControl = new ol.control.ScaleLine();
+        this.map.addControl(scaleLineControl);
+
+        // Add mouse position control
+        var mousePositionFormat = function () {
+            return (
+                function (coord) {
+                    return ol.coordinate.toStringHDMS(coord);
+                });
+        };
+        var mousePositionControl = new ol.control.MousePosition({
+            coordinateFormat: mousePositionFormat(),
+            projection: new ol.proj.Projection({code: 'EPSG:4326'}),
+            undefinedHTML: 'no coordinates'
+        });
+        this.map.addControl(mousePositionControl);
     }
 
     /**

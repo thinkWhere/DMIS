@@ -68,15 +68,38 @@ export class IdentifyService {
         map.on('singleclick', (evt) => {
             // The identify calls go to different sources depending on the type of layer
             // So we need to wait for all the calls to finish before displaying a popup
+            // Supported layer types are:
+            // - Pacific Disaster Centre ArcGIS REST layer (external)
+            // - DMIS WMS GetFeatureInfo
+            // - DMIS geoJSON (this is not async but include to allow them to appear in one popup)
             this.identifyAsyncCalls = {
                 pdcArcGISRest: false,
-                dmisGetFeatureInfo: false
+                dmisGetFeatureInfo: false,
+                dmisGeoJSON: false
             };
             this.content.innerHTML = '';
             this.overlay.setPosition(null);
-            var coordinate = evt.coordinate;
-            // WMS GetFeatureInfo
-            var viewResolution = map.getView().getResolution();
+
+            // Identify - WMS GetFeatureInfo
+            this.setupAndIdentifyWMS(map, source, evt);
+
+            // Identify - ArcGIS REST
+            this.setupAndIdentifyArcGISRest(map, evt);
+
+            // Identify - GeoJSON
+            this.setupAndIdentifyGeoJSON(map, evt);
+        });
+    }
+
+    /**
+     * Setup and identify WMS
+     * @param map
+     * @param source
+     * @param evt
+     */
+    private setupAndIdentifyWMS(map, source, evt){
+         var coordinate = evt.coordinate;
+         var viewResolution = map.getView().getResolution();
             var getFeatureInfoUrl = source.getGetFeatureInfoUrl(
                 evt.coordinate, viewResolution, 'EPSG:3857',
                 {
@@ -113,9 +136,16 @@ export class IdentifyService {
                 // No call is made so set it to finished
                 this.identifyAsyncCalls.dmisGetFeatureInfo = true;
             }
+    }
 
-            // Use ArcGIS REST identify
-            var arcgisLayers = this.layerService.getIdentifiableLayers(map, 'arcgisrest');
+    /**
+     * Setup and identify ArcGIS REST layer
+     * @param map
+     * @param evt
+     */
+    private setupAndIdentifyArcGISRest(map, evt){
+         var coordinate = evt.coordinate;
+         var arcgisLayers = this.layerService.getIdentifiableLayers(map, 'arcgisrest');
             var geometry = evt.coordinate[0] + ',' + evt.coordinate[1];
             var mapExtent = '-20037700,20037700,-30241100,30241100';
             var imageDisplay = map.getSize()[0] + ',' + map.getSize()[1] + ',' + '72';
@@ -135,7 +165,8 @@ export class IdentifyService {
                         data => {
                             // Success
                             this.identifyAsyncCalls.pdcArcGISRest = true;
-                            var content = this.generateArcPopupContent(data.results);
+                            // Only only layer at a time supported
+                            var content = this.generateArcPopupContent(data.results, arcgisLayers[0].getProperties().layerTitle);
                             this.content.innerHTML += content;
                             this.checkOtherCallsAndShowPopup(coordinate);
                         },
@@ -149,7 +180,28 @@ export class IdentifyService {
                 // No call is made so set it to finished
                 this.identifyAsyncCalls.pdcArcGISRest = true;
             }
-        });
+    }
+
+    /**
+     * Setup and identify GeoJSON layer
+     * @param map
+     * @param evt
+     */
+    private setupAndIdentifyGeoJSON(map, evt){
+        var pixel = evt.pixel;
+        var coordinate = evt.coordinate;
+        var features = [];
+        map.forEachFeatureAtPixel(pixel, function(feature, layer){
+            // Add the layer title so it can be displayed as a header in the identify popup
+            var layerTitle = layer.getProperties().layerTitle;
+            feature.setProperties({"dmisLayerTitle": layerTitle});
+            features.push(feature);
+
+        }, {hitTolerance: 10});
+        this.identifyAsyncCalls.dmisGeoJSON = true;
+        var content = this.generatePopupContent(features);
+        this.content.innerHTML += content;
+        this.checkOtherCallsAndShowPopup(coordinate);
     }
 
     /**
@@ -206,14 +258,32 @@ export class IdentifyService {
         if (result.length) {
             var tableContent = '';
             for (var i = 0, ii = result.length; i < ii; ++i) {
-                tableContent += '<h4>' + result[i].getId() + '</h4>';
+                // If the layerTitle is set on the properties, use this. This title is the same as
+                // the title displayed in the table of contents. If it is not available, then try to
+                // use the ID returned in the results (e.g. for WMS, where GeoServer knows which layer
+                // belongs to which property
+                // TODO: match the ID returned in results with the layerTitle property on the layer to display a more
+                // user friendly layer title for WMS results
+                var layerTitle = '';
+                if (result[i].getProperties().dmisLayerTitle){
+                    layerTitle = result[i].getProperties().dmisLayerTitle;
+                }
+                else if (result[i].getId()){
+                    layerTitle = result[i].getId();
+                }
+                else {
+                    layerTitle = '';
+                }
+                if (layerTitle) {
+                    tableContent += '<h4>' + layerTitle + '</h4>';
+                }
                 tableContent += '<table class="table table-condensed">';
                 tableContent += '<tbody>';
                 tableContent += '<thead><tr><th>Property</th><th>Value</th></tr></thead>';
                 var properties = result[i].getKeys();
                 // exclude geometry property
                 for (var j = 0; j < properties.length; j++) {
-                    if (properties[j] !== 'geometry') {
+                    if (properties[j] !== 'geometry' && properties[j] !== 'dmisLayerTitle') {
                         tableContent += '<tr>';
                         // Property key
                         tableContent += '<th scope="row">';
@@ -239,12 +309,12 @@ export class IdentifyService {
      * @param result
      * @returns {string}
      */
-    private generateArcPopupContent(result) {
+    private generateArcPopupContent(result, layerTitle) {
         var htmlContent = '';
         if (result.length) {
             var tableContent = '';
             for (var i = 0; i < result.length; i++) {
-                tableContent += '<h4>' + result[i].layerName + '</h4>';
+                tableContent += '<h4>' + layerTitle + '</h4>';
                 tableContent += '<table class="table table-condensed">';
                 tableContent += '<tbody>';
                 tableContent += '<thead><tr><th>Property</th><th>Value</th></tr></thead>';
