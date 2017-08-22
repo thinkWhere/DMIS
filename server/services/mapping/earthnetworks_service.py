@@ -79,8 +79,6 @@ class EarthNetworksService:
         """ Return location on server where weather file can be safely downloaded"""
         base_dir = Path(__file__).parents[3]
         weather_dir = os.path.join(base_dir, 'weather')
-        current_app.logger.debug(f'Weather dir is {weather_dir}')
-
         EarthNetworksService.clean_up_weather_dir(weather_dir, 7)
         file_path = os.path.join(weather_dir, filename)
         return file_path

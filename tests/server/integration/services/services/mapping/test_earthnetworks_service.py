@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from datetime import datetime
 
-from geojson import FeatureCollection, is_valid, dumps
+from geojson import FeatureCollection
 
 from server.services.mapping.earthnetworks_service import EarthNetworksService
 from server import bootstrap_app
