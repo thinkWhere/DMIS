@@ -55,41 +55,52 @@ export class LayerService {
    * @returns {Observable<R|T>}
    */
   getGeoJSON(layerName){
-    var sourceGeoJSON = '';
-    switch(layerName){
-      case 'earthnetworks_lightning_points':
-        sourceGeoJSON = 'earthnetworks_lightning';
-        break;
-      case 'earthnetworks_lightning_heatmap':
-        sourceGeoJSON = 'earthnetworks_lightning';
-        break;
-      case 'ktm_pcdm_affected_healthcenter':
-        sourceGeoJSON = 'affected_healthcenter';
-        break;
-      case 'ktm_pcdm_affected_road':
-        sourceGeoJSON = 'affected_road';
-        break;
-      case 'ktm_pcdm_affected_school':
-        sourceGeoJSON = 'affected_school';
-        break;
-      case 'ktm_pcdm_affected_wells':
-        sourceGeoJSON = 'affected_wells';
-        break;
-      case 'ktm_pcdm_at_risk_commune':
-        sourceGeoJSON = 'at_risk_commune';
-        break;
-      case 'ktm_pcdm_at_risk_village':
-        sourceGeoJSON = 'at_risk_village';
-        break;
-      case 'ktm_pcdm_data_daily_actual':
-        sourceGeoJSON = 'data_daily_actual';
-        break;
-      default:
-        sourceGeoJSON = ''
+    // Get the lightning layers from the API
+    if (layerName === 'earthnetworks_lightning_points' || layerName === 'earthnetworks_lightning_heatmap'){
+      var layer = {
+        layerName: layerName
+      };
+      let headers = this.authenticationService.getAuthenticatedHeaders();
+      let options = new RequestOptions({
+        params: layer,
+        headers: headers
+      });
+      return this.http.get(environment.apiEndpoint + '/v1/map/geojson', options)
+          .map(response => response.json())
+          .catch(this.handleError);
     }
-    return this.http.get('assets/test-geojson/' + sourceGeoJSON + '.geojson')
-        .map(response => response.json())
-        .catch(this.handleError);
+    // Use hardcoded file
+    else {
+      var sourceGeoJSON = '';
+      switch(layerName){
+        case 'ktm_pcdm_affected_healthcenter':
+          sourceGeoJSON = 'affected_healthcenter';
+          break;
+        case 'ktm_pcdm_affected_road':
+          sourceGeoJSON = 'affected_road';
+          break;
+        case 'ktm_pcdm_affected_school':
+          sourceGeoJSON = 'affected_school';
+          break;
+        case 'ktm_pcdm_affected_wells':
+          sourceGeoJSON = 'affected_wells';
+          break;
+        case 'ktm_pcdm_at_risk_commune':
+          sourceGeoJSON = 'at_risk_commune';
+          break;
+        case 'ktm_pcdm_at_risk_village':
+          sourceGeoJSON = 'at_risk_village';
+          break;
+        case 'ktm_pcdm_data_daily_actual':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        default:
+          sourceGeoJSON = ''
+      }
+      return this.http.get('assets/test-geojson/' + sourceGeoJSON + '.geojson')
+          .map(response => response.json())
+          .catch(this.handleError);
+    }
   }
   
   /**
