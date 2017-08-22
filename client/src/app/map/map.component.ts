@@ -323,9 +323,17 @@ export class MapComponent implements OnInit {
                         featureProjection: 'EPSG:3857'
                     }),
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
-                }),
-                style: this.styleService.getStyle(layerData.layerName)
+                })
             });
+        }
+        if (layerData.layerName === 'earthnetworks_lightning_points'){
+            layer.setStyle(this.styleService.getLightningStyle)
+        }
+        else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
+            layer.setStyle(this.styleService.getAtRiskVillageStyle);
+        }
+        else {
+            layer.setStyle(this.styleService.getStyle);
         }
         layer.setVisible(false);
         layer.setProperties({
