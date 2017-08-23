@@ -205,6 +205,7 @@ export class MapComponent implements OnInit {
                 this.addArcGISRESTLayer(layers[i]);
             }
             if (layers[i].layerType === 'geojson'){
+                this.setGeoJSONLegend(layers[i]);
                 this.addGeoJSONLayer(layers[i]);
             }
         }
@@ -229,6 +230,13 @@ export class MapComponent implements OnInit {
                      // TODO: potentially handle error?
                  }
              )
+    }
+
+    private setGeoJSONLegend(layer){
+        // TEST
+        //layer.layerLegend = '<div>Hello!</div>';
+        //layer.layerLegend = "<div><svg height='15' width='15'><rect width='15' height='15' stroke='rgba(84, 84, 84, 0.7)' stroke-width='1' fill='rgba(223, 223, 223, 0.1)'/></svg>Test</div>";
+        layer.layerLegend = '<canvas id="myCanvas" width="200" height="100"></canvas>';
     }
 
     /**
@@ -360,6 +368,9 @@ export class MapComponent implements OnInit {
         }
         else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
             layer.setStyle(this.styleService.getAtRiskVillageStyle);
+        }
+        else if (layerData.layerName === 'ktm_pcdm_at_risk_commune'){
+            layer.setStyle(this.styleService.getAtRiskCommuneStyle)
         }
         else {
             layer.setStyle(this.styleService.getStyle);

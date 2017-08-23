@@ -101,7 +101,31 @@ export class StyleService {
     }
 
     getAtRiskCommuneStyle(feature){
-        //TODO
+        var style = {};
+        var isVillageAtRiskOfFlood = feature.get('SS_P_AL');
+        if (isVillageAtRiskOfFlood === '1'){
+            style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(211, 211, 211, 0.4)' // red
+                })
+            });
+        }
+        else {
+            style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(255, 215, 0, 0.4)' // yellow
+                })
+            });
+        }
+        return style;
     }
 
     /**
