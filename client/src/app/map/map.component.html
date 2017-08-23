@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="layer-group" [hidden]="category !== 'preparedness'">
-                            <div *ngFor="let layerGroup of layers.preparednessLayers | groupBy: 'layerGroup'">
+                            <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerGroup'">
                                 <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                     <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                     <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <div class="layer-group" [hidden]="category !== 'incidents'">
-                            <div *ngFor="let layerGroup of layers.incidentLayers | groupBy: 'layerGroup'">
+                            <div *ngFor="let layerGroup of incidentLayers | groupBy: 'layerGroup'">
                                 <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                     <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                     <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div [hidden]="category !== 'assessment'">
-                             <div *ngFor="let layerGroup of layers.assessmentLayers | groupBy: 'layerGroup'">
+                             <div *ngFor="let layerGroup of assessmentLayers | groupBy: 'layerGroup'">
                                 <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                     <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                     <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
