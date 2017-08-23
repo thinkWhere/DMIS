@@ -515,3 +515,45 @@ $move-map-in-xs: true !default;
   max-height: 200px;
   overflow-y: auto;
 }
+
+/*********************************** Measure Tools *******************************/
+:host /deep/ .ol-tooltip {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  color: white;
+  padding: 4px 8px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+:host /deep/ .ol-tooltip-measure {
+  opacity: 1;
+  font-weight: bold;
+}
+
+:host /deep/ .ol-tooltip-static {
+  background-color: #2abb81;
+  color: white;
+  border: 1px solid white;
+}
+
+:host /deep/ .ol-tooltip-measure:before,
+:host /deep/ .ol-tooltip-static:before {
+  border-top: 6px solid rgba(0, 0, 0, 0.5);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  margin-left: -7px;
+  left: 50%;
+}
+
+:host /deep/ .ol-tooltip-static:before {
+  border-top-color: #2abb81;
+}
+
+.sidebar-measure {
+  padding-top: 20px;
+}

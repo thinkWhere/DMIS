@@ -20,11 +20,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
@@ -43,11 +43,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
@@ -66,11 +66,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
@@ -134,14 +134,28 @@
         </context-group>
         <note priority="1" from="description">EWS link title</note>
       </trans-unit>
+      <trans-unit id="headerWeatherMapLink" datatype="html" approved="yes">
+        <source>Weather</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <note priority="1" from="description">Weather map link</note>
+      </trans-unit>
+      <trans-unit id="headerWeatherMapLinkTitle" datatype="html" approved="yes">
+        <source>Go to the weather map</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <note priority="1" from="description">Weather map link title</note>
+      </trans-unit>
       <trans-unit id="login" datatype="html" approved="yes">
         <source>Login</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
@@ -156,21 +170,21 @@
       <trans-unit id="headerWelcomeMessage" datatype="html" approved="yes">
         <source>Hi</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <note priority="1" from="description">Welcome greeting for user</note>
       </trans-unit>
       <trans-unit id="headerAdminLink" datatype="html" approved="yes">
         <source>Admin</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <note priority="1" from="description">Admin link</note>
       </trans-unit>
       <trans-unit id="headerLogoutLink" datatype="html" approved="yes">
         <source>Logout</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <note priority="1" from="description">Logout link</note>
       </trans-unit>
@@ -178,6 +192,10 @@
         <source>Username</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
@@ -200,6 +218,10 @@
         <source>Password</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <note priority="1" from="description">Password</note>
       </trans-unit>
@@ -247,20 +269,45 @@
       <trans-unit id="mapToggleCategory" datatype="html" approved="yes">
         <source>Change category</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <note priority="1" from="description">Category toggle title</note>
       </trans-unit>
       <trans-unit id="mapToggleLayerGroup" datatype="html" approved="yes">
         <source>Toggle layer group</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">110</context>
         </context-group>
         <note priority="1" from="description">Toggle layer group button</note>
+      </trans-unit>
+      <trans-unit id="mapMeasureHelpMsg" datatype="html" approved="yes">
+        <source>Click to start drawing</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+        <note priority="1" from="description">Measure help message</note>
+      </trans-unit>
+      <trans-unit id="mapMeasureContinuePolygonMsg" datatype="html" approved="yes">
+        <source>Click to continue drawing the polygon</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <note priority="1" from="description">Measure continue polygon message</note>
+      </trans-unit>
+      <trans-unit id="mapMeasureContinueLineMsg" datatype="html" approved="yes">
+        <source>Click to continue drawing the line</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+        <note priority="1" from="description">Measure continue line message</note>
       </trans-unit>
       <trans-unit id="titleApplication" datatype="html" approved="yes">
         <source>DMIS</source> <target state="translated">TODO</target><context-group purpose="location">
@@ -310,6 +357,13 @@
           <context context-type="linenumber">6</context>
         </context-group>
         <note priority="1" from="description">Subheader for the FAQ</note>
+      </trans-unit>
+      <trans-unit id="weatherTitle" datatype="html" approved="yes">
+        <source>Weather</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/weather/weather.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">Weather title</note>
       </trans-unit>
       <trans-unit id="adminDashboardHeader" datatype="html" approved="yes">
         <source>Dashboard</source> <target state="translated">TODO</target><context-group purpose="location">
