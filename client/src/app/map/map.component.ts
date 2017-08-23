@@ -246,10 +246,12 @@ export class MapComponent implements OnInit {
              )
     }
 
+    /**
+     * Set layer legend for a GeoJSON layer using the canvas
+     * TODO: add image to canvas
+     * @param layer
+     */
     private setGeoJSONLegend(layer){
-        // TEST
-        //layer.layerLegend = '<div>Hello!</div>';
-        //layer.layerLegend = "<div><svg height='15' width='15'><rect width='15' height='15' stroke='rgba(84, 84, 84, 0.7)' stroke-width='1' fill='rgba(223, 223, 223, 0.1)'/></svg>Test</div>";
         layer.layerLegend = '<canvas id="myCanvas" width="200" height="100"></canvas>';
     }
 

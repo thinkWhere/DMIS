@@ -86,7 +86,7 @@
                                         <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
                                     </div>
                                     <div class="layer-legend">
-                                        <img [src]="layer.layerLegend" alt="Legend ">
+                                        <img [src]="layer.layerLegend" alt="Legend">
                                     </div>
                                 </div>
                             </div>
@@ -102,6 +102,9 @@
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
                                         <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
                                     </div>
+                                    <div class="layer-legend">
+                                        <div [innerHTML]="layer.layerLegend"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +118,9 @@
                                 <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
                                         <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                    </div>
+                                    <div class="layer-legend">
+                                        <div [innerHTML]="layer.layerLegend"></div>
                                     </div>
                                 </div>
                             </div>
