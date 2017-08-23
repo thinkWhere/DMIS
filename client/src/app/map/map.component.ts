@@ -12,13 +12,14 @@ import { LayerService } from './layer.service';
 import { MapService } from './map.service';
 import { IdentifyService } from './identify.service';
 import { StyleService } from './style.service';
+import { MeasureService } from './measure.service';
 import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [LayerService, MapService, IdentifyService, StyleService]
+  providers: [LayerService, MapService, IdentifyService, StyleService, MeasureService]
 })
 export class MapComponent implements OnInit {
 
@@ -28,7 +29,9 @@ export class MapComponent implements OnInit {
     layers: any;
     map: any;
     wmsSource: any; // WMS source for use in identify
-    contentTab: string = 'map';
+    contentTab: string = 'legend';
+
+    activeMeasureType: string = '';
 
     constructor(
         private router: Router,
@@ -36,6 +39,7 @@ export class MapComponent implements OnInit {
         private mapService: MapService,
         private identifyService: IdentifyService,
         private styleService: StyleService,
+        private measureService: MeasureService,
         private sanitizer:DomSanitizer
     ){}
 
@@ -51,7 +55,7 @@ export class MapComponent implements OnInit {
         this.layers = [];
 
         this.initMap();
-        
+        this.measureService.initMeasureTool();
         this.layerService.getLayers()
             .subscribe(
             data => {
@@ -66,11 +70,8 @@ export class MapComponent implements OnInit {
                 if (this.layers.assessmentLayers){
                     this.addLayers(this.layers.assessmentLayers);
                 }
-                // If a WMS source exists, add identify event handlers. The WMS source is used by the
-                // identify service to generate the GetFeatureInfo URL
-                if (this.wmsSource){
-                    this.identifyService.addIdentifyEventHandlers(this.map, this.wmsSource);
-                }
+                this.identifyService.addIdentifyEventHandlers(this.map, this.wmsSource);
+                this.identifyService.setActive(true);
             },
             error => {
               // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
@@ -96,8 +97,18 @@ export class MapComponent implements OnInit {
         if (this.contentTab === tab){
             this.toggleContent();
         }
-        this.contentTab = tab;
-
+        else {
+            this.contentTab = tab;
+            // Reset measure
+            this.measureService.setActive(false);
+            this.activeMeasureType = '';
+        }
+        if (this.contentTab === 'legend'){
+            this.identifyService.setActive(true);
+        }
+        else {
+            this.identifyService.setActive(false);
+        }
     }
 
     /**
@@ -131,6 +142,24 @@ export class MapComponent implements OnInit {
                 return;
             }
         }
+    }
+
+    /**
+     * Activate measure (line or area)
+     * @param type
+     */
+    activateMeasure(type){
+        this.activeMeasureType = type;
+        this.measureService.setType(type);
+        this.measureService.setActive(true);
+    }
+
+    /**
+     * Reset the measure tool
+     */
+    resetMeasure(){
+        this.measureService.setActive(false);
+        this.activeMeasureType = '';
     }
 
     /**

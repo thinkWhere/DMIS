@@ -1,0 +1,68 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-dmis" role="navigation" [ngClass]="{'preparedness': category === 'preparedness', 'incidents': category === 'incidents', 'assessment': category === 'assessment'}">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/" i18n="Name of the application@@headerNameOfApplication">DMIS Cambodia</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul *ngIf="(route == '/map/preparedness' || route == '/map/incidents' || route == '/map/assessment')" class="nav navbar-nav navbar-categories">
+                <li>
+                    <a routerLinkActive="active" routerLink="/map/preparedness" class="preparedness" title="Preparedness"
+                       i18n="Map category@@mapCategoryPreparedness" i18n-title="Map category@@mapCategoryPreparedness">Preparedness</a>
+                </li>
+                <li>
+                    <a routerLinkActive="active" routerLink="/map/incidents" class="incidents" title="Incidents and Warnings"
+                       i18n="Map category@@mapCategoryIncidents" i18n-title="Map category@@mapCategoryIncidents">Incidents and Warnings</a>
+                </li>
+                <li>
+                    <a routerLinkActive="active" routerLink="/map/assessment" class="assessment" title="Assessment and Response"
+                       i18n="Map category@@mapCategoryAssessment" i18n-title="Map category@@mapCategoryAssessment">Assessment and Response</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a routerLink="/" title="Go to the about page" i18n="About link@@headerAboutLink" i18n-title="About link title@@headerAboutLinkTitle">About</a>
+                </li>
+                <li>
+                    <a routerLink="/map/preparedness" title="Go to the map page" i18n="Map link@@headerMapLink" i18n-title="Map link title@@headerMapLinkTitle">Map</a>
+                </li>
+                <li>
+                    <a routerLink="/faq" title="Go to the FAQ page" i18n="FAQ link@@headerFaqLink" i18n-title="FAQ link title@@headerFAQLinkTitle">FAQ</a>
+                </li>
+                <li>
+                    <a href="http://ews1294.info/home" target="_blank" title="Go to the EWS website" i18n="EWS link@@headerEWSLink" i18n-title="EWS link title@@headerEWSLinkTitle">EWS</a>
+                </li>
+                <li>
+                    <a routerLink="/weather" title="Go to the weather map" i18n="Weather map link@@headerWeatherMapLink" i18n-title="Weather map link title@@headerWeatherMapLinkTitle">Weather</a>
+                </li>
+                <li *ngIf="languageCode === 'km'">
+                    <a class="pointer" (click)="switchLanguage('en')">English</a>
+                </li>
+                <li *ngIf="languageCode === 'en'">
+                    <a class="pointer" (click)="switchLanguage('km')">ភាសាខ្មែរ</a>
+                </li>
+                <li *ngIf="!user">
+                    <a routerLink="/login" title="Login" i18n-title="Login@@login"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;<span i18n="Login@@login">Login</span></a>
+                </li>
+                <li *ngIf="user" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span i18n="Welcome greeting for user@@headerWelcomeMessage">Hi</span>, {{ user.username }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li *ngIf="user.role === 'ADMIN'"><a routerLink="/admin" i18n="Admin link@@headerAdminLink">Admin</a></li>
+                        <li><a (click)="logout()" i18n="Logout link@@headerLogoutLink">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="dmis-container">
+    <router-outlet></router-outlet>
+</div>
