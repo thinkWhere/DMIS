@@ -4,6 +4,7 @@ import requests
 from flask import current_app, Response
 from werkzeug.datastructures import Headers
 
+from server.models.postgis.dmis_data import DMISData
 from server.services.mapping.earthnetworks_service import EarthNetworksService, EarthNetworksError
 
 
@@ -36,13 +37,20 @@ class MapService:
 
     @staticmethod
     def handle_geojson_request(query_string: str) -> Response:
-        """ Validate that request if for a known layer, then generate a valid Flask Response """
+        """ Validate that request if for a known geojson datasource, then generate a valid Flask Response """
         layer_source = MapService.parse_geojson_request(query_string)
 
-        if layer_source.lower() == 'earthnetworks_lightning':
+        available_layers = DMISData.get_available_data_sources()
+
+        if layer_source not in available_layers:
+            raise MapServiceClientError(f'Unknown geojson layer source: {layer_source}')
+
+        if layer_source == 'earthnetworks_lightning':
+            # EarthNetworks data retrieved from S3, so needs separate path
             return MapService.get_earthnetworks_lightning_response()
         else:
-            raise MapServiceClientError(f'Unknown geojson layer source: {layer_source}')
+            layer_geojson = DMISData.get_latest_json_data_for_source(layer_source)
+            return Response(layer_geojson, status=200, mimetype='application/json')
 
     @staticmethod
     def get_earthnetworks_lightning_response():
@@ -65,7 +73,7 @@ class MapService:
         parsed_query = parse_qs(query_string)
 
         if 'layerSource' in parsed_query:
-            return parsed_query['layerSource'][0]
+            return parsed_query['layerSource'][0].lower()
         else:
             raise MapServiceClientError('GeoJson request must supply layerSource in query string')
 
