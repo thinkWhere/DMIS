@@ -1,6 +1,6 @@
 from flask_restful import Resource, request, current_app
 
-from server.services.mapping.map_service import MapService, MapServiceError
+from server.services.mapping.map_service import MapService, MapServiceClientError, MapServiceServerError
 from server.services.users.authentication_service import token_auth
 
 
@@ -32,6 +32,11 @@ class MapsAPI(Resource):
             type: string
             required: false
             default: GetCapabilities
+          - in: query
+            name: layerName
+            type: string
+            required: false
+            default: earthnetworks_lightning_points
         responses:
           200:
             description: Request successful
@@ -47,8 +52,10 @@ class MapsAPI(Resource):
             query_str = request.query_string.decode('utf-8')
             response = MapService.handle_map_request(map_protocol, query_str)
             return response
-        except MapServiceError as e:
+        except MapServiceClientError as e:
             return {'Error': str(e)}, 400
+        except MapServiceServerError as e:
+            return {'Error': str(e)}, 500
         except Exception as e:
             current_app.logger.critical('Unhandled exception encountered: {}'.format(e))
             return {'Error': 'Unhandled'}, 500
