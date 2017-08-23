@@ -49,15 +49,13 @@ export class StyleService {
                 })
             });
         }
-        if (feature === 'ktm_pcdm_at_risk_commune') {
-            console.log("risk commune");
-        }
-        if (feature === 'ktm_pcdm_at_risk_village') {
-            console.log("risk village");
-        }
         return style;
     };
 
+    /**
+     * Return a default style (red)
+     * @returns {ol.style.Style}
+     */
     getDefaultStyle() {
         var style = new ol.style.Style({
             image: new ol.style.Circle({
