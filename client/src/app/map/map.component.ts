@@ -200,7 +200,7 @@ export class MapComponent implements OnInit {
          var assessment = [];
          for (var i = 0; i < layers.length; i++) {
              if (layers[i].layerType === 'wms') {
-                 //this.setWMSLayerLegend(layers[i]);
+                 this.setWMSLayerLegend(layers[i]);
                  this.addWMSLayer(layers[i]);
              }
              if (layers[i].layerType === 'arcgisrest') {
@@ -376,18 +376,18 @@ export class MapComponent implements OnInit {
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 })
             });
-        }
-        if (layerData.layerName === 'earthnetworks_lightning_points'){
-            layer.setStyle(this.styleService.getLightningStyle)
-        }
-        else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
-            layer.setStyle(this.styleService.getAtRiskVillageStyle);
-        }
-        else if (layerData.layerName === 'ktm_pcdm_at_risk_commune'){
-            layer.setStyle(this.styleService.getAtRiskCommuneStyle)
-        }
-        else {
-            layer.setStyle(this.styleService.getStyle);
+            if (layerData.layerName === 'earthnetworks_lightning_points'){
+                layer.setStyle(this.styleService.getLightningStyle)
+            }
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
+                layer.setStyle(this.styleService.getAtRiskVillageStyle);
+            }
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune'){
+                layer.setStyle(this.styleService.getAtRiskCommuneStyle)
+            }
+            else {
+                layer.setStyle(this.styleService.getStyle);
+            }
         }
         layer.setVisible(false);
         layer.setProperties({

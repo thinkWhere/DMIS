@@ -13,7 +13,6 @@ export class StyleService {
      * @returns {ol.style.Style}
      */
     getStyle(feature) {
-        console.log(feature);
         // Default style
         var style = new ol.style.Style({
             image: new ol.style.Circle({
@@ -82,6 +81,10 @@ export class StyleService {
         return style;
     }
 
+    /**
+     * Return the style for lightning
+     * @returns {ol.style.Style}
+     */
     getLightningStyle() {
         var style = new ol.style.Style({
             text: new ol.style.Text({
@@ -100,17 +103,21 @@ export class StyleService {
         return style;
     }
 
+    /**Return the style for At Risk Communes
+     * @param feature
+     * @returns {{}}
+     */
     getAtRiskCommuneStyle(feature){
         var style = {};
-        var isVillageAtRiskOfFlood = feature.get('SS_P_AL');
-        if (isVillageAtRiskOfFlood === '1'){
+        var proportionDisplacedPeople = feature.get('SS_P_AL');
+        if (proportionDisplacedPeople === 1){
             style = new ol.style.Style({
                 stroke: new ol.style.Stroke({
                     color: 'black',
                     width: 1
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(211, 211, 211, 0.4)' // red
+                    color: 'rgba(255, 0, 0, 0.4)' // red
                 })
             });
         }
@@ -121,7 +128,7 @@ export class StyleService {
                     width: 1
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(255, 215, 0, 0.4)' // yellow
+                    color: 'rgba(255, 255, 0, 0.4)' // yellow
                 })
             });
         }

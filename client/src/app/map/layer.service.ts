@@ -93,6 +93,33 @@ export class LayerService {
         case 'ktm_pcdm_data_daily_actual':
           sourceGeoJSON = 'data_daily_actual';
           break;
+        case 'wfp_daily_people_affected':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_displaced':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_deaths':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_pumpwells':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_healthcenter':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_school':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_road':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_bridge':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
+        case 'wfp_daily_rice':
+          sourceGeoJSON = 'data_daily_actual';
+          break;
         default:
           sourceGeoJSON = ''
       }
