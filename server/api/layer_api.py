@@ -38,8 +38,6 @@ class LayerListAPI(Resource):
         try:
             layers = LayerService.get_all_layers()
             return layers.to_primitive(), 200
-        except LayerServiceError as e:
-            return {"Error": str(e)}, 400
         except NotFound:
             return {"Error": "No layers found"}, 404
         except Exception as e:
