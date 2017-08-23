@@ -51,37 +51,18 @@ class Layer(db.Model):
         db.session.commit()
 
     @staticmethod
-    def get_layers(map_category: MapCategory) -> Optional[DMISLayersDTO]:
-        """
-        Get all layers grouped by map category, with optional filter by map category
-        UNKNOWN category returns all categories
-        """
+    def get_all_layers() -> Optional[DMISLayersDTO]:
+        """ Get all available layers in the DB """
+        db_layers = Layer.query.all()
 
-        # TODO: filter by role
-        # Base query that applies to all searches
-        layer_query = db.session.query(Layer)
-
-        if map_category != MapCategory.UNKNOWN:
-            layers = layer_query.filter(Layer.map_category == map_category.value).all()
-        else:
-            layers = layer_query.order_by(Layer.map_category, Layer.layer_group).all()
-
-        if len(layers) == 0:
+        if len(db_layers) == 0:
             return None
 
         layers_dto = DMISLayersDTO()
 
-        for layer in layers:
-            layer_toc = Layer.get_layer_details(layer)
-
-            if layer.map_category == MapCategory.PREPAREDNESS.value:
-                layers_dto.preparedness_layers.append(layer_toc)
-            elif layer.map_category == MapCategory.INCIDENTS_WARNINGS.value:
-                layers_dto.incident_layers.append(layer_toc)
-            elif layer.map_category == MapCategory.ASSESSMENT_RESPONSE.value:
-                layers_dto.assessment_layers.append(layer_toc)
-            else:
-                current_app.logger.error(f'Unknown Map Category for layer {layer.layer_id}')
+        for layer in db_layers:
+            layer_details = Layer.get_layer_details(layer)
+            layers_dto.layers.append(layer_details)
 
         return layers_dto
 

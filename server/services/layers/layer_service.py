@@ -25,17 +25,9 @@ class LayerService:
         return new_layer
 
     @staticmethod
-    def get_layers_by_category(map_category_str: str = 'UNKNOWN') -> DMISLayersDTO:
-        """
-        Returns layers that match category, all layers returned if UNKNOWN supplied
-        :raises: LayerServiceError, NotFound
-        """
-        try:
-            map_category = MapCategory[map_category_str.upper()]
-        except KeyError:
-            raise LayerServiceError(f'Unknown map category: {map_category_str}')
-
-        layers = Layer.get_layers(map_category)
+    def get_all_layers():
+        """ Returns a list of layers """
+        layers = Layer.get_all_layers()
 
         if layers is None:
             raise NotFound()
