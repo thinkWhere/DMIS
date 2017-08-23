@@ -31,6 +31,11 @@ export class MapComponent implements OnInit {
     wmsSource: any; // WMS source for use in identify
     contentTab: string = 'legend';
 
+    // Categories
+    preparednessLayers: any = [];
+    incidentLayers: any = [];
+    assessmentLayers: any = [];
+
     activeMeasureType: string = '';
 
     constructor(
@@ -60,16 +65,8 @@ export class MapComponent implements OnInit {
             .subscribe(
             data => {
                 // Success
-                this.layers = data;
-                if (this.layers.preparednessLayers){
-                    this.addLayers(this.layers.preparednessLayers);
-                }
-                if (this.layers.incidentLayers){
-                    this.addLayers(this.layers.incidentLayers);
-                }
-                if (this.layers.assessmentLayers){
-                    this.addLayers(this.layers.assessmentLayers);
-                }
+                this.layers = data.layers;
+                this.addLayers(this.layers);
                 this.identifyService.addIdentifyEventHandlers(this.map, this.wmsSource);
                 this.identifyService.setActive(true);
             },
@@ -196,19 +193,36 @@ export class MapComponent implements OnInit {
      * TODO: review and maybe add to layer service when this function grows?
      */
     private addLayers (layers) {
-        for (var i = 0; i < layers.length; i++){
-            if (layers[i].layerType === 'wms'){
-                this.setWMSLayerLegend(layers[i]);
-                this.addWMSLayer(layers[i]);
-            }
-            if (layers[i].layerType === 'arcgisrest'){
-                this.addArcGISRESTLayer(layers[i]);
-            }
-            if (layers[i].layerType === 'geojson'){
-                this.setGeoJSONLegend(layers[i]);
-                this.addGeoJSONLayer(layers[i]);
-            }
-        }
+         // Using local variables and assigning it to the relevant arrays after looping over the layers to
+         // avoid issues with the 'groupBy' filter in the HTML
+         var preparedness = [];
+         var incidents = [];
+         var assessment = [];
+         for (var i = 0; i < layers.length; i++) {
+             if (layers[i].layerType === 'wms') {
+                 //this.setWMSLayerLegend(layers[i]);
+                 this.addWMSLayer(layers[i]);
+             }
+             if (layers[i].layerType === 'arcgisrest') {
+                 this.addArcGISRESTLayer(layers[i]);
+             }
+             if (layers[i].layerType === 'geojson') {
+                 this.setGeoJSONLegend(layers[i]);
+                 this.addGeoJSONLayer(layers[i]);
+             }
+             if (this.layers[i].mapCategory === 'PREPAREDNESS') {
+                 preparedness.push(layers[i]);
+             }
+             if (this.layers[i].mapCategory === 'INCIDENTS_WARNINGS') {
+                 incidents.push(layers[i]);
+             }
+             if (this.layers[i].mapCategory === 'ASSESSMENT_RESPONSE') {
+                 assessment.push(layers[i]);
+             }
+         }
+        this.preparednessLayers = preparedness;
+        this.incidentLayers = incidents;
+        this.assessmentLayers = assessment;
     }
 
     /**
@@ -312,7 +326,7 @@ export class MapComponent implements OnInit {
      * @param geoJSONLayer
      */
     private addGeoJSONLayer(geoJSONLayer){
-        this.layerService.getGeoJSON(geoJSONLayer.layerName)
+        this.layerService.getGeoJSON(geoJSONLayer)
             .subscribe(
             data => {
                 // Success

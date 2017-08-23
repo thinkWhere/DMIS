@@ -50,15 +50,15 @@ class TestLayerService(unittest.TestCase):
         # This tests that the layer service correctly corrects layers
         self.test_layer = LayerService.create_layer(layer_dto)
 
-    def test_layers_by_category_finds_layer(self):
+    def test_get_all_layers_returns_layers(self):
         if self.skip_tests:
             return
 
         # Act
-        layer_by_category = LayerService.get_layers_by_category(MapCategory.PREPAREDNESS.name)
+        layers_dto = LayerService.get_all_layers()
 
         # Assert that at least one layer returned
-        self.assertGreater(len(layer_by_category.preparedness_layers), 0)
+        self.assertGreater(len(layers_dto.layers), 0)
 
     def test_update_layer_details(self):
         """ Check that the layer details are updated """

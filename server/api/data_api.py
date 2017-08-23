@@ -7,7 +7,7 @@ from server.services.users.authentication_service import token_auth
 class DataAPI(Resource):
 
     @token_auth.login_required
-    def put(self, data_source):
+    def post(self, data_source):
         """
         Allows third parties to push data into DMIS
         ---

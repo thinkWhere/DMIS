@@ -37,9 +37,9 @@ class MapService:
     @staticmethod
     def handle_geojson_request(query_string: str) -> Response:
         """ Validate that request if for a known layer, then generate a valid Flask Response """
-        requested_layer = MapService.parse_geojson_request(query_string)
+        layer_source = MapService.parse_geojson_request(query_string)
 
-        if requested_layer.lower() in ['earthnetworks_lightning_points', 'earthnetworks_lightning_heatmap']:
+        if layer_source.lower() == 'earthnetworks_lightning':
 
             try:
                 feature_collection_json, last_updated = EarthNetworksService.get_latest_lightning_data()
@@ -53,17 +53,17 @@ class MapService:
                                       headers=response_headers)
             return flask_response
         else:
-            raise MapServiceClientError(f'Unknown geojson layer requested: {requested_layer}')
+            raise MapServiceClientError(f'Unknown geojson layer source: {layer_source}')
 
     @staticmethod
     def parse_geojson_request(query_string: str) -> str:
         """ Helper method to ensure geoJson mapping request is valid """
         parsed_query = parse_qs(query_string)
 
-        if 'layerName' in parsed_query:
-            return parsed_query['layerName'][0]
+        if 'layerSource' in parsed_query:
+            return parsed_query['layerSource'][0]
         else:
-            raise MapServiceClientError('GeoJson request must supply layerName in query string')
+            raise MapServiceClientError('GeoJson request must supply layerSource in query string')
 
     @staticmethod
     def proxy_request_to_geoserver(map_protocol: str, query_string: str) -> Response:

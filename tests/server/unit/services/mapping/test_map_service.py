@@ -7,13 +7,13 @@ class TestMapService(unittest.TestCase):
 
     def test_parse_geojson_request_returns_layername(self):
         # Arrange
-        test_query = 'layerName=earthnetworks_lightning_points'
+        test_query = 'layerSource=earthnetworks_lightning'
 
         # Act
         layer_name = MapService.parse_geojson_request(test_query)
 
         # Assert
-        self.assertEqual(layer_name, 'earthnetworks_lightning_points')
+        self.assertEqual(layer_name, 'earthnetworks_lightning')
 
     def test_no_layername_in_query_string_raises_error(self):
         # Arrange

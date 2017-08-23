@@ -46,15 +46,10 @@ class LayerUpdateDTO(Model):
 
 
 class DMISLayersDTO(Model):
-    """ Model for layers grouped by map category and layer group """
-
+    """ DTO for all available layers """
     def __init__(self):
         """ DTO constructor initialise all arrays to empty"""
         super().__init__()
-        self.preparedness_layers = []
-        self.incident_layers = []
-        self.assessment_layers = []
+        self.layers = []
 
-    preparedness_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='preparednessLayers', serialize_when_none=False)
-    incident_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='incidentLayers', serialize_when_none=False)
-    assessment_layers = ListType(ModelType(LayerDetailsDTO), serialized_name='assessmentLayers', serialize_when_none=False)
+    layers = ListType(ModelType(LayerDetailsDTO))

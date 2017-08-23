@@ -8,12 +8,12 @@ from server.services.users.authentication_service import token_auth
 from server.models.postgis.utils import NotFound
 
 
-class LayerTocAPI(Resource):
+class LayerListAPI(Resource):
 
     @token_auth.login_required
-    def get(self, map_category):
+    def get(self):
         """
-        Gets layers grouped by Category
+        Get all available layers
         ---
         tags:
           - layers
@@ -25,22 +25,9 @@ class LayerTocAPI(Resource):
               description: Base64 encoded session token
               required: true
               type: string
-            - in: path
-              name: map_category
-              description: Category of mapping, from MapCategory enum
-              type: string
-              required: false
-              default: "UNKNOWN"
-              enum:
-                - "UNKNOWN"
-                - "PREPAREDNESS"
-                - "INCIDENTS_WARNINGS"
-                - "ASSESSMENT_RESPONSE"
         responses:
           200:
             description: Layers
-          400:
-            description: Client error
           401:
             description: Unauthorized, credentials are invalid
           404:
@@ -49,10 +36,8 @@ class LayerTocAPI(Resource):
             description: Internal Server Error
         """
         try:
-            layer_details = LayerService.get_layers_by_category(map_category)
-            return layer_details.to_primitive(), 200
-        except LayerServiceError as e:
-            return {"Error": str(e)}, 400
+            layers = LayerService.get_all_layers()
+            return layers.to_primitive(), 200
         except NotFound:
             return {"Error": "No layers found"}, 404
         except Exception as e:
