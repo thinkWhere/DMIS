@@ -26,9 +26,6 @@ class DataIngestService:
         if data_source == 'river-gauge':
             # TODO may want to save to a separate river gauge table in future
             dmis_data.save_json_data(data_source, raw_request.get_json())
-        elif data_source == 'hub':
-            # TODO more parsing will be needed to understand exactly what type of data is here
-            dmis_data.save_json_data(data_source, raw_request.get_json())
         elif data_source in dynamic_assessment_data_sources:
             geojson = DataIngestService._process_arcgis_json(raw_request.get_json())
             dmis_data.save_json_data(data_source, geojson)

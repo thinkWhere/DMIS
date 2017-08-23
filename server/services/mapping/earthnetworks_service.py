@@ -10,6 +10,8 @@ import boto3
 from flask import current_app
 from geojson import Feature, FeatureCollection, Point, dumps
 
+from server.models.postgis.dmis_data import DMISData
+
 
 class EarthNetworksError(Exception):
     """ Custom Exception to notify callers an error occurred when handling projects """
@@ -31,7 +33,7 @@ class EarthNetworksService:
 
     @staticmethod
     def get_latest_lightning_data() -> Tuple[str, str]:
-        # TODO once realtime data flowing use current datetime not canned
+        """ Gets latest lightning data from S3 and converts it into a GeoJson feature collection"""
         current_date = datetime.now().date()
         file_location = EarthNetworksService.get_latest_daily_lighting_file(current_date)
         feature_collection, metadata = EarthNetworksService.convert_lightning_data_to_geojson(file_location)
@@ -124,6 +126,9 @@ class EarthNetworksService:
         if not lightning_feature_collection.is_valid:
             current_app.logger.critical(f'Generated invalid geojson for file: {file_location}')
             raise EarthNetworksError('Generated geojson is invalid')
+
+        # Persist response in database, which will help debugging
+        DMISData().save_json_data('earthnetworks_lightning', lightning_feature_collection)
 
         metadata = EarthNetworksService.get_lightning_file_meta_data(os.path.basename(file_location))
 

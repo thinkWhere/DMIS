@@ -48,7 +48,6 @@ class MapsAPI(Resource):
             description: Internal Server Error
         """
         try:
-            # Get query string from URL
             query_str = request.query_string.decode('utf-8')
             response = MapService.handle_map_request(map_protocol, query_str)
             return response

@@ -40,20 +40,24 @@ class MapService:
         layer_source = MapService.parse_geojson_request(query_string)
 
         if layer_source.lower() == 'earthnetworks_lightning':
-
-            try:
-                feature_collection_json, last_updated = EarthNetworksService.get_latest_lightning_data()
-            except EarthNetworksError:
-                raise MapServiceServerError('Error occurred attempting to get EarthNetworks Lightning Data')
-
-            response_headers = Headers()
-            response_headers.add('Last-Modified', last_updated)
-
-            flask_response = Response(feature_collection_json, status=200, mimetype='application/json',
-                                      headers=response_headers)
-            return flask_response
+            return MapService.get_earthnetworks_lightning_response()
         else:
             raise MapServiceClientError(f'Unknown geojson layer source: {layer_source}')
+
+    @staticmethod
+    def get_earthnetworks_lightning_response():
+        """ Get the EarthNetworks lightning response """
+        try:
+            feature_collection_json, last_updated = EarthNetworksService.get_latest_lightning_data()
+        except EarthNetworksError:
+            raise MapServiceServerError('Error occurred attempting to get EarthNetworks Lightning Data')
+
+        response_headers = Headers()
+        response_headers.add('Last-Modified', last_updated)
+
+        flask_response = Response(feature_collection_json, status=200, mimetype='application/json',
+                                  headers=response_headers)
+        return flask_response
 
     @staticmethod
     def parse_geojson_request(query_string: str) -> str:
