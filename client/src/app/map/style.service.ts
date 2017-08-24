@@ -245,7 +245,6 @@ export class StyleService {
      */
     getDailyDisplacedStyle(feature){
         var styleProperty = feature.get('EVAPEO');
-        console.log(styleProperty);
         if (styleProperty < 100) {
             var style = new ol.style.Style({
                 stroke: new ol.style.Stroke({
@@ -314,7 +313,33 @@ export class StyleService {
      * @returns {ol.style.Style}
      */
     getDailyDeathsStyle(feature){
-        // TODO
+        var styleProperty = feature.get('DEATH_AL');
+        // Deaths reported
+        if (styleProperty == 2) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(227,74,51, 0.4)'
+                })
+            });
+            return style;
+        }
+        // No deaths reported
+        else {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(128,128,128, 0.4)'
+                })
+            });
+            return style;
+        }
     }
 
     /**

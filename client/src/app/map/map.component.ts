@@ -419,6 +419,9 @@ export class MapComponent implements OnInit {
             else if (layerData.layerName === 'wfp_daily_displaced'){
                 layer.setStyle(this.styleService.getDailyDisplacedStyle);
             }
+            else if (layerData.layerName === 'wfp_daily_deaths'){
+                layer.setStyle(this.styleService.getDailyDeathsStyle);
+            }
             else {
                 layer.setStyle(this.styleService.getStyle);
             }
