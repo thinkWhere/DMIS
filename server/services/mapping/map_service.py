@@ -37,7 +37,6 @@ class MapService:
     def handle_geojson_request(query_string: str) -> Response:
         """ Validate that request if for a known geojson datasource, then generate a valid Flask Response """
         layer_source = MapService.parse_geojson_request(query_string)
-
         available_layers = DMISData.get_available_data_sources()
 
         if layer_source not in available_layers:

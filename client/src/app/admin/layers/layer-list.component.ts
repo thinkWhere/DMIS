@@ -33,23 +33,7 @@ export class LayerListComponent implements OnInit {
             .subscribe(
             data => {
               // Success
-              this.layerList = [];
-              // TODO: let the API do this?
-              if (data.preparednessLayers) {
-                for (var i = 0; i < data.preparednessLayers.length; i++){
-                  this.layerList.push(data.preparednessLayers[i]);
-                }
-              }
-              if (data.incidentLayers){
-                for (var i = 0; i < data.incidentLayers.length; i++){
-                   this.layerList.push(data.incidentLayers[i]);
-                }
-              }
-              if (data.assessmentLayers){
-                for (var i = 0; i < data.assessmentLayers.length; i++){
-                  this.layerList.push(data.assessmentLayers[i]);
-                }
-              }
+              this.layerList = data.layers;
             },
             error => {
               this.errorGettingLayerList = true;

@@ -21,7 +21,7 @@ export class LayerService {
     let headers = this.authenticationService.getAuthenticatedHeaders();
     let options = new RequestOptions({headers: headers});
 
-    return this.http.get(environment.apiEndpoint + '/layer/toc/UNKNOWN', options)
+    return this.http.get(environment.apiEndpoint + '/layer/list', options)
         .map(response => response.json())
   }
 

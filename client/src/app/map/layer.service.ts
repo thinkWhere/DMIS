@@ -21,8 +21,7 @@ export class LayerService {
     let headers = this.authenticationService.getAuthenticatedHeaders();
     let options = new RequestOptions({headers: headers});
 
-    // TODO: make category a parameter
-    return this.http.get(environment.apiEndpoint + '/layer/toc/UNKNOWN', options)
+    return this.http.get(environment.apiEndpoint + '/layer/list', options)
         .map(response => response.json())
         .catch(this.handleError);
   }
@@ -54,15 +53,15 @@ export class LayerService {
    * @param layerName
    * @returns {Observable<R|T>}
    */
-  getGeoJSON(layerName){
+  getGeoJSON(layer){
     // Get the lightning layers from the API
-    if (layerName === 'earthnetworks_lightning_points' || layerName === 'earthnetworks_lightning_heatmap'){
-      var layer = {
-        layerName: layerName
+    if (layer.layerSource === 'earthnetworks_lightning'){
+      var layerOptions = {
+        layerSource: layer.layerSource
       };
       let headers = this.authenticationService.getAuthenticatedHeaders();
       let options = new RequestOptions({
-        params: layer,
+        params: layerOptions,
         headers: headers
       });
       return this.http.get(environment.apiEndpoint + '/v1/map/geojson', options)
@@ -72,7 +71,7 @@ export class LayerService {
     // Use hardcoded file
     else {
       var sourceGeoJSON = '';
-      switch(layerName){
+      switch(layer.layerName){
         case 'ktm_pcdm_affected_healthcenter':
           sourceGeoJSON = 'affected_healthcenter';
           break;
