@@ -54,7 +54,8 @@ class LayerAPI(Resource):
         Gets a layer
         ---
         tags:
-          - layers
+          - admin
+              - layers
         produces:
           - application/json
         parameters:
@@ -99,7 +100,7 @@ class LayerAPI(Resource):
         Updates a layer
         ---
         tags:
-          - layers
+          - admin - layers
         produces:
           - application/json
         parameters:

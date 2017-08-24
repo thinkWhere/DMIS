@@ -16,7 +16,7 @@ class UserAPI(Resource):
         Creates user
         ---
         tags:
-          - users
+          - admin - users
         produces:
           - application/json
         parameters:
@@ -78,7 +78,7 @@ class UserAPI(Resource):
         Deletes a user
         ---
         tags:
-          - users
+          - admin - users
         produces:
           - application/json
         parameters:
@@ -119,7 +119,7 @@ class UserAPI(Resource):
         Updates a user
         ---
         tags:
-          - users
+          - admin - users
         produces:
           - application/json
         parameters:
@@ -182,7 +182,7 @@ class LoginAPI(Resource):
         Validates users credentials and returns token and relevant user details
         ---
         tags:
-          - users
+          - admin - users
         produces:
           - application/json
         parameters:
@@ -215,7 +215,7 @@ class UserListAPI(Resource):
         Gets a list of all users
         ---
         tags:
-          - users
+          - admin - users
         produces:
           - application/json
         parameters:

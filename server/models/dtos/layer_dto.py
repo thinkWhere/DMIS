@@ -42,7 +42,7 @@ class LayerDetailsDTO(Model):
     layer_source = StringType(required=True, serialized_name='layerSource')
     layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     layer_type = StringType(required=True, validators=[is_known_type], serialized_name='layerType')
-    layer_info = ModelType(LayerInfoDTO, serialized_name='projectInfo')
+    layer_info = ModelType(LayerInfoDTO, serialized_name='layerInfo')
 
 
 class LayerUpdateDTO(Model):
