@@ -2,14 +2,14 @@ from flask_restful import Resource, request, current_app
 from schematics.exceptions import DataError
 
 from server.models.dtos.user_dto import UserDTO, UserUpdateDTO
-from server.services.users.authentication_service import token_auth
 from server.services.users.user_service import UserService, UserExistsError
-from server.services.users.authentication_service import AuthenticationService, basic_auth, dmis
+from server.services.users.authentication_service import AuthenticationService, basic_auth, dmis, token_auth
 from server.models.postgis.utils import NotFound
 
 
 class UserAPI(Resource):
 
+    @dmis.admin_only()
     @token_auth.login_required
     def put(self, username):
         """
@@ -72,6 +72,7 @@ class UserAPI(Resource):
             current_app.logger.critical(error_msg)
             return {"Error": error_msg}, 500
 
+    @dmis.admin_only()
     @token_auth.login_required
     def delete(self, username):
         """
@@ -113,6 +114,7 @@ class UserAPI(Resource):
             current_app.logger.critical(error_msg)
             return {"error": error_msg}, 500
 
+    @dmis.admin_only()
     @token_auth.login_required
     def post(self, username):
         """
@@ -182,13 +184,13 @@ class LoginAPI(Resource):
         Validates users credentials and returns token and relevant user details
         ---
         tags:
-          - admin - users
+          - authentication
         produces:
           - application/json
         parameters:
             - in: header
               name: Authorization
-              description: Base64 encoded session token
+              description: Base64 encoded user password
               required: true
               type: string
         responses:
@@ -209,6 +211,7 @@ class LoginAPI(Resource):
 
 class UserListAPI(Resource):
 
+    @dmis.admin_only()
     @token_auth.login_required
     def get(self):
         """
