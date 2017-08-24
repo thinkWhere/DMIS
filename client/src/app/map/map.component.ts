@@ -410,8 +410,14 @@ export class MapComponent implements OnInit {
             else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
                 layer.setStyle(this.styleService.getAtRiskVillageStyle);
             }
-            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune'){
-                layer.setStyle(this.styleService.getAtRiskCommuneStyle)
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune') {
+                layer.setStyle(this.styleService.getAtRiskCommuneStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_people_affected'){
+                layer.setStyle(this.styleService.getDailyPeopleAffectedStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_displaced'){
+                layer.setStyle(this.styleService.getDailyDisplacedStyle);
             }
             else {
                 layer.setStyle(this.styleService.getStyle);
