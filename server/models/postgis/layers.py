@@ -3,6 +3,7 @@ from typing import Optional
 from flask import current_app
 from server import db
 from server.models.dtos.layer_dto import DMISLayersDTO, LayerDetailsDTO, LayerUpdateDTO
+from server.models.postgis.layer_info import LayerInfo
 from server.models.postgis.lookups import MapCategory, LayerType
 
 
@@ -18,6 +19,9 @@ class Layer(db.Model):
     layer_source = db.Column(db.String)
     layer_copyright = db.Column(db.String)
     layer_type = db.Column(db.String, default='wms', nullable=False)
+
+    # Mapped Objects
+    layer_info = db.relationship(LayerInfo, cascade='all')
 
     @classmethod
     def create_from_dto(cls, layer_dto: LayerDetailsDTO):
@@ -39,7 +43,8 @@ class Layer(db.Model):
     @staticmethod
     def get_by_id(layer_id: int):
         """ Return the layer for the specified id, or None if not found """
-        return Layer.query.get(layer_id)
+        layer = Layer.query.get(layer_id)
+        return layer
 
     def get_by_layername(self, layername: str):
         """ Return the layer for the specified layername, or None if not found """
