@@ -42,9 +42,7 @@ class LayerService:
         if layer is None:
             raise NotFound()
 
-        layer_details_dto = Layer.get_layer_details(layer)
-
-        return layer_details_dto
+        return layer.as_dto()
 
     @staticmethod
     def get_layer_by_id(layer_id: int) -> Layer:
@@ -61,4 +59,4 @@ class LayerService:
         """ Updates the user details in DB """
         layer_details = LayerService.get_layer_by_id(layer_update_dto.layer_id)
         layer_details.update(layer_update_dto)
-        return layer_details.get_layer_details(layer_details)
+        return layer_details.as_dto()
