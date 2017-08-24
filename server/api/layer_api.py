@@ -4,7 +4,7 @@ from schematics.exceptions import DataError
 
 from server.models.dtos.layer_dto import LayerUpdateDTO
 from server.services.layers.layer_service import LayerService, LayerServiceError
-from server.services.users.authentication_service import token_auth
+from server.services.users.authentication_service import token_auth, dmis
 from server.models.postgis.utils import NotFound
 
 
@@ -48,6 +48,7 @@ class LayerListAPI(Resource):
 
 class LayerAPI(Resource):
 
+    @dmis.admin_only()
     @token_auth.login_required
     def get(self, id):
         """
@@ -94,6 +95,7 @@ class LayerAPI(Resource):
             current_app.logger.critical(error_msg)
             return {'error': error_msg}, 500
 
+    @dmis.admin_only()
     @token_auth.login_required
     def post(self, id):
         """
