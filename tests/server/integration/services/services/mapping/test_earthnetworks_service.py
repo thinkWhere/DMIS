@@ -100,6 +100,9 @@ class TestEarthNetworksService(unittest.TestCase):
         self.assertTrue(type(empty_feature_collection) is FeatureCollection, 'Must be a feature collection object')
 
     def test_valid_lightning_file_returns_feature_collection(self):
+        if self.skip_tests:
+            return
+
         # Arrange
         lightning_file = os.path.join(self.weather_dir, 'test_lightning.csv')
 
