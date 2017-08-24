@@ -200,13 +200,14 @@ export class MapComponent implements OnInit {
          var assessment = [];
          for (var i = 0; i < layers.length; i++) {
              if (layers[i].layerType === 'wms') {
-                 //this.setWMSLayerLegend(layers[i]);
+                 this.setWMSLayerLegend(layers[i]);
                  this.addWMSLayer(layers[i]);
              }
              if (layers[i].layerType === 'arcgisrest') {
                  this.addArcGISRESTLayer(layers[i]);
              }
              if (layers[i].layerType === 'geojson') {
+                 this.setGeoJSONLegend(layers[i]);
                  this.addGeoJSONLayer(layers[i]);
              }
              if (this.layers[i].mapCategory === 'PREPAREDNESS') {
@@ -243,6 +244,41 @@ export class MapComponent implements OnInit {
                      // TODO: potentially handle error?
                  }
              )
+    }
+
+    /**
+     * Set layer legend for a GeoJSON layer using the canvas
+     * TODO: dynamically generate a legend based on OL style
+     * @param layer
+     */
+    private setGeoJSONLegend(layer) {
+        // Create a canvas element
+        var canvas : any = document.createElement("canvas");
+
+        // Add images to it
+        var vectorContext = ol.render.toContext(canvas.getContext('2d'), {size: [60, 25]});
+
+        var fill = new ol.style.Fill({color: 'blue'});
+        var stroke = new ol.style.Stroke({color: 'black'});
+        var style = new ol.style.Style({
+            fill: fill,
+            stroke: stroke,
+            image: new ol.style.Circle({
+                radius: 5,
+                fill: fill,
+                stroke: stroke
+            })
+        });
+        vectorContext.setStyle(style);
+        vectorContext.drawGeometry(new ol.geom.Point([10, 10]));
+
+        var ctx = canvas.getContext("2d");
+        ctx.font = "10px Arial";
+        ctx.fillText("Test legend",30,15);
+
+        // Convert it into an image that can be used as a legend
+        var dataURL = canvas.toDataURL();
+        layer.layerLegend = dataURL;
     }
 
     /**
@@ -366,9 +402,20 @@ export class MapComponent implements OnInit {
                         featureProjection: 'EPSG:3857'
                     }),
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
-                }),
-                style: this.styleService.getStyle(layerData.layerName)
+                })
             });
+            if (layerData.layerName === 'earthnetworks_lightning_points'){
+                layer.setStyle(this.styleService.getLightningStyle)
+            }
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
+                layer.setStyle(this.styleService.getAtRiskVillageStyle);
+            }
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune'){
+                layer.setStyle(this.styleService.getAtRiskCommuneStyle)
+            }
+            else {
+                layer.setStyle(this.styleService.getStyle);
+            }
         }
         layer.setVisible(false);
         layer.setProperties({
