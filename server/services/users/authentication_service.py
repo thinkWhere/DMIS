@@ -1,7 +1,7 @@
 from base64 import b64decode, b64encode
 
 from flask_httpauth import HTTPTokenAuth, HTTPBasicAuth
-from flask import current_app
+from flask import current_app, request
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from passlib.hash import pbkdf2_sha256 as sha256_hash
 
@@ -13,7 +13,7 @@ from server.services.users.user_service import UserService, NotFound
 
 basic_auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth()
-dmis = DMISAPIDecorators
+dmis = DMISAPIDecorators()
 
 
 @basic_auth.verify_password
@@ -125,5 +125,12 @@ class AuthenticationService:
         except BadSignature:
             current_app.logger.debug('Bad Token Signature')
             return False
+
+        # Ensure user is Admin priv to access admin only endpoints
+        if dmis.is_admin_only_resource:
+            user = UserService.get_user_by_id(tokenised_user_id)
+            if UserRole(user.role) != UserRole.ADMIN:
+                current_app.logger.debug(f'User {tokenised_user_id} is not an Admin {request.base_url}')
+                return False
 
         return True

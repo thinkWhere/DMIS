@@ -51,6 +51,7 @@ class UserService:
     @staticmethod
     def get_user_by_id(user_id: int) -> User:
         """ Returns user that matches ID """
+        # TODO cache this
         user = User.get_by_id(user_id)
 
         if user is None:

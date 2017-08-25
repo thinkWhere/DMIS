@@ -3,6 +3,7 @@ from typing import Optional
 from flask import current_app
 from server import db
 from server.models.dtos.layer_dto import DMISLayersDTO, LayerDetailsDTO, LayerUpdateDTO
+from server.models.postgis.layer_info import LayerInfo
 from server.models.postgis.lookups import MapCategory, LayerType
 
 
@@ -18,6 +19,9 @@ class Layer(db.Model):
     layer_source = db.Column(db.String)
     layer_copyright = db.Column(db.String)
     layer_type = db.Column(db.String, default='wms', nullable=False)
+
+    # Mapped Objects
+    layer_info = db.relationship(LayerInfo, cascade='all')
 
     @classmethod
     def create_from_dto(cls, layer_dto: LayerDetailsDTO):
@@ -39,7 +43,8 @@ class Layer(db.Model):
     @staticmethod
     def get_by_id(layer_id: int):
         """ Return the layer for the specified id, or None if not found """
-        return Layer.query.get(layer_id)
+        layer = Layer.query.get(layer_id)
+        return layer
 
     def get_by_layername(self, layername: str):
         """ Return the layer for the specified layername, or None if not found """
@@ -61,31 +66,21 @@ class Layer(db.Model):
         layers_dto = DMISLayersDTO()
 
         for layer in db_layers:
-            layer_details = Layer.get_layer_details(layer)
-            layers_dto.layers.append(layer_details)
+            layers_dto.layers.append(layer.as_dto())
 
         return layers_dto
 
-    @staticmethod
-    def get_layer_details(layer) -> LayerDetailsDTO:
+    def as_dto(self) -> LayerDetailsDTO:
+        """ Returns a LayerDetailsDTO object for the layer in scope """
         layer_details = LayerDetailsDTO()
-        layer_details.layer_id = layer.layer_id
-        layer_details.layer_name = layer.layer_name
-        layer_details.layer_title = layer.layer_title
-        layer_details.layer_group = layer.layer_group
-        layer_details.layer_source = layer.layer_source
-        layer_details.layer_copyright = layer.layer_copyright
-        layer_details.layer_type = layer.layer_type
-
-        if layer.map_category == MapCategory.PREPAREDNESS.value:
-            layer_details.map_category = MapCategory.PREPAREDNESS.name
-        elif layer.map_category == MapCategory.INCIDENTS_WARNINGS.value:
-            layer_details.map_category = MapCategory.INCIDENTS_WARNINGS.name
-        elif layer.map_category == MapCategory.ASSESSMENT_RESPONSE.value:
-            layer_details.map_category = MapCategory.ASSESSMENT_RESPONSE.name
-        else:
-            current_app.logger.error(f'Unknown Map Category for layer {layer.layer_id}')
-
+        layer_details.layer_id = self.layer_id
+        layer_details.layer_name = self.layer_name
+        layer_details.layer_title = self.layer_title
+        layer_details.layer_group = self.layer_group
+        layer_details.layer_source = self.layer_source
+        layer_details.layer_copyright = self.layer_copyright
+        layer_details.layer_type = self.layer_type
+        layer_details.map_category = MapCategory(self.map_category).name
         return layer_details
 
     def update(self, layer_update_dto: LayerUpdateDTO):

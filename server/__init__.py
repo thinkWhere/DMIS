@@ -11,7 +11,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 # Import all models so that they are registered with SQLAlchemy
-from server.models.postgis import user  # noqa
+from server.models.postgis import *  # noqa
 
 
 def bootstrap_app(env=None):
@@ -85,11 +85,11 @@ def define_flask_restful_routes(app):
     from server.api.user_api import LoginAPI, UserAPI, UserListAPI
     from server.api.swagger_docs import SwaggerDocs
 
+    api.add_resource(LayerAPI,      '/api/v1/admin/layer/<int:id>')
+    api.add_resource(UserAPI,       '/api/v1/admin/user/<string:username>')
+    api.add_resource(UserListAPI,   '/api/v1/admin/user/list')
+    api.add_resource(LoginAPI,      '/api/v1/authentication/login')
     api.add_resource(DataAPI,       '/api/v1/data/<string:data_source>')
-    api.add_resource(LayerListAPI,  '/api/layer/list')
-    api.add_resource(LayerAPI,      '/api/layer/<int:id>')
+    api.add_resource(LayerListAPI,  '/api/v1/layer/list')
     api.add_resource(MapsAPI,       '/api/v1/map/<string:map_protocol>')
-    api.add_resource(UserAPI,       '/api/user/<string:username>')
-    api.add_resource(UserListAPI,   '/api/user/all')
-    api.add_resource(LoginAPI,      '/api/user/login')
     api.add_resource(SwaggerDocs,   '/api/docs')
