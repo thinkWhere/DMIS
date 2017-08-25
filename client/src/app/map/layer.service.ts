@@ -62,7 +62,7 @@ export class LayerService {
       params: layerOptions,
       headers: headers
     });
-    return this.http.get(environment.apiEndpoint + '/v1/map/geojson', options)
+    return this.http.get(environment.apiEndpoint + '/map/geojson', options)
         .map(response => response.json())
         .catch(this.handleError);
 }

@@ -34,7 +34,7 @@ export class LayerService {
     let headers = this.authenticationService.getAuthenticatedHeaders();
     let options = new RequestOptions({headers: headers});
 
-    return this.http.get(environment.apiEndpoint + '/layer/' + layerId, options)
+    return this.http.get(environment.apiEndpoint + '/admin/layer/' + layerId, options)
         .map(response => response.json())
   }
 
@@ -54,7 +54,7 @@ export class LayerService {
       mapCategory: layer.mapCategory
     };
 
-    return this.http.post(environment.apiEndpoint + '/layer/' + layer.layerId, data, options)
+    return this.http.post(environment.apiEndpoint + '/admin/layer/' + layer.layerId, data, options)
         .map(response => response.json())
   }
 
