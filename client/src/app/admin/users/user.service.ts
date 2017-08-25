@@ -49,7 +49,7 @@ export class UserService {
     let headers = this.authenticationService.getAuthenticatedHeaders();
     let options = new RequestOptions({headers: headers});
 
-    return this.http.delete(environment.apiEndpoint + '/user/' + username, options)
+    return this.http.delete(environment.apiEndpoint + '/admin/user/' + username, options)
         .map(response => response.json())
   }
 
