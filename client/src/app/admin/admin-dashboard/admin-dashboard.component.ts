@@ -64,34 +64,36 @@ export class AdminDashboardComponent implements OnInit {
     // Get layers and prepare data in a format for NGX-Charts
     this.layerService.getLayers()
             .subscribe(
-            data => {
-              // Success
-              this.layers = [];
-              var preparednessLayers = {
-                'name': 'Preparedness',
-                'value': 0
-              };
-              if (data.preparednessLayers) {
-                preparednessLayers.value = data.preparednessLayers.length;
-              }
-              this.layers.push(preparednessLayers);
-              var incidentLayers = {
-                'name': 'Incidents and warnings',
-                'value': 0
-              };
-              if (data.incidentLayers){
-                incidentLayers.value = data.incidentLayers.length;
-              }
-              this.layers.push(incidentLayers);
-              var assessmentLayers = {
-                'name': 'Assessment and response',
-                'value': 0
-              };
-              if (data.assessmentLayers){
-                assessmentLayers.value = data.assessmentLayers.length;
-              }
-              this.layers.push(assessmentLayers);
-            },
+                data => {
+                    // Success
+                    this.layers = [];
+                    var preparednessLayers = {
+                        'name': 'Preparedness',
+                        'value': 0
+                    };
+                    var incidentLayers = {
+                        'name': 'Incidents and warnings',
+                        'value': 0
+                    };
+                    var assessmentLayers = {
+                        'name': 'Assessment and response',
+                        'value': 0
+                    };
+                    for (var i = 0; i < data.layers.length; i++) {
+                        if (data.layers[i].mapCategory === 'PREPAREDNESS') {
+                            preparednessLayers.value++;
+                        }
+                        if (data.layers[i].mapCategory === 'INCIDENTS_WARNINGS') {
+                            incidentLayers.value++;
+                        }
+                        if (data.layers[i].mapCategory === 'ASSESSMENT_RESPONSE') {
+                            assessmentLayers.value++;
+                        }
+                    }
+                    this.layers.push(preparednessLayers);
+                    this.layers.push(incidentLayers);
+                    this.layers.push(assessmentLayers);
+                },
             error => {
               // TODO: handle error?
             });

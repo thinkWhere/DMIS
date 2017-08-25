@@ -34,7 +34,7 @@ export class AuthenticationService {
 
     let options = new RequestOptions({ headers: headers});
 
-    return this.http.post(environment.apiEndpoint + '/user/login', {}, options)
+    return this.http.post(environment.apiEndpoint + '/authentication/login', {}, options)
         .map(this.extractLoginData)
         .catch(this.handleError);
   }

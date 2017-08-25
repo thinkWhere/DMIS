@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://dmis-staging.eu-west-1.elasticbeanstalk.com/api'
+  apiEndpoint: 'http://dmis-staging.eu-west-1.elasticbeanstalk.com/api/v1'
 };

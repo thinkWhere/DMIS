@@ -20,7 +20,7 @@ export class UserService {
     let headers = this.authenticationService.getAuthenticatedHeaders();
     let options = new RequestOptions({headers: headers});
 
-    return this.http.get(environment.apiEndpoint + '/user/all', options)
+    return this.http.get(environment.apiEndpoint + '/admin/user/list', options)
         .map(response => response.json())
   }
 
@@ -36,7 +36,7 @@ export class UserService {
       password: user.password,
       role: user.role
     };
-    return this.http.put(environment.apiEndpoint + '/user/' + user.username, newUser, options)
+    return this.http.put(environment.apiEndpoint + '/admin/user/' + user.username, newUser, options)
         .map(response => response.json())
   }
 
@@ -49,7 +49,7 @@ export class UserService {
     let headers = this.authenticationService.getAuthenticatedHeaders();
     let options = new RequestOptions({headers: headers});
 
-    return this.http.delete(environment.apiEndpoint + '/user/' + username, options)
+    return this.http.delete(environment.apiEndpoint + '/admin/user/' + username, options)
         .map(response => response.json())
   }
 
