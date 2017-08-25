@@ -219,7 +219,7 @@ export class MapComponent implements OnInit {
              if (this.layers[i].mapCategory === 'ASSESSMENT_RESPONSE') {
                  assessment.push(layers[i]);
              }
-         }
+        }
         this.preparednessLayers = preparedness;
         this.incidentLayers = incidents;
         this.assessmentLayers = assessment;
