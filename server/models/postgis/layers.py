@@ -81,6 +81,10 @@ class Layer(db.Model):
         layer_details.layer_copyright = self.layer_copyright
         layer_details.layer_type = self.layer_type
         layer_details.map_category = MapCategory(self.map_category).name
+
+        for info in self.layer_info:
+            layer_details.layer_info.append(info.as_dto())
+
         return layer_details
 
     def update(self, layer_update_dto: LayerUpdateDTO):

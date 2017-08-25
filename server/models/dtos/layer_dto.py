@@ -34,6 +34,11 @@ class LayerInfoDTO(Model):
 
 class LayerDetailsDTO(Model):
     """ Describes a layer within the Layer List """
+    def __init__(self):
+        """ DTO constructor initialise all arrays to empty"""
+        super().__init__()
+        self.layer_info = []
+
     layer_id = IntType(required=True, serialized_name='layerId')
     layer_name = StringType(required=True, serialized_name='layerName')
     layer_title = StringType(required=True, serialized_name='layerTitle')
@@ -42,7 +47,7 @@ class LayerDetailsDTO(Model):
     layer_source = StringType(required=True, serialized_name='layerSource')
     layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     layer_type = StringType(required=True, validators=[is_known_type], serialized_name='layerType')
-    layer_info = ModelType(LayerInfoDTO, serialized_name='layerInfo')
+    layer_info = ListType(ModelType(LayerInfoDTO), serialized_name='layerInfo')
 
 
 class LayerUpdateDTO(Model):
