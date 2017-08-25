@@ -87,9 +87,9 @@ def define_flask_restful_routes(app):
 
     api.add_resource(LayerAPI,      '/api/v1/admin/layer/<int:id>')
     api.add_resource(UserAPI,       '/api/v1/admin/user/<string:username>')
+    api.add_resource(UserListAPI,   '/api/v1/admin/user/list')
     api.add_resource(LoginAPI,      '/api/v1/authentication/login')
     api.add_resource(DataAPI,       '/api/v1/data/<string:data_source>')
     api.add_resource(LayerListAPI,  '/api/v1/layer/list')
     api.add_resource(MapsAPI,       '/api/v1/map/<string:map_protocol>')
-    api.add_resource(UserListAPI,   '/api/v1/user/list')
     api.add_resource(SwaggerDocs,   '/api/docs')
