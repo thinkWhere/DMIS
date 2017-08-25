@@ -129,6 +129,9 @@ class LayerAPI(Resource):
                           type: array
                           items:
                               properties:
+                                  locale:
+                                      type: string
+                                      default: en
                                   layerTitle:
                                       type: string
                                       default: rivers
