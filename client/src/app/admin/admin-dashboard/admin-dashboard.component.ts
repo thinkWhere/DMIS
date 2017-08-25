@@ -93,7 +93,6 @@ export class AdminDashboardComponent implements OnInit {
                     this.layers.push(preparednessLayers);
                     this.layers.push(incidentLayers);
                     this.layers.push(assessmentLayers);
-                     console.log(this.layers);
                 },
             error => {
               // TODO: handle error?
