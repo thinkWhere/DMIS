@@ -105,10 +105,10 @@ export class StyleService {
      * @param feature
      * @returns {{}}
      */
-    getAtRiskCommuneStyle(feature){
+    getAtRiskCommuneStyle(feature) {
         var style = {};
         var proportionDisplacedPeople = feature.get('SS_P_AL');
-        if (proportionDisplacedPeople === 1){
+        if (proportionDisplacedPeople === 1) {
             style = new ol.style.Style({
                 stroke: new ol.style.Stroke({
                     color: 'black',
@@ -138,9 +138,9 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getAtRiskVillageStyle(feature){
+    getAtRiskVillageStyle(feature) {
         var isVillageAtRiskOfFlood = feature.get('Flood');
-        if (isVillageAtRiskOfFlood === 'yes'){
+        if (isVillageAtRiskOfFlood === 'yes') {
             var style = new ol.style.Style({
                 image: new ol.style.Circle({
                     radius: 4,
@@ -243,7 +243,7 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailyDisplacedStyle(feature){
+    getDailyDisplacedStyle(feature) {
         var styleProperty = feature.get('EVAPEO');
         if (styleProperty < 100) {
             var style = new ol.style.Style({
@@ -312,9 +312,8 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailyDeathsStyle(feature){
+    getDailyDeathsStyle(feature) {
         var styleProperty = feature.get('DEATH_AL');
-        // Deaths reported
         if (styleProperty == 2) {
             var style = new ol.style.Style({
                 stroke: new ol.style.Stroke({
@@ -327,7 +326,6 @@ export class StyleService {
             });
             return style;
         }
-        // No deaths reported
         else {
             var style = new ol.style.Style({
                 stroke: new ol.style.Stroke({
@@ -347,8 +345,32 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailyPumpWells(feature){
-        // TODO
+    getDailyPumpWells(feature) {
+        var styleProperty = feature.get('AFFPWEL_AL');
+        if (styleProperty == 2) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(227,74,51, 0.4)' //red
+                })
+            });
+            return style;
+        }
+        else {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(128,128,128, 0.4)' //grey
+                })
+            });
+            return style;
+        }
     }
 
     /**
@@ -356,8 +378,32 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailyHealthCenter(feature){
-        // TODO
+    getDailyHealthCenter(feature) {
+        var styleProperty = feature.get('AFFHC_AL');
+        if (styleProperty == 2) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(227,74,51, 0.4)' //red
+                })
+            });
+            return style;
+        }
+        else {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(128,128,128, 0.4)' //grey
+                })
+            });
+            return style;
+        }
     }
 
     /**
@@ -365,8 +411,32 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailySchool(feature){
-        // TODO
+    getDailySchool(feature) {
+        var styleProperty = feature.get('AFFSCH_AL');
+        if (styleProperty == 2) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(227,74,51, 0.4)' //red
+                })
+            });
+            return style;
+        }
+        else {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(128,128,128, 0.4)' //grey
+                })
+            });
+            return style;
+        }
     }
 
     /**
@@ -374,8 +444,44 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailyRoad(feature){
-        // TODO
+    getDailyRoad(feature) {
+        var styleProperty = feature.get('AFF_R_AL');
+        if (styleProperty > 1000) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(227,74,51, 0.4)' // red
+                })
+            });
+            return style;
+        }
+        else if (styleProperty > 0) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(254,204,92, 0.4)' // yellow
+                })
+            });
+            return style;
+        }
+        else {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(128,128,128, 0.4)' //grey
+                })
+            });
+            return style;
+        }
     }
 
     /**
@@ -383,8 +489,32 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailyBridge(feature){
-        // TODO
+    getDailyBridge(feature) {
+        var styleProperty = feature.get('BRIDGE_AL');
+        if (styleProperty == 2) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(227,74,51, 0.4)' //red
+                })
+            });
+            return style;
+        }
+        else {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(128,128,128, 0.4)' //grey
+                })
+            });
+            return style;
+        }
     }
 
     /**
@@ -392,7 +522,43 @@ export class StyleService {
      * @param feature
      * @returns {ol.style.Style}
      */
-    getDailyRice(feature){
-        // TODO
+    getDailyRice(feature) {
+        var styleProperty = feature.get('WETAFF_AL');
+        if (styleProperty > 500) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(227,74,51, 0.4)' //red
+                })
+            });
+            return style;
+        }
+        else if (styleProperty > 0) {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(254,204,92, 0.4)' // yellow
+                })
+            });
+            return style;
+        }
+        else {
+            var style = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'black',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(128,128,128, 0.4)' //grey
+                })
+            });
+            return style;
+        }
     }
 }
