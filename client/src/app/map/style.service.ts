@@ -115,7 +115,7 @@ export class StyleService {
                     width: 1
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(255, 0, 0, 0.4)' // red
+                    color: 'rgba(227,74,51, 0.4)' // red
                 })
             });
         }
@@ -126,7 +126,7 @@ export class StyleService {
                     width: 1
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(255, 255, 0, 0.4)' // yellow
+                    color: 'rgba(254,204,92, 0.4)' // yellow
                 })
             });
         }
@@ -149,7 +149,7 @@ export class StyleService {
                         width: 2
                     }),
                     fill: new ol.style.Fill({
-                        color: 'red'
+                        color: 'rgba(227,74,51, 0.4)'
                     })
                 }),
                 stroke: new ol.style.Stroke({
@@ -157,7 +157,7 @@ export class StyleService {
                     width: 1
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(255, 255, 255, 0.4)'
+                    color: 'rgba(254,204,92, 0.4)'
                 })
             });
             return style;
@@ -170,11 +170,6 @@ export class StyleService {
      * @returns {ol.style.Style}
      */
     getDailyPeopleAffectedStyle(feature) {
-        //254,240,217
-        //253,204,138
-        //252,141,89
-        //227,74,51
-        //179,0,0
         var styleProperty = feature.get('AFFPEO');
         if (styleProperty < 500) {
             var style = new ol.style.Style({
