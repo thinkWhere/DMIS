@@ -53,10 +53,11 @@ class LayerDetailsDTO(Model):
 class LayerUpdateDTO(Model):
     """ DTO for layer update """
     layer_id = IntType(required=True, serialized_name='layerId')
-    layer_title = StringType(required=True, serialized_name='layerTitle')
-    layer_group = StringType(serialized_name='layerGroup')
-    layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     map_category = StringType(required=True, validators=[is_known_category], serialized_name='mapCategory')
+    layer_info = ListType(ModelType(LayerInfoDTO), serialized_name='layerInfo')
+    # layer_title = StringType(required=True, serialized_name='layerTitle')
+    # layer_group = StringType(serialized_name='layerGroup')
+    # layer_copyright = StringType(required=True, serialized_name='layerCopyright')
 
 
 class DMISLayersDTO(Model):
