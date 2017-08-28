@@ -19,6 +19,7 @@ class Layer(db.Model):
     layer_source = db.Column(db.String)
     layer_copyright = db.Column(db.String)
     layer_type = db.Column(db.String, default='wms', nullable=False)
+    layer_style = db.Column(db.JSON)
 
     # Mapped Objects
     layer_info = db.relationship(LayerInfo, cascade='all')
@@ -34,6 +35,7 @@ class Layer(db.Model):
         new_layer.layer_group = layer_dto.layer_group
         new_layer.layer_copyright = layer_dto.layer_copyright
         new_layer.layer_type = LayerType[layer_dto.layer_type].value
+        new_layer.layer_style = layer_dto.layer_style
 
         db.session.add(new_layer)
         db.session.commit()
@@ -81,6 +83,7 @@ class Layer(db.Model):
         layer_details.layer_copyright = self.layer_copyright
         layer_details.layer_type = self.layer_type
         layer_details.map_category = MapCategory(self.map_category).name
+        layer_details.layer_style = self.layer_style
 
         for info in self.layer_info:
             layer_details.layer_info.append(info.as_dto())
