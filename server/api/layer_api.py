@@ -110,30 +110,37 @@ class LayerAPI(Resource):
             description: Base64 encoded session token
             required: true
             type: string
-          - in: body
-            name: body
-            required: true
-            description: JSON object for updating a layer
-            schema:
-                  properties:
-                      layerTitle:
-                          type: string
-                          default: rivers
-                      layerCopyright:
-                          type: string
-                          default: People in Need
-                      layerGroup:
-                          type: string
-                          default: environment
-                      mapCategory:
-                          type: string
-                          default: PREPAREDNESS
           - in: path
             name: id
             description: ID of the layer
             type: integer
             required: true
             default: 1
+          - in: body
+            name: body
+            required: true
+            description: JSON object for updating a layer
+            schema:
+                  properties:
+                      mapCategory:
+                          type: string
+                          default: PREPAREDNESS
+                      layerInfo:
+                          type: array
+                          items:
+                              properties:
+                                  locale:
+                                      type: string
+                                      default: en
+                                  layerTitle:
+                                      type: string
+                                      default: rivers
+                                  layerCopyright:
+                                      type: string
+                                      default: People in Need
+                                  layerGroup:
+                                      type: string
+                                      default: environment
         responses:
           200:
             description: Layer details updated

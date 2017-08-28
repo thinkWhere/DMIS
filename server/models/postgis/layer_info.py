@@ -12,6 +12,20 @@ class LayerInfo(db.Model):
     layer_group = db.Column(db.String, nullable=False)
     layer_copyright = db.Column(db.String)
 
+    @classmethod
+    def create_from_dto(cls, dto: LayerInfoDTO) -> 'LayerInfo':
+        """ Creates new LayerInfo if it doesn't already exist """
+        new_info = cls()
+        new_info.locale = dto.locale
+        new_info.update_from_dto(dto)
+        return new_info
+
+    def update_from_dto(self, dto: LayerInfoDTO):
+        """ Updates existing LayerInfo """
+        self.layer_title = dto.layer_title
+        self.layer_group = dto.layer_group
+        self.layer_copyright = dto.layer_copyright
+
     def as_dto(self) -> LayerInfoDTO:
         """ Return object as LayerInfoDTO """
         dto = LayerInfoDTO()

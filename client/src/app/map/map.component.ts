@@ -256,7 +256,7 @@ export class MapComponent implements OnInit {
         var canvas : any = document.createElement("canvas");
 
         // Add images to it
-        var vectorContext = ol.render.toContext(canvas.getContext('2d'), {size: [60, 25]});
+        var vectorContext = ol.render.toContext(canvas.getContext('2d'), {size: [80, 25]});
 
         var fill = new ol.style.Fill({color: 'blue'});
         var stroke = new ol.style.Stroke({color: 'black'});
@@ -410,8 +410,35 @@ export class MapComponent implements OnInit {
             else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
                 layer.setStyle(this.styleService.getAtRiskVillageStyle);
             }
-            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune'){
-                layer.setStyle(this.styleService.getAtRiskCommuneStyle)
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune') {
+                layer.setStyle(this.styleService.getAtRiskCommuneStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_people_affected'){
+                layer.setStyle(this.styleService.getDailyPeopleAffectedStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_displaced'){
+                layer.setStyle(this.styleService.getDailyDisplacedStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_deaths'){
+                layer.setStyle(this.styleService.getDailyDeathsStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_pumpwells'){
+                layer.setStyle(this.styleService.getDailyPumpWells);
+            }
+            else if (layerData.layerName === 'wfp_daily_healthcenter'){
+                layer.setStyle(this.styleService.getDailyHealthCenter);
+            }
+            else if (layerData.layerName === 'wfp_daily_school'){
+                layer.setStyle(this.styleService.getDailySchool);
+            }
+            else if (layerData.layerName === 'wfp_daily_road'){
+                layer.setStyle(this.styleService.getDailyRoad);
+            }
+            else if (layerData.layerName === 'wfp_daily_bridge'){
+                layer.setStyle(this.styleService.getDailyBridge);
+            }
+            else if (layerData.layerName === 'wfp_daily_rice'){
+                layer.setStyle(this.styleService.getDailyRice);
             }
             else {
                 layer.setStyle(this.styleService.getStyle);
