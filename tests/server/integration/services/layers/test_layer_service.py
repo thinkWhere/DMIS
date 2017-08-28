@@ -69,10 +69,13 @@ class TestLayerService(unittest.TestCase):
             return
 
         # Act
-        layers_dto = LayerService.get_all_layers()
+        layers_dto = LayerService.get_all_layers('en')
 
         # Assert that at least one layer returned
         self.assertGreater(len(layers_dto.layers), 0)
+        self.assertTrue(layers_dto.layers[0].layer_info, 'All objects should have a layer_info property')
+        self.assertFalse(layers_dto.layers[0].layer_info_locales,
+                         'All objects should not have a layer_info_locales property')
 
     def test_get_layer_dto_by_id_returns_expected_layer(self):
         if self.skip_tests:
@@ -111,4 +114,5 @@ class TestLayerService(unittest.TestCase):
         self.assertEqual(len(updated_layer.layer_info_locales), 2, 'Should be 2 records for layer info')
         self.assertEqual(updated_layer.layer_info_locales[0].layer_title, 'Iain Test 1')
         self.assertEqual(updated_layer.layer_info_locales[1].layer_title, 'Iain Test 2')
+        self.assertFalse(updated_layer.layer_info, 'Updated layer should not have a layer_info property')
         self.assertEqual(updated_layer.map_category, test_layer_update_dto.map_category)

@@ -42,7 +42,8 @@ class LayerListAPI(Resource):
             description: Internal Server Error
         """
         try:
-            layers = LayerService.get_all_layers()
+            locale = request.environ.get('HTTP_ACCEPT_LANGUAGE')
+            layers = LayerService.get_all_layers(locale)
             return layers.to_primitive(), 200
         except NotFound:
             return {"Error": "No layers found"}, 404

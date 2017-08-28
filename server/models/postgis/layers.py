@@ -57,7 +57,7 @@ class Layer(db.Model):
         db.session.commit()
 
     @staticmethod
-    def get_all_layers() -> Optional[DMISLayersDTO]:
+    def get_all_layers(locale: str) -> Optional[DMISLayersDTO]:
         """ Get all available layers in the DB """
         db_layers = Layer.query.all()
 
@@ -67,7 +67,7 @@ class Layer(db.Model):
         layers_dto = DMISLayersDTO()
 
         for layer in db_layers:
-            layers_dto.layers.append(layer.as_dto())
+            layers_dto.layers.append(layer.as_dto(locale))
 
         return layers_dto
 
