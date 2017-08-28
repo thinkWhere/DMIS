@@ -25,6 +25,12 @@ class LayerListAPI(Resource):
               description: Base64 encoded session token
               required: true
               type: string
+            - in: header
+              name: Accept-Language
+              description: Language user is requesting
+              type: string
+              required: true
+              default: en
         responses:
           200:
             description: Layers
@@ -125,7 +131,7 @@ class LayerAPI(Resource):
                       mapCategory:
                           type: string
                           default: PREPAREDNESS
-                      layerInfo:
+                      layerInfoLocales:
                           type: array
                           items:
                               properties:
