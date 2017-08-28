@@ -13,11 +13,8 @@ class Layer(db.Model):
 
     layer_id = db.Column(db.BigInteger, primary_key=True, index=True)
     layer_name = db.Column(db.String, unique=True, index=True)
-    layer_title = db.Column(db.String, default="New Layer")
-    layer_group = db.Column(db.String, default="OTHER LAYERS", nullable=False)
     map_category = db.Column(db.Integer, default=0, nullable=False)
     layer_source = db.Column(db.String)
-    layer_copyright = db.Column(db.String)
     layer_type = db.Column(db.String, default='wms', nullable=False)
     layer_style = db.Column(db.JSON)
 
@@ -79,10 +76,7 @@ class Layer(db.Model):
         layer_details = LayerDetailsDTO()
         layer_details.layer_id = self.layer_id
         layer_details.layer_name = self.layer_name
-        layer_details.layer_title = self.layer_title
-        layer_details.layer_group = self.layer_group
         layer_details.layer_source = self.layer_source
-        layer_details.layer_copyright = self.layer_copyright
         layer_details.layer_type = self.layer_type
         layer_details.map_category = MapCategory(self.map_category).name
         layer_details.layer_style = self.layer_style
