@@ -1,6 +1,6 @@
 from schematics import Model
 from schematics.exceptions import ValidationError
-from schematics.types import StringType, IntType
+from schematics.types import StringType, IntType, BaseType
 from schematics.types.compound import ListType, ModelType
 from server.models.postgis.lookups import MapCategory, LayerType
 
@@ -48,6 +48,7 @@ class LayerDetailsDTO(Model):
     layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     layer_type = StringType(required=True, validators=[is_known_type], serialized_name='layerType')
     layer_info = ListType(ModelType(LayerInfoDTO), serialized_name='layerInfo')
+    layer_style = BaseType(serialized_name='layerStyle')
 
 
 class LayerUpdateDTO(Model):
