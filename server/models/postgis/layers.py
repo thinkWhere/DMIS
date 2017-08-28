@@ -29,11 +29,8 @@ class Layer(db.Model):
         """ Creates new layer from DTO """
         new_layer = cls()
         new_layer.layer_name = layer_dto.layer_name
-        #new_layer.layer_title = layer_dto.layer_title
         new_layer.layer_source = layer_dto.layer_source
         new_layer.map_category = MapCategory[layer_dto.map_category].value
-        #new_layer.layer_group = layer_dto.layer_group
-        #new_layer.layer_copyright = layer_dto.layer_copyright
         new_layer.layer_type = LayerType[layer_dto.layer_type].value
 
         for info in layer_dto.layer_info:
