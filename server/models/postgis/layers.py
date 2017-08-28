@@ -21,7 +21,8 @@ class Layer(db.Model):
     layer_type = db.Column(db.String, default='wms', nullable=False)
 
     # Mapped Objects
-    layer_info = db.relationship(LayerInfo, cascade='all')
+    # Use dynamic relationship to enable filtering of related layer_info rows
+    layer_info = db.relationship(LayerInfo, lazy='dynamic', cascade='all')
 
     @classmethod
     def create_from_dto(cls, layer_dto: LayerDetailsDTO):
@@ -88,22 +89,17 @@ class Layer(db.Model):
         return layer_details
 
     def update(self, layer_update_dto: LayerUpdateDTO):
-        """ Update the user details """
+        """ Update the layer details """
         self.map_category = MapCategory[layer_update_dto.map_category].value
 
         # Set layer_info for all supplied locales
         for info in layer_update_dto.layer_info:
-            # TODO fix issue with filtering by locale!!!
             locale_info = self.layer_info.filter_by(locale=info.locale).one_or_none()
 
             if locale_info is None:
-                new_info = LayerInfo.create_from_dto(layer_update_dto)
+                new_info = LayerInfo.create_from_dto(info)
                 self.layer_info.append(new_info)
             else:
-                locale_info.update_from_dto(layer_update_dto)
+                locale_info.update_from_dto(info)
 
-        #self.layer_title = layer_update_dto.layer_title
-        #self.layer_copyright = layer_update_dto.layer_copyright
-
-        #self.layer_group = layer_update_dto.layer_group
         db.session.commit()

@@ -1,5 +1,5 @@
 from server import db
-from server.models.dtos.layer_dto import LayerInfoDTO, LayerUpdateDTO
+from server.models.dtos.layer_dto import LayerInfoDTO
 
 
 class LayerInfo(db.Model):
@@ -13,13 +13,14 @@ class LayerInfo(db.Model):
     layer_copyright = db.Column(db.String)
 
     @classmethod
-    def create_from_dto(cls, dto: LayerUpdateDTO):
+    def create_from_dto(cls, dto: LayerInfoDTO):
+        """ Creates new LayerInfo if it doesn't already exist """
         new_info = cls()
         new_info.update_from_dto(dto)
         return new_info
 
-    def update_from_dto(self, dto: LayerUpdateDTO):
-        """ Creates a new LayerInfo class from dto """
+    def update_from_dto(self, dto: LayerInfoDTO):
+        """ Updates existing LayerInfo """
         self.layer_title = dto.layer_title
         self.layer_group = dto.layer_group
         self.layer_copyright = dto.layer_copyright
