@@ -15,9 +15,9 @@ export class LayerComponent implements OnInit {
   layer: any = [];
   editMode: boolean = false;
   categoryOptions: any = [
-      {value: 'PREPAREDNESS', name: 'Preparedness'},
-      {value: 'INCIDENTS_WARNINGS', name: 'Incidents and Warnings'},
-      {value: 'ASSESSMENT_RESPONSE', name: 'Assessment and Response'}
+      {value: 'PREPAREDNESS'},
+      {value: 'INCIDENTS_WARNINGS'},
+      {value: 'ASSESSMENT_RESPONSE'}
   ];
   selectedCategory: any = {
       value: '',
@@ -63,7 +63,6 @@ export class LayerComponent implements OnInit {
 
   /**
    * Cancel edit layer details
-   * TODO
    */
   cancel(){
       this.editMode = false;
@@ -80,7 +79,6 @@ export class LayerComponent implements OnInit {
       this.layerService.updateLayer(layer)
       .subscribe(
           data => {
-              console.log(data);
             this.layer = data;
             this.selectedCategory = this.getSelectedCategory(this.layer.mapCategory);
           },
