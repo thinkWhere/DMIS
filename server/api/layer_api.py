@@ -25,6 +25,12 @@ class LayerListAPI(Resource):
               description: Base64 encoded session token
               required: true
               type: string
+            - in: header
+              name: Accept-Language
+              description: Language user is requesting
+              type: string
+              required: true
+              default: en
         responses:
           200:
             description: Layers
@@ -36,7 +42,8 @@ class LayerListAPI(Resource):
             description: Internal Server Error
         """
         try:
-            layers = LayerService.get_all_layers()
+            locale = request.environ.get('HTTP_ACCEPT_LANGUAGE')
+            layers = LayerService.get_all_layers(locale)
             return layers.to_primitive(), 200
         except NotFound:
             return {"Error": "No layers found"}, 404
@@ -125,7 +132,7 @@ class LayerAPI(Resource):
                       mapCategory:
                           type: string
                           default: PREPAREDNESS
-                      layerInfo:
+                      layerInfoLocales:
                           type: array
                           items:
                               properties:
