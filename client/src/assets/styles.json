@@ -1,0 +1,21 @@
+{
+	"rules": [
+	  {
+		"filter": {
+          "propertyName": "prop",
+          "propertyType": "",
+          "comparisonType": "",
+          "min": "",
+          "max": "",
+          "value": ""
+        },
+		"style": {
+          "geomType": "point", // point, line or polygon
+          "fill": "", //RGBA
+          "stroke": "", //RGBA, by default stroke width 1
+          "image": "" //
+        }
+	  }
+	]
+
+}
