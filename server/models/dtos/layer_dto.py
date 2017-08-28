@@ -41,11 +41,8 @@ class LayerDetailsDTO(Model):
 
     layer_id = IntType(required=True, serialized_name='layerId')
     layer_name = StringType(required=True, serialized_name='layerName')
-    layer_title = StringType(required=True, serialized_name='layerTitle')
     map_category = StringType(required=True, validators=[is_known_category], serialized_name='mapCategory')
-    layer_group = StringType(serialized_name='layerGroup')
     layer_source = StringType(required=True, serialized_name='layerSource')
-    layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     layer_type = StringType(required=True, validators=[is_known_type], serialized_name='layerType')
     layer_info = ListType(ModelType(LayerInfoDTO), serialized_name='layerInfo')
     layer_style = BaseType(serialized_name='layerStyle')
