@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { PlatformLocation } from '@angular/common';
 
 import { environment } from '../../environments/environment';
 
@@ -12,6 +13,7 @@ import 'rxjs/add/operator/map';
 export class AuthenticationService {
 
   isLoggedIn: boolean;
+  languageCode: string;
   
   // Observable string sources
   private usernameChangedSource = new Subject<string>();
@@ -19,8 +21,16 @@ export class AuthenticationService {
   // Observable strings
   usernameChanged$ = this.usernameChangedSource.asObservable();
 
-  constructor(private http: Http) {
+  constructor(
+      private http: Http,
+      private platformLocation: PlatformLocation
+  ) {
     this.isLoggedIn = false;
+    // Get the BaseURL to decide which language to request
+    this.languageCode = 'en'; // default to English
+    if (this.platformLocation.getBaseHrefFromDOM() === '/km'){
+      this.languageCode = 'km';
+    }
   }
 
   /**
@@ -80,7 +90,7 @@ export class AuthenticationService {
     let token = this.getToken();
     headers.append('Content-Type', 'application/json; charset=UTF-8');
     headers.append('Authorization', 'Bearer ' + token);
-    headers.append('Accept-Language', 'en');
+    headers.append('Accept-Language', this.languageCode);
     return headers;
   }
 
