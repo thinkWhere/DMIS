@@ -129,6 +129,7 @@ export class MapComponent implements OnInit {
      * Toggle a layer
      */
     toggleLayer(layerName): void {
+        console.log(layerName);
         // get the layers
         var layers = this.map.getLayers().getArray();
         // find the layer
@@ -404,6 +405,12 @@ export class MapComponent implements OnInit {
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 })
             });
+            var features = layer.getSource().getFeatures();
+            for (var i = 0; i < features.length; i++){
+                features[i].setProperties({
+                    layerStyle: layerData.layerStyle
+                })
+            }
             if (layerData.layerName === 'earthnetworks_lightning_points'){
                 layer.setStyle(this.styleService.getLightningStyle)
             }
@@ -414,31 +421,31 @@ export class MapComponent implements OnInit {
                 layer.setStyle(this.styleService.getAtRiskCommuneStyle);
             }
             else if (layerData.layerName === 'wfp_daily_people_affected'){
-                layer.setStyle(this.styleService.getDailyPeopleAffectedStyle);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_displaced'){
-                layer.setStyle(this.styleService.getDailyDisplacedStyle);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_deaths'){
-                layer.setStyle(this.styleService.getDailyDeathsStyle);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_pumpwells'){
-                layer.setStyle(this.styleService.getDailyPumpWells);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_healthcenter'){
-                layer.setStyle(this.styleService.getDailyHealthCenter);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_school'){
-                layer.setStyle(this.styleService.getDailySchool);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_road'){
-                layer.setStyle(this.styleService.getDailyRoad);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_bridge'){
-                layer.setStyle(this.styleService.getDailyBridge);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else if (layerData.layerName === 'wfp_daily_rice'){
-                layer.setStyle(this.styleService.getDailyRice);
+                layer.setStyle(this.styleService.getGeoJSONStyle);
             }
             else {
                 layer.setStyle(this.styleService.getStyle);
