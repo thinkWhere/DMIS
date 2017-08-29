@@ -80,7 +80,6 @@ export class LayerComponent implements OnInit {
       this.layerService.updateLayer(layer)
       .subscribe(
           data => {
-              console.log(data);
             this.layer = data;
             this.selectedCategory = this.getSelectedCategory(this.layer.mapCategory);
           },
