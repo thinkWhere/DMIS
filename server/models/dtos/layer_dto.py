@@ -1,6 +1,6 @@
 from schematics import Model
 from schematics.exceptions import ValidationError
-from schematics.types import StringType, IntType
+from schematics.types import StringType, IntType, BaseType
 from schematics.types.compound import ListType, ModelType
 from server.models.postgis.lookups import MapCategory, LayerType
 
@@ -34,24 +34,27 @@ class LayerInfoDTO(Model):
 
 class LayerDetailsDTO(Model):
     """ Describes a layer within the Layer List """
+    def __init__(self):
+        """ DTO constructor initialise all arrays to empty"""
+        super().__init__()
+        self.layer_info_locales = []
+
     layer_id = IntType(required=True, serialized_name='layerId')
     layer_name = StringType(required=True, serialized_name='layerName')
-    layer_title = StringType(required=True, serialized_name='layerTitle')
     map_category = StringType(required=True, validators=[is_known_category], serialized_name='mapCategory')
-    layer_group = StringType(serialized_name='layerGroup')
     layer_source = StringType(required=True, serialized_name='layerSource')
-    layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     layer_type = StringType(required=True, validators=[is_known_type], serialized_name='layerType')
-    layer_info = ModelType(LayerInfoDTO, serialized_name='layerInfo')
+    layer_style = BaseType(serialized_name='layerStyle')
+    # We will either return a LayerInfo object for the specified locale or all locales if no locale is specified
+    layer_info = ModelType(LayerInfoDTO, serialized_name='layerInfo', serialize_when_none=False)
+    layer_info_locales = ListType(ModelType(LayerInfoDTO), serialized_name='layerInfoLocales', serialize_when_none=False)
 
 
 class LayerUpdateDTO(Model):
     """ DTO for layer update """
     layer_id = IntType(required=True, serialized_name='layerId')
-    layer_title = StringType(required=True, serialized_name='layerTitle')
-    layer_group = StringType(serialized_name='layerGroup')
-    layer_copyright = StringType(required=True, serialized_name='layerCopyright')
     map_category = StringType(required=True, validators=[is_known_category], serialized_name='mapCategory')
+    layer_info_locales = ListType(ModelType(LayerInfoDTO), serialized_name='layerInfoLocales')
 
 
 class DMISLayersDTO(Model):

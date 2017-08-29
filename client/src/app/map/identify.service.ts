@@ -118,8 +118,7 @@ export class IdentifyService {
                  evt.coordinate, viewResolution, 'EPSG:3857',
                  {
                      'INFO_FORMAT': 'application/json',
-                     'FEATURE_COUNT': this.maxFeatureCount,
-                     'BUFFER': 10
+                     'FEATURE_COUNT': this.maxFeatureCount
                  });
              var identifiableLayers = this.layerService.getIdentifiableLayers(map, 'wms');
              var identifiableLayerNames = [];

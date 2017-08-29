@@ -80,6 +80,7 @@ export class AuthenticationService {
     let token = this.getToken();
     headers.append('Content-Type', 'application/json; charset=UTF-8');
     headers.append('Authorization', 'Bearer ' + token);
+    headers.append('Accept-Language', 'en');
     return headers;
   }
 

@@ -11,7 +11,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let layer of layerList | orderBy: 'layerTitle'">
-            <td>{{ layer.layerTitle }}</td>
+            <td>{{ layer.layerInfo.layerTitle }}</td>
             <td>
                 <span *ngIf="layer.mapCategory === 'PREPAREDNESS'" i18n="Map category@@mapCategoryPreparedness">Preparedness</span>
                 <span *ngIf="layer.mapCategory === 'INCIDENTS_WARNINGS'"i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</span>

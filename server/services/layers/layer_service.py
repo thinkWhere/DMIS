@@ -25,9 +25,9 @@ class LayerService:
         return new_layer
 
     @staticmethod
-    def get_all_layers():
+    def get_all_layers(locale: str = 'en') -> DMISLayersDTO:
         """ Returns a list of layers """
-        layers = Layer.get_all_layers()
+        layers = Layer.get_all_layers(locale)
 
         if layers is None:
             raise NotFound()
@@ -58,5 +58,5 @@ class LayerService:
     def update_layer(layer_update_dto: LayerUpdateDTO) -> LayerDetailsDTO:
         """ Updates the user details in DB """
         layer_details = LayerService.get_layer_by_id(layer_update_dto.layer_id)
-        layer_details.update(layer_update_dto)
-        return layer_details.as_dto()
+        updated_layer_dto = layer_details.update(layer_update_dto)
+        return updated_layer_dto
