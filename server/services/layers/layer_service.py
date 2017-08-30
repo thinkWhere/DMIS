@@ -25,9 +25,9 @@ class LayerService:
         return new_layer
 
     @staticmethod
-    def get_all_layers():
+    def get_all_layers(locale: str = 'en') -> DMISLayersDTO:
         """ Returns a list of layers """
-        layers = Layer.get_all_layers()
+        layers = Layer.get_all_layers(locale)
 
         if layers is None:
             raise NotFound()

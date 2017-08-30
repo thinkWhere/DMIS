@@ -48,9 +48,7 @@ export class LayerService {
     let options = new RequestOptions({headers: headers});
 
     var data = {
-      layerCopyright: layer.layerCopyright,
-      layerGroup: layer.layerGroup,
-      layerTitle: layer.layerTitle,
+      layerInfoLocales: layer.layerInfoLocales,
       mapCategory: layer.mapCategory
     };
 

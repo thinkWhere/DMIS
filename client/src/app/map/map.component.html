@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="layer-group" [hidden]="category !== 'preparedness'">
-                            <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerGroup'">
+                            <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerInfo.layerGroup'">
                                 <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                     <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                     <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
@@ -83,7 +83,7 @@
                                 </h4>
                                 <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                        <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                        <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
                                     </div>
                                     <div class="layer-legend">
                                         <img [src]="layer.layerLegend" alt="Legend">
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <div class="layer-group" [hidden]="category !== 'incidents'">
-                            <div *ngFor="let layerGroup of incidentLayers | groupBy: 'layerGroup'">
+                            <div *ngFor="let layerGroup of incidentLayers | groupBy: 'layerInfo.layerGroup'">
                                 <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                     <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                     <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
@@ -100,7 +100,7 @@
                                 </h4>
                                 <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                        <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                        <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
                                     </div>
                                     <div class="layer-legend">
                                         <img [src]="layer.layerLegend" alt="Legend">
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="layer-group" [hidden]="category !== 'assessment'">
-                             <div *ngFor="let layerGroup of assessmentLayers | groupBy: 'layerGroup'">
+                             <div *ngFor="let layerGroup of assessmentLayers | groupBy: 'layerInfo.layerGroup'">
                                 <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
                                     <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
                                     <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
@@ -117,7 +117,7 @@
                                 </h4>
                                 <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
-                                        <label><input type="checkbox" value="">{{ layer.layerTitle }}</label>
+                                        <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
                                     </div>
                                     <div class="layer-legend">
                                         <img [src]="layer.layerLegend" alt="Legend">
