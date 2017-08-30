@@ -411,7 +411,7 @@ export class MapComponent implements OnInit {
                 })
             }
 
-            layer.setStyle(this.styleService.getGeoJSONStyle)
+            layer.setStyle(this.styleService.getStyle)
         }
         layer.setVisible(false);
         layer.setProperties({

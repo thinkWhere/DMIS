@@ -8,11 +8,11 @@ export class StyleService {
     }
 
     /**
-     * Get GeoJSON style
+     * Get style
      * @param feature
      * @returns {any}
      */
-    getGeoJSONStyle(feature) {
+    getStyle(feature) {
         var style: any;
         var layerStyle = feature.getProperties().layerStyle;
         if (!layerStyle){
