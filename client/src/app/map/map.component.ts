@@ -129,7 +129,6 @@ export class MapComponent implements OnInit {
      * Toggle a layer
      */
     toggleLayer(layerName): void {
-        console.log(layerName);
         // get the layers
         var layers = this.map.getLayers().getArray();
         // find the layer
@@ -411,45 +410,8 @@ export class MapComponent implements OnInit {
                     layerStyle: layerData.layerStyle
                 })
             }
-            if (layerData.layerName === 'earthnetworks_lightning_points'){
-                layer.setStyle(this.styleService.getLightningStyle)
-            }
-            else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
-                layer.setStyle(this.styleService.getAtRiskVillageStyle);
-            }
-            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune') {
-                layer.setStyle(this.styleService.getAtRiskCommuneStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_people_affected'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_displaced'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_deaths'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_pumpwells'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_healthcenter'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_school'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_road'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_bridge'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_rice'){
-                layer.setStyle(this.styleService.getGeoJSONStyle);
-            }
-            else {
-                layer.setStyle(this.styleService.getStyle);
-            }
+
+            layer.setStyle(this.styleService.getGeoJSONStyle)
         }
         layer.setVisible(false);
         layer.setProperties({

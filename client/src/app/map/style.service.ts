@@ -8,112 +8,90 @@ export class StyleService {
     }
 
     /**
-     * Style function: returns a style based on the layer name
-     * @param layerName
-     * @returns {ol.style.Style}
+     * Get GeoJSON style
+     * @param feature
+     * @returns {any}
      */
-    getStyle(feature) {
-        // Default style
-        var style = new ol.style.Style({
-            image: new ol.style.Circle({
-                radius: 4,
-                stroke: new ol.style.Stroke({
-                    color: 'red',
-                    width: 2
-                }),
-                fill: new ol.style.Fill({
-                    color: 'white'
-                })
-            }),
-            stroke: new ol.style.Stroke({
-                color: 'red',
-                width: 1
-            }),
-            fill: new ol.style.Fill({
-                color: 'rgba(255, 255, 255, 0.4)'
-            })
-        });
-        if (feature === 'earthnetworks_lightning_points') {
-            style = new ol.style.Style({
-                text: new ol.style.Text({
-                    text: '\uf0e7',
-                    font: 'normal 20px FontAwesome',
-                    textBaseline: 'Bottom',
-                    fill: new ol.style.Fill({
-                        color: 'yellow',
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: 'black',
-                        width: 2
+    getGeoJSONStyle(feature) {
+        var style: any;
+        var layerStyle = feature.getProperties().layerStyle;
+        if (!layerStyle){
+            style = getDefaultStyle();
+            return style;
+        }
+        for (var i = 0; i < layerStyle.rules.length; i++) {
+            // If a filter is defined
+            var filter = layerStyle.rules[i].filter;
+            var ruleStyle = layerStyle.rules[i].style;
+            if (filter) {
+                var propertyName = filter.propertyName;
+                var comparisonType = filter.comparisonType;
+                if (comparisonType === 'BETWEEN') {
+                    if (feature.get(propertyName) >= filter.min && feature.get(propertyName) < filter.max) {
+                        style = getOLStyle(ruleStyle);
+                        return style;
+                    }
+                }
+                if (comparisonType === 'GREATER_THAN') {
+                    if (feature.get(propertyName) > filter.min) {
+                        style = getOLStyle(ruleStyle);
+                        return style;
+                    }
+                }
+                if (comparisonType === 'EQUALS') {
+                    if (feature.get(propertyName) == filter.value) {
+                        style = getOLStyle(ruleStyle);
+                        return style;
+                    }
+                }
+            }
+            else {
+                // No filter
+                style = getOLStyle(ruleStyle);
+                return style;
+            }
+        }
+        /**
+         * Get the OL style based on the rule style
+         * This is a nested function to allow access to it from the style function
+         * @param ruleStyle
+         * @returns {any}
+         */
+        function getOLStyle(ruleStyle) {
+            if (ruleStyle.text) {
+                var style: any = new ol.style.Style({
+                    text: new ol.style.Text({
+                        text: ruleStyle.text.text,
+                        font: ruleStyle.text.font,
+                        textBaseline: 'Bottom',
+                        fill: new ol.style.Fill({
+                            color: ruleStyle.text.fill.colour,
+                        }),
+                        stroke: new ol.style.Stroke({
+                            color: ruleStyle.text.stroke.colour,
+                            width: ruleStyle.text.stroke.width
+                        })
                     })
-                })
-            });
-        }
-        return style;
-    };
-
-    /**
-     * Return the style for lightning
-     * @returns {ol.style.Style}
-     */
-    getLightningStyle() {
-        var style = new ol.style.Style({
-            text: new ol.style.Text({
-                text: '\uf0e7',
-                font: 'normal 20px FontAwesome',
-                textBaseline: 'Bottom',
-                fill: new ol.style.Fill({
-                    color: 'yellow',
-                }),
+                });
+                return style;
+            }
+            var style: any = new ol.style.Style({
                 stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 2
-                })
-            })
-        });
-        return style;
-    }
-
-    /**Return the style for At Risk Communes
-     * @param feature
-     * @returns {{}}
-     */
-    getAtRiskCommuneStyle(feature) {
-        var style = {};
-        var proportionDisplacedPeople = feature.get('SS_P_AL');
-        if (proportionDisplacedPeople === 1) {
-            style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
+                    color: ruleStyle.stroke.colour,
+                    width: ruleStyle.stroke.width
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' // red
+                    color: ruleStyle.fill.colour
                 })
             });
+            return style;
         }
-        else {
-            style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(254,204,92, 0.4)' // yellow
-                })
-            });
-        }
-        return style;
-    }
-
-    /**
-     * Return the style for At Risk Villages
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getAtRiskVillageStyle(feature) {
-        var isVillageAtRiskOfFlood = feature.get('Flood');
-        if (isVillageAtRiskOfFlood === 'yes') {
+        /**
+         * Style function: returns a default style
+         * @returns {ol.style.Style}
+         */
+        function getDefaultStyle() {
+            // Default style
             var style = new ol.style.Style({
                 image: new ol.style.Circle({
                     radius: 4,
@@ -122,7 +100,7 @@ export class StyleService {
                         width: 2
                     }),
                     fill: new ol.style.Fill({
-                        color: 'rgba(227,74,51, 0.4)'
+                        color: 'white'
                     })
                 }),
                 stroke: new ol.style.Stroke({
@@ -130,84 +108,10 @@ export class StyleService {
                     width: 1
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(254,204,92, 0.4)'
+                    color: 'rgba(255, 255, 255, 0.4)'
                 })
             });
             return style;
         }
-    }
-
-    /**
-     * Get GeoJSON style
-     * @param feature
-     * @returns {any}
-     */
-    getGeoJSONStyle(feature) {
-        var layerStyle = feature.getProperties().layerStyle;
-        for (var i = 0; i < layerStyle.rules.length; i++) {
-            // If a filter is defined
-            if (layerStyle.rules[i].filter) {
-                var filter = layerStyle.rules[i].filter;
-                var ruleStyle = layerStyle.rules[i].style;
-                var propertyName = filter.propertyName;
-                var comparisonType = filter.comparisonType;
-                if (filter) {
-                    if (comparisonType === 'BETWEEN') {
-                        if (feature.get(propertyName) >= filter.min && feature.get(propertyName) < filter.max) {
-                            var style: any = this.getOLStyle(ruleStyle);
-                            return style;
-                        }
-                    }
-                    if (comparisonType === 'GREATER_THAN') {
-                        if (feature.get(propertyName) > filter.min) {
-                            var style: any = this.getOLStyle(ruleStyle);
-                            return style;
-                        }
-                    }
-                    if (comparisonType === 'EQUALS') {
-                        if (feature.get(propertyName) == filter.value) {
-                            var style: any = this.getOLStyle(ruleStyle);
-                            return style;
-                        }
-                    }
-                }
-                else {
-                    // No filter
-                    var style: any = this.getOLStyle(ruleStyle);
-                    return style;
-
-                }
-            }
-        }
-    }
-
-    getOLStyle(filterStyle) {
-        if (filterStyle.text) {
-            var style: any = new ol.style.Style({
-                text: new ol.style.Text({
-                    text: filterStyle.text.text,
-                    font: filterStyle.text.font,
-                    textBaseline: 'Bottom',
-                    fill: new ol.style.Fill({
-                        color: filterStyle.text.fill.colour,
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: filterStyle.text.stroke.colour,
-                        width: filterStyle.text.stroke.width
-                    })
-                })
-            });
-            return style;
-        }
-        var style: any = new ol.style.Style({
-            stroke: new ol.style.Stroke({
-                color: filterStyle.stroke.colour,
-                width: filterStyle.stroke.width
-            }),
-            fill: new ol.style.Fill({
-                color: filterStyle.fill.colour
-            })
-        });
-        return style;
     }
 }
