@@ -100,7 +100,7 @@ export class StyleService {
                         width: 2
                     }),
                     fill: new ol.style.Fill({
-                        color: 'white'
+                        color: 'rgba(255, 255, 255, 0.4)'
                     })
                 }),
                 stroke: new ol.style.Stroke({
