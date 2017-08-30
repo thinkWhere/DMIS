@@ -252,33 +252,8 @@ export class MapComponent implements OnInit {
      * @param layer
      */
     private setGeoJSONLegend(layer) {
-        // Create a canvas element
-        var canvas : any = document.createElement("canvas");
-
-        // Add images to it
-        var vectorContext = ol.render.toContext(canvas.getContext('2d'), {size: [80, 25]});
-
-        var fill = new ol.style.Fill({color: 'blue'});
-        var stroke = new ol.style.Stroke({color: 'black'});
-        var style = new ol.style.Style({
-            fill: fill,
-            stroke: stroke,
-            image: new ol.style.Circle({
-                radius: 5,
-                fill: fill,
-                stroke: stroke
-            })
-        });
-        vectorContext.setStyle(style);
-        vectorContext.drawGeometry(new ol.geom.Point([10, 10]));
-
-        var ctx = canvas.getContext("2d");
-        ctx.font = "10px Arial";
-        ctx.fillText("Test legend",30,15);
-
-        // Convert it into an image that can be used as a legend
-        var dataURL = canvas.toDataURL();
-        layer.layerLegend = dataURL;
+        var legendImage = this.styleService.getLegendImage(layer.layerStyle);
+        layer.layerLegend = legendImage;
     }
 
     /**
@@ -406,12 +381,13 @@ export class MapComponent implements OnInit {
             });
             var features = layer.getSource().getFeatures();
             for (var i = 0; i < features.length; i++){
-                features[i].setProperties({
-                    layerStyle: layerData.layerStyle
-                })
+                //features[i].setProperties({
+                //    layerStyle: layerData.layerStyle
+                //});
+                features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
             }
 
-            layer.setStyle(this.styleService.getStyle)
+            //layer.setStyle(this.styleService.getStyle)
         }
         layer.setVisible(false);
         layer.setProperties({
