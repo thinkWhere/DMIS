@@ -318,7 +318,7 @@ export class MapComponent implements OnInit {
             "layerName": arcRESTLayer.layerName,
             "layerSource": arcRESTLayer.layerSource,
             "layerType": arcRESTLayer.layerType,
-            "layerTitle": arcRESTLayer.layerTitle
+            "layerTitle": arcRESTLayer.layerInfo.layerTitle
         });
         this.map.addLayer(layer);
     }
@@ -389,7 +389,7 @@ export class MapComponent implements OnInit {
             "layerName": layerData.layerName,
             "layerSource": layerData.layerSource,
             "layerType": layerData.layerType,
-            "layerTitle": layerData.layerTitle
+            "layerTitle": layerData.layerInfo.layerTitle
         });
         this.map.addLayer(layer);
     }
