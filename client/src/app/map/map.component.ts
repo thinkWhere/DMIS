@@ -252,33 +252,8 @@ export class MapComponent implements OnInit {
      * @param layer
      */
     private setGeoJSONLegend(layer) {
-        // Create a canvas element
-        var canvas : any = document.createElement("canvas");
-
-        // Add images to it
-        var vectorContext = ol.render.toContext(canvas.getContext('2d'), {size: [80, 25]});
-
-        var fill = new ol.style.Fill({color: 'blue'});
-        var stroke = new ol.style.Stroke({color: 'black'});
-        var style = new ol.style.Style({
-            fill: fill,
-            stroke: stroke,
-            image: new ol.style.Circle({
-                radius: 5,
-                fill: fill,
-                stroke: stroke
-            })
-        });
-        vectorContext.setStyle(style);
-        vectorContext.drawGeometry(new ol.geom.Point([10, 10]));
-
-        var ctx = canvas.getContext("2d");
-        ctx.font = "10px Arial";
-        ctx.fillText("Test legend",30,15);
-
-        // Convert it into an image that can be used as a legend
-        var dataURL = canvas.toDataURL();
-        layer.layerLegend = dataURL;
+        var legendImage = this.styleService.getLegendImage(layer.layerStyle);
+        layer.layerLegend = legendImage;
     }
 
     /**
@@ -343,7 +318,7 @@ export class MapComponent implements OnInit {
             "layerName": arcRESTLayer.layerName,
             "layerSource": arcRESTLayer.layerSource,
             "layerType": arcRESTLayer.layerType,
-            "layerTitle": arcRESTLayer.layerTitle
+            "layerTitle": arcRESTLayer.layerInfo.layerTitle
         });
         this.map.addLayer(layer);
     }
@@ -404,44 +379,9 @@ export class MapComponent implements OnInit {
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 })
             });
-            if (layerData.layerName === 'earthnetworks_lightning_points'){
-                layer.setStyle(this.styleService.getLightningStyle)
-            }
-            else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
-                layer.setStyle(this.styleService.getAtRiskVillageStyle);
-            }
-            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune') {
-                layer.setStyle(this.styleService.getAtRiskCommuneStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_people_affected'){
-                layer.setStyle(this.styleService.getDailyPeopleAffectedStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_displaced'){
-                layer.setStyle(this.styleService.getDailyDisplacedStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_deaths'){
-                layer.setStyle(this.styleService.getDailyDeathsStyle);
-            }
-            else if (layerData.layerName === 'wfp_daily_pumpwells'){
-                layer.setStyle(this.styleService.getDailyPumpWells);
-            }
-            else if (layerData.layerName === 'wfp_daily_healthcenter'){
-                layer.setStyle(this.styleService.getDailyHealthCenter);
-            }
-            else if (layerData.layerName === 'wfp_daily_school'){
-                layer.setStyle(this.styleService.getDailySchool);
-            }
-            else if (layerData.layerName === 'wfp_daily_road'){
-                layer.setStyle(this.styleService.getDailyRoad);
-            }
-            else if (layerData.layerName === 'wfp_daily_bridge'){
-                layer.setStyle(this.styleService.getDailyBridge);
-            }
-            else if (layerData.layerName === 'wfp_daily_rice'){
-                layer.setStyle(this.styleService.getDailyRice);
-            }
-            else {
-                layer.setStyle(this.styleService.getStyle);
+            var features = layer.getSource().getFeatures();
+            for (var i = 0; i < features.length; i++){
+                features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
             }
         }
         layer.setVisible(false);
@@ -449,7 +389,7 @@ export class MapComponent implements OnInit {
             "layerName": layerData.layerName,
             "layerSource": layerData.layerSource,
             "layerType": layerData.layerType,
-            "layerTitle": layerData.layerTitle
+            "layerTitle": layerData.layerInfo.layerTitle
         });
         this.map.addLayer(layer);
     }
