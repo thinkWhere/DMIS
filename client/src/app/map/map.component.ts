@@ -383,6 +383,7 @@ export class MapComponent implements OnInit {
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 }),
                 blur: 30,
+                opacity: 0.7,
                 weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
             });
         }
