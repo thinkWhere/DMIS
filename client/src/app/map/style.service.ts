@@ -8,139 +8,90 @@ export class StyleService {
     }
 
     /**
-     * Style function: returns a style based on the layer name
-     * @param layerName
-     * @returns {ol.style.Style}
+     * Get style
+     * @param feature
+     * @returns {any}
      */
     getStyle(feature) {
-        // Default style
-        var style = new ol.style.Style({
-            image: new ol.style.Circle({
-                radius: 4,
-                stroke: new ol.style.Stroke({
-                    color: 'red',
-                    width: 2
-                }),
-                fill: new ol.style.Fill({
-                    color: 'white'
-                })
-            }),
-            stroke: new ol.style.Stroke({
-                color: 'red',
-                width: 1
-            }),
-            fill: new ol.style.Fill({
-                color: 'rgba(255, 255, 255, 0.4)'
-            })
-        });
-        if (feature === 'earthnetworks_lightning_points') {
-            style = new ol.style.Style({
-                text: new ol.style.Text({
-                    text: '\uf0e7',
-                    font: 'normal 20px FontAwesome',
-                    textBaseline: 'Bottom',
-                    fill: new ol.style.Fill({
-                        color: 'yellow',
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: 'black',
-                        width: 2
+        var style: any;
+        var layerStyle = feature.getProperties().layerStyle;
+        if (!layerStyle){
+            style = getDefaultStyle();
+            return style;
+        }
+        for (var i = 0; i < layerStyle.rules.length; i++) {
+            // If a filter is defined
+            var filter = layerStyle.rules[i].filter;
+            var ruleStyle = layerStyle.rules[i].style;
+            if (filter) {
+                var propertyName = filter.propertyName;
+                var comparisonType = filter.comparisonType;
+                if (comparisonType === 'BETWEEN') {
+                    if (feature.get(propertyName) >= filter.min && feature.get(propertyName) < filter.max) {
+                        style = getOLStyle(ruleStyle);
+                        return style;
+                    }
+                }
+                if (comparisonType === 'GREATER_THAN') {
+                    if (feature.get(propertyName) > filter.min) {
+                        style = getOLStyle(ruleStyle);
+                        return style;
+                    }
+                }
+                if (comparisonType === 'EQUALS') {
+                    if (feature.get(propertyName) == filter.value) {
+                        style = getOLStyle(ruleStyle);
+                        return style;
+                    }
+                }
+            }
+            else {
+                // No filter
+                style = getOLStyle(ruleStyle);
+                return style;
+            }
+        }
+        /**
+         * Get the OL style based on the rule style
+         * This is a nested function to allow access to it from the style function
+         * @param ruleStyle
+         * @returns {any}
+         */
+        function getOLStyle(ruleStyle) {
+            if (ruleStyle.text) {
+                var style: any = new ol.style.Style({
+                    text: new ol.style.Text({
+                        text: ruleStyle.text.text,
+                        font: ruleStyle.text.font,
+                        textBaseline: 'Bottom',
+                        fill: new ol.style.Fill({
+                            color: ruleStyle.text.fill.colour,
+                        }),
+                        stroke: new ol.style.Stroke({
+                            color: ruleStyle.text.stroke.colour,
+                            width: ruleStyle.text.stroke.width
+                        })
                     })
+                });
+                return style;
+            }
+            var style: any = new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: ruleStyle.stroke.colour,
+                    width: ruleStyle.stroke.width
+                }),
+                fill: new ol.style.Fill({
+                    color: ruleStyle.fill.colour
                 })
             });
+            return style;
         }
-        return style;
-    };
-
-    /**
-     * Return a default style (red)
-     * @returns {ol.style.Style}
-     */
-    getDefaultStyle() {
-        var style = new ol.style.Style({
-            image: new ol.style.Circle({
-                radius: 4,
-                stroke: new ol.style.Stroke({
-                    color: 'red',
-                    width: 2
-                }),
-                fill: new ol.style.Fill({
-                    color: 'white'
-                })
-            }),
-            stroke: new ol.style.Stroke({
-                color: 'red',
-                width: 1
-            }),
-            fill: new ol.style.Fill({
-                color: 'rgba(255, 255, 255, 0.4)'
-            })
-        });
-        return style;
-    }
-
-    /**
-     * Return the style for lightning
-     * @returns {ol.style.Style}
-     */
-    getLightningStyle() {
-        var style = new ol.style.Style({
-            text: new ol.style.Text({
-                text: '\uf0e7',
-                font: 'normal 20px FontAwesome',
-                textBaseline: 'Bottom',
-                fill: new ol.style.Fill({
-                    color: 'yellow',
-                }),
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 2
-                })
-            })
-        });
-        return style;
-    }
-
-    /**Return the style for At Risk Communes
-     * @param feature
-     * @returns {{}}
-     */
-    getAtRiskCommuneStyle(feature) {
-        var style = {};
-        var proportionDisplacedPeople = feature.get('SS_P_AL');
-        if (proportionDisplacedPeople === 1) {
-            style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' // red
-                })
-            });
-        }
-        else {
-            style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(254,204,92, 0.4)' // yellow
-                })
-            });
-        }
-        return style;
-    }
-
-    /**
-     * Return the style for At Risk Villages
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getAtRiskVillageStyle(feature) {
-        var isVillageAtRiskOfFlood = feature.get('Flood');
-        if (isVillageAtRiskOfFlood === 'yes') {
+        /**
+         * Style function: returns a default style
+         * @returns {ol.style.Style}
+         */
+        function getDefaultStyle() {
+            // Default style
             var style = new ol.style.Style({
                 image: new ol.style.Circle({
                     radius: 4,
@@ -149,7 +100,7 @@ export class StyleService {
                         width: 2
                     }),
                     fill: new ol.style.Fill({
-                        color: 'rgba(227,74,51, 0.4)'
+                        color: 'rgba(255, 255, 255, 0.4)'
                     })
                 }),
                 stroke: new ol.style.Stroke({
@@ -157,400 +108,7 @@ export class StyleService {
                     width: 1
                 }),
                 fill: new ol.style.Fill({
-                    color: 'rgba(254,204,92, 0.4)'
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily People Affected (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyPeopleAffectedStyle(feature) {
-        var styleProperty = feature.get('AFFPEO');
-        if (styleProperty < 500) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(254,240,217, 0.4)'
-                })
-            });
-            return style;
-        }
-        if (styleProperty < 1000) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(253,204,138, 0.4)'
-                })
-            });
-            return style;
-        }
-        if (styleProperty < 1500) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(252,141,89, 0.4)'
-                })
-            });
-            return style;
-        }
-        if (styleProperty < 2000) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)'
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(179,0,0, 0.4)'
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily Displaced (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyDisplacedStyle(feature) {
-        var styleProperty = feature.get('EVAPEO');
-        if (styleProperty < 100) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(254,240,217, 0.4)'
-                })
-            });
-            return style;
-        }
-        if (styleProperty < 200) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(253,204,138, 0.4)'
-                })
-            });
-            return style;
-        }
-        if (styleProperty < 300) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(252,141,89, 0.4)'
-                })
-            });
-            return style;
-        }
-        if (styleProperty < 400) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)'
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(179,0,0, 0.4)'
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily Deaths (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyDeathsStyle(feature) {
-        var styleProperty = feature.get('DEATH_AL');
-        if (styleProperty == 2) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)'
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(128,128,128, 0.4)'
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily Pump Wells (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyPumpWells(feature) {
-        var styleProperty = feature.get('AFFPWEL_AL');
-        if (styleProperty == 2) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' //red
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(128,128,128, 0.4)' //grey
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily Health Center (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyHealthCenter(feature) {
-        var styleProperty = feature.get('AFFHC_AL');
-        if (styleProperty == 2) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' //red
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(128,128,128, 0.4)' //grey
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily School (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailySchool(feature) {
-        var styleProperty = feature.get('AFFSCH_AL');
-        if (styleProperty == 2) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' //red
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(128,128,128, 0.4)' //grey
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily Road (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyRoad(feature) {
-        var styleProperty = feature.get('AFF_R_AL');
-        if (styleProperty > 1000) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' // red
-                })
-            });
-            return style;
-        }
-        else if (styleProperty > 0) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(254,204,92, 0.4)' // yellow
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(128,128,128, 0.4)' //grey
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily Bridge (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyBridge(feature) {
-        var styleProperty = feature.get('BRIDGE_AL');
-        if (styleProperty == 2) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' //red
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(128,128,128, 0.4)' //grey
-                })
-            });
-            return style;
-        }
-    }
-
-    /**
-     * Return the style for Daily Rice (NCDM)
-     * @param feature
-     * @returns {ol.style.Style}
-     */
-    getDailyRice(feature) {
-        var styleProperty = feature.get('WETAFF_AL');
-        if (styleProperty > 500) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(227,74,51, 0.4)' //red
-                })
-            });
-            return style;
-        }
-        else if (styleProperty > 0) {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(254,204,92, 0.4)' // yellow
-                })
-            });
-            return style;
-        }
-        else {
-            var style = new ol.style.Style({
-                stroke: new ol.style.Stroke({
-                    color: 'black',
-                    width: 1
-                }),
-                fill: new ol.style.Fill({
-                    color: 'rgba(128,128,128, 0.4)' //grey
+                    color: 'rgba(255, 255, 255, 0.4)'
                 })
             });
             return style;
