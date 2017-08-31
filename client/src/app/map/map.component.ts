@@ -383,7 +383,6 @@ export class MapComponent implements OnInit {
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 }),
                 blur: 30,
-                opacity: 0.7,
                 weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
             });
         }
@@ -403,14 +402,45 @@ export class MapComponent implements OnInit {
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 })
             });
-            var features = layer.getSource().getFeatures();
-            for (var i = 0; i < features.length; i++){
-                features[i].setProperties({
-                    layerStyle: layerData.layerStyle
-                })
+            if (layerData.layerName === 'earthnetworks_lightning_points'){
+                layer.setStyle(this.styleService.getLightningStyle)
             }
-
-            layer.setStyle(this.styleService.getStyle)
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_village'){
+                layer.setStyle(this.styleService.getAtRiskVillageStyle);
+            }
+            else if (layerData.layerName === 'ktm_pcdm_at_risk_commune') {
+                layer.setStyle(this.styleService.getAtRiskCommuneStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_people_affected'){
+                layer.setStyle(this.styleService.getDailyPeopleAffectedStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_displaced'){
+                layer.setStyle(this.styleService.getDailyDisplacedStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_deaths'){
+                layer.setStyle(this.styleService.getDailyDeathsStyle);
+            }
+            else if (layerData.layerName === 'wfp_daily_pumpwells'){
+                layer.setStyle(this.styleService.getDailyPumpWells);
+            }
+            else if (layerData.layerName === 'wfp_daily_healthcenter'){
+                layer.setStyle(this.styleService.getDailyHealthCenter);
+            }
+            else if (layerData.layerName === 'wfp_daily_school'){
+                layer.setStyle(this.styleService.getDailySchool);
+            }
+            else if (layerData.layerName === 'wfp_daily_road'){
+                layer.setStyle(this.styleService.getDailyRoad);
+            }
+            else if (layerData.layerName === 'wfp_daily_bridge'){
+                layer.setStyle(this.styleService.getDailyBridge);
+            }
+            else if (layerData.layerName === 'wfp_daily_rice'){
+                layer.setStyle(this.styleService.getDailyRice);
+            }
+            else {
+                layer.setStyle(this.styleService.getStyle);
+            }
         }
         layer.setVisible(false);
         layer.setProperties({
