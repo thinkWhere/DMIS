@@ -178,6 +178,7 @@ export class StyleService {
                 });
             }
             vectorContext.setStyle(style);
+            // TODO: draw Point, Line or Polygon depending on geomType
             vectorContext.drawGeometry(new ol.geom.Point([10, (10 + i * heightPerCategory)]));
 
             var ctx = canvas.getContext("2d");
