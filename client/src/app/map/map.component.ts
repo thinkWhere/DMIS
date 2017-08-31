@@ -381,13 +381,8 @@ export class MapComponent implements OnInit {
             });
             var features = layer.getSource().getFeatures();
             for (var i = 0; i < features.length; i++){
-                //features[i].setProperties({
-                //    layerStyle: layerData.layerStyle
-                //});
                 features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
             }
-
-            //layer.setStyle(this.styleService.getStyle)
         }
         layer.setVisible(false);
         layer.setProperties({
