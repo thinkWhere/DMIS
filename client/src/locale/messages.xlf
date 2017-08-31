@@ -530,6 +530,14 @@
         </context-group>
         <note priority="1" from="description">Weather title</note>
       </trans-unit>
+      <trans-unit id="adminheader" datatype="html">
+        <source>Admin</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">pageheader</note>
+      </trans-unit>
       <trans-unit id="adminDashboardHeader" datatype="html">
         <source>Dashboard</source>
         <context-group purpose="location">

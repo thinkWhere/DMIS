@@ -265,6 +265,13 @@
         </context-group>
         <note priority="1" from="description">Admin link</note>
       </trans-unit>
+      <trans-unit id="adminTitleheader" datatype="html" approved="yes">
+        <source>Admin</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <note priority="1" from="description">Admin link</note>
+      </trans-unit>
       <trans-unit id="headerLogoutLink" datatype="html" approved="yes">
         <source>Logout</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
