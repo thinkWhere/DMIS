@@ -204,6 +204,7 @@ export class MapComponent implements OnInit {
                  this.addWMSLayer(layers[i]);
              }
              if (layers[i].layerType === 'arcgisrest') {
+                 this.setArcGISRESTLegend(layers[i]);
                  this.addArcGISRESTLayer(layers[i]);
              }
              if (layers[i].layerType === 'geojson') {
@@ -254,6 +255,18 @@ export class MapComponent implements OnInit {
     private setGeoJSONLegend(layer) {
         var legendImage = this.styleService.getLegendImage(layer.layerStyle);
         layer.layerLegend = legendImage;
+    }
+
+    private setArcGISRESTLegend(layer){
+        var legendLocation = layer.layerSource + '/legend?f=pjson';
+        this.styleService.getArcGISLegendInfo(legendLocation)
+                    .subscribe(
+                        data => {
+                            this.styleService.getArcGISLegend(data, function(result){
+                                layer.layerLegend = result;
+                            });
+                        }
+                    )
     }
 
     /**
