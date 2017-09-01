@@ -1,11 +1,12 @@
 from flask_restful import Resource, request, current_app
 
 from server.services.mapping.map_service import MapService, MapServiceClientError, MapServiceServerError
-from server.services.users.authentication_service import token_auth
+from server.services.users.authentication_service import token_auth, dmis
 
 
 class MapsAPI(Resource):
 
+    @dmis.admin_only(False)
     @token_auth.login_required
     def get(self, map_protocol):
         """

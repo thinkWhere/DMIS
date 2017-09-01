@@ -1,11 +1,12 @@
 from flask_restful import Resource, request, current_app
 
 from server.services.data_ingest.data_ingest_service import DataIngestService, DataIngestError
-from server.services.users.authentication_service import token_auth
+from server.services.users.authentication_service import token_auth, dmis
 
 
 class DataAPI(Resource):
 
+    @dmis.admin_only(False)
     @token_auth.login_required
     def post(self, data_source):
         """

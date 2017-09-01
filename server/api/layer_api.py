@@ -10,6 +10,7 @@ from server.models.postgis.utils import NotFound
 
 class LayerListAPI(Resource):
 
+    @dmis.admin_only(False)
     @token_auth.login_required
     def get(self):
         """
