@@ -120,6 +120,90 @@
         </context-group>
         <note priority="1" from="description">FAQ link title</note>
       </trans-unit>
+      <trans-unit id="faq1" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="answer1" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="faq2" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="answer2" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+            <trans-unit id="faq3" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+            <trans-unit id="answer3" datatype="html" approved="yes">
+        <trans-unit id="faq4" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="answer4" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="faq5" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="answer5" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="faq6" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+      <trans-unit id="answer6" datatype="html" approved="yes">
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
+        <source>FAQ</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">FAQ link</note>
+      </trans-unit>
       <trans-unit id="headerEWSLink" datatype="html" approved="yes">
         <source>EWS</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
@@ -175,6 +259,13 @@
         <note priority="1" from="description">Welcome greeting for user</note>
       </trans-unit>
       <trans-unit id="headerAdminLink" datatype="html" approved="yes">
+        <source>Admin</source> <target state="translated">TODO</target><context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <note priority="1" from="description">Admin link</note>
+      </trans-unit>
+      <trans-unit id="adminTitleheader" datatype="html" approved="yes">
         <source>Admin</source> <target state="translated">TODO</target><context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">58</context>
