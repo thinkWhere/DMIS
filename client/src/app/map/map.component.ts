@@ -281,7 +281,7 @@ export class MapComponent implements OnInit {
                 'LAYERS': wmsLayer.layerName,
                 'FORMAT': 'image/png'
             },
-            attributions: [new ol.Attribution({html: wmsLayer.layerCopyright})],
+            attributions: [new ol.Attribution({html: wmsLayer.layerInfo.layerCopyright})],
             url: environment.apiEndpoint + '/map/wms',
             projection: this.map.getView().getProjection(),
             tileLoadFunction: function (imageTile, src) {
@@ -324,7 +324,7 @@ export class MapComponent implements OnInit {
         var layer = new ol.layer.Tile({
             source: new ol.source.TileArcGISRest({
                 url: arcRESTLayer.layerSource,
-                attributions: [new ol.Attribution({html: arcRESTLayer.layerCopyright})],
+                attributions: [new ol.Attribution({html: arcRESTLayer.layerInfo.layerCopyright})],
             })
         });
         layer.setVisible(false);
@@ -363,6 +363,7 @@ export class MapComponent implements OnInit {
     private createGeoJSONLayer(layerData, geoJSON){
         // Treat the layer as a heatmap when it includes the word heatmap
         var isHeatmap = layerData.layerName.includes("heatmap");
+        var attribution = new ol.Attribution({html: layerData.layerInfo.layerCopyright});
         var layer = null;
         if (isHeatmap) {
             layer = new ol.layer.Heatmap({
@@ -371,7 +372,7 @@ export class MapComponent implements OnInit {
                         dataProjection: 'EPSG:4326',
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [new ol.Attribution({html: layerData.layerCopyright})],
+                    attributions: [attribution],
                 }),
                 blur: 30,
                 opacity: 0.7,
@@ -391,7 +392,7 @@ export class MapComponent implements OnInit {
                         dataProjection: epsg,
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [new ol.Attribution({html: layerData.layerInfo.layerCopyright})],
+                    attributions: [attribution],
                 })
             });
             var features = layer.getSource().getFeatures();
