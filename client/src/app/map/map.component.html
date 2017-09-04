@@ -84,6 +84,10 @@
                                 <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
                                         <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
+                                        <a class="sidebar-refresh-button pointer" (click)="refreshLayer(layer)"
+                                            title="Refresh" i18n="Refresh layer@@mapRefreshLayer">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                     <div class="layer-legend">
                                         <img [src]="layer.layerLegend" alt="Legend">
@@ -101,6 +105,10 @@
                                 <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
                                         <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
+                                        <a class="sidebar-refresh-button pointer" (click)="refreshLayer(layer)"
+                                            title="Refresh" i18n="Refresh layer@@mapRefreshLayer">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                     <div class="layer-legend">
                                         <img [src]="layer.layerLegend" alt="Legend">
@@ -118,6 +126,10 @@
                                 <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
                                     <div class="checkbox" (change)="toggleLayer(layer.layerName)">
                                         <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
+                                        <a class="sidebar-refresh-button pointer" (click)="refreshLayer(layer)"
+                                            title="Refresh" i18n="Refresh layer@@mapRefreshLayer">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                     <div class="layer-legend">
                                         <img [src]="layer.layerLegend" alt="Legend">
