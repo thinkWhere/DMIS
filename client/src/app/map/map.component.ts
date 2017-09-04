@@ -202,6 +202,7 @@ export class MapComponent implements OnInit {
                  this.addWMSLayer(layers[i]);
              }
              if (layers[i].layerType === 'arcgisrest') {
+                 this.setArcGISRESTLegend(layers[i]);
                  this.addArcGISRESTLayer(layers[i]);
              }
              if (layers[i].layerType === 'geojson') {
@@ -246,12 +247,27 @@ export class MapComponent implements OnInit {
 
     /**
      * Set layer legend for a GeoJSON layer using the canvas
-     * TODO: dynamically generate a legend based on OL style
      * @param layer
      */
     private setGeoJSONLegend(layer) {
         var legendImage = this.styleService.getLegendImage(layer.layerStyle);
         layer.layerLegend = legendImage;
+    }
+
+    /**
+     * Set layer legend for a ArcGIS layer using the canvas
+     * @param layer
+     */
+    private setArcGISRESTLegend(layer) {
+        var legendLocation = layer.layerSource + '/legend?f=pjson';
+        this.styleService.getArcGISLegendInfo(legendLocation)
+            .subscribe(
+                data => {
+                    this.styleService.getArcGISLegend(data, function (result) {
+                        layer.layerLegend = result;
+                    });
+                }
+            )
     }
 
     /**

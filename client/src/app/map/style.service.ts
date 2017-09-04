@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import * as ol from 'openlayers';
+import { Http, Headers, Response, RequestOptions, ResponseContentType } from '@angular/http';
 
 @Injectable()
 export class StyleService {
 
-    constructor() {
-    }
+    constructor(
+        private http: Http
+    ){}
 
     /**
      * Get style
@@ -203,5 +205,64 @@ export class StyleService {
          // Convert it into an image that can be used as a legend
         var dataURL = canvas.toDataURL();
         return dataURL;
+    }
+
+
+    /**
+     * Get the image by adding authentication headers
+     * @param url
+     * @returns {any|Promise<R>|Maybe<T>}
+     */
+    getArcGISLegendInfo(url){
+        return this.http.get(url)
+            .map(response => response.json())
+    }
+
+    /**
+     * Create a legend based on JSON from an ArcGIS layer
+     * @param legendInfo
+     * @param callback
+     */
+    getArcGISLegend(legendInfo, callback){
+        // Create a canvas element
+        var canvas: any = document.createElement("canvas");
+        var context = canvas.getContext('2d');
+        var imageCount = 0;
+        // Count the images first so we can check later if all images have been loaded before turning the canvas
+        // into an image to return
+        for (var i = 0; i < legendInfo.layers.length; i++){
+            for (var j = 0; j < legendInfo.layers[i].legend.length; j++) {
+                imageCount++;
+            }
+        }
+        var anchorHeight = 0;
+        var imagesLoaded = 0;
+        for (var i = 0; i < legendInfo.layers.length; i++){
+            var legends = legendInfo.layers[i].legend;
+            for (var j = 0; j < legends.length; j++){
+                var img: any = new Image();
+                img.anchorHeight = anchorHeight;
+                img.label = legends[j].label;
+                img.width = legends[j].width;
+                img.height = legends[j].height;
+                // Add the height of the image to the anchorHeight for the next image to be drawn
+                anchorHeight += legends[j].height;
+                // Add the legend images
+                img.onload = function() {
+                    imagesLoaded++;
+                    context.drawImage(this, 0, this.anchorHeight, this.width, this.height);
+                    context.font = "12px Arial";
+                    context.fillText(this.label, this.width + 10, this.anchorHeight + 20);
+                    // Wait for all the legend images to be loaded before returning it
+                    if(imagesLoaded == imageCount){
+                        var dataURL = canvas.toDataURL();
+                        callback(dataURL);
+                    }
+
+                };
+                img.src = 'data:' + legends[j].contentType + ';base64,' + legends[j].imageData;
+            }
+        }
+        canvas.height = anchorHeight;
     }
 }
