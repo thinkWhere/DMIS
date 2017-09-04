@@ -159,6 +159,7 @@ export class MapComponent implements OnInit {
 
     /**
      * Refreshes a layer (GeoJSON / WMS / ArcGISREST)
+     * TODO: review - is there a better way to do this for GeoJSON layers?
      * The refesh() function on ol.source.vector does not refresh remote sources
      * https://github.com/openlayers/openlayers/issues/7044
      * @param layer
