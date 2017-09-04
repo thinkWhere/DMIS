@@ -71,9 +71,7 @@ export class MapComponent implements OnInit {
                 this.identifyService.setActive(true);
             },
             error => {
-              // TODO: better error handling. At the moment it always redirects to the login page (also when it is not 
-              // a 401
-              this.router.navigate(['/login'], { queryParams: { returnUrl: 'map/preparedness' }});
+              // TODO: better error handling.
             }
         );
     }
@@ -376,6 +374,7 @@ export class MapComponent implements OnInit {
                     attributions: [new ol.Attribution({html: layerData.layerCopyright})],
                 }),
                 blur: 30,
+                opacity: 0.7,
                 weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
             });
         }
@@ -392,13 +391,16 @@ export class MapComponent implements OnInit {
                         dataProjection: epsg,
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [new ol.Attribution({html: layerData.layerCopyright})],
+                    attributions: [new ol.Attribution({html: layerData.layerInfo.layerCopyright})],
                 })
             });
             var features = layer.getSource().getFeatures();
             for (var i = 0; i < features.length; i++){
                 features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
             }
+            // Set the layer style to null to prevent features that don't have a style attached to them using the
+            // layer's default OL style
+            layer.setStyle(null);
         }
         layer.setVisible(false);
         layer.setProperties({

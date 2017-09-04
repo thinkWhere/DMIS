@@ -80,6 +80,16 @@ export class StyleService {
             return style;
         }
         var style: any = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 4,
+                stroke: new ol.style.Stroke({
+                    color: ruleStyle.stroke.colour,
+                    width: ruleStyle.stroke.width
+                }),
+                fill: new ol.style.Fill({
+                    color: ruleStyle.fill.colour
+                })
+            }),
             stroke: new ol.style.Stroke({
                 color: ruleStyle.stroke.colour,
                 width: ruleStyle.stroke.width
@@ -121,73 +131,78 @@ export class StyleService {
 
     /**
      * Get legend image
-     * TODO: work in progress
+     * TODO: add error handling for when no styles are defined
      * @param layerStyle
      * @returns {string}
      */
     getLegendImage(layerStyle) {
-        if (!layerStyle) {
-            // TODO: return default style legend image
-            return;
-        }
         // Create a canvas element
         var canvas: any = document.createElement("canvas");
 
         // Create the context using OL
-        var baseHeight = 10;
+        var baseHeight = 25;
         var heightPerCategory = 20;
-        var height = baseHeight + heightPerCategory * layerStyle.rules.length;
+        if (layerStyle) {
+            var height = heightPerCategory * layerStyle.rules.length;
+        }
+        else {
+            var height = baseHeight;
+        }
         var width = 200;
         var vectorContext = ol.render.toContext(canvas.getContext('2d'), {size: [width, height]});
+        var style: any;
 
-        for (var i = 0; i < layerStyle.rules.length; i++) {
-            var ruleStyle = layerStyle.rules[i].style;
-            var label = layerStyle.rules[i].label;
-            // Get style - very similar to getDefaultStyle which is a nested function
-            // TODO: review
-            var style: any;
-            if (ruleStyle.text) {
-                style = new ol.style.Style({
-                    text: new ol.style.Text({
-                        text: ruleStyle.text.text,
-                        font: ruleStyle.text.font,
-                        textBaseline: 'Bottom',
-                        fill: new ol.style.Fill({
-                            color: ruleStyle.text.fill.colour,
-                        }),
-                        stroke: new ol.style.Stroke({
-                            color: ruleStyle.text.stroke.colour,
-                            width: ruleStyle.text.stroke.width
-                        })
-                    })
-                });
-            }
-            else {
-                // Add square
-                style = new ol.style.Style({
-                    image: new ol.style.RegularShape({
-                        radius: 10,
-                        points: 4,
-                        angle: Math.PI / 4,
-                        stroke: new ol.style.Stroke({
-                            color: ruleStyle.stroke.colour,
-                            width: ruleStyle.stroke.width
-                        }),
-                        fill: new ol.style.Fill({
-                            color: ruleStyle.fill.colour
-                        })
-                    })
-                });
-            }
+        if (!layerStyle) {
+            style = this.getDefaultStyle();
             vectorContext.setStyle(style);
-            // TODO: draw Point, Line or Polygon depending on geomType
-            vectorContext.drawGeometry(new ol.geom.Point([10, (10 + i * heightPerCategory)]));
-
-            var ctx = canvas.getContext("2d");
-            ctx.font = "10px Arial";
-            ctx.fillText(label, 30, (15 + i * heightPerCategory));
+            // We don't know what the geometry type is so draw a point by default
+            vectorContext.drawGeometry(
+                new ol.geom.Point(
+                    [10, 10]
+                ));
         }
-        // Convert it into an image that can be used as a legend
+        else {
+            for (var i = 0; i < layerStyle.rules.length; i++) {
+                 var ruleStyle = layerStyle.rules[i].style;
+                 var ctx = canvas.getContext("2d");
+                ctx.font = "10px Arial";
+                ctx.fillStyle = 'black';
+                ctx.fillText(ruleStyle.label, 30, (15 + i * heightPerCategory));
+
+                if (ruleStyle) {
+                    style = this.getOLStyle(ruleStyle);
+                }
+                else {
+                    style = this.getDefaultStyle();
+                }
+                vectorContext.setStyle(style);
+                if (ruleStyle.geomType === 'LINE') {
+                    vectorContext.drawGeometry(new ol.geom.LineString([
+                        [5, 10 + i * heightPerCategory],
+                        [20, 10 + i * heightPerCategory]
+                    ]));
+                }
+                else if (ruleStyle.geomType === 'POLYGON') {
+                    vectorContext.drawGeometry(
+                        new ol.geom.Polygon([
+                            [
+                                [5, 5 + i * heightPerCategory],
+                                [20, 5 + i * heightPerCategory],
+                                [20, 20 + i * heightPerCategory],
+                                [5, 20 + i * heightPerCategory],
+                                [5, 5 + i * heightPerCategory]
+                            ]]));
+                }
+                else { // POINT
+                    vectorContext.drawGeometry(
+                        new ol.geom.Point(
+                            [10, 10 + i * heightPerCategory]
+                        ));
+                }
+
+            }
+        }
+         // Convert it into an image that can be used as a legend
         var dataURL = canvas.toDataURL();
         return dataURL;
     }

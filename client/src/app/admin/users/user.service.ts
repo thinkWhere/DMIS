@@ -65,7 +65,7 @@ export class UserService {
     let headers = this.authenticationService.getAuthenticatedHeaders();
     let options = new RequestOptions({headers: headers});
 
-    return this.http.post(environment.apiEndpoint + '/user/' + user.username, data, options)
+    return this.http.post(environment.apiEndpoint + '/admin/user/' + user.username, data, options)
         .map(response => response.json())
   }
 }
