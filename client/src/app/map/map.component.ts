@@ -376,13 +376,16 @@ export class MapComponent implements OnInit {
                         dataProjection: epsg,
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [new ol.Attribution({html: layerData.layerCopyright})],
+                    attributions: [new ol.Attribution({html: layerData.layerInfo.layerCopyright})],
                 })
             });
             var features = layer.getSource().getFeatures();
             for (var i = 0; i < features.length; i++){
                 features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
             }
+            // Set the layer style to null to prevent features that don't have a style attached to them using the
+            // layer's default OL style
+            layer.setStyle(null);
         }
         layer.setVisible(false);
         layer.setProperties({
