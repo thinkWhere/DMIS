@@ -249,7 +249,6 @@ export class MapComponent implements OnInit {
 
     /**
      * Set layer legend for a GeoJSON layer using the canvas
-     * TODO: dynamically generate a legend based on OL style
      * @param layer
      */
     private setGeoJSONLegend(layer) {
@@ -257,16 +256,20 @@ export class MapComponent implements OnInit {
         layer.layerLegend = legendImage;
     }
 
-    private setArcGISRESTLegend(layer){
+    /**
+     * Set layer legend for a ArcGIS layer using the canvas
+     * @param layer
+     */
+    private setArcGISRESTLegend(layer) {
         var legendLocation = layer.layerSource + '/legend?f=pjson';
         this.styleService.getArcGISLegendInfo(legendLocation)
-                    .subscribe(
-                        data => {
-                            this.styleService.getArcGISLegend(data, function(result){
-                                layer.layerLegend = result;
-                            });
-                        }
-                    )
+            .subscribe(
+                data => {
+                    this.styleService.getArcGISLegend(data, function (result) {
+                        layer.layerLegend = result;
+                    });
+                }
+            )
     }
 
     /**
