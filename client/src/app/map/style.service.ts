@@ -245,7 +245,7 @@ export class StyleService {
                     }
 
                 };
-                img.src = "data:image/png;base64," + legends[j].imageData;
+                img.src = 'data:' + legends[j].contentType + ';base64,' + legends[j].imageData;
             }
         }
         canvas.height = anchorHeight;
