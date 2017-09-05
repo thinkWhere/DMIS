@@ -426,7 +426,7 @@ export class MapComponent implements OnInit {
                         dataProjection: 'EPSG:4326',
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [attribution],
+                    attributions: [attribution]
                 }),
                 blur: 30,
                 opacity: 0.7,
