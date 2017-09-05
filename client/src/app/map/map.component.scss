@@ -296,15 +296,15 @@ $move-map-in-xs: true !default;
   }
 
   @media(min-width: $threshold-sm) and (max-width: $threshold-md - 1px) {
-    min-width: $width-sm - $tab-size;
+    min-width: $width-sm - $tab-size - 10px;
   }
 
   @media(min-width: $threshold-md) and (max-width: $threshold-lg - 1px) {
-    min-width: $width-md - $tab-size;
+    min-width: $width-md - $tab-size - 10px;
   }
 
   @media(min-width: $threshold-lg) {
-    min-width: $width-lg - $tab-size;
+    min-width: $width-lg - $tab-size - 10px;
   }
 }
 
@@ -556,4 +556,9 @@ $move-map-in-xs: true !default;
 
 .sidebar-measure {
   padding-top: 20px;
+}
+
+.sidebar-refresh-button {
+  padding-left: 5px;
+  color: black;
 }

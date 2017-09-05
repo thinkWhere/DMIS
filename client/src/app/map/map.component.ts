@@ -158,6 +158,60 @@ export class MapComponent implements OnInit {
     }
 
     /**
+     * Refreshes a layer (GeoJSON / WMS / ArcGISREST)
+     * TODO: review - is there a better way to do this for GeoJSON layers?
+     * The refesh() function on ol.source.vector does not refresh remote sources
+     * https://github.com/openlayers/openlayers/issues/7044
+     * @param layer
+     */
+    refreshLayer(layer) {
+        // get the layers
+        var layers = this.map.getLayers().getArray();
+        // find the layer
+        for (var i = 0; i < layers.length; i++) {
+            // toggle visibility
+            if (layer.layerName === layers[i].getProperties().layerName) {
+                // Update the data by requesting it again
+                if (layer.layerType === 'geojson'){
+                    this.layerService.getGeoJSON(layer)
+                        .subscribe(
+                            data => {
+                                // Success - fetch features from the API, clear the current features on the layer and
+                                // add the new features
+                                var epsg = 'EPSG:4326';
+                                if (data.crs){
+                                    if (data.crs.properties.name){
+                                        epsg = data.crs.properties.name;
+                                    }
+                                }
+                                var newFeatures = (new ol.format.GeoJSON()).readFeatures(data, {
+                                    dataProjection: epsg,
+                                    featureProjection: 'EPSG:3857'
+                                });
+                                layers[i].getSource().clear();
+                                layers[i].getSource().addFeatures(newFeatures);
+                                for (var j = 0; j < newFeatures.length; j++){
+                                    newFeatures[j].setStyle(this.styleService.getStyle(newFeatures[j], layer.layerStyle));
+                                }
+                            },
+                            error => {
+                                // TODO
+                            }
+                        );
+                }
+                // Refresh the data by updating the parameters which forces a refresh
+                else { // WMS or ArcGISRest
+                    var source = layers[i].getSource();
+                    var params = source.getParams();
+                    params.t = new Date().getMilliseconds();
+                    source.updateParams(params);
+                }
+                return;
+            }
+        }
+    }
+
+    /**
      * Initialise the map
      */
     private initMap() {
@@ -372,7 +426,7 @@ export class MapComponent implements OnInit {
                         dataProjection: 'EPSG:4326',
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [attribution],
+                    attributions: [attribution]
                 }),
                 blur: 30,
                 opacity: 0.7,
@@ -392,7 +446,7 @@ export class MapComponent implements OnInit {
                         dataProjection: epsg,
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [attribution],
+                    attributions: [attribution]
                 })
             });
             var features = layer.getSource().getFeatures();
