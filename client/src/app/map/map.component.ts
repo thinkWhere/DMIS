@@ -446,7 +446,7 @@ export class MapComponent implements OnInit {
                         dataProjection: epsg,
                         featureProjection: 'EPSG:3857'
                     }),
-                    attributions: [new ol.Attribution({html: layerData.layerInfo.layerCopyright})]
+                    attributions: [attribution]
                 })
             });
             var features = layer.getSource().getFeatures();
