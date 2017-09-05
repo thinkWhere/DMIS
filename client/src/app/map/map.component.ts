@@ -176,7 +176,8 @@ export class MapComponent implements OnInit {
                     this.layerService.getGeoJSON(layer)
                         .subscribe(
                             data => {
-                                // Success
+                                // Success - fetch features from the API, clear the current features on the layer and
+                                // add the new features
                                 var epsg = 'EPSG:4326';
                                 if (data.crs){
                                     if (data.crs.properties.name){
