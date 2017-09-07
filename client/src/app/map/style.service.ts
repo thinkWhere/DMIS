@@ -178,8 +178,8 @@ export class StyleService {
                 vectorContext.setStyle(style);
                 if (ruleStyle.geomType === 'LINE') {
                     vectorContext.drawGeometry(new ol.geom.LineString([
-                        [5, 10 + i * heightPerCategory],
-                        [20, 10 + i * heightPerCategory]
+                        [20, 5 + i * heightPerCategory],
+                        [5, 15 + i * heightPerCategory]
                     ]));
                 }
                 else if (ruleStyle.geomType === 'POLYGON') {
@@ -196,7 +196,7 @@ export class StyleService {
                 else { // POINT
                     vectorContext.drawGeometry(
                         new ol.geom.Point(
-                            [10, 10 + i * heightPerCategory]
+                            [13, 13 + i * heightPerCategory]
                         ));
                 }
 
