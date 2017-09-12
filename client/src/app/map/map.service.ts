@@ -8,8 +8,9 @@ import { AuthenticationService } from './../shared/authentication.service';
 @Injectable()
 export class MapService {
 
-    map:any;
-    self = this;
+    map: any;
+    initialExtents: any = [104.50, 12.56];
+    initialZoom: any = 8;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -29,8 +30,8 @@ export class MapService {
                 })
             ],
             view: new ol.View({
-                center: ol.proj.transform([104.99, 12.56], 'EPSG:4326', 'EPSG:3857'),
-                zoom: 7
+                center: ol.proj.transform(this.initialExtents, 'EPSG:4326', 'EPSG:3857'),
+                zoom: this.initialZoom
             })
         });
 
