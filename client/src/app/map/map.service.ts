@@ -10,7 +10,6 @@ export class MapService {
 
     map: any;
     initialExtents: any = [104.50, 12.56];
-
     initialZoom: any = 8;
 
     constructor(
