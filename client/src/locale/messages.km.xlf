@@ -121,7 +121,7 @@
         <target>មានបញ្ហា</target>
         <note priority="1" from="description">Error</note>
       </trans-unit>
-      <trans-unit id="35161b0e4414f30d97c44608f42ef0703e043217" datatype="html">
+      <trans-unit id="loginUsernamePasswordIncorrect" datatype="html">
         <source>Username or password is incorrect.</source>
         <target>ឈ្មោះអ្នកប្រើឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ</target>
         <note priority="1" from="description">Username or password incorrect message@loginUsernamePasswordIncorrect</note>
@@ -135,6 +135,11 @@
         <source>Toggle layer group</source>
         <target>បិទ / បើកក្រុមស្រទាប់</target>
         <note priority="1" from="description">Toggle layer group button</note>
+      </trans-unit>
+      <trans-unit id="mapRefreshLayer" datatype="html">
+        <source>Refresh</source>
+        <target>ធ្វើ​ឱ្យ​ស្រស់</target>
+        <note priority="1" from="description">Refresh layer</note>
       </trans-unit>
       <trans-unit id="mapMeasureHelpMsg" datatype="html">
         <source>Click to start drawing</source>
@@ -291,7 +296,7 @@
         <target>តួនាទី</target>
         <note priority="1" from="description">Role</note>
       </trans-unit>
-      <trans-unit id="adminOptionRoleAdmin" datatype="html">
+      <trans-unit id="admin" datatype="html">
         <source>Admin</source>
         <target>អ្នកគ្រប់គ្រង</target>
         <note priority="1" from="description">Option for role</note>

@@ -214,13 +214,29 @@
         </context-group>
         <note priority="1" from="description">Welcome greeting for user</note>
       </trans-unit>
-      <trans-unit id="headerAdminLink" datatype="html">
+      <trans-unit id="admin" datatype="html">
         <source>Admin</source>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">58</context>
         </context-group>
-        <note priority="1" from="description">Admin link</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <note priority="1" from="description">Admin text</note>
       </trans-unit>
       <trans-unit id="headerLogoutLink" datatype="html">
         <source>Logout</source>
@@ -306,13 +322,13 @@
         </context-group>
         <note priority="1" from="description">Error</note>
       </trans-unit>
-      <trans-unit id="35161b0e4414f30d97c44608f42ef0703e043217" datatype="html">
+      <trans-unit id="loginUsernamePasswordIncorrect" datatype="html">
         <source>Username or password is incorrect.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <note priority="1" from="description">Username or password incorrect message@loginUsernamePasswordIncorrect</note>
+        <note priority="1" from="description">Username or password incorrect message</note>
       </trans-unit>
       <trans-unit id="mapToggleCategory" datatype="html">
         <source>Change category</source>
@@ -339,9 +355,7 @@
         <note priority="1" from="description">Toggle layer group button</note>
       </trans-unit>
       <trans-unit id="mapRefreshLayer" datatype="html">
-        <source>
-                                            <x id="START_ITALIC_TEXT" ctype="x-i"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i"/>
-                                        </source>
+        <source>Refresh</source>
         <context-group purpose="location">
           <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">88</context>
@@ -548,14 +562,6 @@
         </context-group>
         <note priority="1" from="description">Weather title</note>
       </trans-unit>
-      <trans-unit id="adminTitleHeader" datatype="html">
-        <source>Admin</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <note priority="1" from="description">pageheader</note>
-      </trans-unit>
       <trans-unit id="adminDashboardHeader" datatype="html">
         <source>Dashboard</source>
         <context-group purpose="location">
@@ -667,22 +673,6 @@
           <context context-type="linenumber">33</context>
         </context-group>
         <note priority="1" from="description">Role</note>
-      </trans-unit>
-      <trans-unit id="adminOptionRoleAdmin" datatype="html">
-        <source>Admin</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <note priority="1" from="description">Option for role</note>
       </trans-unit>
       <trans-unit id="adminOptionRoleUser" datatype="html">
         <source>User</source>

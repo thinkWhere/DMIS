@@ -55,7 +55,7 @@
                         <span i18n="Welcome greeting for user@@headerWelcomeMessage">Hi</span>, {{ user.username }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li *ngIf="user.role === 'ADMIN'"><a routerLink="/admin" i18n="Admin link@@headerAdminLink">Admin</a></li>
+                        <li *ngIf="user.role === 'ADMIN'"><a routerLink="/admin" i18n="Admin text@@admin">Admin</a></li>
                         <li><a (click)="logout()" i18n="Logout link@@headerLogoutLink">Logout</a></li>
                     </ul>
                 </li>
