@@ -5,7 +5,7 @@
       <trans-unit id="headerNameOfApplication" datatype="html">
         <source>DMIS Cambodia</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <note priority="1" from="description">Name of the application</note>
@@ -13,31 +13,31 @@
       <trans-unit id="mapCategoryPreparedness" datatype="html">
         <source>Preparedness</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <note priority="1" from="description">Map category</note>
@@ -45,31 +45,31 @@
       <trans-unit id="mapCategoryIncidents" datatype="html">
         <source>Incidents and Warnings</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">71</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">23</context>
         </context-group>
         <note priority="1" from="description">Map category</note>
@@ -77,31 +77,31 @@
       <trans-unit id="mapCategoryAssessment" datatype="html">
         <source>Assessment and Response</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">24</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">26</context>
         </context-group>
         <note priority="1" from="description">Map category</note>
@@ -109,7 +109,7 @@
       <trans-unit id="headerAboutLink" datatype="html">
         <source>About</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
         <note priority="1" from="description">About link</note>
@@ -117,7 +117,7 @@
       <trans-unit id="headerAboutLinkTitle" datatype="html">
         <source>Go to the about page</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
         <note priority="1" from="description">About link title</note>
@@ -125,7 +125,7 @@
       <trans-unit id="headerMapLink" datatype="html">
         <source>Map</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
         <note priority="1" from="description">Map link</note>
@@ -133,7 +133,7 @@
       <trans-unit id="headerMapLinkTitle" datatype="html">
         <source>Go to the map page</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
         <note priority="1" from="description">Map link title</note>
@@ -141,7 +141,7 @@
       <trans-unit id="headerFaqLink" datatype="html">
         <source>FAQ</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">36</context>
         </context-group>
         <note priority="1" from="description">FAQ link</note>
@@ -149,7 +149,7 @@
       <trans-unit id="headerFAQLinkTitle" datatype="html">
         <source>Go to the FAQ page</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">36</context>
         </context-group>
         <note priority="1" from="description">FAQ link title</note>
@@ -157,7 +157,7 @@
       <trans-unit id="headerEWSLink" datatype="html">
         <source>EWS</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
         <note priority="1" from="description">EWS link</note>
@@ -165,7 +165,7 @@
       <trans-unit id="headerEWSLinkTitle" datatype="html">
         <source>Go to the EWS website</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
         <note priority="1" from="description">EWS link title</note>
@@ -173,7 +173,7 @@
       <trans-unit id="headerWeatherMapLink" datatype="html">
         <source>Weather</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
         <note priority="1" from="description">Weather map link</note>
@@ -181,7 +181,7 @@
       <trans-unit id="headerWeatherMapLinkTitle" datatype="html">
         <source>Go to the weather map</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
         <note priority="1" from="description">Weather map link title</note>
@@ -189,19 +189,19 @@
       <trans-unit id="login" datatype="html">
         <source>Login</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">15</context>
         </context-group>
         <note priority="1" from="description">Login</note>
@@ -209,7 +209,7 @@
       <trans-unit id="headerWelcomeMessage" datatype="html">
         <source>Hi</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">55</context>
         </context-group>
         <note priority="1" from="description">Welcome greeting for user</note>
@@ -217,7 +217,7 @@
       <trans-unit id="headerAdminLink" datatype="html">
         <source>Admin</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">58</context>
         </context-group>
         <note priority="1" from="description">Admin link</note>
@@ -225,7 +225,7 @@
       <trans-unit id="headerLogoutLink" datatype="html">
         <source>Logout</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/app.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/app.component.ts</context>
           <context context-type="linenumber">59</context>
         </context-group>
         <note priority="1" from="description">Logout link</note>
@@ -233,19 +233,19 @@
       <trans-unit id="username" datatype="html">
         <source>Username</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
         <note priority="1" from="description">Username</note>
@@ -253,7 +253,7 @@
       <trans-unit id="loginUsernameRequired" datatype="html">
         <source> Your username is required</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <note priority="1" from="description">Username is required message</note>
@@ -261,11 +261,11 @@
       <trans-unit id="password" datatype="html">
         <source>Password</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <note priority="1" from="description">Password</note>
@@ -273,7 +273,7 @@
       <trans-unit id="loginPasswordRequired" datatype="html">
         <source>Password is required</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">12</context>
         </context-group>
         <note priority="1" from="description">Password is required message</note>
@@ -281,27 +281,27 @@
       <trans-unit id="error" datatype="html">
         <source>Error</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">75</context>
         </context-group>
         <note priority="1" from="description">Error</note>
@@ -309,7 +309,7 @@
       <trans-unit id="35161b0e4414f30d97c44608f42ef0703e043217" datatype="html">
         <source>Username or password is incorrect.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/login/login.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/login/login.component.ts</context>
           <context context-type="linenumber">19</context>
         </context-group>
         <note priority="1" from="description">Username or password incorrect message@loginUsernamePasswordIncorrect</note>
@@ -317,7 +317,7 @@
       <trans-unit id="mapToggleCategory" datatype="html">
         <source>Change category</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">57</context>
         </context-group>
         <note priority="1" from="description">Category toggle title</note>
@@ -325,26 +325,44 @@
       <trans-unit id="mapToggleLayerGroup" datatype="html">
         <source>Toggle layer group</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
           <context context-type="linenumber">79</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <note priority="1" from="description">Toggle layer group button</note>
+      </trans-unit>
+      <trans-unit id="mapRefreshLayer" datatype="html">
+        <source>
+                                            <x id="START_ITALIC_TEXT" ctype="x-i"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i"/>
+                                        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <note priority="1" from="description">Refresh layer</note>
       </trans-unit>
       <trans-unit id="mapMeasureHelpMsg" datatype="html">
         <source>
         Click to start drawing
     </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <note priority="1" from="description">Measure help message</note>
       </trans-unit>
@@ -353,8 +371,8 @@
         Click to continue drawing the polygon
     </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">154</context>
         </context-group>
         <note priority="1" from="description">Measure continue polygon message</note>
       </trans-unit>
@@ -363,15 +381,15 @@
         Click to continue drawing the line
     </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/map/map.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/map/map.component.ts</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <note priority="1" from="description">Measure continue line message</note>
       </trans-unit>
       <trans-unit id="titleApplication" datatype="html">
         <source>DMIS</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <note priority="1" from="description">Title of the application</note>
@@ -379,7 +397,7 @@
       <trans-unit id="homeDescription" datatype="html">
         <source>This Disaster Management Information System provides a centralised repository for the systematic collection, documentation, analysis and display of relevant data related to the preparedness, detection and response to natural and man made disasters. </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
         <note priority="1" from="description">Description of the application in header</note>
@@ -387,7 +405,7 @@
       <trans-unit id="homeViewMap" datatype="html">
         <source>View map</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
         <note priority="1" from="description">View map button</note>
@@ -395,7 +413,7 @@
       <trans-unit id="homeDescriptionParagraph" datatype="html">
         <source>The DMIS is a tool that helps to provide alerting and analysis functionality to members of the disaster response community in Cambodia, in order to better prepare communities and reduce the impact of disasters.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <note priority="1" from="description">Description of the application in paragraph</note>
@@ -403,7 +421,7 @@
       <trans-unit id="homeDescriptionParagraphPartTwo" datatype="html">
         <source>The Disaster Management Information System was developed by thinkWhere in partnership with People in Need on behalf of the World Food Programme for use by the National Committee for Disaster Management in Cambodia and other Civil Society Organisations.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/home/home.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/home/home.component.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <note priority="1" from="description">Description of the application in paragraph</note>
@@ -411,7 +429,7 @@
       <trans-unit id="faqHeader" datatype="html">
         <source>Frequently Asked Questions</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
         <note priority="1" from="description">Header for the FAQ</note>
@@ -419,7 +437,7 @@
       <trans-unit id="faqSubheader" datatype="html">
         <source>Simple answers to your most common questions</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
         <note priority="1" from="description">Subheader for the FAQ</note>
@@ -427,7 +445,7 @@
       <trans-unit id="faq1" datatype="html">
         <source>What is DMIS?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <note priority="1" from="description">faq-question bold</note>
@@ -437,7 +455,7 @@
 
 </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <note priority="1" from="description">faq1 paragraph</note>
@@ -445,7 +463,7 @@
       <trans-unit id="faq2" datatype="html">
         <source>What data is available through DMIS?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">16</context>
         </context-group>
         <note priority="1" from="description">faq-question bold</note>
@@ -453,7 +471,7 @@
       <trans-unit id="answer2" datatype="html">
         <source> There are various datasets provided in three different categories: Preparadness, Incidents and Warnings, Assessment and Response. Mapping data provides information on Cambodian demographics, infrastructure, weather conditions and other.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">17</context>
         </context-group>
         <note priority="1" from="description">faq2 paragraph</note>
@@ -461,7 +479,7 @@
       <trans-unit id="faq3" datatype="html">
         <source>How can my organization gain access to DMIS?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <note priority="1" from="description">faq-question paragraph</note>
@@ -469,7 +487,7 @@
       <trans-unit id="answer3" datatype="html">
         <source>Please get in touch with us at support@dmis.com</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
         <note priority="1" from="description">faq2 paragraph</note>
@@ -477,7 +495,7 @@
       <trans-unit id="faq4" datatype="html">
         <source>How do I reset my username/password?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">24</context>
         </context-group>
         <note priority="1" from="description">faq-question paragraph</note>
@@ -485,7 +503,7 @@
       <trans-unit id="answer4" datatype="html">
         <source>Please get in touch with us at support@dmis.com</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
         <note priority="1" from="description">faq4 paragraph</note>
@@ -493,7 +511,7 @@
       <trans-unit id="faq5" datatype="html">
         <source>I cannot see some datasets, why?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">28</context>
         </context-group>
         <note priority="1" from="description">faq-question paragraph</note>
@@ -501,7 +519,7 @@
       <trans-unit id="answer5" datatype="html">
         <source>Some datasets, for instance Earth Network Lightning information, are dynamic are only displayed when available.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">29</context>
         </context-group>
         <note priority="1" from="description">faq5 paragraph</note>
@@ -509,7 +527,7 @@
       <trans-unit id="faq6" datatype="html">
         <source>How can I create additional accounts for my colleagues?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">32</context>
         </context-group>
         <note priority="1" from="description">faq-question paragraph</note>
@@ -517,7 +535,7 @@
       <trans-unit id="answer6" datatype="html">
         <source>You will require admin privileges to add additional users. Please get in touch with us at support@dmis.com</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/faq/faq.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/faq/faq.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
         <note priority="1" from="description">faq5 paragraph</note>
@@ -525,15 +543,15 @@
       <trans-unit id="weatherTitle" datatype="html">
         <source>Weather</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/weather/weather.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/weather/weather.component.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <note priority="1" from="description">Weather title</note>
       </trans-unit>
-      <trans-unit id="adminheader" datatype="html">
+      <trans-unit id="adminTitleHeader" datatype="html">
         <source>Admin</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <note priority="1" from="description">pageheader</note>
@@ -541,19 +559,19 @@
       <trans-unit id="adminDashboardHeader" datatype="html">
         <source>Dashboard</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin-dashboard/admin-dashboard.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin-dashboard/admin-dashboard.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
         <note priority="1" from="description">Dashboard header</note>
@@ -561,7 +579,7 @@
       <trans-unit id="adminManageUsersHeader" datatype="html">
         <source>Manage users</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <note priority="1" from="description">Admin manage users header</note>
@@ -569,19 +587,19 @@
       <trans-unit id="adminUsersHeader" datatype="html">
         <source>Users</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">2</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin-dashboard/admin-dashboard.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin-dashboard/admin-dashboard.component.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
         <note priority="1" from="description">Users header for admin page</note>
@@ -589,19 +607,23 @@
       <trans-unit id="adminAddUserHeader" datatype="html">
         <source>Add user</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">2</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
         <note priority="1" from="description">Add user header for admin page</note>
@@ -609,7 +631,7 @@
       <trans-unit id="adminManageLayersHeader" datatype="html">
         <source>Manage layers</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <note priority="1" from="description">manage layers header for admin page</note>
@@ -617,19 +639,19 @@
       <trans-unit id="adminLayersHeader" datatype="html">
         <source>Layers</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin.component.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/admin-dashboard/admin-dashboard.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/admin-dashboard/admin-dashboard.component.ts</context>
           <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">2</context>
         </context-group>
         <note priority="1" from="description">layers header for admin page</note>
@@ -637,11 +659,11 @@
       <trans-unit id="role" datatype="html">
         <source>Role</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
         <note priority="1" from="description">Role</note>
@@ -649,15 +671,15 @@
       <trans-unit id="adminOptionRoleAdmin" datatype="html">
         <source>Admin</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
         <note priority="1" from="description">Option for role</note>
@@ -665,15 +687,15 @@
       <trans-unit id="adminOptionRoleUser" datatype="html">
         <source>User</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">38</context>
         </context-group>
         <note priority="1" from="description">Option for role</note>
@@ -681,11 +703,11 @@
       <trans-unit id="adminEditButton" datatype="html">
         <source>Edit</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">65</context>
         </context-group>
         <note priority="1" from="description">Edit button</note>
@@ -693,11 +715,11 @@
       <trans-unit id="adminSaveButton" datatype="html">
         <source>Save</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">70</context>
         </context-group>
         <note priority="1" from="description">Save button</note>
@@ -705,7 +727,7 @@
       <trans-unit id="adminDeleteButton" datatype="html">
         <source>Delete</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">37</context>
         </context-group>
         <note priority="1" from="description">Delete button</note>
@@ -713,7 +735,7 @@
       <trans-unit id="adminErrorDeleteUser" datatype="html">
         <source>Could not delete the user.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">43</context>
         </context-group>
         <note priority="1" from="description">Error delete user</note>
@@ -721,7 +743,7 @@
       <trans-unit id="adminDeleteUserConfirmation" datatype="html">
         <source>Delete confirmation</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
         <note priority="1" from="description">Delete confirmation</note>
@@ -729,7 +751,7 @@
       <trans-unit id="adminDeleteUserConfirmationText" datatype="html">
         <source>Are you sure you want to delete this user?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">56</context>
         </context-group>
         <note priority="1" from="description">Delete confirmation text</note>
@@ -737,11 +759,11 @@
       <trans-unit id="adminCancelButton" datatype="html">
         <source>Cancel</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">68</context>
         </context-group>
         <note priority="1" from="description">Cancel button</note>
@@ -749,7 +771,7 @@
       <trans-unit id="adminConfirmButton" datatype="html">
         <source>Confirm</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/users.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/users.component.ts</context>
           <context context-type="linenumber">60</context>
         </context-group>
         <note priority="1" from="description">Confirm button</note>
@@ -757,7 +779,7 @@
       <trans-unit id="adminUsernameRequired" datatype="html">
         <source>Username is required</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">13</context>
         </context-group>
         <note priority="1" from="description">Username is required</note>
@@ -765,7 +787,7 @@
       <trans-unit id="adminUsernameMinCharacters" datatype="html">
         <source>Username must be at least 4 characters long.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">14</context>
         </context-group>
         <note priority="1" from="description">Username min characters</note>
@@ -773,7 +795,7 @@
       <trans-unit id="adminUsernameMaxCharacters" datatype="html">
         <source>Username cannot be more than 24 characters long.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">15</context>
         </context-group>
         <note priority="1" from="description">Username max characters</note>
@@ -781,7 +803,7 @@
       <trans-unit id="adminPasswordLabel" datatype="html">
         <source>Password</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <note priority="1" from="description">Label for password</note>
@@ -789,7 +811,7 @@
       <trans-unit id="adminPasswordRequired" datatype="html">
         <source>Password is required</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">28</context>
         </context-group>
         <note priority="1" from="description">Password required</note>
@@ -797,7 +819,7 @@
       <trans-unit id="adminRoleRequired" datatype="html">
         <source>Role is required</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">43</context>
         </context-group>
         <note priority="1" from="description">Role required</note>
@@ -805,7 +827,7 @@
       <trans-unit id="success" datatype="html">
         <source>Success</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
         <note priority="1" from="description">Success</note>
@@ -813,7 +835,7 @@
       <trans-unit id="adminSuccessAddUser" datatype="html">
         <source>Successfully added a user.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
         <note priority="1" from="description">Success add user</note>
@@ -821,7 +843,7 @@
       <trans-unit id="adminFailedAddUser" datatype="html">
         <source>Failed to add a user. Does this username already exist?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">54</context>
         </context-group>
         <note priority="1" from="description">Failed to add user</note>
@@ -829,7 +851,7 @@
       <trans-unit id="adminInvalidUsername" datatype="html">
         <source>The username is invalid. Please make sure you don&apos;t have any whitespaces in your username.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/users/add-user.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/users/add-user.component.ts</context>
           <context context-type="linenumber">57</context>
         </context-group>
         <note priority="1" from="description">Invalid username</note>
@@ -837,11 +859,11 @@
       <trans-unit id="adminLayerTitle" datatype="html">
         <source>Title</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
         <note priority="1" from="description">Layer title</note>
@@ -849,11 +871,11 @@
       <trans-unit id="adminLayerCategory" datatype="html">
         <source>Category</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
         <note priority="1" from="description">Layer category</note>
@@ -861,11 +883,11 @@
       <trans-unit id="adminLayerGroup" datatype="html">
         <source>Group</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
         <note priority="1" from="description">Layer group</note>
@@ -873,7 +895,7 @@
       <trans-unit id="adminLayerDetailsButton" datatype="html">
         <source>Details</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
         <note priority="1" from="description">Show details layer button</note>
@@ -881,7 +903,7 @@
       <trans-unit id="adminErrorLayerList" datatype="html">
         <source>Could not get the list of layers.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer-list.component.ts</context>
           <context context-type="linenumber">29</context>
         </context-group>
         <note priority="1" from="description">Error message getting layer list</note>
@@ -889,7 +911,7 @@
       <trans-unit id="adminLayerDetailsHeader" datatype="html">
         <source>Layer details</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
         <note priority="1" from="description">Layer details header for admin page</note>
@@ -897,7 +919,7 @@
       <trans-unit id="adminLayerCopyright" datatype="html">
         <source>Copyright</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
         <note priority="1" from="description">Layer copyright</note>
@@ -905,7 +927,7 @@
       <trans-unit id="adminErrorEditLayer" datatype="html">
         <source>Could not get the layer details.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">C:/dev/git/DMIS/client/src/app/admin/layers/layer.component.ts</context>
+          <context context-type="sourcefile">C:/dev/DMIS/client/src/app/admin/layers/layer.component.ts</context>
           <context context-type="linenumber">76</context>
         </context-group>
         <note priority="1" from="description">Error message edit layer</note>
