@@ -76,7 +76,6 @@ export class LayerComponent implements OnInit {
       layer.mapCategory = this.selectedCategory.value;
       this.editMode = false;
       this.errorUpdatingLayer = false;
-      console.log(layer)
       this.layerService.updateLayer(layer)
       .subscribe(
           data => {
