@@ -17,6 +17,9 @@ import { SitrepComponent } from './map/sitrep.component';
 import { FaqComponent } from './faq/faq.component';
 import { WeatherComponent } from './weather/weather.component';
 
+import { RequestOptions } from '@angular/http';
+import { RequestOptionsService } from './shared/request-options.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +69,9 @@ import { WeatherComponent } from './weather/weather.component';
           }
       ])
   ],
-  providers: [AuthenticationService, AuthGuardService],
+  providers: [AuthenticationService, AuthGuardService, {
+    provide: RequestOptions, useClass: RequestOptionsService
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
