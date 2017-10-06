@@ -220,6 +220,9 @@ export class StyleService {
 
     /**
      * Create a legend based on JSON from an ArcGIS layer
+     * TODO: this is hardcoded! For the Pacific Disaster Center layer only the first icon needs
+     * to get displayed. See: https://github.com/thinkWhere/DMIS/issues/109
+     * By hardcoding this, any additional ArcGIS REST layers will only show the first icon as well...
      * @param legendInfo
      * @param callback
      */
@@ -253,15 +256,15 @@ export class StyleService {
                     context.drawImage(this, 0, this.anchorHeight, this.width, this.height);
                     context.font = "12px Arial";
                     context.fillText(this.label, this.width + 10, this.anchorHeight + 20);
-                    // Wait for all the legend images to be loaded before returning it
-                    if(imagesLoaded == imageCount){
-                        var dataURL = canvas.toDataURL();
-                        callback(dataURL);
-                    }
-
+                    // If using multiple images, Wait for all the legend images to be loaded before returning it
+                    // by checking if imagesLoaded == imageCount
+                    var dataURL = canvas.toDataURL();
+                    callback(dataURL);
                 };
                 img.src = 'data:' + legends[j].contentType + ';base64,' + legends[j].imageData;
+                break;
             }
+            break;
         }
         canvas.height = anchorHeight;
     }
