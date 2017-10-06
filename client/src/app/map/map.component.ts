@@ -273,6 +273,7 @@ export class MapComponent implements OnInit {
                  assessment.push(layers[i]);
              }
         }
+        this.layerService.setZIndex(this.map.getLayers().getArray());
         this.preparednessLayers = preparedness;
         this.incidentLayers = incidents;
         this.assessmentLayers = assessment;
@@ -365,7 +366,8 @@ export class MapComponent implements OnInit {
         layer.setProperties({
             "layerName": wmsLayer.layerName,
             "layerSource": wmsLayer.layerSource,
-            "layerType": wmsLayer.layerType
+            "layerType": wmsLayer.layerType,
+            "layerGeometryType": wmsLayer.layerGeometryType
         });
         this.map.addLayer(layer);
     }
@@ -386,7 +388,8 @@ export class MapComponent implements OnInit {
             "layerName": arcRESTLayer.layerName,
             "layerSource": arcRESTLayer.layerSource,
             "layerType": arcRESTLayer.layerType,
-            "layerTitle": arcRESTLayer.layerInfo.layerTitle
+            "layerTitle": arcRESTLayer.layerInfo.layerTitle,
+            "layerGeometryType": arcRESTLayer.layerGeometryType
         });
         this.map.addLayer(layer);
     }
@@ -462,7 +465,8 @@ export class MapComponent implements OnInit {
             "layerName": layerData.layerName,
             "layerSource": layerData.layerSource,
             "layerType": layerData.layerType,
-            "layerTitle": layerData.layerInfo.layerTitle
+            "layerTitle": layerData.layerInfo.layerTitle,
+            "layerGeometryType": layerData.layerInfo.layerGeometryType
         });
         this.map.addLayer(layer);
     }

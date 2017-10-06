@@ -65,7 +65,26 @@ export class LayerService {
     return this.http.get(environment.apiEndpoint + '/map/geojson', options)
         .map(response => response.json())
         .catch(this.handleError);
-}
+  }
+
+  /**
+   * Set the z index of layers depending on the geometry type
+   * @param layers
+   */
+  setZIndex(layers){
+    for (var i = 0; i < layers.length; i++){
+      let geometryType = layers[i].getProperties().layerGeometryType;
+      if (geometryType === 'polygon') {
+        layers[i].setZIndex(0);
+      }
+      if (geometryType === 'line') {
+        layers[i].setZIndex(1);
+      }
+      if (geometryType === 'point') {
+        layers[i].setZIndex(2);
+      }
+    }
+  }
   
   /**
    * Handle the error

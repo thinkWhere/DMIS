@@ -45,6 +45,7 @@ class LayerDetailsDTO(Model):
     layer_source = StringType(required=True, serialized_name='layerSource')
     layer_type = StringType(required=True, validators=[is_known_type], serialized_name='layerType')
     layer_style = BaseType(serialized_name='layerStyle')
+    layer_geometry_type = BaseType(required=True, serialized_name='layerGeometryType')
     # We will either return a LayerInfo object for the specified locale or all locales if no locale is specified
     layer_info = ModelType(LayerInfoDTO, serialized_name='layerInfo', serialize_when_none=False)
     layer_info_locales = ListType(ModelType(LayerInfoDTO), serialized_name='layerInfoLocales', serialize_when_none=False)
