@@ -61,7 +61,7 @@ class Layer(db.Model):
     @staticmethod
     def get_all_layers(locale: str) -> Optional[DMISLayersDTO]:
         """ Get all available layers in the DB """
-        db_layers = Layer.query.all()
+        db_layers = Layer.query.order_by(Layer.layer_id).all()
 
         if len(db_layers) == 0:
             return None
