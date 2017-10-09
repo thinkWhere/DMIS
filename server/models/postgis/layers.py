@@ -17,6 +17,7 @@ class Layer(db.Model):
     layer_source = db.Column(db.String)
     layer_type = db.Column(db.String, default='wms', nullable=False)
     layer_style = db.Column(db.JSON)
+    layer_geometry_type = db.Column(db.String)
 
     # Mapped Objects
     # Use dynamic relationship to enable filtering of related layer_info rows
@@ -31,6 +32,7 @@ class Layer(db.Model):
         new_layer.map_category = MapCategory[layer_dto.map_category].value
         new_layer.layer_type = LayerType[layer_dto.layer_type].value
         new_layer.layer_style = layer_dto.layer_style
+        new_layer.layer_geometry_type = layer_dto.layer_geometry_type
 
         for info in layer_dto.layer_info_locales:
             new_info = LayerInfo.create_from_dto(info)
@@ -80,6 +82,7 @@ class Layer(db.Model):
         layer_details.layer_type = self.layer_type
         layer_details.map_category = MapCategory(self.map_category).name
         layer_details.layer_style = self.layer_style
+        layer_details.layer_geometry_type = self.layer_geometry_type
 
         if locale:
             # If client is filtering by locale only return the layerinfo for the locale they have asked for
