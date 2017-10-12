@@ -36,9 +36,17 @@ deployment environment:
     * ```setx DMIS_ENV "Dev"```
 
 ### DB migrations
-TODO: add more docs
-``` python manage.py db migrate```
-``` python manage.py db upgrade```
+We use [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to create the database from the migrations directory. Create the database as follows:
+
+```
+python manage.py db upgrade
+```
+
+Create migration scripts when DB models have been updated as follows:
+``` 
+python manage.py db migrate
+```
+
 
 #### Set-up development environment
 To develop on the application:
@@ -55,7 +63,12 @@ To develop on the application:
     
 #### Running locally
 
-TODO
+* Before running you'll need to create a distribution of the client code, that we'll use Flask to serve.  This is done via Angular CLI from the client directory:
+    * ```cd client```
+    * ```ng build```
+* Once the distribution has been built, you can run the app from the command line, ensure you have installed all dependencies, as described above, then:
+    * ```python manage.py runserver -d```
+* To see the app running, point your browser to [http://localhost:5000/](http://localhost:5000/)
 
 
 ### Getting Started with Client Development
