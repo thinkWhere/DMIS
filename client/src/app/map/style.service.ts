@@ -67,7 +67,7 @@ export class StyleService {
             var style: any = new ol.style.Style({
                 text: new ol.style.Text({
                     text: "O",
-                    font: ruleStyle.text.font,
+                    font: "Arial",
                     textBaseline: 'Bottom',
                     fill: new ol.style.Fill({
                         color: ruleStyle.text.fill.colour,
