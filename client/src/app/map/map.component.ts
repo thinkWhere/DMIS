@@ -273,7 +273,6 @@ export class MapComponent implements OnInit {
                  assessment.push(layers[i]);
              }
         }
-        this.layerService.setZIndex(this.map.getLayers().getArray());
         this.preparednessLayers = preparedness;
         this.incidentLayers = incidents;
         this.assessmentLayers = assessment;
@@ -369,7 +368,7 @@ export class MapComponent implements OnInit {
             "layerType": wmsLayer.layerType,
             "layerGeometryType": wmsLayer.layerGeometryType
         });
-        this.map.addLayer(layer);
+        this.addLayer(layer);
     }
 
     /**
@@ -391,7 +390,7 @@ export class MapComponent implements OnInit {
             "layerTitle": arcRESTLayer.layerInfo.layerTitle,
             "layerGeometryType": arcRESTLayer.layerGeometryType
         });
-        this.map.addLayer(layer);
+        this.addLayer(layer);
     }
 
     /**
@@ -466,8 +465,17 @@ export class MapComponent implements OnInit {
             "layerSource": layerData.layerSource,
             "layerType": layerData.layerType,
             "layerTitle": layerData.layerInfo.layerTitle,
-            "layerGeometryType": layerData.layerInfo.layerGeometryType
+            "layerGeometryType": layerData.layerGeometryType
         });
+        this.addLayer(layer);
+    }
+
+    /**
+     * Add layer and set zindex
+     * @param layer
+     */
+    private addLayer(layer){
         this.map.addLayer(layer);
+        this.layerService.setZIndex(layer);
     }
 }
