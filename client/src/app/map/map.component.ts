@@ -452,9 +452,11 @@ export class MapComponent implements OnInit {
                 })
             });
             var features = layer.getSource().getFeatures();
-            for (var i = 0; i < features.length; i++){
-                features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
-            }
+            setTimeout(() => {
+                for (var i = 0; i < features.length; i++) {
+                    features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
+                }
+            }, 5000);
             // Set the layer style to null to prevent features that don't have a style attached to them using the
             // layer's default OL style
             layer.setStyle(null);
