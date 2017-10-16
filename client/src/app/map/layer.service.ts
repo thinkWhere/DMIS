@@ -68,22 +68,20 @@ export class LayerService {
   }
 
   /**
-   * Set the z index of layers depending on the geometry type
-   * @param layers
+   * Set the z index of a layer depending on the geometry type
+   * @param layer
    */
-  setZIndex(layers){
-    for (var i = 0; i < layers.length; i++){
-      let geometryType = layers[i].getProperties().layerGeometryType;
+  setZIndex(layer){
+      let geometryType = layer.getProperties().layerGeometryType;
       if (geometryType === 'polygon') {
-        layers[i].setZIndex(0);
+        layer.setZIndex(0);
       }
       if (geometryType === 'line') {
-        layers[i].setZIndex(1);
+        layer.setZIndex(1);
       }
       if (geometryType === 'point') {
-        layers[i].setZIndex(2);
+        layer.setZIndex(2);
       }
-    }
   }
   
   /**
