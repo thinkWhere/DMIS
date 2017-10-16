@@ -58,6 +58,7 @@ export class StyleService {
 
     /**
      * Get the OL style based on the rule style
+     * Supports Font Awesome for text styles
      * @param ruleStyle
      * @returns {any}
      */
