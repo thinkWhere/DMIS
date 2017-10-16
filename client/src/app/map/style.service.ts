@@ -137,6 +137,9 @@ export class StyleService {
      * @returns {string}
      */
     getLegendImage(layerStyle) {
+        // Calculate the device pixel ratio
+        var ratio = this.getDevicePixelRatio();
+
         // Create a canvas element
         var canvas: any = document.createElement("canvas");
 
@@ -166,9 +169,9 @@ export class StyleService {
             for (var i = 0; i < layerStyle.rules.length; i++) {
                  var ruleStyle = layerStyle.rules[i].style;
                  var ctx = canvas.getContext("2d");
-                ctx.font = "10px Arial";
+                ctx.font = "12px Arial";
                 ctx.fillStyle = 'black';
-                ctx.fillText(ruleStyle.label, 30, (15 + i * heightPerCategory));
+                ctx.fillText(ruleStyle.label, 30 * ratio, (15 * ratio + i * heightPerCategory * ratio));
 
                 if (ruleStyle) {
                     style = this.getOLStyle(ruleStyle);
@@ -269,4 +272,17 @@ export class StyleService {
         }
         canvas.height = anchorHeight;
     }
+
+    getDevicePixelRatio() {
+        var ratio = 1;
+        // To account for zoom, change to use deviceXDPI instead of systemXDPI
+        if (window.screen.systemXDPI !== undefined && window.screen.logicalXDPI !== undefined && window.screen.systemXDPI > window.screen.logicalXDPI) {
+            // Only allow for values > 1
+            ratio = window.screen.systemXDPI / window.screen.logicalXDPI;
+        }
+        else if (window.devicePixelRatio !== undefined) {
+            ratio = window.devicePixelRatio;
+        }
+        return ratio;
+    };
 }
