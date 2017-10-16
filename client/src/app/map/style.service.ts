@@ -273,6 +273,10 @@ export class StyleService {
         canvas.height = anchorHeight;
     }
 
+    /**
+     * Returns the device pixel ratio for all browsers
+     * @returns {number}
+     */
     getDevicePixelRatio() {
         var ratio = 1;
         // To account for zoom, change to use deviceXDPI instead of systemXDPI
