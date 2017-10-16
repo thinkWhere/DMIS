@@ -66,7 +66,7 @@ export class StyleService {
         if (ruleStyle.text) {
             var style: any = new ol.style.Style({
                 text: new ol.style.Text({
-                    text: ruleStyle.text.text,
+                    text: "O",
                     font: ruleStyle.text.font,
                     textBaseline: 'Bottom',
                     fill: new ol.style.Fill({
