@@ -65,7 +65,7 @@ To develop on the application:
 
 * Before running you'll need to create a distribution of the client code, that we'll use Flask to serve.  This is done via Angular CLI from the client directory:
     * ```cd client```
-    * ```ng build```
+    * ```ng build --aot --prod -op ../server/web/static/dist/en```
 * Once the distribution has been built, you can run the app from the command line, ensure you have installed all dependencies, as described above, then:
     * ```python manage.py runserver -d```
 * To see the app running, point your browser to [http://localhost:5000/](http://localhost:5000/)
