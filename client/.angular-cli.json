@@ -37,6 +37,9 @@
       }
     }
   ],
+  "addons": [
+    "../node_modules/font-awesome/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
+  ],
   "lint": [
     {
       "project": "src/tsconfig.app.json"
