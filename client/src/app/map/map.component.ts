@@ -191,6 +191,7 @@ export class MapComponent implements OnInit {
                                 layers[i].getSource().clear();
                                 layers[i].getSource().addFeatures(newFeatures);
                                 for (var j = 0; j < newFeatures.length; j++){
+                                    console.log(this.styleService.getStyle(newFeatures[j], layer.layerStyle));
                                     newFeatures[j].setStyle(this.styleService.getStyle(newFeatures[j], layer.layerStyle));
                                 }
                             },

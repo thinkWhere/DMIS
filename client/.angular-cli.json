@@ -19,7 +19,6 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/openlayers/dist/ol-debug.css",
         "assets/styles/dmis.scss"
       ],
@@ -36,9 +35,6 @@
         "prod": "environments/environment.prod.ts"
       }
     }
-  ],
-  "addons": [
-    "../node_modules/font-awesome/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
   ],
   "lint": [
     {
