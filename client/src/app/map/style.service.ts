@@ -58,7 +58,6 @@ export class StyleService {
 
     /**
      * Get the OL style based on the rule style
-     * Supports Font Awesome for text styles
      * @param ruleStyle
      * @returns {any}
      */
@@ -137,9 +136,6 @@ export class StyleService {
      * @returns {string}
      */
     getLegendImage(layerStyle) {
-        // Calculate the device pixel ratio
-        var ratio = this.getDevicePixelRatio();
-
         // Create a canvas element
         var canvas: any = document.createElement("canvas");
 
@@ -169,9 +165,9 @@ export class StyleService {
             for (var i = 0; i < layerStyle.rules.length; i++) {
                  var ruleStyle = layerStyle.rules[i].style;
                  var ctx = canvas.getContext("2d");
-                ctx.font = "12px Arial";
+                ctx.font = "10px Arial";
                 ctx.fillStyle = 'black';
-                ctx.fillText(ruleStyle.label, 30 * ratio, (15 * ratio + i * heightPerCategory * ratio));
+                ctx.fillText(ruleStyle.label, 30, (15 + i * heightPerCategory));
 
                 if (ruleStyle) {
                     style = this.getOLStyle(ruleStyle);
@@ -224,9 +220,6 @@ export class StyleService {
 
     /**
      * Create a legend based on JSON from an ArcGIS layer
-     * TODO: this is hardcoded! For the Pacific Disaster Center layer only the first icon needs
-     * to get displayed. See: https://github.com/thinkWhere/DMIS/issues/109
-     * By hardcoding this, any additional ArcGIS REST layers will only show the first icon as well...
      * @param legendInfo
      * @param callback
      */
@@ -260,35 +253,16 @@ export class StyleService {
                     context.drawImage(this, 0, this.anchorHeight, this.width, this.height);
                     context.font = "12px Arial";
                     context.fillText(this.label, this.width + 10, this.anchorHeight + 20);
-                    // If using multiple images, Wait for all the legend images to be loaded before returning it
-                    // by checking if imagesLoaded == imageCount
-                    if (imagesLoaded == imageCount) {
+                    // Wait for all the legend images to be loaded before returning it
+                    if(imagesLoaded == imageCount){
                         var dataURL = canvas.toDataURL();
                         callback(dataURL);
                     }
+
                 };
                 img.src = 'data:' + legends[j].contentType + ';base64,' + legends[j].imageData;
-                //break;
             }
-            //break;
         }
         canvas.height = anchorHeight;
     }
-
-    /**
-     * Returns the device pixel ratio for all browsers
-     * @returns {number}
-     */
-    getDevicePixelRatio() {
-        var ratio = 1;
-        // To account for zoom, change to use deviceXDPI instead of systemXDPI
-        if (window.screen.systemXDPI !== undefined && window.screen.logicalXDPI !== undefined && window.screen.systemXDPI > window.screen.logicalXDPI) {
-            // Only allow for values > 1
-            ratio = window.screen.systemXDPI / window.screen.logicalXDPI;
-        }
-        else if (window.devicePixelRatio !== undefined) {
-            ratio = window.devicePixelRatio;
-        }
-        return ratio;
-    };
 }
