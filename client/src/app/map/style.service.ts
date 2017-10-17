@@ -234,14 +234,14 @@ export class StyleService {
         // Create a canvas element
         var canvas: any = document.createElement("canvas");
         var context = canvas.getContext('2d');
-        var imageCount = 1;
+        var imageCount = 0;
         // Count the images first so we can check later if all images have been loaded before turning the canvas
         // into an image to return
-        /*for (var i = 0; i < legendInfo.layers.length; i++){
+        for (var i = 0; i < legendInfo.layers.length; i++){
             for (var j = 0; j < legendInfo.layers[i].legend.length; j++) {
                 imageCount++;
             }
-        }*/
+        }
         var anchorHeight = 0;
         var imagesLoaded = 0;
         for (var i = 0; i < legendInfo.layers.length; i++){
@@ -268,9 +268,9 @@ export class StyleService {
                     }
                 };
                 img.src = 'data:' + legends[j].contentType + ';base64,' + legends[j].imageData;
-                break;
+                //break;
             }
-            break;
+            //break;
         }
         canvas.height = anchorHeight;
     }
