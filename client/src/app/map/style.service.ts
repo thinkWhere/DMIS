@@ -68,7 +68,7 @@ export class StyleService {
                 text: new ol.style.Text({
                     text: ruleStyle.text.text,
                     font: ruleStyle.text.font,
-                    textBaseline: 'Bottom',
+                    textBaseline: 'bottom',
                     fill: new ol.style.Fill({
                         color: ruleStyle.text.fill.colour,
                     }),
@@ -200,7 +200,7 @@ export class StyleService {
                 else { // POINT
                     vectorContext.drawGeometry(
                         new ol.geom.Point(
-                            [13, 13 + i * heightPerCategory]
+                            [13, 15 + i * heightPerCategory]
                         ));
                 }
 
