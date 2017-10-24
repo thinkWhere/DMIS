@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" routerLink="/" i18n="Name of the application@@headerNameOfApplication">DMIS Cambodia</a>
+            <a class="navbar-brand" routerLink="/map/preparedness" i18n="Name of the application@@headerNameOfApplication" title="Go to the map page" i18n-title="Map link title@@headerMapLinkTitle">DMIS Cambodia</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul *ngIf="(route == '/map/preparedness' || route == '/map/incidents' || route == '/map/assessment')" class="nav navbar-nav navbar-categories">
@@ -28,9 +28,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a routerLink="/" title="Go to the about page" i18n="About link@@headerAboutLink" i18n-title="About link title@@headerAboutLinkTitle">About</a>
-                </li>
-                <li>
-                    <a routerLink="/map/preparedness" title="Go to the map page" i18n="Map link@@headerMapLink" i18n-title="Map link title@@headerMapLinkTitle">Map</a>
                 </li>
                 <li>
                     <a routerLink="/faq" title="Go to the FAQ page" i18n="FAQ link@@headerFaqLink" i18n-title="FAQ link title@@headerFAQLinkTitle">FAQ</a>
