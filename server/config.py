@@ -16,6 +16,12 @@ class EnvironmentConfig(object):
     SQLALCHEMY_MAX_OVERFLOW = 5
 
 
+class ProdConfig(EnvironmentConfig):
+    GEOSERVER_URL = 'http://ec2-13-250-26-33.ap-southeast-1.compute.amazonaws.com/geoserver'
+    LOG_DIR = '/var/log/dmis-logs'
+    LOG_LEVEL = logging.INFO
+
+
 class StagingConfig(EnvironmentConfig):
     LOG_DIR = '/var/log/dmis-logs'
     LOG_LEVEL = logging.DEBUG
