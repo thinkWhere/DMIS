@@ -10,13 +10,8 @@ env:
 
 build:
     ci:
-        # Install latest LTS node
-        - apt-get update
-        - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-        - apt-get install nodejs
-        - node --version
-
         # Install NPM packages and build client from gulpfile
+        - node --version
         - cd client
         - npm install
         # Build english version of the app, see package.json
