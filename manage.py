@@ -4,6 +4,7 @@ from flask_script import Manager
 
 from server import bootstrap_app
 from server.services.users.authentication_service import AuthenticationService
+from server.services.users.user_service import UserService, UserDTO
 
 application = bootstrap_app()  # Initialise the flask app.
 manager = Manager(application)
@@ -26,6 +27,18 @@ def gen_token(user_id):
     """ Helper method for generating valid base64 encoded session tokens """
     token = AuthenticationService.generate_timed_token(user_id)
     print(f"Bearer {token}")
+
+
+@manager.option('-p', '--password')
+@manager.option('-u', '--username')
+def create_admin(username: str, password: str):
+    """ Helper method to create a new user, mainly used for creating initial admin user """
+    dto = UserDTO()
+    dto.username = username
+    dto.password = password
+    dto.role = 'ADMIN'
+
+    UserService.create_user(dto)
 
 
 if __name__ == '__main__':
