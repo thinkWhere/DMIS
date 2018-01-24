@@ -1,0 +1,24 @@
+$icon-font-path: '../../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+$fa-font-path : '../../../node_modules/font-awesome/fonts';
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+$brand-primary:         #2abb81 !default;
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+
+/** Categories **/
+$preparedness: #FF9900;
+$incidents: #E74C3C;
+$assessment: #3498DB;
+
+$brand-secondary: #1b1e27;;
+$brand-secondary-lighter: #242834;
+

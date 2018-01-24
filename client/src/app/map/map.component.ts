@@ -1,0 +1,481 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GroupByPipe } from 'angular-pipes/src/aggregate/group-by.pipe';
+import {DomSanitizer} from '@angular/platform-browser';
+import * as ol from 'openlayers';
+import * as proj4x from 'proj4';
+
+// Define proj4 as workaround. See https://github.com/DefinitelyTyped/DefinitelyTyped/issues/15663
+let proj4 = (proj4x as any).default;
+
+import { LayerService } from './layer.service';
+import { MapService } from './map.service';
+import { IdentifyService } from './identify.service';
+import { StyleService } from './style.service';
+import { MeasureService } from './measure.service';
+import { environment } from '../../environments/environment';
+
+@Component({
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss'],
+  providers: [LayerService, MapService, IdentifyService, StyleService, MeasureService]
+})
+export class MapComponent implements OnInit {
+
+    showContent: boolean;
+    showCategoryPicker: boolean;
+    category: string;
+    layers: any;
+    map: any;
+    wmsSource: any; // WMS source for use in identify
+    contentTab: string = 'legend';
+
+    // Categories
+    preparednessLayers: any = [];
+    incidentLayers: any = [];
+    assessmentLayers: any = [];
+
+    activeMeasureType: string = '';
+
+    constructor(
+        private router: Router,
+        private layerService: LayerService,
+        private mapService: MapService,
+        private identifyService: IdentifyService,
+        private styleService: StyleService,
+        private measureService: MeasureService,
+        private sanitizer:DomSanitizer
+    ){}
+
+    ngOnInit() {
+
+        // Define Indian 1960 / UTM zone 48N (used in Cambodia) Proj4js projection (copied from https://epsg.io/3148)
+        ol.proj.setProj4(proj4);
+        proj4.defs("EPSG:3148","+proj=utm +zone=48 +a=6377276.345 +b=6356075.41314024 +towgs84=198,881,317,0,0,0,0 +units=m +no_defs");
+
+        this.showContent = true;
+        this.showCategoryPicker = false;
+        this.category = 'preparedness';
+        this.layers = [];
+
+        this.initMap();
+        this.measureService.initMeasureTool();
+        this.layerService.getLayers()
+            .subscribe(
+            data => {
+                // Success
+                this.layers = data.layers;
+                this.addLayers(this.layers);
+                this.identifyService.addIdentifyEventHandlers(this.map, this.wmsSource);
+                this.identifyService.setActive(true);
+            },
+            error => {
+              // TODO: better error handling.
+            }
+        );
+    }
+
+    /**
+     * Toggles the visibility of the table of contents 
+     */
+    toggleContent(): void {
+        this.showContent = !this.showContent;
+    }
+
+    /**
+     * Set the content of the tab
+     * @param tab
+     */
+    setContent(tab): void {
+        // Toggle content instead of switching when it is already on that tab
+        if (this.contentTab === tab){
+            this.toggleContent();
+        }
+        else {
+            this.contentTab = tab;
+            // Reset measure
+            this.measureService.setActive(false);
+            this.activeMeasureType = '';
+        }
+        if (this.contentTab === 'legend'){
+            this.identifyService.setActive(true);
+        }
+        else {
+            this.identifyService.setActive(false);
+        }
+    }
+
+    /**
+     * Toggles the visibility of the category picker
+     */
+    toggleCategoryPicker(): void {
+        this.showCategoryPicker = !this.showCategoryPicker;
+    }
+
+    /**
+     * Set category
+     * @param category
+     */
+    setCategory(category): void {
+        this.category = category;
+        this.showCategoryPicker = false;
+        this.router.navigate(['/map/' + this.category]);
+    }
+
+    /**
+     * Toggle a layer
+     */
+    toggleLayer(layerName): void {
+        // get the layers
+        var layers = this.map.getLayers().getArray();
+        // find the layer
+        for (var i = 0; i < layers.length; i++) {
+            // toggle visibility
+            if (layerName === layers[i].getProperties().layerName) {
+                layers[i].setVisible(!layers[i].getVisible());
+                return;
+            }
+        }
+    }
+
+    /**
+     * Activate measure (line or area)
+     * @param type
+     */
+    activateMeasure(type){
+        this.activeMeasureType = type;
+        this.measureService.setType(type);
+        this.measureService.setActive(true);
+    }
+
+    /**
+     * Reset the measure tool
+     */
+    resetMeasure(){
+        this.measureService.setActive(false);
+        this.activeMeasureType = '';
+    }
+
+    /**
+     * Refreshes a layer (GeoJSON / WMS / ArcGISREST)
+     * TODO: review - is there a better way to do this for GeoJSON layers?
+     * The refesh() function on ol.source.vector does not refresh remote sources
+     * https://github.com/openlayers/openlayers/issues/7044
+     * @param layer
+     */
+    refreshLayer(layer) {
+        // get the layers
+        var layers = this.map.getLayers().getArray();
+        // find the layer
+        for (var i = 0; i < layers.length; i++) {
+            // toggle visibility
+            if (layer.layerName === layers[i].getProperties().layerName) {
+                // Update the data by requesting it again
+                if (layer.layerType === 'geojson'){
+                    this.layerService.getGeoJSON(layer)
+                        .subscribe(
+                            data => {
+                                // Success - fetch features from the API, clear the current features on the layer and
+                                // add the new features
+                                var epsg = 'EPSG:4326';
+                                if (data.crs){
+                                    if (data.crs.properties.name){
+                                        epsg = data.crs.properties.name;
+                                    }
+                                }
+                                var newFeatures = (new ol.format.GeoJSON()).readFeatures(data, {
+                                    dataProjection: epsg,
+                                    featureProjection: 'EPSG:3857'
+                                });
+                                layers[i].getSource().clear();
+                                layers[i].getSource().addFeatures(newFeatures);
+                                for (var j = 0; j < newFeatures.length; j++){
+                                    newFeatures[j].setStyle(this.styleService.getStyle(newFeatures[j], layer.layerStyle));
+                                }
+                            },
+                            error => {
+                                // TODO
+                            }
+                        );
+                }
+                // Refresh the data by updating the parameters which forces a refresh
+                else { // WMS or ArcGISRest
+                    var source = layers[i].getSource();
+                    var params = source.getParams();
+                    params.t = new Date().getMilliseconds();
+                    source.updateParams(params);
+                }
+                return;
+            }
+        }
+    }
+
+    /**
+     * Initialise the map
+     */
+    private initMap() {
+        this.mapService.initMap();
+        this.map = this.mapService.getMap();
+        this.map.setTarget('map');
+        this.checkCategory();
+        this.router.events.subscribe(() => {
+            this.checkCategory();
+        });
+        this.identifyService.addIdentifyPopup(this.map);
+    }
+
+    /**
+     * Check the category in the URL
+     */
+    private checkCategory() {
+        if (this.router.url === '/map/preparedness') {
+            this.category = 'preparedness';
+        }
+        if (this.router.url === '/map/incidents') {
+            this.category = 'incidents';
+        }
+        if (this.router.url === '/map/assessment') {
+            this.category = 'assessment';
+        }
+    }
+
+     /**
+     * Add layers to the map - maybe move to layer service
+     * TODO: review and maybe add to layer service when this function grows?
+     */
+    private addLayers (layers) {
+         // Using local variables and assigning it to the relevant arrays after looping over the layers to
+         // avoid issues with the 'groupBy' filter in the HTML
+         var preparedness = [];
+         var incidents = [];
+         var assessment = [];
+         for (var i = 0; i < layers.length; i++) {
+             if (layers[i].layerType === 'wms') {
+                 this.setWMSLayerLegend(layers[i]);
+                 this.addWMSLayer(layers[i]);
+             }
+             if (layers[i].layerType === 'arcgisrest') {
+                 this.setArcGISRESTLegend(layers[i]);
+                 this.addArcGISRESTLayer(layers[i]);
+             }
+             if (layers[i].layerType === 'geojson') {
+                 this.setGeoJSONLegend(layers[i]);
+                 this.addGeoJSONLayer(layers[i]);
+             }
+             if (this.layers[i].mapCategory === 'PREPAREDNESS') {
+                 preparedness.push(layers[i]);
+             }
+             if (this.layers[i].mapCategory === 'INCIDENTS_WARNINGS') {
+                 incidents.push(layers[i]);
+             }
+             if (this.layers[i].mapCategory === 'ASSESSMENT_RESPONSE') {
+                 assessment.push(layers[i]);
+             }
+        }
+        this.preparednessLayers = preparedness;
+        this.incidentLayers = incidents;
+        this.assessmentLayers = assessment;
+    }
+
+    /**
+    * Set layer legend for a WMS layer using a GetLegendGraphic request
+    * @param layer
+    */
+    private setWMSLayerLegend(layer){
+         layer.layerLegend = '';
+         var url = environment.apiEndpoint + '/map/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&height=10&LAYER=' + layer.layerName + '&legend_options=fontName:Times%20New%20Roman;fontSize:6;fontAntiAliasing:true;fontColor:0x000033;dpi:180&transparent=true';
+         this.mapService.getImage(url)
+             .subscribe(
+                 data => {
+                     // Success - returns a Blob - create an URL from it and update the layer legend
+                     var urlCreator = window.URL;
+                     var imageUrl = urlCreator.createObjectURL(data);
+                     layer.layerLegend = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+                 },
+                 error => {
+                     // TODO: potentially handle error?
+                 }
+             )
+    }
+
+    /**
+     * Set layer legend for a GeoJSON layer using the canvas
+     * @param layer
+     */
+    private setGeoJSONLegend(layer) {
+        var legendImage = this.styleService.getLegendImage(layer.layerStyle);
+        layer.layerLegend = legendImage;
+    }
+
+    /**
+     * Set layer legend for a ArcGIS layer using the canvas
+     * @param layer
+     */
+    private setArcGISRESTLegend(layer) {
+        var legendLocation = layer.layerSource + '/legend?f=pjson';
+        this.styleService.getArcGISLegendInfo(legendLocation)
+            .subscribe(
+                data => {
+                    this.styleService.getArcGISLegend(data, function (result) {
+                        layer.layerLegend = result;
+                    });
+                }
+            )
+    }
+
+    /**
+     * Add a WMS layer
+     * TODO: use source property on the layer to allow support for a WMS from another source
+     * @param wmsLayer
+     */
+    private addWMSLayer(wmsLayer) {
+        var newSource = new ol.source.TileWMS({
+            params: {
+                'LAYERS': wmsLayer.layerName,
+                'FORMAT': 'image/png'
+            },
+            attributions: [new ol.Attribution({html: wmsLayer.layerInfo.layerCopyright})],
+            url: environment.apiEndpoint + '/map/wms',
+            projection: this.map.getView().getProjection(),
+            tileLoadFunction: function (imageTile, src) {
+                // use a tileLoadFunction to add authentication headers to the request
+                this.mapService.getImage(src)
+                    .subscribe(
+                        data => {
+                            // Success - returns a Blob - create an URL from it and update the original
+                            // imageTile source
+                            var urlCreator = window.URL;
+                            var imageUrl = urlCreator.createObjectURL(data);
+                            imageTile.getImage().src = imageUrl;
+                        },
+                        error => {
+                            // TODO: potentially handle error?
+                        }
+                    )
+            }.bind(this)
+        });
+        if (!this.wmsSource) {
+            this.wmsSource = newSource;
+        }
+        var layer = new ol.layer.Tile({
+            source: newSource
+        });
+        layer.setVisible(false);
+        layer.setProperties({
+            "layerName": wmsLayer.layerName,
+            "layerSource": wmsLayer.layerSource,
+            "layerType": wmsLayer.layerType,
+            "layerGeometryType": wmsLayer.layerGeometryType
+        });
+        this.addLayer(layer);
+    }
+
+    /**
+     * Add a ArcGIS REST layer
+     * @param arcRESTLayer
+     */
+    private addArcGISRESTLayer(arcRESTLayer) {
+        var layer = new ol.layer.Tile({
+            source: new ol.source.TileArcGISRest({
+                url: arcRESTLayer.layerSource,
+                attributions: [new ol.Attribution({html: arcRESTLayer.layerInfo.layerCopyright})],
+            })
+        });
+        layer.setVisible(false);
+        layer.setProperties({
+            "layerName": arcRESTLayer.layerName,
+            "layerSource": arcRESTLayer.layerSource,
+            "layerType": arcRESTLayer.layerType,
+            "layerTitle": arcRESTLayer.layerInfo.layerTitle,
+            "layerGeometryType": arcRESTLayer.layerGeometryType
+        });
+        this.addLayer(layer);
+    }
+
+    /**
+     * Add a GeoJSON layer to the map
+     * Supports a normal GeoJSON layer and a Heatmap based on a GeoJSON layer
+     * @param geoJSONLayer
+     */
+    private addGeoJSONLayer(geoJSONLayer){
+        this.layerService.getGeoJSON(geoJSONLayer)
+            .subscribe(
+            data => {
+                // Success
+                this.createGeoJSONLayer(geoJSONLayer, data);
+            },
+            error => {
+                // TODO
+            }
+        );
+    }
+
+    /**
+     * Create a OL GeoJSON layer from GeoJSON and layer data and add to the map
+     * @param layerData
+     * @param geoJSON
+     */
+    private createGeoJSONLayer(layerData, geoJSON){
+        // Treat the layer as a heatmap when it includes the word heatmap
+        var isHeatmap = layerData.layerName.includes("heatmap");
+        var attribution = new ol.Attribution({html: layerData.layerInfo.layerCopyright});
+        var layer = null;
+        if (isHeatmap) {
+            layer = new ol.layer.Heatmap({
+                source: new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(geoJSON, {
+                        dataProjection: 'EPSG:4326',
+                        featureProjection: 'EPSG:3857'
+                    }),
+                    attributions: [attribution]
+                }),
+                blur: 30,
+                opacity: 0.7,
+                weight: 'weight' // no feature attributes are used for the heatmap, just the points themselves
+            });
+        }
+        else {
+            var epsg = 'EPSG:4326';
+            if (geoJSON.crs){
+                if (geoJSON.crs.properties.name){
+                    epsg = geoJSON.crs.properties.name;
+                }
+            }
+            layer = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(geoJSON, {
+                        dataProjection: epsg,
+                        featureProjection: 'EPSG:3857'
+                    }),
+                    attributions: [attribution]
+                })
+            });
+            var features = layer.getSource().getFeatures();
+            for (var i = 0; i < features.length; i++){
+                features[i].setStyle(this.styleService.getStyle(features[i], layerData.layerStyle));
+            }
+            // Set the layer style to null to prevent features that don't have a style attached to them using the
+            // layer's default OL style
+            layer.setStyle(null);
+        }
+        layer.setVisible(false);
+        layer.setProperties({
+            "layerName": layerData.layerName,
+            "layerSource": layerData.layerSource,
+            "layerType": layerData.layerType,
+            "layerTitle": layerData.layerInfo.layerTitle,
+            "layerGeometryType": layerData.layerGeometryType
+        });
+        this.addLayer(layer);
+    }
+
+    /**
+     * Add layer and set zindex
+     * @param layer
+     */
+    private addLayer(layer){
+        this.map.addLayer(layer);
+        this.layerService.setZIndex(layer);
+    }
+}

@@ -1,0 +1,21 @@
+@import "../../assets/styles/_variables.scss";
+
+.jumbotron {
+  color: white;
+  position: relative;
+  background: #000 url("../../assets/images/topographic-map.png") center center;
+  width: 100%;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.jumbotron .container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.container-homepage {
+  max-width: 800px;
+}

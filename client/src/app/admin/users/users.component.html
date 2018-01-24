@@ -1,0 +1,64 @@
+<div id="users-component">
+    <h1 i18n="Users header for admin page@@adminUsersHeader">Users</h1>
+    <a routerLink="/admin/user/add" role="button" class="btn btn-primary pull-right" i18n="Add user header for admin page@@adminAddUserHeader">Add user</a>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th i18n="Username@@username">Username</th>
+            <th i18n="Role@@role">Role</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of userList | orderBy: 'username'" [class.selected]="user === selectedUser">
+            <td>{{ user.username }}</td>
+            <td *ngIf="!editMode || user.username != editUsername">
+                <span *ngIf="user.role === 'ADMIN'" i18n="Admin text@@admin">Admin</span>
+                <span *ngIf="user.role === 'USER'" i18n="Option for role@@adminOptionRoleUser">User</span>
+            </td>
+            <td *ngIf="editMode && user.username == editUsername">
+                <select id="role" class="form-control"
+                name="role"
+                [(ngModel)]="user.role" required
+                #role="ngModel" >
+                  <option value="USER" i18n="Option for role@@adminOptionRoleUser">User</option>
+                  <option value="ADMIN" i18n="Admin text@@admin">Admin</option>
+                </select>
+            </td>
+            <td *ngIf="!editMode" class="pointer" (click)="editUser(user.username); $event.stopPropagation()">
+                <a class="btn btn-xs btn-primary">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> <span i18n="Edit button@@adminEditButton">Edit</span></a></td>
+            <td *ngIf="editMode" class="pointer" (click)="saveEdits(user.username, user.role); $event.stopPropagation()">
+                <a class="btn btn-xs btn-primary">
+                    <i class="fa fa-save" aria-hidden="true"></i> <span i18n="Save button@@adminSaveButton">Save</span></a></td>
+            <td class="pointer" data-target="#myModal" data-toggle="modal" (click)="showDeleteConfirm(true, user);">
+                <a class="btn btn-xs btn-primary">
+                    <i class="fa fa-trash" aria-hidden="true"></i> <span i18n="Delete button@@adminDeleteButton">Delete</span></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div *ngIf="errorDeletingUser" class="alert alert-danger">
+        <strong i18n="Error@@error">Error</strong>:
+        <span i18n="Error delete user@@adminErrorDeleteUser">Could not delete the user.</span>
+    </div>
+</div>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="myModal" role="dialog" [hidden]="!showDeleteConfirmModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" i18n="Delete confirmation@@adminDeleteUserConfirmation">Delete confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <p i18n="Delete confirmation text@@adminDeleteUserConfirmationText">Are you sure you want to delete this user?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" i18n="Cancel button@@adminCancelButton">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="deleteUser(userToDelete)" data-dismiss="modal" i18n="Confirm button@@adminConfirmButton">Confirm</button>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+@import "../assets/styles/_variables.scss";
+
+.dmis-container {
+  padding-top: 52px;
+  height: 100%;
+}
+
+.navbar-dmis {
+  border-bottom: 2px solid;
+  border-color: $brand-secondary !important;
+}
+.navbar-dmis.preparedness {
+    border-color: $preparedness !important;
+}
+.navbar-dmis.incidents {
+    border-color: $incidents !important;
+}
+.navbar-dmis.assessment {
+    border-color: $assessment !important;
+}
+
+.navbar-categories {
+  padding: 10px 0 0;
+  li {
+    margin: 0px 3px;
+    a {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: $brand-secondary;
+      color: white !important;
+    }
+    .preparedness.active {
+        color: white !important;
+        background-color: $preparedness;
+    }
+    .incidents.active{
+         color: white !important;
+         background-color: $incidents;
+    }
+    .assessment.active {
+      color: white !important;
+      background-color: $assessment;
+    }
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+    .navbar-categories {
+        display: none;
+    }
+}
+
+/** Custom Bootstrap navbar **/
+$bgDefault      : #ffffff;
+$bgHighlight    : #ffffff;
+$colDefault     : #000000;
+$colHighlight   : #000000;
+$dropDown       : false;
+.navbar-default {
+  background-color: $bgDefault;
+  border-color: $bgHighlight;
+  .navbar-brand {
+    color: $colDefault;
+    &:hover, &:focus {
+      color: $colHighlight; }}
+  .navbar-text {
+    color: $colDefault; }
+  .navbar-nav {
+    > li {
+      > a {
+        color: $colDefault;
+        &:hover,  &:focus {
+          color: $colHighlight; }}
+      @if $dropDown {
+        > .dropdown-menu {
+          background-color: $bgDefault;
+          > li {
+            > a {
+              color: $colDefault;
+              &:hover,  &:focus {
+                color: $colHighlight;
+                background-color: $bgHighlight; }}
+            &.divider {
+              background-color: $bgHighlight;}}}}}
+    @if $dropDown {
+      .open .dropdown-menu > .active {
+        > a, > a:hover, > a:focus {
+          color: $colHighlight;
+          background-color: $bgHighlight; }}}
+    > .active {
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}
+    > .open {
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}}
+  .navbar-toggle {
+    border-color: $bgHighlight;
+    &:hover, &:focus {
+      background-color: $bgHighlight; }
+    .icon-bar {
+      background-color: $colDefault; }}
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $colDefault; }
+  .navbar-link {
+    color: $colDefault;
+    &:hover {
+      color: $colHighlight; }}}
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu {
+    > li > a {
+      color: $colDefault;
+      &:hover, &:focus {
+        color: $colHighlight; }}
+    > .active {
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}}
+}

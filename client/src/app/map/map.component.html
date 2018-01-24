@@ -1,0 +1,160 @@
+<div class="map-container row row-no-padding" [ngClass]="{'preparedness': category === 'preparedness', 'incidents': category === 'incidents', 'assessment': category === 'assessment'}">
+    <div id="map" class="map col-md-12">
+        <div id="sidebar" class="sidebar sidebar-left" [ngClass]="{'collapsed': !showContent}">
+            <!-- Nav tabs -->
+            <div class="sidebar-tabs"
+                 [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                <ul role="tablist">
+                    <li (click)="toggleContent()" class="pointer">
+                        <a role="tab"><i class="fa fa-bars"></i></a>
+                    </li>
+                    <li (click)="setContent('legend')" class="pointer">
+                        <a role="tab" [ngClass]="{'active': contentTab === 'legend'}"
+                         [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                            <i class="fa fa-map-o"></i>
+                        </a>
+                    </li>
+                    <li (click)="setContent('measure')" class="pointer">
+                        <a role="tab"  [ngClass]="{'active': contentTab === 'measure'}"
+                           [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Tab panes -->
+            <div [hidden]="!showContent" class="sidebar-content">
+                <div [hidden]="contentTab !== 'measure'">
+                    <div class="sidebar-pane active" id="measure">
+                        <h1 class="sidebar-header pointer"
+                             [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                             Measure
+                        </h1>
+                        <div class="sidebar-measure">
+                            <div class="btn-group btn-group-justified">
+                              <a class="btn btn-default" (click)="activateMeasure('line')"
+                                 [ngClass]="{'active': activeMeasureType === 'line'}">
+                                  Measure line
+                              </a>
+                              <a class="btn btn-default" (click)="activateMeasure('area')"
+                                 [ngClass]="{'active': activeMeasureType === 'area'}">
+                                  Measure area
+                              </a>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="button" (click)="resetMeasure()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="contentTab !== 'legend'">
+                    <div class="sidebar-pane active" id="home">
+                        <h1 class="sidebar-header pointer"
+                            [ngClass]="{'preparedness-bg': category === 'preparedness', 'incidents-bg': category === 'incidents', 'assessment-bg': category === 'assessment'}">
+                            Legend
+                        </h1>
+                        <h4 class="pointer legend-category" title="Change category" i18n-title="Category toggle title@@mapToggleCategory"
+                            (click)="toggleCategoryPicker()">
+                            <span [hidden]="category !== 'preparedness'" i18n="Map category@@mapCategoryPreparedness">Preparedness</span>
+                            <span [hidden]="category !== 'incidents'" i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</span>
+                            <span [hidden]="category !== 'assessment'" i18n="Map category@@mapCategoryAssessment">Assessment and Response</span>
+                            <span class="pull-right">
+                                <i class="fa fa-caret-down"></i>
+                            </span>
+                        </h4>
+                        <div class="switch-category" [hidden]="!showCategoryPicker">
+                            <div class="preparedness-fg" (click)="setCategory('preparedness')">
+                                <h4 i18n="Map category@@mapCategoryPreparedness">Preparedness</h4>
+                            </div>
+                            <div class="incidents-fg" (click)="setCategory('incidents')">
+                                <h4 i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</h4>
+                            </div>
+                            <div class="assessment-fg" (click)="setCategory('assessment')">
+                                <h4 i18n="Map category@@mapCategoryAssessment">Assessment and Response</h4>
+                            </div>
+                        </div>
+                        <div class="layer-group" [hidden]="category !== 'preparedness'">
+                            <div *ngFor="let layerGroup of preparednessLayers | groupBy: 'layerInfo.layerGroup'">
+                                <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
+                                    <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
+                                    <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
+                                    {{ layerGroup.key }}
+                                </h4>
+                                <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
+                                    <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                        <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
+                                        <a class="sidebar-refresh-button pointer" (click)="refreshLayer(layer)"
+                                            title="Refresh" i18n-title="Refresh layer@@mapRefreshLayer">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="layer-legend">
+                                        <img [src]="layer.layerLegend" alt="Legend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layer-group" [hidden]="category !== 'incidents'">
+                            <div *ngFor="let layerGroup of incidentLayers | groupBy: 'layerInfo.layerGroup'">
+                                <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
+                                    <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
+                                    <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
+                                    {{ layerGroup.key }}
+                                </h4>
+                                <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
+                                    <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                        <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
+                                        <a class="sidebar-refresh-button pointer" (click)="refreshLayer(layer)"
+                                            title="Refresh" i18n="Refresh layer@@mapRefreshLayer">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="layer-legend">
+                                        <img [src]="layer.layerLegend" alt="Legend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layer-group" [hidden]="category !== 'assessment'">
+                             <div *ngFor="let layerGroup of assessmentLayers | groupBy: 'layerInfo.layerGroup'">
+                                <h4 (click)="layerGroup.show = !layerGroup.show" class="pointer heading" title="Toggle layer group" i18n-title="Toggle layer group button@@mapToggleLayerGroup">
+                                    <i *ngIf="!layerGroup.show" class="fa fa-plus" aria-hidden="true"></i>
+                                    <i *ngIf="layerGroup.show" class="fa fa-minus" aria-hidden="true"></i>
+                                    {{ layerGroup.key }}
+                                </h4>
+                                <div class="item" [hidden]="!layerGroup.show" *ngFor="let layer of layerGroup.value; index as i;">
+                                    <div class="checkbox" (change)="toggleLayer(layer.layerName)">
+                                        <label><input type="checkbox" value="">{{ layer.layerInfo.layerTitle }}</label>
+                                        <a class="sidebar-refresh-button pointer" (click)="refreshLayer(layer)"
+                                            title="Refresh" i18n="Refresh layer@@mapRefreshLayer">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="layer-legend">
+                                        <img [src]="layer.layerLegend" alt="Legend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content" class="popup-content"></div>
+</div>
+<div style="display: none;">
+    <span id="helpMsg" i18n="Measure help message@@mapMeasureHelpMsg">
+        Click to start drawing
+    </span>
+    <span id="continuePolygonMsg" i18n="Measure continue polygon message@@mapMeasureContinuePolygonMsg">
+        Click to continue drawing the polygon
+    </span>
+    <span id="continueLineMsg" i18n="Measure continue line message@@mapMeasureContinueLineMsg">
+        Click to continue drawing the line
+    </span>
+</div>

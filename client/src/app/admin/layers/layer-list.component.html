@@ -1,0 +1,31 @@
+<div>
+    <h1 i18n="layers header for admin page@@adminLayersHeader">Layers</h1>
+    <table *ngIf="!errorGettingLayerList" class="table table-hover">
+        <thead>
+        <tr>
+            <th i18n="Layer title@@adminLayerTitle">Title</th>
+            <th i18n="Layer category@@adminLayerCategory">Category</th>
+            <th i18n="Layer group@@adminLayerGroup">Group</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let layer of layerList | orderBy: 'layerTitle'">
+            <td>{{ layer.layerInfo.layerTitle }}</td>
+            <td>
+                <span *ngIf="layer.mapCategory === 'PREPAREDNESS'" i18n="Map category@@mapCategoryPreparedness">Preparedness</span>
+                <span *ngIf="layer.mapCategory === 'INCIDENTS_WARNINGS'"i18n="Map category@@mapCategoryIncidents">Incidents and Warnings</span>
+                <span *ngIf="layer.mapCategory === 'ASSESSMENT_RESPONSE'" i18n="Map category@@mapCategoryAssessment">Assessment and Response</span>
+            </td>
+            <td>{{ layer.layerGroup }}</td>
+            <td class="pointer">
+                <a class="btn btn-xs btn-primary" (click)="onSelect(layer)"><i class="fa fa-info" aria-hidden="true"></i> <span i18n="Show details layer button@@adminLayerDetailsButton">Details</span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div *ngIf="errorGettingLayerList" class="alert alert-danger">
+        <strong i18n="Error@@error">Error</strong>:
+        <span i18n="Error message getting layer list@@adminErrorLayerList">Could not get the list of layers.</span>
+    </div>
+</div>

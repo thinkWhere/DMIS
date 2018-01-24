@@ -1,0 +1,78 @@
+@import "variables";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import '../../../node_modules/font-awesome/scss/font-awesome';
+
+body, html {
+  font-family: 'Droid Sans', sans-serif;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+/** Helpers **/
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/* OpenLayers override */
+.ol-zoom button {
+  background-color: $brand-primary;
+}
+
+.ol-attribution button {
+  background-color: $brand-primary;
+}
+
+.ol-attribution ul {
+  font-size: 1rem;
+}
+
+.ol-attribution li + li:before {
+    content: " | ";
+}
+
+.ol-scale-line {
+  left: auto;
+  bottom: auto;
+  top: 8px;
+  right: 8px;
+  background: $brand-primary;
+}
+
+.ol-mouse-position {
+  top: 35px;
+  right: 8px;
+  background: $brand-primary;
+  color: white;
+  padding: 4px;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+.ol-control button, .ol-control button:focus, .ol-control button:hover {
+  background-color: $brand-primary;
+}
+
+.ol-zoom {
+  top: auto;
+  left: auto;
+  bottom: 55px;
+  right: 8px;
+}
+
+/********************* FORMS *************************/
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
