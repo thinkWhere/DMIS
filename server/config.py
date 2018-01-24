@@ -18,6 +18,11 @@ class EnvironmentConfig(object):
 
 class ProdConfig(EnvironmentConfig):
     API_DOCS_URL = 'http://pindmis-prod.ap-southeast-1.elasticbeanstalk.com/api-docs/swagger-ui/index.html?url=http://pindmis-prod.ap-southeast-1.elasticbeanstalk.com/api/docs'
+    EARTHNETWORKS_S3_SETTINGS = {
+        'aws_access_key_id': os.getenv('EN_ACCESS_KEY', None),
+        'aws_secret_access_key': os.getenv('EN_SECRET_KEY', None),
+        'bucket_name': 'pin-dmis'
+    }
     GEOSERVER_URL = 'http://ec2-13-250-26-33.ap-southeast-1.compute.amazonaws.com/geoserver'
     LOG_DIR = '/var/log/dmis-logs'
     LOG_LEVEL = logging.DEBUG
