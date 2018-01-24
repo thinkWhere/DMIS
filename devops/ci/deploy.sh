@@ -11,7 +11,7 @@ if [ $IS_PULL_REQUEST == true ]
 fi
 
 # Set Version Number
-VERSION=v.0.0.$BUILD_NUMBER-$BRANCH
+VERSION=v.1.0.$BUILD_NUMBER-$BRANCH
 
 # Only deploy to Staging if we're on develop
 if [ $BRANCH == "develop" ]
@@ -26,4 +26,13 @@ if [ $BRANCH == "develop" ]
         # Deploy develop builds to Staging environment
         echo Deploying $VERSION to dmis-staging
         eb deploy -l $VERSION
+fi
+
+if [ $BRANCH == "master" ]
+    then
+        echo Tagging build as $VERSION
+
+        # Tag Prod version
+        git tag -a $VERSION -m "$VERSION ready for deploy to production"
+        git push origin $VERSION
 fi
