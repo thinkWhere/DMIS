@@ -50,7 +50,6 @@ class EarthNetworksService:
         s3_client = EarthNetworksService.get_s3_client()
 
         # Get all files that match the prefix, eg all files for the specified
-        print(f'earthnetworks/pplnneed2_lx__{file_date_str}')
         bucket_response = s3_client.list_objects(
             Bucket=bucket_name,
             Prefix=f'earthnetworks/pplnneed2_lx_{file_date_str}'
