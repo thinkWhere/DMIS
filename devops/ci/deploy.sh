@@ -27,12 +27,3 @@ if [ $BRANCH == "develop" ]
         echo Deploying $VERSION to dmis-staging
         eb deploy -l $VERSION
 fi
-
-if [ $BRANCH == "master" ]
-    then
-        echo Tagging build as $VERSION
-
-        # Tag Prod version
-        git tag -a $VERSION -m "$VERSION ready for deploy to production"
-        git push origin $VERSION
-fi
