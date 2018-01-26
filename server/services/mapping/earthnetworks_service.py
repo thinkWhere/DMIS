@@ -52,7 +52,7 @@ class EarthNetworksService:
         # Get all files that match the prefix, eg all files for the specified
         bucket_response = s3_client.list_objects(
             Bucket=bucket_name,
-            Prefix=f'earthnetworks/pplnneedlx_{file_date_str}'
+            Prefix=f'earthnetworks/pplnneed2_lx_{file_date_str}'
         )
 
         if 'Contents' not in bucket_response:
@@ -140,7 +140,8 @@ class EarthNetworksService:
         if 'test' in file_name:
             return 'TEST FILE'  # Ensure we can unit test using test files without blowing up
 
-        clean_file_name = file_name.lstrip('pplnneedlx_').rstrip('.csv')
+        clean_file_name = file_name.lstrip('2pplnneed_').rstrip('.csv')
+        clean_file_name = clean_file_name.lstrip('x_')
         file_date = datetime.strptime(clean_file_name, '%Y%m%d_%H%M%S')
         date_string = file_date.strftime('%d-%b-%Y %H:%M:%S')
         return date_string

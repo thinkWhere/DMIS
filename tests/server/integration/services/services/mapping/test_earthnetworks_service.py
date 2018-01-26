@@ -77,7 +77,7 @@ class TestEarthNetworksService(unittest.TestCase):
             return
 
         # Arrange
-        test_date = datetime.strptime('20170821', '%Y%m%d')
+        test_date = datetime.strptime('20180125', '%Y%m%d')
 
         # Act
         lightning_file = EarthNetworksService.get_latest_daily_lighting_file(test_date)
@@ -113,13 +113,13 @@ class TestEarthNetworksService(unittest.TestCase):
 
     def test_can_retrieve_metadata_from_filename(self):
         # Arrange
-        filename = 'pplnneedlx_20170808_072225.csv'
+        filename = 'pplnneed2_lx_20180125_200059.csv'
 
         # Act
         metadata = EarthNetworksService.get_lightning_file_meta_data(filename)
 
         # Assert
-        self.assertEqual(metadata, '08-Aug-2017 07:22:25')
+        self.assertEqual(metadata, '25-Jan-2018 20:00:59')
 
     def test_get_latest_lighning_data_returns_json_feature_collection(self):
         if self.skip_tests:
