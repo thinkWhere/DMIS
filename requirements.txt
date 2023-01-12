@@ -8,7 +8,7 @@ click==6.7
 coverage==4.4.1
 docutils==0.14
 Flask==0.12.2
-Flask-Cors==3.0.2
+Flask-Cors==3.0.9
 Flask-HTTPAuth==3.2.3
 Flask-Migrate==2.0.4
 Flask-RESTful==0.3.6
